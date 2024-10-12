@@ -15,6 +15,7 @@ use App\Http\Controllers\DeliveryNoteController;
 use App\Http\Controllers\IndentController;
 use App\Http\Controllers\OfferController;
 use App\Http\Controllers\PurchaseOrderController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\WarrantyNoteController;
 
 /*
@@ -148,4 +149,9 @@ Route::middleware('auth')->group(function () {
     Route::get('indent/delete/{id}', [IndentController::class, 'delete'])->name('indent.delete');
     Route::post('indent/store', [IndentController::class, 'store'])->name('indent.store');
     Route::post('indent/update', [IndentController::class, 'update'])->name('indent.update');
+
+    // Reports
+    Route::get('/report/supplier', [ReportController::class, 'supplier'])->name('report.supplier');
+    Route::get('/report/customer', [ReportController::class, 'customer'])->name('report.customer');
+    Route::get('/report/product', [ReportController::class, 'product'])->name('report.product');
 });

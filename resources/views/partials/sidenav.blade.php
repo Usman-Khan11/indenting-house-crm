@@ -89,6 +89,30 @@
             </a>
         </li>
 
+        <li class="menu-item {{ menuActive('report*', 2) }}">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons ti ti-users"></i>
+                <div data-i18n="Reports">Reports</div>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item {{ menuActive('report.supplier') }}">
+                    <a href="{{ route('report.supplier') }}" class="menu-link">
+                        <div data-i18n="Supplier List">Supplier List</div>
+                    </a>
+                </li>
+                <li class="menu-item {{ menuActive('report.customer') }}">
+                    <a href="{{ route('report.customer') }}" class="menu-link">
+                        <div data-i18n="Customer List">Customer List</div>
+                    </a>
+                </li>
+                <li class="menu-item {{ menuActive('report.product') }}">
+                    <a href="{{ route('report.product') }}" class="menu-link">
+                        <div data-i18n="Materials List">Materials List</div>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
         <!-- <li class="menu-item {{ menuActive('quotation*') }}">
             <a href="{{ route('quotation') }}" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-database"></i>

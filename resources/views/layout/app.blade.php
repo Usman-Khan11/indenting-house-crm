@@ -225,6 +225,7 @@
                 type: 'getOfferData'
             }, function(res) {
                 $(".customer_id").val(res.customer_id).trigger("change");
+                $(".shipping_type").val(res.shipping_type).trigger("change");
                 $(".remark").val(res.remark);
 
                 if (res.items.length) {
@@ -261,6 +262,7 @@
             }, function(res) {
                 $(".customer_id").val(res.customer_id).trigger("change");
                 $(".supplier_id").val(res.supplier_id).trigger("change");
+                $(".shipping_type").val(res.shipping_type).trigger("change");
                 $(".remark").val(res.remark);
 
                 if (res.items.length) {
@@ -290,6 +292,25 @@
         $("form").on('submit', function() {
             $(".loader").show();
         })
+
+        function indentDates(e) {
+            let indentDate = new Date($(e).val());
+
+            const validityDate = new Date(indentDate);
+            validityDate.setMonth(validityDate.getMonth() + 1);
+
+            const lastShipmentDate = new Date(validityDate);
+            lastShipmentDate.setMonth(lastShipmentDate.getMonth() + 1);
+
+            const negotiationDate = new Date(lastShipmentDate);
+            negotiationDate.setDate(negotiationDate.getDate() + 15);
+
+            const formatDate = (date) => date.toISOString().split('T')[0];
+
+            $(".validity").val(formatDate(validityDate));
+            $(".last_date_of_shipment").val(formatDate(lastShipmentDate));
+            $(".date_of_negotiation").val(formatDate(negotiationDate));
+        }
     </script>
 </body>
 

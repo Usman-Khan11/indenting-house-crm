@@ -23,7 +23,7 @@
                     <div class="col-md-2 col-12">
                         <div class="mb-3">
                             <label class="form-label">Date</label>
-                            <input type="date" required name="date" value="{{ old('date', $indent->date) }}" class="form-control" placeholder="Date" />
+                            <input type="date" required name="date" value="{{ old('date', $indent->date) }}" class="form-control" placeholder="Date" onchange="indentDates(this)" />
                         </div>
                     </div>
 
@@ -134,21 +134,21 @@
                     <div class="col-md-2 col-12">
                         <div class="mb-3">
                             <label class="form-label">Last Date of Shipment</label>
-                            <input type="date" name="latest_date_of_shipment" value="{{ old('latest_date_of_shipment', $indent->latest_date_of_shipment) }}" class="form-control" placeholder="Date" />
+                            <input type="date" name="latest_date_of_shipment" value="{{ old('latest_date_of_shipment', $indent->latest_date_of_shipment) }}" class="form-control last_date_of_shipment" placeholder="Date" />
                         </div>
                     </div>
 
                     <div class="col-md-2 col-12">
                         <div class="mb-3">
                             <label class="form-label">Date of Negotiation</label>
-                            <input type="date" name="date_of_negotiation" value="{{ old('date_of_negotiation', $indent->date_of_negotiation) }}" class="form-control" placeholder="Date of Negotiation" />
+                            <input type="date" name="date_of_negotiation" value="{{ old('date_of_negotiation', $indent->date_of_negotiation) }}" class="form-control date_of_negotiation" placeholder="Date of Negotiation" />
                         </div>
                     </div>
 
                     <div class="col-md-2 col-12">
                         <div class="mb-3">
                             <label class="form-label">Validity</label>
-                            <input type="date" name="validity" value="{{ old('validity', $indent->validity) }}" class="form-control" placeholder="Validity" />
+                            <input type="date" name="validity" value="{{ old('validity', $indent->validity) }}" class="form-control validity" placeholder="Validity" />
                         </div>
                     </div>
 
@@ -239,10 +239,10 @@
                                     <th>Total</th>
                                     <th>Shipment Mode</th>
                                     <th>Payment Term</th>
-                                    <th>PONO</th>
+                                    <!-- <th>PONO</th>
                                     <th>PODT</th>
                                     <th>Lot Detail</th>
-                                    <th>Other Desc</th>
+                                    <th>Other Desc</th> -->
                                 </tr>
                             </thead>
                             <tbody>
@@ -290,21 +290,21 @@
                                             @endforeach
                                         </select>
                                     </td>
-                                    <td>
-                                        <select name="product_po_id[]" class="form-select product_po_id" required>
+                                    <td class="d-none">
+                                        <select name="product_po_id[]" class="form-select product_po_id">
                                             <option selected disabled value="">Select Purchase Order</option>
                                             @foreach($purchase_orders as $purchase_order)
                                             <option @if($v->po_id==$purchase_order->id ) selected @endif value="{{ $purchase_order->id }}">{{ $purchase_order->po_no }}</option>
                                             @endforeach
                                         </select>
                                     </td>
-                                    <td>
+                                    <td class="d-none">
                                         <input type="text" value="{{ $v->po_date }}" name="product_po_date[]" class="form-control product_po_date">
                                     </td>
-                                    <td>
+                                    <td class="d-none">
                                         <input type="text" value="{{ $v->lot_detail }}" name="product_lot_detail[]" class="form-control product_lot_detail">
                                     </td>
-                                    <td>
+                                    <td class="d-none">
                                         <input type="text" value="{{ $v->other_desc }}" name="product_other_desc[]" class="form-control product_other_desc">
                                     </td>
                                 </tr>
@@ -349,21 +349,21 @@
                                             @endforeach
                                         </select>
                                     </td>
-                                    <td>
-                                        <select name="product_po_id[]" class="form-select product_po_id" required>
+                                    <td class="d-none">
+                                        <select name="product_po_id[]" class="form-select product_po_id">
                                             <option selected disabled value="">Select Purchase Order</option>
                                             @foreach($purchase_orders as $purchase_order)
                                             <option value="{{ $purchase_order->id }}">{{ $purchase_order->po_no }}</option>
                                             @endforeach
                                         </select>
                                     </td>
-                                    <td>
+                                    <td class="d-none">
                                         <input type="text" name="product_po_date[]" class="form-control product_po_date">
                                     </td>
-                                    <td>
+                                    <td class="d-none">
                                         <input type="text" name="product_lot_detail[]" class="form-control product_lot_detail">
                                     </td>
-                                    <td>
+                                    <td class="d-none">
                                         <input type="text" name="product_other_desc[]" class="form-control product_other_desc">
                                     </td>
                                 </tr>

@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('date', 15)->nullable();
             $table->integer('customer_id');
             $table->integer('supplier_id');
+            $table->string('shipping_type', 25)->nullable();
             $table->text('remark')->nullable();
             $table->integer('added_by');
             $table->timestamps();

@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('date', 20)->nullable();
             $table->integer('inquiry_id');
             $table->string('currency', 20)->nullable();
+            $table->string('shipping_type', 25)->nullable();
             $table->string('validity', 20)->nullable();
             $table->integer('customer_id');
             $table->text('remark')->nullable();

@@ -144,7 +144,7 @@ class IndentController extends Controller
                 $indent_product->total = $request->product_total[$key] ?? 0;
                 $indent_product->shipment_mode = $request->product_shipment[$key];
                 $indent_product->payment_term = $request->product_payment_term[$key];
-                $indent_product->po_id = $request->product_po_id[$key];
+                $indent_product->po_id = $request->product_po_id[$key] ?? 0;
                 $indent_product->po_date = $request->product_po_date[$key];
                 $indent_product->lot_detail = $request->product_lot_detail[$key];
                 $indent_product->other_desc = $request->product_other_desc[$key];
@@ -225,7 +225,7 @@ class IndentController extends Controller
                 $indent_product->total = $request->product_total[$key] ?? 0;
                 $indent_product->shipment_mode = $request->product_shipment[$key];
                 $indent_product->payment_term = $request->product_payment_term[$key];
-                $indent_product->po_id = $request->product_po_id[$key];
+                $indent_product->po_id = $request->product_po_id[$key] ?? 0;
                 $indent_product->po_date = $request->product_po_date[$key];
                 $indent_product->lot_detail = $request->product_lot_detail[$key];
                 $indent_product->other_desc = $request->product_other_desc[$key];

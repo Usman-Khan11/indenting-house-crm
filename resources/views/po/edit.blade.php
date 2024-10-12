@@ -63,6 +63,17 @@
                         </div>
                     </div>
 
+                    <div class="col-md-2 col-12">
+                        <div class="mb-3">
+                            <label class="form-label">Shipping Type</label>
+                            <select name="shipping_type" class="form-select shipping_type">
+                                @foreach(shippingType() as $key => $value)
+                                <option @if(old('shipping_type', $po->shipping_type)==$key) selected @endif value="{{ $key }}">{{ $value }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+
                     <div class="col-md-4 col-12">
                         <div class="mb-3">
                             <label class="form-label">Remarks</label>

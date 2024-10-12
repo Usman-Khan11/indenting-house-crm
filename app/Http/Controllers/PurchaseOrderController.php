@@ -82,6 +82,7 @@ class PurchaseOrderController extends Controller
             'customer_id' => 'required|integer|exists:customers,id',
             'supplier_id' => 'required|integer|exists:suppliers,id',
             'date' => 'required|string|max:15',
+            'shipping_type' => 'nullable|string|max:25',
             'remark' => 'nullable|string'
         ]);
 
@@ -91,6 +92,7 @@ class PurchaseOrderController extends Controller
         $po->customer_id = $request->customer_id;
         $po->supplier_id = $request->supplier_id;
         $po->date = $request->date;
+        $po->shipping_type = $request->shipping_type;
         $po->remark = $request->remark;
         $po->added_by = auth()->user()->id;
 
@@ -127,6 +129,7 @@ class PurchaseOrderController extends Controller
             'customer_id' => 'required|integer|exists:customers,id',
             'supplier_id' => 'required|integer|exists:suppliers,id',
             'date' => 'required|string|max:15',
+            'shipping_type' => 'nullable|string|max:25',
             'remark' => 'nullable|string'
         ]);
 
@@ -136,6 +139,7 @@ class PurchaseOrderController extends Controller
         $po->customer_id = $request->customer_id;
         $po->supplier_id = $request->supplier_id;
         $po->date = $request->date;
+        $po->shipping_type = $request->shipping_type;
         $po->remark = $request->remark;
 
         $product = (!empty($request->product)) ? $request->product : [];

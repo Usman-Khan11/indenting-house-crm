@@ -89,6 +89,7 @@ class OfferController extends Controller
             'date' => 'required|string|max:20',
             'validity' => 'nullable|string|max:20',
             'currency' => 'nullable|string|max:20',
+            'shipping_type' => 'nullable|string|max:25',
             'remark' => 'nullable|string',
             'remark_2' => 'nullable|string',
             'status_remark' => 'nullable|string',
@@ -100,6 +101,7 @@ class OfferController extends Controller
         $offer->inquiry_id = $request->inquiry_id;
         $offer->customer_id = $request->customer_id;
         $offer->currency = $request->currency;
+        $offer->shipping_type = $request->shipping_type;
         $offer->date = $request->date;
         $offer->validity = $request->validity;
         $offer->remark = $request->remark;
@@ -146,6 +148,7 @@ class OfferController extends Controller
             'date' => 'required|string|max:20',
             'validity' => 'nullable|string|max:20',
             'currency' => 'nullable|string|max:20',
+            'shipping_type' => 'nullable|string|max:25',
             'remark' => 'nullable|string',
             'remark_2' => 'nullable|string',
             'status_remark' => 'nullable|string',
@@ -157,6 +160,7 @@ class OfferController extends Controller
         $offer->inquiry_id = $request->inquiry_id;
         $offer->customer_id = $request->customer_id;
         $offer->currency = $request->currency;
+        $offer->shipping_type = $request->shipping_type;
         $offer->date = $request->date;
         $offer->validity = $request->validity;
         $offer->remark = $request->remark;
