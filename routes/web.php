@@ -154,4 +154,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/report/supplier', [ReportController::class, 'supplier'])->name('report.supplier');
     Route::get('/report/customer', [ReportController::class, 'customer'])->name('report.customer');
     Route::get('/report/product', [ReportController::class, 'product'])->name('report.product');
+    Route::get('/report/supplier-product', [ReportController::class, 'supplier_product'])->name('report.supplier_product');
+    Route::get('/report/customer-product', [ReportController::class, 'customer_product'])->name('report.customer_product');
 });

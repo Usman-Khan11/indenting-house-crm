@@ -110,6 +110,16 @@
                         <div data-i18n="Materials List">Materials List</div>
                     </a>
                 </li>
+                <li class="menu-item {{ menuActive('report.supplier_product') }}">
+                    <a href="{{ route('report.supplier_product') }}" class="menu-link">
+                        <div data-i18n="Item Wise Supplier">Item Wise Supplier</div>
+                    </a>
+                </li>
+                <li class="menu-item {{ menuActive('report.customer_product') }}">
+                    <a href="{{ route('report.customer_product') }}" class="menu-link">
+                        <div data-i18n="Item Wise Customer">Item Wise Customer</div>
+                    </a>
+                </li>
             </ul>
         </li>
 
