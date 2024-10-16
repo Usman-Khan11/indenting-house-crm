@@ -92,6 +92,7 @@
                     class: "text-nowrap",
                     render: function(data, type, full, meta) {
                         let button = '';
+                        button += `<a href="/inquiry/view/${full.id}" target="_blank" class="btn btn-info btn-sm">View</a> `;
                         button += `<a href="/inquiry/edit/${full.id}" class="btn btn-warning btn-sm">Edit</a> `;
                         button += `<a onclick="return checkDelete()" href="/inquiry/delete/${full.id}" class="btn btn-danger btn-sm">Delete</a> `;
 

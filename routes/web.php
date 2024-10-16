@@ -120,6 +120,7 @@ Route::middleware('auth')->group(function () {
     Route::get('inquiry', [InquiryController::class, 'index'])->name('inquiry');
     Route::get('inquiry/create', [InquiryController::class, 'create'])->name('inquiry.create');
     Route::get('inquiry/edit/{id}', [InquiryController::class, 'edit'])->name('inquiry.edit');
+    Route::get('inquiry/view/{id}', [InquiryController::class, 'view'])->name('inquiry.view');
     Route::get('inquiry/delete/{id}', [InquiryController::class, 'delete'])->name('inquiry.delete');
     Route::post('inquiry/store', [InquiryController::class, 'store'])->name('inquiry.store');
     Route::post('inquiry/update', [InquiryController::class, 'update'])->name('inquiry.update');
@@ -137,6 +138,7 @@ Route::middleware('auth')->group(function () {
     Route::get('po', [PurchaseOrderController::class, 'index'])->name('po');
     Route::get('po/create', [PurchaseOrderController::class, 'create'])->name('po.create');
     Route::get('po/edit/{id}', [PurchaseOrderController::class, 'edit'])->name('po.edit');
+    Route::get('po/view/{id}', [PurchaseOrderController::class, 'view'])->name('po.view');
     Route::get('po/delete/{id}', [PurchaseOrderController::class, 'delete'])->name('po.delete');
     Route::post('po/store', [PurchaseOrderController::class, 'store'])->name('po.store');
     Route::post('po/update', [PurchaseOrderController::class, 'update'])->name('po.update');

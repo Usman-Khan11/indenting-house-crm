@@ -67,6 +67,13 @@ class PurchaseOrderController extends Controller
         return view('po.edit', $data);
     }
 
+    public function view($id)
+    {
+        $data['page_title'] = "View Purchase Order";
+        $data['po'] = PurchaseOrder::where("id", $id)->with('items')->first();
+        return view('po.view', $data);
+    }
+
     public function delete($id)
     {
         PurchaseOrder::where("id", $id)->delete();

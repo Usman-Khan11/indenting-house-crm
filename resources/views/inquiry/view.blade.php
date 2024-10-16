@@ -27,7 +27,6 @@
     .low-padding-table td,
     .low-padding-table th {
         padding: 4px;
-        /* Adjust padding as needed */
     }
 </style>
 @endpush
@@ -65,32 +64,32 @@
         </div>
 
         <div class="mb-2 mt-3">
-            <h3 class="text-center fw-bolder">OFFER</h3>
+            <h3 class="text-center fw-bolder">INQUIRY</h3>
             <table class="table table-bordered table-sm border-dark">
                 <tbody>
                     <tr>
                         <td width="60%">
-                            <h5 class="mb-1">{{ @$offer->customer->name }}</h5>
-                            <small class="mb-0">{{ @$offer->customer->address_office }}</small>
+                            <h5 class="mb-1">{{ @$inquiry->customer->name }}</h5>
+                            <small class="mb-0">{{ @$inquiry->customer->address_office }}</small>
                         </td>
                         <td width="22%">
-                            <h5 class="mb-0">Offer No.</h5>
+                            <h5 class="mb-0">Inquiry No.</h5>
                         </td>
                         <td width="18%">
-                            <h6 class="m-0 text-center">{{ $offer->offer_no }}</h6>
+                            <h6 class="m-0 text-center">{{ $inquiry->inq_no }}</h6>
                         </td>
                     </tr>
                     <tr>
                         <td width="60%">
-                            <h4 class="mb-1">{{ @$offer->customer->person ?? '-' }}</h4>
+                            <h4 class="mb-1">{{ @$inquiry->customer->person ?? '-' }}</h4>
                         </td>
                         <td width="22%">
-                            <h5 class="mb-1">Offer Date</h5>
-                            <h5 class="mb-1">Offer Validity</h5>
+                            <h5 class="mb-1">Inquiry Date</h5>
+                            <h5 class="mb-1">Inquiry Validity</h5>
                         </td>
                         <td width="18%">
-                            <h6 class="m-0 mb-1 text-center">{{ date("d-M-Y", strtotime($offer->date)) }}</h6>
-                            <h6 class="m-0 mb-1 text-center">{{ date("d-M-Y", strtotime($offer->validity)) }}</h6>
+                            <h6 class="m-0 mb-1 text-center">{{ date("d-M-Y", strtotime($inquiry->created_at)) }}</h6>
+                            <h6 class="m-0 mb-1 text-center">{{ date("d-M-Y", strtotime($inquiry->validity)) }}</h6>
                         </td>
                     </tr>
                 </tbody>
@@ -105,7 +104,7 @@
             </div>
         </div>
 
-        @if($offer->items)
+        @if($inquiry->items)
         <div class="w-100">
             <table class="table table-sm text-wrap w-100 table-bordered border-dark">
                 <thead>
@@ -113,7 +112,6 @@
                         <th>Description</th>
                         <th>Qty</th>
                         <th>Rate</th>
-                        <th>Shipping Type</th>
                         <th>Shipment Mode</th>
                         <th>Payment Term</th>
                         <th>Delivery</th>
@@ -121,7 +119,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($offer->items as $k => $v)
+                    @foreach($inquiry->items as $k => $v)
                     <tr>
                         <td>
                             {{ @$v->item->name }} <br>
@@ -136,7 +134,6 @@
                             {{ @$v->rate }}/
                             {{ @$v->unit }}
                         </td>
-                        <td>{{ $offer->shipping_type }}</td>
                         <td>{{ @$v->shipment_mode }}</td>
                         <td>{{ @$v->payment_term }}</td>
                         <td>{{ @$v->delivery }}</td>
@@ -170,9 +167,9 @@
         @endif
 
         <div class="row mt-2">
-            <div class="col-12 mb-2">
+            <!-- <div class="col-12 mb-2">
                 <span>We hope our offer will prove competitive & we look forward to your order confirmation.</span>
-            </div>
+            </div> -->
             <div class="col-12">
                 <span>Thank you</span>
             </div>

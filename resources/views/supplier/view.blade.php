@@ -64,7 +64,7 @@
                             <td width="82%">{{ $supplier->origin }}</td>
                         </tr>
                         <tr>
-                            <th width="18%">Band Details</th>
+                            <th width="18%">Bank Details</th>
                             <td width="82%">{{ $supplier->band_detail }}</td>
                         </tr>
                         <tr>
@@ -101,11 +101,3 @@
     </div>
 </div>
 @endsection
-
-@push('script')
-<script type="text/javascript">
-    $(document).ready(function() {
-
-    });
-</script>
-@endpush

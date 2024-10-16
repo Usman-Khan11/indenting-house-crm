@@ -53,8 +53,14 @@ class InquiryController extends Controller
         $data['suppliers'] = Supplier::latest()->get();
         $data['products'] = Product::latest()->get();
         $data['inquiry'] = Inquiry::where("id", $id)->with('items')->first();
-        // return $data['inquiry']->items[0]->id;
         return view('inquiry.edit', $data);
+    }
+
+    public function view($id)
+    {
+        $data['page_title'] = "View Inquiry";
+        $data['inquiry'] = Inquiry::where("id", $id)->with('items')->first();
+        return view('inquiry.view', $data);
     }
 
     public function delete($id)
