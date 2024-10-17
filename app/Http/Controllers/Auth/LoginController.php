@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\GeneralSetting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -29,6 +30,9 @@ class LoginController extends Controller
         if ($user) {
             $pass_check = Hash::check($password, $user->password);
             if ($pass_check) {
+                if (renew() == 1) {
+                    return back()->withError('Subscription expired please renew now!');
+                }
                 Auth::login($user);
                 return redirect()->route('dashboard')->withSuccess('Login successfully.');
             }

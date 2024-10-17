@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\GeneralSetting;
+use Carbon\Carbon;
 
 function general()
 {
@@ -170,4 +171,25 @@ function portOfDestination()
     ];
 
     return $data;
+}
+
+function renew()
+{
+    $gnl = GeneralSetting::first();
+
+    if ($gnl) {
+        $today = Carbon::today();
+        $expired_at = Carbon::parse($gnl->expired_at);
+
+        if ($today->greaterThanOrEqualTo($expired_at) && $gnl->expired == 0) {
+            $gnl->expired = 1;
+            $gnl->save();
+        }
+
+        if ($gnl->expired == 1) {
+            return 1;
+        }
+    }
+
+    return 0;
 }
