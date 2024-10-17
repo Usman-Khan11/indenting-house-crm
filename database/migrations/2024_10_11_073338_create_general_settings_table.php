@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('sitename', 150)->nullable();
             $table->string('logo', 150)->nullable();
             $table->integer('page_length')->default(10);
+            $table->tinyInteger('expired')->default(0);
+            $table->string('expired_at', 20)->nullable();
             $table->timestamps();
         });
     }
