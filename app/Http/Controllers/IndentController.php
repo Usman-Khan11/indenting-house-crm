@@ -26,6 +26,11 @@ class IndentController extends Controller
                 return $data;
             }
 
+            if (isset($request->type) && $request->type == "getSupplierBankDetail") {
+                $data = Supplier::find($request->supId);
+                return $data->band_detail;
+            }
+
             $query = Indent::Query();
             $query = $query->with('po', 'customer', 'supplier', 'added_by');
             $query = $query->latest()->get();

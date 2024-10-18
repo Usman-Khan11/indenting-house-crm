@@ -36,6 +36,7 @@ Route::post('/login', [LoginController::class, 'login'])->name('login');
 Route::middleware('auth')->group(function () {
     Route::get('/', [UserController::class, 'dashboard'])->name('main');
     Route::get('dashboard', [UserController::class, 'dashboard'])->name('dashboard');
+    Route::get('/db-backup', [UserController::class, 'db_backup'])->name('db_backup');
     Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
     // Customer

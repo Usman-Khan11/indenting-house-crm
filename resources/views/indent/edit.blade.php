@@ -54,7 +54,7 @@
                     <div class="col-md-4 col-12">
                         <div class="mb-3">
                             <label class="form-label">Suppliers</label>
-                            <select class="select2 form-select" name="supplier_id" required>
+                            <select class="select2 form-select" name="supplier_id" required onchange="getBankDetail(this)">
                                 <option selected disabled value="">Select Supplier</option>
                                 @foreach($suppliers as $supplier)
                                 <option @if(old('supplier_id', $indent->supplier_id) == $supplier->id) selected @endif value="{{ $supplier->id }}">{{ $supplier->name }}</option>
@@ -197,7 +197,7 @@
                     <div class="col-md-4 col-12">
                         <div class="mb-3">
                             <label class="form-label">Bank Detail</label>
-                            <textarea name="bank_detail" class="form-control" placeholder="Bank Detail">{{ old('bank_detail', $indent->bank_detail) }}</textarea>
+                            <textarea name="bank_detail" class="form-control bank_detail" placeholder="Bank Detail">{{ old('bank_detail', $indent->bank_detail) }}</textarea>
                         </div>
                     </div>
 

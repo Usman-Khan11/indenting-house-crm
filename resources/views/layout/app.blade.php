@@ -311,6 +311,19 @@
             $(".last_date_of_shipment").val(formatDate(lastShipmentDate));
             $(".date_of_negotiation").val(formatDate(negotiationDate));
         }
+
+        function getBankDetail(e) {
+            let supId = $(e).val();
+            if (supId) {
+                $.get("{{ route('indent') }}", {
+                    _token: '{{ csrf_token() }}',
+                    supId,
+                    type: 'getSupplierBankDetail'
+                }, function(res) {
+                    $(".bank_detail").val(res)
+                })
+            }
+        }
     </script>
 </body>
 

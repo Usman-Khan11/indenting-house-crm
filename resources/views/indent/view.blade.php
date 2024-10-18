@@ -304,7 +304,10 @@
                                 <td width="50%">
                                     <h5 class="mb-1"><b>Special Note:</b></h5>
                                     <p class="mb-0">
-                                        {{ $indent->remark }}
+                                        {{-- $indent->remark --}}
+                                        Form 7. Analysis Certificate & Export Packing List Must Accompany Shipping Documents and complete sets thereof should be sent by courier to buyer and indenters prior to shipment.
+                                        <br /><br />
+                                        Manufacturer & Expiry dates should be mentioned on each Export packing. Shelf life of material should be 80% minimum at the time of arrival.
                                     </p>
                                 </td>
                             </tr>
@@ -314,7 +317,6 @@
             </div>
         </div>
 
-        @if(!empty($indent->remark_2))
         <div class="mb-2 mt-1">
             <div class="row">
                 <div class="col-12">
@@ -323,7 +325,7 @@
                             <tr>
                                 <td width="100%">
                                     <p class="mb-0 fw-bold">
-                                        {{ $indent->remark_2 }}
+                                        Bank Charges: Inside Pakistan are opener's & outside on beneficiary's A/C Tolerance: Plus Minus 10% allowed in quantity and value (For Packaging Only)
                                     </p>
                                 </td>
                             </tr>
@@ -332,7 +334,6 @@
                 </div>
             </div>
         </div>
-        @endif
 
         <!-- <div class="row mt-2">
             <div class="col-12 mb-2">
