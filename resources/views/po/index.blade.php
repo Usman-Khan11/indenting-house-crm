@@ -87,6 +87,10 @@
                     }
                 },
                 {
+                    data: "currency",
+                    title: "currency",
+                },
+                {
                     title: "Added By",
                     render: function(data, type, full, meta) {
                         if (full.added_by) {

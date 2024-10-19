@@ -86,10 +86,10 @@ class OfferController extends Controller
             'offer_no' => 'required|string|max:200|unique:offers',
             'inquiry_id' => 'required|integer|exists:inquiries,id',
             'customer_id' => 'required|integer|exists:customers,id',
+            'supplier_id' => 'required|integer|exists:suppliers,id',
             'date' => 'required|string|max:20',
             'validity' => 'nullable|string|max:20',
             'currency' => 'nullable|string|max:20',
-            'shipping_type' => 'nullable|string|max:25',
             'remark' => 'nullable|string',
             'remark_2' => 'nullable|string',
             'status_remark' => 'nullable|string',
@@ -100,8 +100,9 @@ class OfferController extends Controller
         $offer->offer_no = $request->offer_no;
         $offer->inquiry_id = $request->inquiry_id;
         $offer->customer_id = $request->customer_id;
+        $offer->supplier_id = $request->supplier_id;
         $offer->currency = $request->currency;
-        $offer->shipping_type = $request->shipping_type;
+        // $offer->shipping_type = $request->shipping_type;
         $offer->date = $request->date;
         $offer->validity = $request->validity;
         $offer->remark = $request->remark;
@@ -121,6 +122,7 @@ class OfferController extends Controller
                 $offer_product->unit = $request->product_unit[$key];
                 $offer_product->rate = $request->product_rate[$key] ?? 0;
                 $offer_product->total = $request->product_total[$key] ?? 0;
+                $offer_product->shipping_type = $request->product_shipping_type[$key];
                 $offer_product->shipment_mode = $request->product_shipment[$key];
                 $offer_product->payment_term = $request->product_payment_term[$key];
                 $offer_product->delivery = $request->product_delivery[$key];
@@ -145,10 +147,10 @@ class OfferController extends Controller
             ],
             'inquiry_id' => 'required|integer|exists:inquiries,id',
             'customer_id' => 'required|integer|exists:customers,id',
+            'supplier_id' => 'required|integer|exists:suppliers,id',
             'date' => 'required|string|max:20',
             'validity' => 'nullable|string|max:20',
             'currency' => 'nullable|string|max:20',
-            'shipping_type' => 'nullable|string|max:25',
             'remark' => 'nullable|string',
             'remark_2' => 'nullable|string',
             'status_remark' => 'nullable|string',
@@ -159,8 +161,9 @@ class OfferController extends Controller
         $offer->offer_no = $request->offer_no;
         $offer->inquiry_id = $request->inquiry_id;
         $offer->customer_id = $request->customer_id;
+        $offer->supplier_id = $request->supplier_id;
         $offer->currency = $request->currency;
-        $offer->shipping_type = $request->shipping_type;
+        // $offer->shipping_type = $request->shipping_type;
         $offer->date = $request->date;
         $offer->validity = $request->validity;
         $offer->remark = $request->remark;
@@ -180,6 +183,7 @@ class OfferController extends Controller
                 $offer_product->unit = $request->product_unit[$key];
                 $offer_product->rate = $request->product_rate[$key] ?? 0;
                 $offer_product->total = $request->product_total[$key] ?? 0;
+                $offer_product->shipping_type = $request->product_shipping_type[$key];
                 $offer_product->shipment_mode = $request->product_shipment[$key];
                 $offer_product->payment_term = $request->product_payment_term[$key];
                 $offer_product->delivery = $request->product_delivery[$key];

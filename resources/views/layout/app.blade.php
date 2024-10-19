@@ -156,8 +156,8 @@
 
         function addProductRow(e) {
             $("#product_table tbody tr:last").clone().appendTo("#product_table tbody");
-            $("#product_table tbody tr:last").find("input").val(null);
-            $("#product_table tbody tr:last").find("select").val(null).trigger('change');
+            $("#product_table tbody tr:last").find("input").val(null).prop("disabled", false);
+            $("#product_table tbody tr:last").find("select").val(null).trigger('change').prop("disabled", false);
         }
 
         function delProductRow(e) {
@@ -183,6 +183,9 @@
                 type: 'getInquiryData'
             }, function(res) {
                 $(".customer_id").val(res.customer_id).trigger("change");
+                $(".customer_id").prop("disabled", true);
+                $(".supplier_id").val(res.supplier_id).trigger("change");
+                $(".supplier_id").prop("disabled", true);
                 $(".validity").val(res.validity);
                 $(".currency").val(res.currency).trigger("change");
                 $(".signature").val(res.signature);
@@ -200,6 +203,7 @@
                         $newRow.find('.product_unit').val(value.unit);
                         $newRow.find('.product_rate').val(value.rate);
                         $newRow.find('.product_total').val(value.total);
+                        $newRow.find('.product_shipping_type').val(value.shipping_type).trigger("change");
                         $newRow.find('.product_shipment').val(value.shipment_mode).trigger("change");
                         $newRow.find('.product_payment_term').val(value.payment_term).trigger("change");
                         $newRow.find('.product_delivery').val(value.delivery);
@@ -225,7 +229,10 @@
                 type: 'getOfferData'
             }, function(res) {
                 $(".customer_id").val(res.customer_id).trigger("change");
-                $(".shipping_type").val(res.shipping_type).trigger("change");
+                $(".customer_id").prop("disabled", true);
+                $(".supplier_id").val(res.supplier_id).trigger("change");
+                $(".supplier_id").prop("disabled", true);
+                $(".currency").val(res.currency).trigger("change");
                 $(".remark").val(res.remark);
 
                 if (res.items.length) {
@@ -240,6 +247,7 @@
                         $newRow.find('.product_unit').val(value.unit);
                         $newRow.find('.product_rate').val(value.rate);
                         $newRow.find('.product_total').val(value.total);
+                        $newRow.find('.product_shipping_type').val(value.shipping_type).trigger('change');
 
                         $("#product_table tbody").append($newRow);
                     });
@@ -261,7 +269,11 @@
                 type: 'getPurchaseOrderData'
             }, function(res) {
                 $(".customer_id").val(res.customer_id).trigger("change");
+                $(".customer_id").prop("disabled", true);
                 $(".supplier_id").val(res.supplier_id).trigger("change");
+                $(".supplier_id").prop("disabled", true);
+                $(".currency").val(res.currency).trigger("change");
+                $(".currency").prop("disabled", true);
                 $(".shipping_type").val(res.shipping_type).trigger("change");
                 $(".remark").val(res.remark);
 
@@ -272,12 +284,12 @@
                     $(items).each(function(key, value) {
                         let $newRow = $("#product_table tbody tr:first").clone();
 
-                        $newRow.find('.product').val(value.item_id).trigger('change');
-                        $newRow.find('.product_qty').val(value.qty);
-                        $newRow.find('.product_unit').val(value.unit);
-                        $newRow.find('.product_rate').val(value.rate);
-                        $newRow.find('.product_total').val(value.total);
-                        $newRow.find('.product_po_id').val(value.po_id).trigger('change');
+                        $newRow.find('.product').val(value.item_id).trigger('change').prop("disabled", true);
+                        $newRow.find('.product_qty').val(value.qty).prop("disabled", true);
+                        $newRow.find('.product_unit').val(value.unit).prop("disabled", true);
+                        $newRow.find('.product_rate').val(value.rate).prop("disabled", true);
+                        $newRow.find('.product_total').val(value.total).prop("disabled", true);
+                        // $newRow.find('.product_po_id').val(value.po_id).trigger('change');
 
                         $("#product_table tbody").append($newRow);
                     });
@@ -290,6 +302,7 @@
         }
 
         $("form").on('submit', function() {
+            $("select, input, textarea").prop("disabled", false);
             $(".loader").show();
         })
 

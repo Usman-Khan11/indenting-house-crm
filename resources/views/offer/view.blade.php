@@ -70,7 +70,7 @@
                 <tbody>
                     <tr>
                         <td width="60%">
-                            <h5 class="mb-1">{{ @$offer->customer->name }}</h5>
+                            <h5 class="mb-1">{{ @$offer->customer->name ?? '-' }}</h5>
                             <small class="mb-0">{{ @$offer->customer->address_office }}</small>
                         </td>
                         <td width="22%">
@@ -132,11 +132,11 @@
                             {{ @$v->unit }}
                         </td>
                         <td>
-                            $ &nbsp;
+                            {{ $offer->currency }} &nbsp;
                             {{ @$v->rate }}/
                             {{ @$v->unit }}
                         </td>
-                        <td>{{ $offer->shipping_type }}</td>
+                        <td>{{ @$v->shipping_type }}</td>
                         <td>{{ @$v->shipment_mode }}</td>
                         <td>{{ @$v->payment_term }}</td>
                         <td>{{ @$v->delivery }}</td>

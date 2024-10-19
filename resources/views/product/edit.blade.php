@@ -41,6 +41,16 @@
                         </div>
                     </div>
 
+                    <div class="col-md-4 col-12">
+                        <div class="mb-3">
+                            <label class="form-label">Type</label>
+                            <select name="type" class="form-select">
+                                <option @if(old('type',$product->type)=='Packaging' ) selected @endif value="Packaging">Packaging</option>
+                                <option @if(old('type',$product->type)=='Raw Material' ) selected @endif value="Raw Material">Raw Material</option>
+                            </select>
+                        </div>
+                    </div>
+
                     <div class="col-md-12 col-12 mt-3">
                         <button type="submit" class="btn btn-primary">Save</button>
                     </div>

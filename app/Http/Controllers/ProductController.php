@@ -47,6 +47,7 @@ class ProductController extends Controller
             'description' => 'nullable|string',
             'hs_code' => 'nullable|string|max:100',
             'unit' => 'nullable|string|max:100',
+            'type' => 'nullable|string|max:30',
         ]);
 
         $product = new Product();
@@ -54,6 +55,7 @@ class ProductController extends Controller
         $product->description = $request->description;
         $product->hs_code = $request->hs_code;
         $product->unit = $request->unit;
+        $product->type = $request->type;
 
         if ($product->save()) {
             return redirect()->route('product')->withSuccess('Material added successfully.');
@@ -69,6 +71,7 @@ class ProductController extends Controller
             'description' => 'nullable|string',
             'hs_code' => 'nullable|string|max:100',
             'unit' => 'nullable|string|max:100',
+            'type' => 'nullable|string|max:30',
         ]);
 
         $product = Product::find($request->id);
@@ -76,6 +79,7 @@ class ProductController extends Controller
         $product->description = $request->description;
         $product->hs_code = $request->hs_code;
         $product->unit = $request->unit;
+        $product->type = $request->type;
 
         if ($product->save()) {
             return redirect()->route('product')->withSuccess('Material updated successfully.');

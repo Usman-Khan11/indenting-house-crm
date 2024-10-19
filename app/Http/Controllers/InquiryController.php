@@ -75,6 +75,7 @@ class InquiryController extends Controller
         $request->validate([
             'inq_no' => 'required|string|max:200|unique:inquiries',
             'customer_id' => 'required|integer|exists:customers,id',
+            'supplier_id' => 'required|integer|exists:suppliers,id',
             'validity' => 'nullable|string|max:20',
             'currency' => 'nullable|string|max:20',
             'remark' => 'nullable|string',
@@ -85,6 +86,7 @@ class InquiryController extends Controller
         $inquiry = new Inquiry();
         $inquiry->inq_no = $request->inq_no;
         $inquiry->customer_id = $request->customer_id;
+        $inquiry->supplier_id = $request->supplier_id;
         $inquiry->currency = $request->currency;
         $inquiry->validity = $request->validity;
         $inquiry->remark = $request->remark;
@@ -103,6 +105,7 @@ class InquiryController extends Controller
                 $inquiry_product->unit = $request->product_unit[$key];
                 $inquiry_product->rate = $request->product_rate[$key] ?? 0;
                 $inquiry_product->total = $request->product_total[$key] ?? 0;
+                $inquiry_product->shipping_type = $request->product_shipping_type[$key];
                 $inquiry_product->shipment_mode = $request->product_shipment[$key];
                 $inquiry_product->payment_term = $request->product_payment_term[$key];
                 $inquiry_product->delivery = $request->product_delivery[$key];
@@ -126,6 +129,7 @@ class InquiryController extends Controller
                 Rule::unique('inquiries')->ignore($request->id),
             ],
             'customer_id' => 'required|integer|exists:customers,id',
+            'supplier_id' => 'required|integer|exists:suppliers,id',
             'validity' => 'nullable|string|max:20',
             'currency' => 'nullable|string|max:20',
             'remark' => 'nullable|string',
@@ -136,6 +140,7 @@ class InquiryController extends Controller
         $inquiry = Inquiry::find($request->id);
         $inquiry->inq_no = $request->inq_no;
         $inquiry->customer_id = $request->customer_id;
+        $inquiry->supplier_id = $request->supplier_id;
         $inquiry->currency = $request->currency;
         $inquiry->validity = $request->validity;
         $inquiry->remark = $request->remark;
@@ -159,6 +164,7 @@ class InquiryController extends Controller
                 $inquiry_product->unit = $request->product_unit[$key];
                 $inquiry_product->rate = $request->product_rate[$key] ?? 0;
                 $inquiry_product->total = $request->product_total[$key] ?? 0;
+                $inquiry_product->shipping_type = $request->product_shipping_type[$key];
                 $inquiry_product->shipment_mode = $request->product_shipment[$key];
                 $inquiry_product->payment_term = $request->product_payment_term[$key];
                 $inquiry_product->delivery = $request->product_delivery[$key];

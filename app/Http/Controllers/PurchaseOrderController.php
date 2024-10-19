@@ -89,7 +89,7 @@ class PurchaseOrderController extends Controller
             'customer_id' => 'required|integer|exists:customers,id',
             'supplier_id' => 'required|integer|exists:suppliers,id',
             'date' => 'required|string|max:15',
-            'shipping_type' => 'nullable|string|max:25',
+            'currency' => 'nullable|string|max:20',
             'remark' => 'nullable|string'
         ]);
 
@@ -99,7 +99,7 @@ class PurchaseOrderController extends Controller
         $po->customer_id = $request->customer_id;
         $po->supplier_id = $request->supplier_id;
         $po->date = $request->date;
-        $po->shipping_type = $request->shipping_type;
+        $po->currency = $request->currency;
         $po->remark = $request->remark;
         $po->added_by = auth()->user()->id;
 
@@ -114,6 +114,7 @@ class PurchaseOrderController extends Controller
                 $po_product->unit = $request->product_unit[$key];
                 $po_product->rate = $request->product_rate[$key] ?? 0;
                 $po_product->total = $request->product_total[$key] ?? 0;
+                $po_product->shipping_type = $request->product_shipping_type[$key];
                 $po_product->save();
             }
 
@@ -136,7 +137,7 @@ class PurchaseOrderController extends Controller
             'customer_id' => 'required|integer|exists:customers,id',
             'supplier_id' => 'required|integer|exists:suppliers,id',
             'date' => 'required|string|max:15',
-            'shipping_type' => 'nullable|string|max:25',
+            'currency' => 'nullable|string|max:20',
             'remark' => 'nullable|string'
         ]);
 
@@ -146,7 +147,7 @@ class PurchaseOrderController extends Controller
         $po->customer_id = $request->customer_id;
         $po->supplier_id = $request->supplier_id;
         $po->date = $request->date;
-        $po->shipping_type = $request->shipping_type;
+        $po->currency = $request->currency;
         $po->remark = $request->remark;
 
         $product = (!empty($request->product)) ? $request->product : [];
@@ -161,6 +162,7 @@ class PurchaseOrderController extends Controller
                 $po_product->unit = $request->product_unit[$key];
                 $po_product->rate = $request->product_rate[$key] ?? 0;
                 $po_product->total = $request->product_total[$key] ?? 0;
+                $po_product->shipping_type = $request->product_shipping_type[$key];
                 $po_product->save();
             }
 

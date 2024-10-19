@@ -159,7 +159,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-3 col-12">
+                    <div class="col-md-2 col-12">
                         <div class="mb-3">
                             <label class="form-label">Origin</label>
                             <select name="origin" class="form-select origin">
@@ -181,12 +181,23 @@
                         </div>
                     </div>
 
-                    <div class="col-md-3 col-12">
+                    <div class="col-md-2 col-12">
                         <div class="mb-3">
                             <label class="form-label">Payment</label>
                             <select name="payment" class="form-select payment">
                                 @foreach(paymentTerms() as $key => $value)
                                 <option @if(old('payment')==$key) selected @endif value="{{ $key }}">{{ $value }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-md-2 col-12">
+                        <div class="mb-3">
+                            <label class="form-label">Currency</label>
+                            <select class="select2 form-select currency" name="currency">
+                                @foreach(currency() as $key => $value)
+                                <option @if(old('currency')==$key ) selected @endif value="{{ $key }}">{{ $value }}</option>
                                 @endforeach
                             </select>
                         </div>

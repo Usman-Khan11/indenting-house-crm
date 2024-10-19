@@ -52,7 +52,7 @@
                     <div class="col-md-4 col-12">
                         <div class="mb-3">
                             <label class="form-label">Suppliers</label>
-                            <select class="select2 form-select" name="supplier_id" required>
+                            <select class="select2 form-select supplier_id" name="supplier_id" required>
                                 <option selected disabled value="">Select Supplier</option>
                                 @foreach($suppliers as $supplier)
                                 <option @if(old('supplier_id')==$supplier->id) selected @endif value="{{ $supplier->id }}">{{ $supplier->name }}</option>
@@ -63,10 +63,10 @@
 
                     <div class="col-md-2 col-12">
                         <div class="mb-3">
-                            <label class="form-label">Shipping Type</label>
-                            <select name="shipping_type" class="form-select shipping_type">
-                                @foreach(shippingType() as $key => $value)
-                                <option @if(old('shipping_type')==$key) selected @endif value="{{ $key }}">{{ $value }}</option>
+                            <label class="form-label">Currency</label>
+                            <select class="select2 form-select currency" name="currency">
+                                @foreach(currency() as $key => $value)
+                                <option @if(old('currency')==$key ) selected @endif value="{{ $key }}">{{ $value }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -93,7 +93,7 @@
                                     <th>Qty</th>
                                     <th>Unit</th>
                                     <th>Rate</th>
-                                    <th>Total</th>
+                                    <th>Shipping Type</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -122,8 +122,16 @@
                                     <td>
                                         <input type="number" onkeyup="calculation(this)" value="{{ old('product_rate')[$k] }}" name="product_rate[]" class="form-control product_rate" step="any" required>
                                     </td>
-                                    <td>
+                                    <td class="d-none">
                                         <input type="number" value="{{ old('product_total')[$k] }}" name="product_total[]" class="form-control product_total" step="any" readonly>
+                                    </td>
+                                    <td>
+                                        <select name="product_shipping_type[]" class="form-select product_shipping_type">
+                                            <option value="" selected>Select Shipping Type</option>
+                                            @foreach(shippingType() as $key => $value)
+                                            <option @if(old('product_shipping_type')==$key) selected @endif value="{{ $key }}">{{ $value }}</option>
+                                            @endforeach
+                                        </select>
                                     </td>
                                 </tr>
                                 @empty
@@ -148,8 +156,16 @@
                                     <td>
                                         <input type="number" onkeyup="calculation(this)" name="product_rate[]" class="form-control product_rate" step="any" required>
                                     </td>
-                                    <td>
+                                    <td class="d-none">
                                         <input type="number" name="product_total[]" class="form-control product_total" step="any" readonly>
+                                    </td>
+                                    <td>
+                                        <select name="product_shipping_type[]" class="form-select product_shipping_type">
+                                            <option value="" selected>Select Shipping Type</option>
+                                            @foreach(shippingType() as $key => $value)
+                                            <option value="{{ $key }}">{{ $value }}</option>
+                                            @endforeach
+                                        </select>
                                     </td>
                                 </tr>
                                 @endforelse

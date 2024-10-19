@@ -60,7 +60,7 @@
                     <div class="col-md-4 col-12">
                         <div class="mb-3">
                             <label class="form-label">Customer</label>
-                            <select class="select2 form-select customer_id" name="customer_id" required>
+                            <select class="select2 form-select customer_id" name="customer_id" required disabled>
                                 <option selected disabled value="">Select Customer</option>
                                 @foreach($customers as $customer)
                                 <option @if(old('customer_id', $offer->customer_id) == $customer->id) selected @endif value="{{ $customer->id }}">{{ $customer->name }}</option>
@@ -71,19 +71,20 @@
 
                     <div class="col-md-4 col-12">
                         <div class="mb-3">
-                            <label class="form-label">Signature</label>
-                            <input type="text" name="signature" value="{{ old('signature', $offer->signature) }}" class="form-control signature" placeholder="Signature" />
+                            <label class="form-label">Supplier</label>
+                            <select class="select2 form-select supplier_id" name="supplier_id" required disabled>
+                                <option selected disabled value="">Select Supplier</option>
+                                @foreach($suppliers as $supplier)
+                                <option @if(old('supplier_id', $offer->supplier_id)==$supplier->id) selected @endif value="{{ $supplier->id }}">{{ $supplier->name }}</option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
 
-                    <div class="col-md-2 col-12">
+                    <div class="col-md-4 col-12">
                         <div class="mb-3">
-                            <label class="form-label">Shipping Type</label>
-                            <select name="shipping_type" class="form-select shipping_type">
-                                @foreach(shippingType() as $key => $value)
-                                <option @if(old('shipping_type', $offer->shipping_type)==$key) selected @endif value="{{ $key }}">{{ $value }}</option>
-                                @endforeach
-                            </select>
+                            <label class="form-label">Signature</label>
+                            <input type="text" name="signature" value="{{ old('signature', $offer->signature) }}" class="form-control signature" placeholder="Signature" />
                         </div>
                     </div>
 
@@ -122,7 +123,7 @@
                                     <th>Qty</th>
                                     <th>Unit</th>
                                     <th>Rate</th>
-                                    <th>Total</th>
+                                    <th>Shipping Type</th>
                                     <th>Shipment Mode</th>
                                     <th>Payment Term</th>
                                     <th>Delivery</th>
@@ -155,8 +156,16 @@
                                     <td>
                                         <input type="number" onkeyup="calculation(this)" value="{{ $v->rate }}" name="product_rate[]" class="form-control product_rate" step="any" required>
                                     </td>
-                                    <td>
+                                    <td class="d-none">
                                         <input type="number" value="{{ $v->total }}" name="product_total[]" class="form-control product_total" step="any" readonly>
+                                    </td>
+                                    <td>
+                                        <select name="product_shipping_type[]" class="form-select product_shipping_type">
+                                            <option selected value="">Select Shipping Type</option>
+                                            @foreach(shippingType() as $key => $value)
+                                            <option @if($v->shipping_type == $key) selected @endif value="{{ $key }}">{{ $value }}</option>
+                                            @endforeach
+                                        </select>
                                     </td>
                                     <td>
                                         <select name="product_shipment[]" class="form-select product_shipment">
@@ -208,8 +217,16 @@
                                     <td>
                                         <input type="number" onkeyup="calculation(this)" name="product_rate[]" class="form-control product_rate" step="any" required>
                                     </td>
-                                    <td>
+                                    <td class="d-none">
                                         <input type="number" name="product_total[]" class="form-control product_total" step="any" readonly>
+                                    </td>
+                                    <td>
+                                        <select name="product_shipping_type[]" class="form-select product_shipping_type">
+                                            <option selected value="">Select Shipping Type</option>
+                                            @foreach(shippingType() as $key => $value)
+                                            <option value="{{ $key }}">{{ $value }}</option>
+                                            @endforeach
+                                        </select>
                                     </td>
                                     <td>
                                         <select name="product_shipment[]" class="form-select product_shipment">

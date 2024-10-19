@@ -81,6 +81,10 @@
                     }
                 },
                 {
+                    data: "currency",
+                    title: "currency",
+                },
+                {
                     title: 'Date',
                     "render": function(data, type, full, meta) {
                         return getDate(full.date);

@@ -104,11 +104,11 @@
                     </tr>
                     <tr>
                         <td width="50%">
-                            <h6 class="mb-1">{{ @$po->supplier->name }}</h6>
+                            <h6 class="mb-1">{{ @$po->supplier->name ?? '-' }}</h6>
                             <small>{{ @$po->supplier->address }}</small>
                         </td>
                         <td width="50%">
-                            <h6 class="mb-1">{{ @$po->customer->name }}</h6>
+                            <h6 class="mb-1">{{ @$po->customer->name ?? '-' }}</h6>
                             <small>{{ @$po->customer->address_office }}</small>
                         </td>
                     </tr>
@@ -147,15 +147,15 @@
                             {{ @$v->unit }}
                         </td>
                         <td class="text-center">
-                            $ &nbsp;
+                            {{ $po->currency }} &nbsp;
                             {{ number_format($v->rate, 2) }}/
                             {{ @$v->unit }}
                         </td>
                         <td class="text-center">
-                            $ &nbsp;
+                            {{ $po->currency }} &nbsp;
                             {{ number_format($v->total, 2) }}
                         </td>
-                        <td>{{ $po->shipping_type }}</td>
+                        <td>{{ $v->shipping_type }}</td>
                     </tr>
                     @php
                     $qty += $v->qty;
@@ -176,7 +176,7 @@
                         <td></td>
                         <td class="text-center">
                             <h6 class="fw-bold mb-0">
-                                $ &nbsp;
+                                {{ $po->currency }} &nbsp;
                                 {{ number_format($total, 2) }}
                             </h6>
                         </td>

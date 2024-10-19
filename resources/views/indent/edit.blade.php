@@ -42,7 +42,7 @@
                     <div class="col-md-4 col-12">
                         <div class="mb-3">
                             <label class="form-label">Customer</label>
-                            <select class="select2 form-select" name="customer_id" required>
+                            <select class="select2 form-select" name="customer_id" required disabled>
                                 <option selected disabled value="">Select Customer</option>
                                 @foreach($customers as $customer)
                                 <option @if(old('customer_id', $indent->customer_id) == $customer->id) selected @endif value="{{ $customer->id }}">{{ $customer->name }}</option>
@@ -54,7 +54,7 @@
                     <div class="col-md-4 col-12">
                         <div class="mb-3">
                             <label class="form-label">Suppliers</label>
-                            <select class="select2 form-select" name="supplier_id" required onchange="getBankDetail(this)">
+                            <select class="select2 form-select" name="supplier_id" required disabled onchange="getBankDetail(this)">
                                 <option selected disabled value="">Select Supplier</option>
                                 @foreach($suppliers as $supplier)
                                 <option @if(old('supplier_id', $indent->supplier_id) == $supplier->id) selected @endif value="{{ $supplier->id }}">{{ $supplier->name }}</option>
@@ -161,7 +161,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-3 col-12">
+                    <div class="col-md-2 col-12">
                         <div class="mb-3">
                             <label class="form-label">Origin</label>
                             <select name="origin" class="form-select origin">
@@ -183,12 +183,23 @@
                         </div>
                     </div>
 
-                    <div class="col-md-3 col-12">
+                    <div class="col-md-2 col-12">
                         <div class="mb-3">
                             <label class="form-label">Payment</label>
                             <select name="payment" class="form-select payment">
                                 @foreach(paymentTerms() as $key => $value)
                                 <option @if(old('payment', $indent->payment)==$key) selected @endif value="{{ $key }}">{{ $value }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-md-2 col-12">
+                        <div class="mb-3">
+                            <label class="form-label">Currency</label>
+                            <select class="select2 form-select currency" name="currency" disabled>
+                                @foreach(currency() as $key => $value)
+                                <option @if(old('currency', $indent->currency)==$key ) selected @endif value="{{ $key }}">{{ $value }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -255,7 +266,7 @@
                                         <button onclick="delProductRow(this)" type="button" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
                                     </td>
                                     <td>
-                                        <select name="product[]" class="form-select product" required>
+                                        <select name="product[]" class="form-select product" required disabled>
                                             <option selected disabled value="">Select Item</option>
                                             @foreach($products as $product)
                                             <option @if($v->item_id==$product->id) selected @endif value="{{ $product->id }}">{{ $product->name }}</option>
@@ -263,16 +274,16 @@
                                         </select>
                                     </td>
                                     <td>
-                                        <input type="number" onkeyup="calculation(this)" value="{{ $v->qty }}" name="product_qty[]" class="form-control product_qty" step="any" required>
+                                        <input type="number" onkeyup="calculation(this)" value="{{ $v->qty }}" name="product_qty[]" class="form-control product_qty" step="any" required disabled>
                                     </td>
                                     <td>
                                         <input type="text" value="{{ $v->unit }}" name="product_unit[]" class="form-control product_unit">
                                     </td>
                                     <td>
-                                        <input type="number" onkeyup="calculation(this)" value="{{ $v->rate }}" name="product_rate[]" class="form-control product_rate" step="any" required>
+                                        <input type="number" onkeyup="calculation(this)" value="{{ $v->rate }}" name="product_rate[]" class="form-control product_rate" step="any" required disabled>
                                     </td>
                                     <td>
-                                        <input type="number" value="{{ $v->total }}" name="product_total[]" class="form-control product_total" step="any" readonly>
+                                        <input type="number" value="{{ $v->total }}" name="product_total[]" class="form-control product_total" step="any" readonly disabled>
                                     </td>
                                     <td>
                                         <select name="product_shipment[]" class="form-select product_shipment">

@@ -105,6 +105,7 @@ class IndentController extends Controller
             'date_of_negotiation' => 'nullable|string|max:15',
             'validity' => 'nullable|string|max:15',
             'origin' => 'nullable|string|max:200',
+            'currency' => 'nullable|string|max:20',
             'bank_detail' => 'nullable|string',
             'remark' => 'nullable|string',
             'remark_2' => 'nullable|string',
@@ -129,6 +130,7 @@ class IndentController extends Controller
         $indent->date_of_negotiation = $request->date_of_negotiation;
         $indent->validity = $request->validity;
         $indent->origin = $request->origin;
+        $indent->currency = $request->currency;
         $indent->bank_detail = $request->bank_detail;
         $indent->remark = $request->remark;
         $indent->remark_2 = $request->remark_2;
@@ -187,6 +189,7 @@ class IndentController extends Controller
             'date_of_negotiation' => 'nullable|string|max:15',
             'validity' => 'nullable|string|max:15',
             'origin' => 'nullable|string|max:200',
+            'currency' => 'nullable|string|max:20',
             'bank_detail' => 'nullable|string',
             'remark' => 'nullable|string',
             'remark_2' => 'nullable|string',
@@ -210,6 +213,7 @@ class IndentController extends Controller
         $indent->date_of_negotiation = $request->date_of_negotiation;
         $indent->validity = $request->validity;
         $indent->origin = $request->origin;
+        $indent->currency = $request->currency;
         $indent->bank_detail = $request->bank_detail;
         $indent->remark = $request->remark;
         $indent->remark_2 = $request->remark_2;

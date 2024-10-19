@@ -93,7 +93,7 @@
                             </tr>
                             <tr>
                                 <td width="60%">
-                                    <h5 class="mb-1"><b>NTN No.</b> &nbsp; -</h5>
+                                    <h5 class="mb-1"><b>NTN No.</b> &nbsp; 2734223-9</h5>
                                 </td>
                             </tr>
                         </tbody>
@@ -157,12 +157,12 @@
                             {{ @$v->unit }}
                         </td>
                         <td class="text-center">
-                            $ &nbsp;
+                            {{ $indent->currency }} &nbsp;
                             {{ number_format($v->rate, 2) }}/
                             {{ @$v->unit }}
                         </td>
                         <td class="text-center">
-                            $ &nbsp;
+                            {{ $indent->currency }} &nbsp;
                             {{ number_format($v->total, 2) }}
                         </td>
                     </tr>
@@ -185,7 +185,7 @@
                         <td></td>
                         <td class="text-center">
                             <h6 class="fw-bold mb-0">
-                                $ &nbsp;
+                                {{ $indent->currency }} &nbsp;
                                 {{ number_format($total, 2) }}
                             </h6>
                         </td>
@@ -335,20 +335,16 @@
             </div>
         </div>
 
-        <!-- <div class="row mt-2">
-            <div class="col-12 mb-2">
-                <span>We hope our offer will prove competitive & we look forward to your order confirmation.</span>
+        <div class="row mt-3">
+            <div class="col-6 border border-dark pb-5 pt-2">
+                <h5 class="mb-1">Sign & Stamp: <small>(For <b>MRI Indenting House</b>)</small></h5>
+                <br /><br />
             </div>
-            <div class="col-12">
-                <span>Thank you</span>
+            <div class="col-6 border border-dark pb-5 pt-2">
+                <h5 class="mb-1">Sign & Stamp: <small>(For <b>Customer/Supplier</b>)</span></h5>
+                <br /><br />
             </div>
-            <div class="col-12">
-                <span>Best Regards,</span>
-            </div>
-            <div class="col-12">
-                <span>For <b>MRI Indenting House</b></span>
-            </div>
-        </div> -->
+        </div>
     </div>
 </div>
 

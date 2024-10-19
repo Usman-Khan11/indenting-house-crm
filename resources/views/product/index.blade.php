@@ -67,6 +67,10 @@
                     title: "unit",
                 },
                 {
+                    data: "type",
+                    title: "type",
+                },
+                {
                     title: "Options",
                     class: "text-nowrap",
                     render: function(data, type, full, meta) {
