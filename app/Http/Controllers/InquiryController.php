@@ -30,9 +30,9 @@ class InquiryController extends Controller
     public function create()
     {
         $data['page_title'] = "Add New Inquiry";
-        $data['customers'] = Customer::latest()->get();
-        $data['suppliers'] = Supplier::latest()->get();
-        $data['products'] = Product::latest()->get();
+        $data['customers'] = Customer::orderBy('name', 'asc')->get();
+        $data['suppliers'] = Supplier::orderBy('name', 'asc')->get();
+        $data['products'] = Product::orderBy('name', 'asc')->get();
 
         $data["inq_no"] = 1000;
         $q = Inquiry::latest()->first();
@@ -49,9 +49,9 @@ class InquiryController extends Controller
     public function edit($id)
     {
         $data['page_title'] = "Edit Inquiry";
-        $data['customers'] = Customer::latest()->get();
-        $data['suppliers'] = Supplier::latest()->get();
-        $data['products'] = Product::latest()->get();
+        $data['customers'] = Customer::orderBy('name', 'asc')->get();
+        $data['suppliers'] = Supplier::orderBy('name', 'asc')->get();
+        $data['products'] = Product::orderBy('name', 'asc')->get();
         $data['inquiry'] = Inquiry::where("id", $id)->with('items')->first();
         return view('inquiry.edit', $data);
     }
@@ -76,6 +76,7 @@ class InquiryController extends Controller
             'inq_no' => 'required|string|max:200|unique:inquiries',
             'customer_id' => 'required|integer|exists:customers,id',
             'supplier_id' => 'required|integer|exists:suppliers,id',
+            'date' => 'required|string|max:15',
             'validity' => 'nullable|string|max:20',
             'currency' => 'nullable|string|max:20',
             'remark' => 'nullable|string',
@@ -89,6 +90,7 @@ class InquiryController extends Controller
         $inquiry->supplier_id = $request->supplier_id;
         $inquiry->currency = $request->currency;
         $inquiry->validity = $request->validity;
+        $inquiry->date = $request->date;
         $inquiry->remark = $request->remark;
         $inquiry->remark_2 = $request->remark_2;
         $inquiry->signature = $request->signature;
@@ -131,6 +133,7 @@ class InquiryController extends Controller
             'customer_id' => 'required|integer|exists:customers,id',
             'supplier_id' => 'required|integer|exists:suppliers,id',
             'validity' => 'nullable|string|max:20',
+            'date' => 'required|string|max:15',
             'currency' => 'nullable|string|max:20',
             'remark' => 'nullable|string',
             'remark_2' => 'nullable|string',
@@ -143,6 +146,7 @@ class InquiryController extends Controller
         $inquiry->supplier_id = $request->supplier_id;
         $inquiry->currency = $request->currency;
         $inquiry->validity = $request->validity;
+        $inquiry->date = $request->date;
         $inquiry->remark = $request->remark;
         $inquiry->remark_2 = $request->remark_2;
         $inquiry->signature = $request->signature;

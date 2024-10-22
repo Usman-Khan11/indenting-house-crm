@@ -72,7 +72,12 @@
                         <tbody>
                             <tr>
                                 <td width="60%">
-                                    <h5 class="mb-1"><b>Indent No.</b> &nbsp; {{ @$indent->indent_no }}</h5>
+                                    <h5 class="mb-1">
+                                        <b>Indent No.</b> &nbsp; {{ @$indent->indent_no }}
+                                        @if($indent->revised)
+                                        <small>(Revised)</small>
+                                        @endif
+                                    </h5>
                                 </td>
                             </tr>
                             <tr>
@@ -153,17 +158,17 @@
                             <small><b>HS Code:</b> {{ @$v->item->hs_code }}</small>
                         </td>
                         <td class="text-center">
-                            {{ number_format($v->qty, 2) }}
+                            {{ number_format($v->qty) }}
                             {{ @$v->unit }}
                         </td>
                         <td class="text-center">
                             {{ $indent->currency }} &nbsp;
-                            {{ number_format($v->rate, 2) }}/
+                            {{ number_format($v->rate, 3) }}/
                             {{ @$v->unit }}
                         </td>
                         <td class="text-center">
                             {{ $indent->currency }} &nbsp;
-                            {{ number_format($v->total, 2) }}
+                            {{ number_format($v->total, 3) }}
                         </td>
                     </tr>
                     @php
@@ -179,14 +184,14 @@
                         </td>
                         <td class="text-center">
                             <h6 class="fw-bold mb-0">
-                                {{ number_format($qty, 2) }}
+                                {{ number_format($qty, 3) }}
                             </h6>
                         </td>
                         <td></td>
                         <td class="text-center">
                             <h6 class="fw-bold mb-0">
                                 {{ $indent->currency }} &nbsp;
-                                {{ number_format($total, 2) }}
+                                {{ number_format($total, 3) }}
                             </h6>
                         </td>
                     </tr>
@@ -338,11 +343,11 @@
         <div class="row mt-3">
             <div class="col-6 border border-dark pb-5 pt-2">
                 <h5 class="mb-1">Sign & Stamp: <small>(For <b>MRI Indenting House</b>)</small></h5>
-                <br /><br />
+                <br /><br /><br />
             </div>
             <div class="col-6 border border-dark pb-5 pt-2">
                 <h5 class="mb-1">Sign & Stamp: <small>(For <b>Customer/Supplier</b>)</span></h5>
-                <br /><br />
+                <br /><br /><br />
             </div>
         </div>
     </div>

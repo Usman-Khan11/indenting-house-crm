@@ -173,7 +173,7 @@
             <div class="col-12 mb-2">
                 <span>We hope our offer will prove competitive & we look forward to your order confirmation.</span>
             </div>
-            <div class="col-12">
+            <div class="col-12 mt-5">
                 <span>Thank you</span>
             </div>
             <div class="col-12">

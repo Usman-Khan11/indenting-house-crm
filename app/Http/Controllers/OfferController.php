@@ -38,9 +38,9 @@ class OfferController extends Controller
     public function create()
     {
         $data['page_title'] = "Add New Offer";
-        $data['customers'] = Customer::latest()->get();
-        $data['suppliers'] = Supplier::latest()->get();
-        $data['products'] = Product::latest()->get();
+        $data['customers'] = Customer::orderBy('name', 'asc')->get();
+        $data['suppliers'] = Supplier::orderBy('name', 'asc')->get();
+        $data['products'] = Product::orderBy('name', 'asc')->get();
         $data['inquiries'] = Inquiry::latest()->get();
 
         $data["offer_no"] = 1000;
@@ -58,9 +58,9 @@ class OfferController extends Controller
     public function edit($id)
     {
         $data['page_title'] = "Edit Offer";
-        $data['customers'] = Customer::latest()->get();
-        $data['suppliers'] = Supplier::latest()->get();
-        $data['products'] = Product::latest()->get();
+        $data['customers'] = Customer::orderBy('name', 'asc')->get();
+        $data['suppliers'] = Supplier::orderBy('name', 'asc')->get();
+        $data['products'] = Product::orderBy('name', 'asc')->get();
         $data['inquiries'] = Inquiry::latest()->get();
         $data['offer'] = Offer::where("id", $id)->with('items')->first();
         return view('offer.edit', $data);

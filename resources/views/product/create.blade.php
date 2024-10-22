@@ -36,7 +36,11 @@
                     <div class="col-md-4 col-12">
                         <div class="mb-3">
                             <label class="form-label">Unit</label>
-                            <input name="unit" type="text" class="form-control" value="{{ old('unit') }}" placeholder="Unit" />
+                            <select name="unit" class="form-select">
+                                @foreach(units() as $key => $value)
+                                <option @if(old('unit')==$key) selected @endif value="{{ $key }}">{{ $value }}</option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
 

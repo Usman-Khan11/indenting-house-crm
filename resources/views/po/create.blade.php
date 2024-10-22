@@ -85,15 +85,15 @@
                             Items: &nbsp;
                             <button onclick="addProductRow(this)" type="button" class="btn btn-info btn-sm"><i class="fa fa-plus"></i></button>
                         </h4>
-                        <table class="datatables-basic table table-bordered" id="product_table" style="width:120%;">
+                        <table class="datatables-basic table table-bordered" id="product_table" style="width:100%;">
                             <thead>
                                 <tr>
-                                    <th>...</th>
-                                    <th>Item</th>
-                                    <th>Qty</th>
-                                    <th>Unit</th>
-                                    <th>Rate</th>
-                                    <th>Shipping Type</th>
+                                    <th width="3%">...</th>
+                                    <th width="30%">Item</th>
+                                    <th width="8%">Qty</th>
+                                    <th width="8%">Unit</th>
+                                    <th width="10%">Rate</th>
+                                    <th width="10%">Shipping Type</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -102,30 +102,30 @@
                                 @endphp
                                 @forelse($p as $k => $v)
                                 <tr>
-                                    <td>
+                                    <td width="3%">
                                         <button onclick="delProductRow(this)" type="button" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
                                     </td>
-                                    <td>
-                                        <select name="product[]" class="form-select product" required>
+                                    <td width="30%">
+                                        <select name="product[]" class="form-select product" required onchange="productData(this)">
                                             <option selected disabled value="">Select Item</option>
                                             @foreach($products as $product)
                                             <option @if($v==$product->id) selected @endif value="{{ $product->id }}">{{ $product->name }}</option>
                                             @endforeach
                                         </select>
                                     </td>
-                                    <td>
+                                    <td width="8%">
                                         <input type="number" onkeyup="calculation(this)" value="{{ old('product_qty')[$k] }}" name="product_qty[]" class="form-control product_qty" step="any" required>
                                     </td>
-                                    <td>
+                                    <td width="8%">
                                         <input type="text" value="{{ old('product_unit')[$k] }}" name="product_unit[]" class="form-control product_unit">
                                     </td>
-                                    <td>
+                                    <td width="10%">
                                         <input type="number" onkeyup="calculation(this)" value="{{ old('product_rate')[$k] }}" name="product_rate[]" class="form-control product_rate" step="any" required>
                                     </td>
                                     <td class="d-none">
                                         <input type="number" value="{{ old('product_total')[$k] }}" name="product_total[]" class="form-control product_total" step="any" readonly>
                                     </td>
-                                    <td>
+                                    <td width="10%">
                                         <select name="product_shipping_type[]" class="form-select product_shipping_type">
                                             <option value="" selected>Select Shipping Type</option>
                                             @foreach(shippingType() as $key => $value)
@@ -136,30 +136,30 @@
                                 </tr>
                                 @empty
                                 <tr>
-                                    <td>
+                                    <td width="3%">
                                         <button onclick="delProductRow(this)" type="button" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
                                     </td>
-                                    <td>
-                                        <select name="product[]" class="form-select product" required>
+                                    <td width="30%">
+                                        <select name="product[]" class="form-select product" required onchange="productData(this)">
                                             <option selected disabled value="">Select Item</option>
                                             @foreach($products as $product)
-                                            <option data-price="{{ $product->unit_price }}" value="{{ $product->id }}">{{ $product->name }}</option>
+                                            <option value="{{ $product->id }}">{{ $product->name }}</option>
                                             @endforeach
                                         </select>
                                     </td>
-                                    <td>
+                                    <td width="8%">
                                         <input type="number" onkeyup="calculation(this)" name="product_qty[]" class="form-control product_qty" step="any" required>
                                     </td>
-                                    <td>
+                                    <td width="8%">
                                         <input type="text" name="product_unit[]" class="form-control product_unit">
                                     </td>
-                                    <td>
+                                    <td width="10%">
                                         <input type="number" onkeyup="calculation(this)" name="product_rate[]" class="form-control product_rate" step="any" required>
                                     </td>
                                     <td class="d-none">
                                         <input type="number" name="product_total[]" class="form-control product_total" step="any" readonly>
                                     </td>
-                                    <td>
+                                    <td width="10%">
                                         <select name="product_shipping_type[]" class="form-select product_shipping_type">
                                             <option value="" selected>Select Shipping Type</option>
                                             @foreach(shippingType() as $key => $value)

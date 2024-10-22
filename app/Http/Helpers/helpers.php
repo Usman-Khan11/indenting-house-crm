@@ -114,6 +114,7 @@ function origin()
 function paymentTerms()
 {
     $data = [
+        'CAD' => 'CAD',
         'LC At Sight' => 'LC At Sight',
         'BC At Sight' => 'BC At Sight',
         'DP At Sight' => 'DP At Sight',
@@ -144,6 +145,7 @@ function portOfShipment()
 {
     $data = [
         'Chinese Sea Port' => 'Chinese Sea Port',
+        'Chinese Airport' => 'Chinese Airport',
         'Shanghai Sea Port' => 'Shanghai Sea Port',
         'Nhava Sheva Sea Port' => 'Nhava Sheva Sea Port',
         'Shenzen Sea Port' => 'Shenzen Sea Port',
@@ -168,6 +170,17 @@ function portOfDestination()
         'Karachi Air Port' => 'Karachi Air Port',
         'Lahore Air Port' => 'Lahore Air Port',
         'Islamabad Air Port' => 'Islamabad Air Port'
+    ];
+
+    return $data;
+}
+
+function units()
+{
+    $data = [
+        'KG' => 'KG',
+        'GM' => 'GM',
+        'LTR' => 'LTR'
     ];
 
     return $data;

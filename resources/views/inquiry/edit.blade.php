@@ -22,6 +22,13 @@
 
                     <div class="col-md-3 col-12">
                         <div class="mb-3">
+                            <label class="form-label">Date</label>
+                            <input type="date" name="date" value="{{ old('date', $inquiry->date) }}" class="form-control" placeholder="Date" />
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 col-12">
+                        <div class="mb-3">
                             <label class="form-label">Validity</label>
                             <input type="date" name="validity" value="{{ old('validity', $inquiry->validity) }}" class="form-control" placeholder="Validity" />
                         </div>
@@ -89,19 +96,19 @@
                             Items: &nbsp;
                             <button onclick="addProductRow(this)" type="button" class="btn btn-info btn-sm"><i class="fa fa-plus"></i></button>
                         </h4>
-                        <table class="datatables-basic table table-bordered" id="product_table" style="width:170%;">
+                        <table class="datatables-basic table table-bordered" id="product_table" style="width:150%;">
                             <thead>
                                 <tr>
-                                    <th>...</th>
-                                    <th>Item</th>
-                                    <th>Qty</th>
-                                    <th>Unit</th>
-                                    <th>Rate</th>
-                                    <th>Shipping Type</th>
-                                    <th>Shipment Mode</th>
-                                    <th>Payment Term</th>
-                                    <th>Delivery</th>
-                                    <th>Supplier/Mfg</th>
+                                    <th width="3%">...</th>
+                                    <th width="30%">Item</th>
+                                    <th width="8%">Qty</th>
+                                    <th width="8%">Unit</th>
+                                    <th width="10%">Rate</th>
+                                    <th width="10%">Shipping Type</th>
+                                    <th width="10%">Shipment Mode</th>
+                                    <th width="10%">Payment Term</th>
+                                    <th width="10%">Delivery</th>
+                                    <th width="20%">Supplier/Mfg</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -110,30 +117,30 @@
                                 @endphp
                                 @forelse($p as $k => $v)
                                 <tr>
-                                    <td>
+                                    <td width="3%">
                                         <button onclick="delProductRow(this)" type="button" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
                                     </td>
-                                    <td>
-                                        <select name="product[]" class="form-select" required>
+                                    <td width="30%">
+                                        <select name="product[]" class="form-select" required onchange="productData(this)">
                                             <option selected disabled value="">Select Item</option>
                                             @foreach($products as $product)
                                             <option @if($v->item_id==$product->id) selected @endif value="{{ $product->id }}">{{ $product->name }}</option>
                                             @endforeach
                                         </select>
                                     </td>
-                                    <td>
+                                    <td width="8%">
                                         <input type="number" onkeyup="calculation(this)" value="{{ $v->qty }}" name="product_qty[]" class="form-control product_qty" step="any" required>
                                     </td>
-                                    <td>
+                                    <td width="8%">
                                         <input type="text" value="{{ $v->unit }}" name="product_unit[]" class="form-control product_unit">
                                     </td>
-                                    <td>
+                                    <td width="10%">
                                         <input type="number" onkeyup="calculation(this)" value="{{ $v->rate }}" name="product_rate[]" class="form-control product_rate" step="any" required>
                                     </td>
                                     <td class="d-none">
                                         <input type="number" value="{{ $v->total }}" name="product_total[]" class="form-control product_total" step="any" readonly>
                                     </td>
-                                    <td>
+                                    <td width="10%">
                                         <select name="product_shipping_type[]" class="form-select product_shipping_type">
                                             <option selected value="">Select Shipping Type</option>
                                             @foreach(shippingType() as $key => $value)
@@ -141,7 +148,7 @@
                                             @endforeach
                                         </select>
                                     </td>
-                                    <td>
+                                    <td width="10%">
                                         <select name="product_shipment[]" class="form-select product_shipment">
                                             <option selected value="">Select Shipment Mode</option>
                                             @foreach(shippingMode() as $key => $value)
@@ -149,7 +156,7 @@
                                             @endforeach
                                         </select>
                                     </td>
-                                    <td>
+                                    <td width="10%">
                                         <select name="product_payment_term[]" class="form-select product_payment_term">
                                             <option selected value="">Select Payment Term</option>
                                             @foreach(paymentTerms() as $key => $value)
@@ -157,10 +164,10 @@
                                             @endforeach
                                         </select>
                                     </td>
-                                    <td>
+                                    <td width="10%">
                                         <input type="text" value="{{ $v->delivery }}" name="product_delivery[]" class="form-control product_delivery">
                                     </td>
-                                    <td>
+                                    <td width="20%">
                                         <select name="product_supplier[]" class="form-select" required>
                                             <option selected disabled value="">Select Supplier</option>
                                             @foreach($suppliers as $supplier)
@@ -171,30 +178,30 @@
                                 </tr>
                                 @empty
                                 <tr>
-                                    <td>
+                                    <td width="3%">
                                         <button onclick="delProductRow(this)" type="button" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
                                     </td>
-                                    <td>
-                                        <select name="product[]" class="form-select" required>
+                                    <td width="30%">
+                                        <select name="product[]" class="form-select" required onchange="productData(this)">
                                             <option selected disabled value="">Select Item</option>
                                             @foreach($products as $product)
-                                            <option data-price="{{ $product->unit_price }}" value="{{ $product->id }}">{{ $product->name }}</option>
+                                            <option value="{{ $product->id }}">{{ $product->name }}</option>
                                             @endforeach
                                         </select>
                                     </td>
-                                    <td>
+                                    <td width="8%">
                                         <input type="number" onkeyup="calculation(this)" name="product_qty[]" class="form-control product_qty" step="any" required>
                                     </td>
-                                    <td>
+                                    <td width="8%">
                                         <input type="text" name="product_unit[]" class="form-control product_unit">
                                     </td>
-                                    <td>
+                                    <td width="10%">
                                         <input type="number" onkeyup="calculation(this)" name="product_rate[]" class="form-control product_rate" step="any" required>
                                     </td>
                                     <td class="d-none">
                                         <input type="number" name="product_total[]" class="form-control product_total" step="any" readonly>
                                     </td>
-                                    <td>
+                                    <td width="10%">
                                         <select name="product_shipping_type[]" class="form-select product_shipping_type">
                                             <option selected value="">Select Shipping Type</option>
                                             @foreach(shippingType() as $key => $value)
@@ -202,7 +209,7 @@
                                             @endforeach
                                         </select>
                                     </td>
-                                    <td>
+                                    <td width="10%">
                                         <select name="product_shipment[]" class="form-select product_shipment">
                                             <option selected value="">Select Shipment Mode</option>
                                             @foreach(shippingMode() as $key => $value)
@@ -210,7 +217,7 @@
                                             @endforeach
                                         </select>
                                     </td>
-                                    <td>
+                                    <td width="10%">
                                         <select name="product_payment_term[]" class="form-select product_payment_term">
                                             <option selected value="">Select Payment Term</option>
                                             @foreach(paymentTerms() as $key => $value)
@@ -218,10 +225,10 @@
                                             @endforeach
                                         </select>
                                     </td>
-                                    <td>
+                                    <td width="10%">
                                         <input type="text" name="product_delivery[]" class="form-control product_delivery">
                                     </td>
-                                    <td>
+                                    <td width="20%">
                                         <select name="product_supplier[]" class="form-select" required>
                                             <option selected disabled value="">Select Supplier</option>
                                             @foreach($suppliers as $supplier)

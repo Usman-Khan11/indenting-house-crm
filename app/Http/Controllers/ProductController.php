@@ -27,6 +27,15 @@ class ProductController extends Controller
         return view('product.create', $data);
     }
 
+    public function get(Request $request)
+    {
+        $id = $request->id;
+        $data = Product::where("id", $id)->first();
+        if ($data) {
+            return $data;
+        }
+    }
+
     public function edit($id)
     {
         $data['page_title'] = "Edit Material";

@@ -154,6 +154,29 @@
             return formattedDateTime;
         }
 
+        function productData(e) {
+            let id = $(e).val();
+            $(".loader").show();
+
+            if (id) {
+                $.get("{{ route('product.get') }}", {
+                    _token: '{{ csrf_token() }}',
+                    id,
+                }, function(res) {
+                    if (res) {
+                        $(e).parent().parent().find(".product_unit").val(res.unit);
+                        $(e).parent().find("p").remove();
+                        $(e).parent().append(`<p class="m-0 p-0 mt-2">${res.description}</p>`);
+                    }
+
+                    $(".loader").hide();
+                })
+            } else {
+                $(e).parent().find("p").remove();
+                $(".loader").hide();
+            }
+        }
+
         function addProductRow(e) {
             $("#product_table tbody tr:last").clone().appendTo("#product_table tbody");
             $("#product_table tbody tr:last").find("input").val(null).prop("disabled", false);

@@ -43,9 +43,9 @@ class IndentController extends Controller
     public function create()
     {
         $data['page_title'] = "Add New Indent";
-        $data['customers'] = Customer::latest()->get();
-        $data['suppliers'] = Supplier::latest()->get();
-        $data['products'] = Product::latest()->get();
+        $data['customers'] = Customer::orderBy('name', 'asc')->get();
+        $data['suppliers'] = Supplier::orderBy('name', 'asc')->get();
+        $data['products'] = Product::orderBy('name', 'asc')->get();
         $data['purchase_orders'] = PurchaseOrder::latest()->get();
 
         $data["indent_no"] = 1000;
@@ -63,9 +63,9 @@ class IndentController extends Controller
     public function edit($id)
     {
         $data['page_title'] = "Edit Indent";
-        $data['customers'] = Customer::latest()->get();
-        $data['suppliers'] = Supplier::latest()->get();
-        $data['products'] = Product::latest()->get();
+        $data['customers'] = Customer::orderBy('name', 'asc')->get();
+        $data['suppliers'] = Supplier::orderBy('name', 'asc')->get();
+        $data['products'] = Product::orderBy('name', 'asc')->get();
         $data['purchase_orders'] = PurchaseOrder::latest()->get();
         $data['indent'] = Indent::where("id", $id)->with('items')->first();
         return view('indent.edit', $data);
