@@ -13,9 +13,26 @@ use Yajra\DataTables\Facades\DataTables;
 
 class InquiryController extends Controller
 {
+    protected $nav_id;
+
+    public function __construct()
+    {
+        $this->nav_id = 4;
+    }
+
+    protected function checkPermissions($action)
+    {
+        $permission = Get_Permission($this->nav_id, auth()->user()->role_id);
+
+        if (!in_array($action, $permission)) {
+            abort(403, 'Access denied.');
+        }
+    }
+
     public function index(Request $request)
     {
         $data['page_title'] = "Inquries";
+        $this->checkPermissions('view');
 
         if ($request->ajax()) {
             $query = Inquiry::Query();
@@ -30,6 +47,8 @@ class InquiryController extends Controller
     public function create()
     {
         $data['page_title'] = "Add New Inquiry";
+        $this->checkPermissions('create');
+
         $data['customers'] = Customer::orderBy('name', 'asc')->get();
         $data['suppliers'] = Supplier::orderBy('name', 'asc')->get();
         $data['products'] = Product::orderBy('name', 'asc')->get();
@@ -49,6 +68,8 @@ class InquiryController extends Controller
     public function edit($id)
     {
         $data['page_title'] = "Edit Inquiry";
+        $this->checkPermissions('update');
+
         $data['customers'] = Customer::orderBy('name', 'asc')->get();
         $data['suppliers'] = Supplier::orderBy('name', 'asc')->get();
         $data['products'] = Product::orderBy('name', 'asc')->get();
@@ -59,12 +80,16 @@ class InquiryController extends Controller
     public function view($id)
     {
         $data['page_title'] = "View Inquiry";
+        $this->checkPermissions('view');
+
         $data['inquiry'] = Inquiry::where("id", $id)->with('items')->first();
         return view('inquiry.view', $data);
     }
 
     public function delete($id)
     {
+        $this->checkPermissions('delete');
+
         Inquiry::where("id", $id)->delete();
         InquiryItem::where("inquiry_id", $id)->delete();
         return back()->withSuccess('Inquiry deleted successfully.');

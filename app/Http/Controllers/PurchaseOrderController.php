@@ -15,9 +15,26 @@ use Yajra\DataTables\Facades\DataTables;
 
 class PurchaseOrderController extends Controller
 {
+    protected $nav_id;
+
+    public function __construct()
+    {
+        $this->nav_id = 6;
+    }
+
+    protected function checkPermissions($action)
+    {
+        $permission = Get_Permission($this->nav_id, auth()->user()->role_id);
+
+        if (!in_array($action, $permission)) {
+            abort(403, 'Access denied.');
+        }
+    }
+
     public function index(Request $request)
     {
         $data['page_title'] = "Purchase Orders";
+        $this->checkPermissions('view');
 
         if ($request->ajax()) {
 
@@ -39,10 +56,12 @@ class PurchaseOrderController extends Controller
     public function create()
     {
         $data['page_title'] = "Add New Purchase Order";
+        $this->checkPermissions('create');
+
         $data['customers'] = Customer::orderBy('name', 'asc')->get();
         $data['suppliers'] = Supplier::orderBy('name', 'asc')->get();
         $data['products'] = Product::orderBy('name', 'asc')->get();
-        $data['offers'] = Offer::latest()->get();
+        $data['offers'] = Offer::leftJoin('purchase_orders', 'offers.id', '=', 'purchase_orders.offer_id')->whereNull('purchase_orders.offer_id')->select('offers.*')->latest()->get();
 
         $data["po_no"] = 1000;
         $q = PurchaseOrder::latest()->first();
@@ -59,6 +78,8 @@ class PurchaseOrderController extends Controller
     public function edit($id)
     {
         $data['page_title'] = "Edit Purchase Order";
+        $this->checkPermissions('update');
+
         $data['customers'] = Customer::orderBy('name', 'asc')->get();
         $data['suppliers'] = Supplier::orderBy('name', 'asc')->get();
         $data['products'] = Product::orderBy('name', 'asc')->get();
@@ -70,12 +91,16 @@ class PurchaseOrderController extends Controller
     public function view($id)
     {
         $data['page_title'] = "View Purchase Order";
+        $this->checkPermissions('view');
+
         $data['po'] = PurchaseOrder::where("id", $id)->with('items')->first();
         return view('po.view', $data);
     }
 
     public function delete($id)
     {
+        $this->checkPermissions('delete');
+
         PurchaseOrder::where("id", $id)->delete();
         PurchaseOrderItem::where("po_id", $id)->delete();
         return back()->withSuccess('Purchase Order deleted successfully.');

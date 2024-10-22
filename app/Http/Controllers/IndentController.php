@@ -15,9 +15,26 @@ use Yajra\DataTables\Facades\DataTables;
 
 class IndentController extends Controller
 {
+    protected $nav_id;
+
+    public function __construct()
+    {
+        $this->nav_id = 7;
+    }
+
+    protected function checkPermissions($action)
+    {
+        $permission = Get_Permission($this->nav_id, auth()->user()->role_id);
+
+        if (!in_array($action, $permission)) {
+            abort(403, 'Access denied.');
+        }
+    }
+
     public function index(Request $request)
     {
         $data['page_title'] = "Indents";
+        $this->checkPermissions('view');
 
         if ($request->ajax()) {
             if (isset($request->type) && $request->type == "getPurchaseOrderData") {
@@ -43,10 +60,12 @@ class IndentController extends Controller
     public function create()
     {
         $data['page_title'] = "Add New Indent";
+        $this->checkPermissions('create');
+
         $data['customers'] = Customer::orderBy('name', 'asc')->get();
         $data['suppliers'] = Supplier::orderBy('name', 'asc')->get();
         $data['products'] = Product::orderBy('name', 'asc')->get();
-        $data['purchase_orders'] = PurchaseOrder::latest()->get();
+        $data['purchase_orders'] = PurchaseOrder::leftJoin('indents', 'purchase_orders.id', '=', 'indents.po_id')->whereNull('indents.po_id')->select('purchase_orders.*')->latest()->latest()->get();
 
         $data["indent_no"] = 1000;
         $q = Indent::latest()->first();
@@ -63,6 +82,8 @@ class IndentController extends Controller
     public function edit($id)
     {
         $data['page_title'] = "Edit Indent";
+        $this->checkPermissions('update');
+
         $data['customers'] = Customer::orderBy('name', 'asc')->get();
         $data['suppliers'] = Supplier::orderBy('name', 'asc')->get();
         $data['products'] = Product::orderBy('name', 'asc')->get();
@@ -74,12 +95,16 @@ class IndentController extends Controller
     public function view($id)
     {
         $data['page_title'] = "View Indent";
+        $this->checkPermissions('view');
+
         $data['indent'] = Indent::where("id", $id)->with('items')->first();
         return view('indent.view', $data);
     }
 
     public function delete($id)
     {
+        $this->checkPermissions('delete');
+
         Indent::where("id", $id)->delete();
         IndentItems::where("indent_id", $id)->delete();
         return back()->withSuccess('Indent deleted successfully.');

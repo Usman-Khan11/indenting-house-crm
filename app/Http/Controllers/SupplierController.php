@@ -10,9 +10,26 @@ use Yajra\DataTables\Facades\DataTables;
 
 class SupplierController extends Controller
 {
+    protected $nav_id;
+
+    public function __construct()
+    {
+        $this->nav_id = 3;
+    }
+
+    protected function checkPermissions($action)
+    {
+        $permission = Get_Permission($this->nav_id, auth()->user()->role_id);
+
+        if (!in_array($action, $permission)) {
+            abort(403, 'Access denied.');
+        }
+    }
+
     public function index(Request $request)
     {
         $data['page_title'] = "Suppliers";
+        $this->checkPermissions('view');
 
         if ($request->ajax()) {
             $query = Supplier::Query();
@@ -26,12 +43,16 @@ class SupplierController extends Controller
     public function create(Request $request)
     {
         $data['page_title'] = "Add New Supplier";
+        $this->checkPermissions('create');
+
         return view('supplier.create', $data);
     }
 
     public function edit($id)
     {
         $data['page_title'] = "Edit Supplier";
+        $this->checkPermissions('update');
+
         $data['supplier'] = Supplier::where("id", $id)->first();
         return view('supplier.edit', $data);
     }
@@ -39,12 +60,16 @@ class SupplierController extends Controller
     public function view($id)
     {
         $data['page_title'] = "View Supplier";
+        $this->checkPermissions('view');
+
         $data['supplier'] = Supplier::where("id", $id)->with('products')->first();
         return view('supplier.view', $data);
     }
 
     public function delete($id)
     {
+        $this->checkPermissions('delete');
+
         Supplier::where("id", $id)->delete();
         return back()->withSuccess('Supplier deleted successfully.');
     }
@@ -52,6 +77,8 @@ class SupplierController extends Controller
     public function map()
     {
         $data['page_title'] = "Supplier Map Material";
+        $this->checkPermissions('map product');
+
         $data['suppliers'] = Supplier::orderBy("name")->get();
         $data['products'] = Product::orderBy("name")->get();
         return view('supplier.map', $data);

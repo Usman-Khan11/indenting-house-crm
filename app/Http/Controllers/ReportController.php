@@ -12,9 +12,26 @@ use Yajra\DataTables\Facades\DataTables;
 
 class ReportController extends Controller
 {
+    protected $nav_id;
+
+    public function __construct()
+    {
+        $this->nav_id = 8;
+    }
+
+    protected function checkPermissions($action)
+    {
+        $permission = Get_Permission($this->nav_id, auth()->user()->role_id);
+
+        if (!in_array($action, $permission)) {
+            abort(403, 'Access denied.');
+        }
+    }
+
     public function supplier(Request $request)
     {
         $data['page_title'] = "Supplier Report";
+        $this->checkPermissions('supplier list');
 
         if ($request->ajax()) {
             $query = Supplier::Query();
@@ -28,6 +45,7 @@ class ReportController extends Controller
     public function customer(Request $request)
     {
         $data['page_title'] = "Customer Report";
+        $this->checkPermissions('customer list');
 
         if ($request->ajax()) {
             $query = Customer::Query();
@@ -41,6 +59,7 @@ class ReportController extends Controller
     public function product(Request $request)
     {
         $data['page_title'] = "Materials Report";
+        $this->checkPermissions('material list');
 
         if ($request->ajax()) {
             $query = Product::Query();
@@ -54,6 +73,8 @@ class ReportController extends Controller
     public function supplier_product(Request $request)
     {
         $data['page_title'] = "Item Wise Supplier Report";
+        $this->checkPermissions('item wise supplier');
+
         $data['products'] = Product::orderBy('name')->get();
 
         if ($request->ajax()) {
@@ -74,6 +95,8 @@ class ReportController extends Controller
     public function customer_product(Request $request)
     {
         $data['page_title'] = "Item Wise Customer Report";
+        $this->checkPermissions('item wise customer');
+
         $data['products'] = Product::orderBy('name')->get();
 
         if ($request->ajax()) {

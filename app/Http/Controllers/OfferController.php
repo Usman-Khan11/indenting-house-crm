@@ -14,9 +14,26 @@ use Yajra\DataTables\Facades\DataTables;
 
 class OfferController extends Controller
 {
+    protected $nav_id;
+
+    public function __construct()
+    {
+        $this->nav_id = 5;
+    }
+
+    protected function checkPermissions($action)
+    {
+        $permission = Get_Permission($this->nav_id, auth()->user()->role_id);
+
+        if (!in_array($action, $permission)) {
+            abort(403, 'Access denied.');
+        }
+    }
+
     public function index(Request $request)
     {
         $data['page_title'] = "Offers";
+        $this->checkPermissions('view');
 
         if ($request->ajax()) {
 
@@ -38,10 +55,12 @@ class OfferController extends Controller
     public function create()
     {
         $data['page_title'] = "Add New Offer";
+        $this->checkPermissions('create');
+
         $data['customers'] = Customer::orderBy('name', 'asc')->get();
         $data['suppliers'] = Supplier::orderBy('name', 'asc')->get();
         $data['products'] = Product::orderBy('name', 'asc')->get();
-        $data['inquiries'] = Inquiry::latest()->get();
+        $data['inquiries'] =  Inquiry::leftJoin('offers', 'inquiries.id', '=', 'offers.inquiry_id')->whereNull('offers.inquiry_id')->select('inquiries.*')->latest()->get();
 
         $data["offer_no"] = 1000;
         $q = Offer::latest()->first();
@@ -58,6 +77,8 @@ class OfferController extends Controller
     public function edit($id)
     {
         $data['page_title'] = "Edit Offer";
+        $this->checkPermissions('update');
+
         $data['customers'] = Customer::orderBy('name', 'asc')->get();
         $data['suppliers'] = Supplier::orderBy('name', 'asc')->get();
         $data['products'] = Product::orderBy('name', 'asc')->get();
@@ -69,12 +90,16 @@ class OfferController extends Controller
     public function view($id)
     {
         $data['page_title'] = "View Offer";
+        $this->checkPermissions('view');
+
         $data['offer'] = Offer::where("id", $id)->with('items')->first();
         return view('offer.view', $data);
     }
 
     public function delete($id)
     {
+        $this->checkPermissions('delete');
+
         Offer::where("id", $id)->delete();
         OfferItem::where("offer_id", $id)->delete();
         return back()->withSuccess('Offer deleted successfully.');

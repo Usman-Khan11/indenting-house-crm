@@ -10,9 +10,26 @@ use Yajra\DataTables\Facades\DataTables;
 
 class CustomerController extends Controller
 {
+    protected $nav_id;
+
+    public function __construct()
+    {
+        $this->nav_id = 2;
+    }
+
+    protected function checkPermissions($action)
+    {
+        $permission = Get_Permission($this->nav_id, auth()->user()->role_id);
+
+        if (!in_array($action, $permission)) {
+            abort(403, 'Access denied.');
+        }
+    }
+
     public function index(Request $request)
     {
         $data['page_title'] = "Customers";
+        $this->checkPermissions('view');
 
         if ($request->ajax()) {
             $query = Customer::Query();
@@ -26,12 +43,16 @@ class CustomerController extends Controller
     public function create(Request $request)
     {
         $data['page_title'] = "Add New Customer";
+        $this->checkPermissions('create');
+
         return view('customer.create', $data);
     }
 
     public function edit($id)
     {
         $data['page_title'] = "Edit Customer";
+        $this->checkPermissions('update');
+
         $data['customer'] = Customer::where("id", $id)->first();
         return view('customer.edit', $data);
     }
@@ -39,12 +60,16 @@ class CustomerController extends Controller
     public function view($id)
     {
         $data['page_title'] = "View Customer";
+        $this->checkPermissions('view');
+
         $data['customer'] = Customer::where("id", $id)->with('products')->first();
         return view('customer.view', $data);
     }
 
     public function delete($id)
     {
+        $this->checkPermissions('delete');
+
         Customer::where("id", $id)->delete();
         return back()->withSuccess('Customer deleted successfully.');
     }
@@ -52,6 +77,8 @@ class CustomerController extends Controller
     public function map()
     {
         $data['page_title'] = "Customer Map Material";
+        $this->checkPermissions('map product');
+
         $data['customers'] = Customer::orderBy("name")->get();
         $data['products'] = Product::orderBy("name")->get();
         return view('customer.map', $data);

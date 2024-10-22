@@ -16,6 +16,7 @@ use App\Http\Controllers\IndentController;
 use App\Http\Controllers\OfferController;
 use App\Http\Controllers\PurchaseOrderController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\WarrantyNoteController;
 
 /*
@@ -38,6 +39,26 @@ Route::middleware('auth')->group(function () {
     Route::get('dashboard', [UserController::class, 'dashboard'])->name('dashboard');
     Route::get('/db-backup', [UserController::class, 'db_backup'])->name('db_backup');
     Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
+
+    // Users
+    Route::get('users', [UserController::class, 'users'])->name('user');
+    Route::get('user/create', [UserController::class, 'create'])->name('user.create');
+    Route::get('user/edit/{id}', [UserController::class, 'edit'])->name('user.edit');
+    Route::get('user/delete/{id}', [UserController::class, 'delete'])->name('user.delete');
+    Route::post('user/store', [UserController::class, 'store'])->name('user.store');
+    Route::post('user/update', [UserController::class, 'update'])->name('user.update');
+
+    // Role Work
+    Route::get('roles', [RoleController::class, 'index'])->name('role');
+    Route::get('role/create', [RoleController::class, 'create'])->name('role.create');
+    Route::post('role/create/form', [RoleController::class, 'store'])->name('role.create.form');
+    Route::get('role/edit/{id}', [RoleController::class, 'edit'])->name('role.edit');
+    Route::post('role/edit/form', [RoleController::class, 'update'])->name('role.edit.form');
+    Route::get('role/delete/{id}', [RoleController::class, 'delete'])->name('role.delete');
+
+    // USER ACCESS WORK
+    Route::get('permissions/{id}', [UserController::class, 'permissions'])->name('permissions');
+    Route::post('add_permissions', [UserController::class, 'add_permissions'])->name('add_permissions');
 
     // Customer
     Route::get('customers', [CustomerController::class, 'index'])->name('customer');

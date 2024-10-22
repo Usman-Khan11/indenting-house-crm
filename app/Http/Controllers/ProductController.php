@@ -8,9 +8,26 @@ use Yajra\DataTables\Facades\DataTables;
 
 class ProductController extends Controller
 {
+    protected $nav_id;
+
+    public function __construct()
+    {
+        $this->nav_id = 1;
+    }
+
+    protected function checkPermissions($action)
+    {
+        $permission = Get_Permission($this->nav_id, auth()->user()->role_id);
+
+        if (!in_array($action, $permission)) {
+            abort(403, 'Access denied.');
+        }
+    }
+
     public function index(Request $request)
     {
         $data['page_title'] = "Materials";
+        $this->checkPermissions('view');
 
         if ($request->ajax()) {
             $query = Product::Query();
@@ -24,6 +41,8 @@ class ProductController extends Controller
     public function create(Request $request)
     {
         $data['page_title'] = "Add New Material";
+        $this->checkPermissions('create');
+
         return view('product.create', $data);
     }
 
@@ -39,12 +58,16 @@ class ProductController extends Controller
     public function edit($id)
     {
         $data['page_title'] = "Edit Material";
+        $this->checkPermissions('update');
+
         $data['product'] = Product::where("id", $id)->first();
         return view('product.edit', $data);
     }
 
     public function delete($id)
     {
+        $this->checkPermissions('delete');
+
         Product::where("id", $id)->delete();
         return back()->withSuccess('Material deleted successfully.');
     }

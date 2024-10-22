@@ -1,7 +1,9 @@
 <?php
 
 use App\Models\GeneralSetting;
+use App\Models\Permission;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 function general()
 {
@@ -205,4 +207,62 @@ function renew()
     }
 
     return 0;
+}
+
+
+function get_user_permission($user_id)
+{
+    $Permisions = DB::table('permissions')->where('user_id', $user_id)->get();
+    return $Permisions;
+}
+
+function Get_Sidebar()
+{
+    $Nav = DB::table('navs')->get();
+    return $Nav;
+}
+
+function Get_Navkeys($nav_id)
+{
+    $Navkeys = DB::table('nav_keys')->where('nav_id', $nav_id)->get();
+    return $Navkeys;
+}
+
+function Get_Sidebar_User($user_id)
+{
+    $Permisions = Permission::select('nav_id')
+        ->where('user_id', $user_id)
+        ->groupBy('nav_id')
+        ->get();
+    return $Permisions;
+}
+
+function get_navkey_by_nav_id($nav_id)
+{
+    $Permisions = DB::table('nav_keys')->where('nav_id', $nav_id)->get();
+    return $Permisions;
+}
+
+function get_user_permissions($role_id, $nav_id, $nav_key_id)
+{
+    $Permisions = Permission::where('user_id', $role_id)->where('nav_id', $nav_id)->where('nav_key_id', $nav_key_id)->get();
+    return $Permisions;
+}
+
+function Get_Permission($nav_id, $role_id)
+{
+    $arr = [];
+    $navs = Get_Sidebar();
+    foreach ($navs as $nav) {
+        if ($nav->id == $nav_id) {
+            $navs_keys = get_navkey_by_nav_id($nav->id);
+            foreach ($navs_keys as $navs_key) {
+                $perm = get_user_permissions($role_id, $nav->id, $navs_key->id);
+                foreach ($perm as $perm) {
+                    $arr[] = $navs_key->key;
+                }
+            }
+        }
+    }
+    return $arr;
 }
