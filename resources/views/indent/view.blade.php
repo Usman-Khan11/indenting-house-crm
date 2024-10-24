@@ -310,7 +310,7 @@
                                     <h5 class="mb-1"><b>Special Note:</b></h5>
                                     <p class="mb-0">
                                         {{-- $indent->remark --}}
-                                        Form 7. Analysis Certificate & Export Packing List Must Accompany Shipping Documents and complete sets thereof should be sent by courier to buyer and indenters prior to shipment.
+                                        Manually signed Non-Negotiable copies of Invoice, Form 3, Form 7. Analysis Certificate & Export Packing List Must Accompany Shipping Documents and complete sets thereof should be sent by courier to buyer and indenters prior to shipment.
                                         <br /><br />
                                         Manufacturer & Expiry dates should be mentioned on each Export packing. Shelf life of material should be 80% minimum at the time of arrival.
                                     </p>

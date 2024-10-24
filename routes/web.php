@@ -181,4 +181,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/report/product', [ReportController::class, 'product'])->name('report.product');
     Route::get('/report/supplier-product', [ReportController::class, 'supplier_product'])->name('report.supplier_product');
     Route::get('/report/customer-product', [ReportController::class, 'customer_product'])->name('report.customer_product');
+    Route::get('/report/inquiry', [ReportController::class, 'inquiry'])->name('report.inquiry');
+    Route::get('/report/offer', [ReportController::class, 'offer'])->name('report.offer');
+    Route::get('/report/po', [ReportController::class, 'po'])->name('report.po');
+    Route::get('/report/indent', [ReportController::class, 'indent'])->name('report.indent');
 });

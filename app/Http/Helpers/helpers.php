@@ -117,6 +117,7 @@ function paymentTerms()
 {
     $data = [
         'CAD' => 'CAD',
+        'CAD 50 Days From BL Date' => 'CAD 50 Days From BL Date',
         'LC At Sight' => 'LC At Sight',
         'BC At Sight' => 'BC At Sight',
         'DP At Sight' => 'DP At Sight',
@@ -159,6 +160,7 @@ function portOfShipment()
         'Mumbai Air Port' => 'Mumbai Air Port',
         'Hyderabad Airport' => 'Hyderabad Airport',
         'Xiamen Airport' => 'Xiamen Airport',
+        'Xiamen Sea Port' => 'Xiamen Sea Port',
     ];
 
     return $data;
@@ -182,7 +184,8 @@ function units()
     $data = [
         'KG' => 'KG',
         'GM' => 'GM',
-        'LTR' => 'LTR'
+        'LTR' => 'LTR',
+        'PC' => 'PC'
     ];
 
     return $data;

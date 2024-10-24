@@ -127,6 +127,10 @@
         || in_array('material list', Get_Permission($value->nav_id, auth()->user()->role_id))
         || in_array('item wise supplier', Get_Permission($value->nav_id, auth()->user()->role_id))
         || in_array('item wise customer', Get_Permission($value->nav_id, auth()->user()->role_id))
+        || in_array('inquiry', Get_Permission($value->nav_id, auth()->user()->role_id))
+        || in_array('offer', Get_Permission($value->nav_id, auth()->user()->role_id))
+        || in_array('po', Get_Permission($value->nav_id, auth()->user()->role_id))
+        || in_array('indent', Get_Permission($value->nav_id, auth()->user()->role_id))
         ))
         <li class="menu-item {{ menuActive('report*', 2) }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
@@ -170,6 +174,38 @@
                 <li class="menu-item {{ menuActive('report.customer_product') }}">
                     <a href="{{ route('report.customer_product') }}" class="menu-link">
                         <div data-i18n="Item Wise Customer">Item Wise Customer</div>
+                    </a>
+                </li>
+                @endif
+
+                @if(in_array('inquiry', Get_Permission($value->nav_id, auth()->user()->role_id)))
+                <li class="menu-item {{ menuActive('report.inquiry') }}">
+                    <a href="{{ route('report.inquiry') }}" class="menu-link">
+                        <div data-i18n="Inquiry">Inquiry</div>
+                    </a>
+                </li>
+                @endif
+
+                @if(in_array('offer', Get_Permission($value->nav_id, auth()->user()->role_id)))
+                <li class="menu-item {{ menuActive('report.offer') }}">
+                    <a href="{{ route('report.offer') }}" class="menu-link">
+                        <div data-i18n="Offer">Offer</div>
+                    </a>
+                </li>
+                @endif
+
+                @if(in_array('po', Get_Permission($value->nav_id, auth()->user()->role_id)))
+                <li class="menu-item {{ menuActive('report.po') }}">
+                    <a href="{{ route('report.po') }}" class="menu-link">
+                        <div data-i18n="Purchase Order">Purchase Order</div>
+                    </a>
+                </li>
+                @endif
+
+                @if(in_array('indent', Get_Permission($value->nav_id, auth()->user()->role_id)))
+                <li class="menu-item {{ menuActive('report.indent') }}">
+                    <a href="{{ route('report.indent') }}" class="menu-link">
+                        <div data-i18n="Indent">Indent</div>
                     </a>
                 </li>
                 @endif
