@@ -143,17 +143,17 @@
                             <small><b>HS Code:</b> {{ @$v->item->hs_code }}</small>
                         </td>
                         <td class="text-center">
-                            {{ number_format($v->qty, 2) }}
+                            {{ number_format($v->qty) }}
                             {{ @$v->unit }}
                         </td>
                         <td class="text-center">
                             {{ $po->currency }} &nbsp;
-                            {{ number_format($v->rate, 2) }}/
+                            {{ number_format($v->rate, 3) }}/
                             {{ @$v->unit }}
                         </td>
                         <td class="text-center">
                             {{ $po->currency }} &nbsp;
-                            {{ number_format($v->total, 2) }}
+                            {{ number_format($v->total, 3) }}
                         </td>
                         <td>{{ $v->shipping_type }}</td>
                     </tr>
@@ -170,14 +170,14 @@
                         </td>
                         <td class="text-center">
                             <h6 class="fw-bold mb-0">
-                                {{ number_format($qty, 2) }}
+                                {{ number_format($qty) }}
                             </h6>
                         </td>
                         <td></td>
                         <td class="text-center">
                             <h6 class="fw-bold mb-0">
                                 {{ $po->currency }} &nbsp;
-                                {{ number_format($total, 2) }}
+                                {{ number_format($total, 3) }}
                             </h6>
                         </td>
                         <td></td>

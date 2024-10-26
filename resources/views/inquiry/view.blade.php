@@ -126,12 +126,12 @@
                             <small>{{ @$v->item->description }}</small>
                         </td>
                         <td>
-                            {{ @$v->qty }}
+                            {{ number_format(@$v->qty) }}
                             {{ @$v->unit }}
                         </td>
                         <td>
                             $ &nbsp;
-                            {{ @$v->rate }}/
+                            {{ number_format(@$v->rate, 3) }}/
                             {{ @$v->unit }}
                         </td>
                         <td>{{ @$v->shipment_mode }}</td>

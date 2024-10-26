@@ -68,6 +68,9 @@
 @push('script')
 <script type="text/javascript">
     $(document).ready(function() {
+        let title = 'MRI Inquiry Report';
+        let filename = 'inquiry-report';
+
         var datatable = $("#my_table").DataTable({
             select: {
                 style: "api",
@@ -95,21 +98,39 @@
                     title: "INQ #",
                 },
                 {
-                    data: "product_name",
-                    title: "Item Description",
-                    render: function(data, type, full, meta) {
-                        var p = `
-                            <div><strong>${full.product_name}</strong></div>
-                            <div><small>${full.product_description}</small></div>
-                            <div class="text-end fw-bold"><small>${full.qty} ${full.unit}</small></div>
-                        `;
-
-                        return p;
+                    title: 'Date',
+                    "render": function(data, type, full, meta) {
+                        return getDate(full.inq_date);
                     }
                 },
                 {
                     data: "customer_name",
                     title: "Customer",
+                },
+                {
+                    data: "product_name",
+                    title: "Item Description",
+                    render: function(data, type, full, meta) {
+                        var p = `
+                            <div><strong>${full.product_name}</strong></div>
+                            <div><small>${full.product_description}</small></div>`;
+
+                        return p;
+                    }
+                },
+                {
+                    data: "qty",
+                    title: "Qty",
+                    render: function(data, type, full, meta) {
+                        return `${full.qty} ${full.unit}`;
+                    }
+                },
+                {
+                    data: "rate",
+                    title: "Rate",
+                    render: function(data, type, full, meta) {
+                        return parseFloat(data).toFixed(3);
+                    }
                 },
                 {
                     data: "supplier_name",
@@ -121,20 +142,29 @@
             buttons: [{
                     extend: 'excelHtml5',
                     text: 'Export Excel',
-                    title: 'Materials List',
-                    className: "btn btn-success",
+                    title: function() {
+                        return title;
+                    },
+                    className: "btn btn-success m-1",
+                    filename: filename
                 },
                 {
                     extend: 'pdfHtml5',
                     text: 'Export PDF',
-                    title: 'Materials List',
-                    className: "btn btn-success",
+                    title: function() {
+                        return title;
+                    },
+                    className: "btn btn-success m-1",
+                    filename: filename
                 },
                 {
                     extend: 'print',
                     text: 'Print Table',
-                    title: 'Materials List',
-                    className: "btn btn-success",
+                    title: function() {
+                        return title;
+                    },
+                    className: "btn btn-success m-1",
+                    filename: filename
                 }
             ]
         });
@@ -147,6 +177,7 @@
             let product_id = $("#product_id").val();
 
             datatable.ajax.reload();
+            title = `MRI Inquiry Report ${from} to ${to}`;
         })
     });
 </script>

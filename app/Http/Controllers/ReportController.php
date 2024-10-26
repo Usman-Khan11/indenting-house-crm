@@ -121,7 +121,7 @@ class ReportController extends Controller
 
     public function inquiry(Request $request)
     {
-        $data['page_title'] = "Inquiry Report";
+        $data['page_title'] = "MRI Inquiry Report";
         $this->checkPermissions('inquiry');
 
         if ($request->ajax()) {
@@ -131,6 +131,7 @@ class ReportController extends Controller
                 ->join('products', 'inquiry_items.item_id', '=', 'products.id')
                 ->select(
                     'inquiries.inq_no',
+                    'inquiries.date as inq_date',
                     'inquiries.customer_id',
                     'inquiries.supplier_id',
                     'inquiry_items.*',
@@ -141,9 +142,9 @@ class ReportController extends Controller
                 );
 
             if (!empty($request->from) && !empty($request->to)) {
-                $query->whereBetween('inquiry_items.created_at', [
-                    $request->from . ' 00:00:00',
-                    $request->to . ' 23:59:59'
+                $query->whereBetween('inquiries.date', [
+                    $request->from,
+                    $request->to
                 ]);
             }
 
@@ -172,7 +173,7 @@ class ReportController extends Controller
 
     public function offer(Request $request)
     {
-        $data['page_title'] = "Offer Report";
+        $data['page_title'] = "MRI Offer Report";
         $this->checkPermissions('offer');
 
         if ($request->ajax()) {
@@ -182,6 +183,7 @@ class ReportController extends Controller
                 ->join('products', 'offer_items.item_id', '=', 'products.id')
                 ->select(
                     'offers.offer_no',
+                    'offers.date as offer_date',
                     'offers.customer_id',
                     'offers.supplier_id',
                     'offer_items.*',
@@ -192,9 +194,9 @@ class ReportController extends Controller
                 );
 
             if (!empty($request->from) && !empty($request->to)) {
-                $query->whereBetween('offer_items.created_at', [
-                    $request->from . ' 00:00:00',
-                    $request->to . ' 23:59:59'
+                $query->whereBetween('offers.date', [
+                    $request->from,
+                    $request->to
                 ]);
             }
 
@@ -223,7 +225,7 @@ class ReportController extends Controller
 
     public function po(Request $request)
     {
-        $data['page_title'] = "Purchase Order Report";
+        $data['page_title'] = "MRI Purchase Order Report";
         $this->checkPermissions('po');
 
         if ($request->ajax()) {
@@ -233,6 +235,7 @@ class ReportController extends Controller
                 ->join('products', 'purchase_order_items.item_id', '=', 'products.id')
                 ->select(
                     'purchase_orders.po_no',
+                    'purchase_orders.date as po_date',
                     'purchase_orders.customer_id',
                     'purchase_orders.supplier_id',
                     'purchase_order_items.*',
@@ -243,9 +246,9 @@ class ReportController extends Controller
                 );
 
             if (!empty($request->from) && !empty($request->to)) {
-                $query->whereBetween('purchase_order_items.created_at', [
-                    $request->from . ' 00:00:00',
-                    $request->to . ' 23:59:59'
+                $query->whereBetween('purchase_orders.date', [
+                    $request->from,
+                    $request->to
                 ]);
             }
 
@@ -274,7 +277,7 @@ class ReportController extends Controller
 
     public function indent(Request $request)
     {
-        $data['page_title'] = "Indent Report";
+        $data['page_title'] = "MRI Indent Report";
         $this->checkPermissions('indent');
 
         if ($request->ajax()) {
@@ -284,6 +287,7 @@ class ReportController extends Controller
                 ->join('products', 'indent_items.item_id', '=', 'products.id')
                 ->select(
                     'indents.indent_no',
+                    'indents.date as indent_date',
                     'indents.customer_id',
                     'indents.supplier_id',
                     'indent_items.*',
@@ -294,9 +298,9 @@ class ReportController extends Controller
                 );
 
             if (!empty($request->from) && !empty($request->to)) {
-                $query->whereBetween('indent_items.created_at', [
-                    $request->from . ' 00:00:00',
-                    $request->to . ' 23:59:59'
+                $query->whereBetween('indents.date', [
+                    $request->from,
+                    $request->to
                 ]);
             }
 

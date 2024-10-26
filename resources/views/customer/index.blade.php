@@ -55,10 +55,6 @@
                     title: "location",
                 },
                 {
-                    data: "fax_number",
-                    title: "fax number",
-                },
-                {
                     data: "email",
                     title: "email",
                 },

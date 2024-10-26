@@ -184,7 +184,7 @@
                         </td>
                         <td class="text-center">
                             <h6 class="fw-bold mb-0">
-                                {{ number_format($qty, 3) }}
+                                {{ number_format($qty) }}
                             </h6>
                         </td>
                         <td></td>
@@ -305,6 +305,11 @@
                                     <p class="mb-0">
                                         {{ $indent->bank_detail }}
                                     </p>
+
+                                    <h5 class="mb-1"><b>Swift Code:</b></h5>
+                                    <p class="mb-0">
+                                        {{ @$indent->supplier->swift_code }}
+                                    </p>
                                 </td>
                                 <td width="50%">
                                     <h5 class="mb-1"><b>Special Note:</b></h5>
@@ -346,7 +351,7 @@
                 <br /><br /><br />
             </div>
             <div class="col-6 border border-dark pb-5 pt-2">
-                <h5 class="mb-1">Sign & Stamp: <small>(For <b>Customer/Supplier</b>)</span></h5>
+                <h5 class="mb-1">Sign & Stamp: <small>(For <b>{{ @$indent->customer->name }}</b>)</span></h5>
                 <br /><br /><br />
             </div>
         </div>

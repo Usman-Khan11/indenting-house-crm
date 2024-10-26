@@ -140,10 +140,10 @@
                                         <button onclick="delProductRow(this)" type="button" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
                                     </td>
                                     <td width="30%">
-                                        <select name="product[]" class="form-select product" required onchange="productData(this)">
+                                        <select name="product[]" class="form-select select2 product" required onchange="productData(this)">
                                             <option selected disabled value="">Select Item</option>
                                             @foreach($products as $product)
-                                            <option @if($v->item_id==$product->id) selected @endif value="{{ $product->id }}">{{ $product->name }}</option>
+                                            <option title="{{ $product->description }}" @if($v->item_id==$product->id) selected @endif value="{{ $product->id }}">{{ $product->name }}</option>
                                             @endforeach
                                         </select>
                                     </td>
@@ -187,7 +187,7 @@
                                         <input type="text" value="{{ $v->delivery }}" name="product_delivery[]" class="form-control product_delivery">
                                     </td>
                                     <td width="20%">
-                                        <select name="product_supplier[]" class="form-select product_supplier" required>
+                                        <select name="product_supplier[]" class="form-select select2 product_supplier" required>
                                             <option selected disabled value="">Select Supplier</option>
                                             @foreach($suppliers as $supplier)
                                             <option @if($v->supplier_id==$supplier->id) selected @endif value="{{ $supplier->id }}">{{ $supplier->name }}</option>
@@ -201,10 +201,10 @@
                                         <button onclick="delProductRow(this)" type="button" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
                                     </td>
                                     <td width="30%">
-                                        <select name="product[]" class="form-select product" required onchange="productData(this)">
+                                        <select name="product[]" class="form-select select2 product" required onchange="productData(this)">
                                             <option selected disabled value="">Select Item</option>
                                             @foreach($products as $product)
-                                            <option value="{{ $product->id }}">{{ $product->name }}</option>
+                                            <option title="{{ $product->description }}" value="{{ $product->id }}">{{ $product->name }}</option>
                                             @endforeach
                                         </select>
                                     </td>
@@ -248,7 +248,7 @@
                                         <input type="text" name="product_delivery[]" class="form-control product_delivery">
                                     </td>
                                     <td width="20%">
-                                        <select name="product_supplier[]" class="form-select product_supplier" required>
+                                        <select name="product_supplier[]" class="form-select select2 product_supplier" required>
                                             <option selected disabled value="">Select Supplier</option>
                                             @foreach($suppliers as $supplier)
                                             <option value="{{ $supplier->id }}">{{ $supplier->name }}</option>

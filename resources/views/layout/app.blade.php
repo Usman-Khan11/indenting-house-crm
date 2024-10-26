@@ -54,6 +54,11 @@
             place-items: center;
             transform: scale(1.5);
         }
+
+        .card-datatable.table-responsive {
+            /* min-height: 500px; */
+            padding: 100px 0;
+        }
     </style>
 </head>
 
@@ -178,9 +183,15 @@
         }
 
         function addProductRow(e) {
+            if ($('select.product, select.product_supplier').hasClass('select2-hidden-accessible')) {
+                $('select.product, select.product_supplier').select2('destroy');
+            }
+
             $("#product_table tbody tr:last").clone().appendTo("#product_table tbody");
             $("#product_table tbody tr:last").find("input").val(null).prop("disabled", false);
             $("#product_table tbody tr:last").find("select").val(null).trigger('change').prop("disabled", false);
+
+            $('select.product, select.product_supplier').select2();
         }
 
         function delProductRow(e) {
@@ -218,6 +229,10 @@
                     let items = res.items;
                     $("#product_table tbody tr:gt(0)").remove();
 
+                    if ($('select.product, select.product_supplier').hasClass('select2-hidden-accessible')) {
+                        $('select.product, select.product_supplier').select2('destroy');
+                    }
+
                     $(items).each(function(key, value) {
                         let $newRow = $("#product_table tbody tr:first").clone();
 
@@ -236,6 +251,7 @@
                     });
 
                     $("#product_table tbody tr:first").remove();
+                    $('select.product, select.product_supplier').select2();
                 }
 
                 $(".loader").hide();
@@ -262,6 +278,10 @@
                     let items = res.items;
                     $("#product_table tbody tr:gt(0)").remove();
 
+                    if ($('select.product, select.product_supplier').hasClass('select2-hidden-accessible')) {
+                        $('select.product, select.product_supplier').select2('destroy');
+                    }
+
                     $(items).each(function(key, value) {
                         let $newRow = $("#product_table tbody tr:first").clone();
 
@@ -276,6 +296,7 @@
                     });
 
                     $("#product_table tbody tr:first").remove();
+                    $('select.product, select.product_supplier').select2();
                 }
 
                 $(".loader").hide();
@@ -304,6 +325,10 @@
                     let items = res.items;
                     $("#product_table tbody tr:gt(0)").remove();
 
+                    if ($('select.product, select.product_supplier').hasClass('select2-hidden-accessible')) {
+                        $('select.product, select.product_supplier').select2('destroy');
+                    }
+
                     $(items).each(function(key, value) {
                         let $newRow = $("#product_table tbody tr:first").clone();
 
@@ -318,6 +343,7 @@
                     });
 
                     $("#product_table tbody tr:first").remove();
+                    $('select.product, select.product_supplier').select2();
                 }
 
                 $(".loader").hide();
@@ -359,6 +385,36 @@
                     $(".bank_detail").val(res)
                 })
             }
+        }
+
+        function productSelect2(elem, url) {
+            if ($(elem).hasClass('select2-hidden-accessible')) {
+                $(elem).select2('destroy');
+            }
+
+            $(elem).select2({
+                ajax: {
+                    url: url,
+                    dataType: 'json',
+                    data: function(params) {
+                        var query = {
+                            search: params.term,
+                            type: 'get_product_data'
+                        }
+                        return query;
+                    },
+                    processResults: function(data) {
+                        return {
+                            results: data
+                        };
+                    }
+                },
+                cache: true,
+                allowClear: true,
+                placeholder: 'Search for...',
+                minimumInputLength: 1,
+                minimumResultsForSearch: 50
+            });
         }
     </script>
 </body>
