@@ -2,6 +2,28 @@
 
 @push('style')
 <style>
+    body {
+        background: #fff;
+        color: black !important;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        color: black !important;
+    }
+
+    p,
+    a,
+    small,
+    td,
+    span {
+        color: black !important;
+    }
+
     #layout-navbar,
     #layout-menu {
         display: none !important;
@@ -22,11 +44,17 @@
     table th {
         font-weight: bold !important;
         text-align: center !important;
+        color: black !important;
+        font-size: 15px !important;
     }
 
     .low-padding-table td,
     .low-padding-table th {
         padding: 4px;
+    }
+
+    .border-dark {
+        border-color: black !important;
     }
 </style>
 @endpush

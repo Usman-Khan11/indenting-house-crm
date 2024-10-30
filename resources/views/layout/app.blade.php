@@ -25,6 +25,7 @@
     <link rel="stylesheet" href="{{ asset('assets/vendor/libs/datatables-bs5/datatables.bootstrap5.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/vendor/libs/datatables-checkboxes-jquery/datatables.checkboxes.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/datatables-buttons-bs5/buttons.bootstrap5.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/vendor/css/pages/cards-advance.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/vendor/libs/select2/select2.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/vendor/libs/bootstrap-select/bootstrap-select.css') }}" />
@@ -57,7 +58,7 @@
 
         .card-datatable.table-responsive {
             /* min-height: 500px; */
-            padding: 100px 0;
+            padding: 120px 0 270px 0;
         }
     </style>
 </head>
@@ -169,7 +170,7 @@
                     id,
                 }, function(res) {
                     if (res) {
-                        $(e).parent().parent().find(".product_unit").val(res.unit);
+                        $(e).parent().parent().parent().find(".product_unit").val(res.unit);
                         $(e).parent().find("p").remove();
                         $(e).parent().append(`<p class="m-0 p-0 mt-2">${res.description}</p>`);
                     }
@@ -415,6 +416,30 @@
                 minimumInputLength: 1,
                 minimumResultsForSearch: 50
             });
+        }
+
+        function getSupplierProducts(e) {
+            $(".loader").show();
+            let supID = $(e).val();
+            $("select.product").html(null);
+
+            if (supID) {
+                $.get("{{ route('supplier.supplier_product') }}", {
+                    _token: '{{ csrf_token() }}',
+                    supID,
+                    type: 'getSupplierProducts'
+                }, function(res) {
+                    if (res) {
+                        $("select.product").append(`<option title="" value=""></option>`);
+                        $(res).each(function(i, v) {
+                            $("select.product").append(`<option title="${v.product.description}" value="${v.product.id}">${v.product.name}</option>`);
+                        });
+                        $(".loader").hide();
+                    }
+                })
+            } else {
+                $(".loader").hide();
+            }
         }
     </script>
 </body>

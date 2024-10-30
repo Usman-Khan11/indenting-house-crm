@@ -183,4 +183,17 @@ class SupplierController extends Controller
 
         return redirect()->route('supplier')->withSuccess('Products mapped successfully.');
     }
+
+    public function supplier_product(Request $request)
+    {
+        $type = $request->type;
+        $supID = $request->supID;
+        $data = null;
+
+        if ($supID) {
+            $data = SupplierProducts::where('supplier_id', $supID)->with('product')->get();
+        }
+
+        return $data;
+    }
 }

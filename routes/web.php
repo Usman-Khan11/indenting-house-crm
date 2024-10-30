@@ -81,6 +81,7 @@ Route::middleware('auth')->group(function () {
     Route::post('supplier/update', [SupplierController::class, 'update'])->name('supplier.update');
     Route::get('supplier/map', [SupplierController::class, 'map'])->name('supplier.map');
     Route::post('supplier/map', [SupplierController::class, 'map_product'])->name('supplier.map_product');
+    Route::get('supplier/products', [SupplierController::class, 'supplier_product'])->name('supplier.supplier_product');
 
     // Products
     Route::get('products', [ProductController::class, 'index'])->name('product');

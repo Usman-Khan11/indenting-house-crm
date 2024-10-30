@@ -60,7 +60,7 @@
                     <div class="col-md-4 col-12">
                         <div class="mb-3">
                             <label class="form-label">Supplier</label>
-                            <select class="select2 form-select" name="supplier_id" required>
+                            <select class="select2 form-select" name="supplier_id" required onchange="getSupplierProducts(this)">
                                 <option selected disabled value="">Select Supplier</option>
                                 @foreach($suppliers as $supplier)
                                 <option @if(old('supplier_id', $inquiry->supplier_id)==$supplier->id) selected @endif value="{{ $supplier->id }}">{{ $supplier->name }}</option>

@@ -15,12 +15,12 @@
             <div class="row mb-1">
                 <div class="col-md-2 mb-2">
                     <label class="form-label">From</label>
-                    <input type="date" id="from" class="form-control">
+                    <input type="date" id="from" class="form-control" value="{{ date('Y-m-d') }}">
                 </div>
 
                 <div class="col-md-2 mb-2">
                     <label class="form-label">To</label>
-                    <input type="date" id="to" class="form-control">
+                    <input type="date" id="to" class="form-control" value="{{ date('Y-m-d') }}">
                 </div>
 
                 <div class="col-md-4 mb-2">
@@ -80,6 +80,7 @@
             serverSide: true,
             lengthChange: true,
             ordering: false,
+            paging: false,
             pageLength: '{{ general()->page_length }}',
             scrollX: true,
             ajax: {

@@ -32,6 +32,7 @@
             serverSide: true,
             lengthChange: true,
             ordering: false,
+            paging: false,
             pageLength: '{{ general()->page_length }}',
             scrollX: true,
             ajax: {
