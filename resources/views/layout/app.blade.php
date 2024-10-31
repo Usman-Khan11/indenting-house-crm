@@ -217,6 +217,7 @@
                 inqId,
                 type: 'getInquiryData'
             }, function(res) {
+                $(".date").val(res.date);
                 $(".customer_id").val(res.customer_id).trigger("change");
                 $(".customer_id").prop("disabled", true);
                 $(".supplier_id").val(res.supplier_id).trigger("change");
@@ -428,6 +429,30 @@
                     _token: '{{ csrf_token() }}',
                     supID,
                     type: 'getSupplierProducts'
+                }, function(res) {
+                    if (res) {
+                        $("select.product").append(`<option title="" value=""></option>`);
+                        $(res).each(function(i, v) {
+                            $("select.product").append(`<option title="${v.product.description}" value="${v.product.id}">${v.product.name}</option>`);
+                        });
+                        $(".loader").hide();
+                    }
+                })
+            } else {
+                $(".loader").hide();
+            }
+        }
+
+        function getCustomerProducts(e) {
+            $(".loader").show();
+            let cusID = $(e).val();
+            $("select.product").html(null);
+
+            if (cusID) {
+                $.get("{{ route('customer.customer_product') }}", {
+                    _token: '{{ csrf_token() }}',
+                    cusID,
+                    type: 'getCustomerProducts'
                 }, function(res) {
                     if (res) {
                         $("select.product").append(`<option title="" value=""></option>`);

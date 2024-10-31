@@ -45,7 +45,7 @@ class OfferController extends Controller
 
             $query = Offer::Query();
             $query = $query->with('inquiry', 'customer', 'added_by');
-            $query = $query->latest()->get();
+            $query = $query->orderBy('date', 'desc')->get();
             return DataTables::of($query)->addIndexColumn()->make(true);
         }
 

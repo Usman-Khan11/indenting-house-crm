@@ -70,6 +70,7 @@ Route::middleware('auth')->group(function () {
     Route::post('customer/update', [CustomerController::class, 'update'])->name('customer.update');
     Route::get('customer/map', [CustomerController::class, 'map'])->name('customer.map');
     Route::post('customer/map', [CustomerController::class, 'map_product'])->name('customer.map_product');
+    Route::get('customer/products', [CustomerController::class, 'customer_product'])->name('customer.customer_product');
 
     // Supplier
     Route::get('suppliers', [SupplierController::class, 'index'])->name('supplier');

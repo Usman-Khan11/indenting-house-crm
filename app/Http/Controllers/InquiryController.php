@@ -38,7 +38,7 @@ class InquiryController extends Controller
         if ($request->ajax()) {
             $query = Inquiry::Query();
             $query = $query->with('customer', 'added_by');
-            $query = $query->latest()->get();
+            $query = $query->orderBy('date', 'desc')->get();
             return DataTables::of($query)->addIndexColumn()->make(true);
         }
 

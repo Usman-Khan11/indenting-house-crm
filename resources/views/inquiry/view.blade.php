@@ -154,7 +154,7 @@
                             <small>{{ @$v->item->description }}</small>
                         </td>
                         <td>
-                            {{ number_format(@$v->qty) }}
+                            {{ number_format(@$v->qty, 2) }}
                             {{ @$v->unit }}
                         </td>
                         <td>

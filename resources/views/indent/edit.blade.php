@@ -16,7 +16,7 @@
                     <div class="col-md-2 col-12">
                         <div class="mb-3">
                             <label class="form-label">INDENT #</label>
-                            <input type="text" name="indent_no" value="{{ $indent->indent_no }}" class="form-control" readonly />
+                            <input type="text" name="indent_no" value="{{ $indent->indent_no }}" class="form-control" @if(auth()->user()->id != 1) readonly @endif />
                         </div>
                     </div>
 

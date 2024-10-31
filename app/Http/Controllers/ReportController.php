@@ -68,7 +68,7 @@ class ReportController extends Controller
 
         if ($request->ajax()) {
             $query = Product::Query();
-            $query = $query->latest()->get();
+            $query = $query->orderBy('name')->get();
             return DataTables::of($query)->addIndexColumn()->make(true);
         }
 
@@ -160,7 +160,7 @@ class ReportController extends Controller
                 $query->where('inquiry_items.item_id', $request->product_id);
             }
 
-            $query = $query->get();
+            $query = $query->orderBy('inq_date', 'desc')->get();
             return DataTables::of($query)->addIndexColumn()->make(true);
         }
 
@@ -212,7 +212,7 @@ class ReportController extends Controller
                 $query->where('offer_items.item_id', $request->product_id);
             }
 
-            $query = $query->get();
+            $query = $query->orderBy('offer_date', 'desc')->get();
             return DataTables::of($query)->addIndexColumn()->make(true);
         }
 
@@ -264,7 +264,7 @@ class ReportController extends Controller
                 $query->where('purchase_order_items.item_id', $request->product_id);
             }
 
-            $query = $query->get();
+            $query = $query->orderBy('po_date', 'desc')->get();
             return DataTables::of($query)->addIndexColumn()->make(true);
         }
 
@@ -316,7 +316,7 @@ class ReportController extends Controller
                 $query->where('indent_items.item_id', $request->product_id);
             }
 
-            $query = $query->get();
+            $query = $query->orderBy('indent_date', 'desc')->get();
             return DataTables::of($query)->addIndexColumn()->make(true);
         }
 

@@ -195,4 +195,17 @@ class CustomerController extends Controller
 
         return redirect()->route('customer')->withSuccess('Products mapped successfully.');
     }
+
+    public function customer_product(Request $request)
+    {
+        $type = $request->type;
+        $cusID = $request->cusID;
+        $data = null;
+
+        if ($cusID) {
+            $data = CustomerProducts::where('customer_id', $cusID)->with('product')->get();
+        }
+
+        return $data;
+    }
 }

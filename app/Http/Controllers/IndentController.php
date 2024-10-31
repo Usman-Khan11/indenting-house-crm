@@ -50,7 +50,7 @@ class IndentController extends Controller
 
             $query = Indent::Query();
             $query = $query->with('po', 'customer', 'supplier', 'added_by');
-            $query = $query->latest()->get();
+            $query = $query->orderBy('date', 'desc')->get();
             return DataTables::of($query)->addIndexColumn()->make(true);
         }
 
@@ -222,6 +222,7 @@ class IndentController extends Controller
         ]);
 
         $indent = Indent::find($request->id);
+        $indent->indent_no = $request->indent_no;
         $indent->po_id = $request->po_id;
         $indent->customer_id = $request->customer_id;
         $indent->supplier_id = $request->supplier_id;

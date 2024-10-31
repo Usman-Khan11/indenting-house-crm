@@ -23,7 +23,7 @@
                     <div class="col-md-3 col-12">
                         <div class="mb-3">
                             <label class="form-label">Date</label>
-                            <input type="date" required name="date" value="{{ old('date', $offer->date) }}" class="form-control" placeholder="Date" />
+                            <input type="date" required name="date" value="{{ old('date', $offer->date) }}" class="form-control date" placeholder="Date" />
                         </div>
                     </div>
 
@@ -60,7 +60,7 @@
                     <div class="col-md-4 col-12">
                         <div class="mb-3">
                             <label class="form-label">Customer</label>
-                            <select class="select2 form-select customer_id" name="customer_id" required disabled>
+                            <select class="select2 form-select customer_id" name="customer_id" required disabled onchange="getCustomerProducts(this)">
                                 <option selected disabled value="">Select Customer</option>
                                 @foreach($customers as $customer)
                                 <option @if(old('customer_id', $offer->customer_id) == $customer->id) selected @endif value="{{ $customer->id }}">{{ $customer->name }}</option>

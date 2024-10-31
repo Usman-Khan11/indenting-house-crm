@@ -124,7 +124,19 @@ function paymentTerms()
         'TT Advance' => 'TT Advance',
         'LC 30 Days From BL Date' => 'LC 30 Days From BL Date',
         'LC 60 Days From BL Date' => 'LC 60 Days From BL Date',
-        'LC 90 Days From BL Date' => 'LC 90 Days From BL Date'
+        'LC 90 Days From BL Date' => 'LC 90 Days From BL Date',
+        'BC 40 Days' => 'BC 40 Days',
+        'BC 45 Days From BL Date' => 'BC 45 Days From BL Date',
+        'BC 40 Days From BL Date' => 'BC 40 Days From BL Date',
+        'BC 60 Days From BL Date' => 'BC 60 Days From BL Date',
+        'BC 120 Days' => 'BC 120 Days',
+        'DA' => 'DA',
+        'DA 30 Days' => 'DA 30 Days',
+        'DA 45 Days' => 'DA 45 Days',
+        'DA 60 Days' => 'DA 60 Days',
+        'DA 90 Days' => 'DA 90 Days',
+        'DA 120 Days' => 'DA 120 Days',
+        'LC 120 Days' => 'LC 120 Days'
     ];
 
     return $data;

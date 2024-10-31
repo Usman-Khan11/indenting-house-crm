@@ -42,15 +42,23 @@
             },
             columns: [{
                     data: "id",
-                    title: "Cus ID",
+                    title: "ID",
                 },
                 {
                     data: "name",
                     title: "Name",
                 },
                 {
+                    data: "description",
+                    title: "description",
+                },
+                {
                     data: "unit",
                     title: "Unit",
+                },
+                {
+                    data: "hs_code",
+                    title: "HS Code",
                 }
             ],
             rowCallback: function(row, data) {},
