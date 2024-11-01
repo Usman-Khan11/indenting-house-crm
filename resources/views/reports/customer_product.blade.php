@@ -14,6 +14,14 @@
         <div class="card-body">
             <div class="row justify-content-end">
                 <div class="col-md-4">
+                    <select class="select2" id="customers">
+                        <option value="all" selected>All Customers</option>
+                        @foreach($customers as $customer)
+                        <option value="{{ $customer->id }}">{{ $customer->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="col-md-4">
                     <select class="select2" id="products">
                         <option value="all" selected>All Items</option>
                         @foreach($products as $product)
@@ -50,23 +58,28 @@
                 type: "get",
                 data: function(d) {
                     d.product_id = $("#products").val();
+                    d.customer_id = $("#customers").val();
                 },
             },
             columns: [{
-                    title: "Cus ID",
-                    render: function(data, type, full, meta) {
-                        if (full.customer) {
-                            return full.customer.id;
-                        } else {
-                            return '-';
-                        }
-                    }
+                    data: "DT_RowIndex",
+                    title: "S.No",
                 },
                 {
                     title: "Name",
                     render: function(data, type, full, meta) {
                         if (full.customer) {
                             return full.customer.name;
+                        } else {
+                            return '-';
+                        }
+                    }
+                },
+                {
+                    title: "Location",
+                    render: function(data, type, full, meta) {
+                        if (full.customer) {
+                            return full.customer.address_office;
                         } else {
                             return '-';
                         }
@@ -83,40 +96,50 @@
                     }
                 },
                 {
-                    title: "Address",
+                    title: "Item",
                     render: function(data, type, full, meta) {
-                        if (full.customer) {
-                            return full.customer.address_office;
+                        if (full.product) {
+                            return full.product.name;
                         } else {
                             return '-';
                         }
                     }
                 },
                 {
-                    title: "Phone",
+                    title: "Item Description",
                     render: function(data, type, full, meta) {
-                        if (full.customer) {
-                            return full.customer.phone_1;
+                        if (full.product) {
+                            return full.product.description;
                         } else {
                             return '-';
                         }
                     }
                 },
                 {
-                    title: "Fax",
+                    title: "HS Code",
                     render: function(data, type, full, meta) {
-                        if (full.customer) {
-                            return full.customer.fax_number;
+                        if (full.product) {
+                            return full.product.hs_code;
                         } else {
                             return '-';
                         }
                     }
                 },
                 {
-                    title: "Email",
+                    title: "Unit",
                     render: function(data, type, full, meta) {
-                        if (full.customer) {
-                            return full.customer.email;
+                        if (full.product) {
+                            return full.product.unit;
+                        } else {
+                            return '-';
+                        }
+                    }
+                },
+                {
+                    title: "Type",
+                    render: function(data, type, full, meta) {
+                        if (full.product) {
+                            return full.product.type;
                         } else {
                             return '-';
                         }
@@ -146,7 +169,7 @@
             ]
         });
 
-        $("#products").change(function() {
+        $("#products, #customers").change(function() {
             datatable.ajax.reload();
         })
     });

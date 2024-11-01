@@ -68,7 +68,7 @@ class ReportController extends Controller
 
         if ($request->ajax()) {
             $query = Product::Query();
-            $query = $query->orderBy('name')->get();
+            $query = $query->orderBy('id', 'asc')->get();
             return DataTables::of($query)->addIndexColumn()->make(true);
         }
 
@@ -81,12 +81,17 @@ class ReportController extends Controller
         $this->checkPermissions('item wise supplier');
 
         $data['products'] = Product::orderBy('name')->get();
+        $data['suppliers'] = Supplier::orderBy('name')->get();
 
         if ($request->ajax()) {
             $query = SupplierProducts::Query();
 
             if ($request->product_id != "all") {
                 $query = $query->where('product_id', $request->product_id);
+            }
+
+            if ($request->supplier_id != "all") {
+                $query = $query->where('supplier_id', $request->supplier_id);
             }
 
             $query = $query->with('supplier', 'product');
@@ -103,12 +108,17 @@ class ReportController extends Controller
         $this->checkPermissions('item wise customer');
 
         $data['products'] = Product::orderBy('name')->get();
+        $data['customers'] = Customer::orderBy('name')->get();
 
         if ($request->ajax()) {
             $query = CustomerProducts::Query();
 
             if ($request->product_id != "all") {
                 $query = $query->where('product_id', $request->product_id);
+            }
+
+            if ($request->customer_id != "all") {
+                $query = $query->where('customer_id', $request->customer_id);
             }
 
             $query = $query->with('customer', 'product');

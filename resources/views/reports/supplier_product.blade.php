@@ -14,6 +14,14 @@
         <div class="card-body">
             <div class="row justify-content-end">
                 <div class="col-md-4">
+                    <select class="select2" id="suppliers">
+                        <option value="all" selected>All Suppliers</option>
+                        @foreach($suppliers as $supplier)
+                        <option value="{{ $supplier->id }}">{{ $supplier->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="col-md-4">
                     <select class="select2" id="products">
                         <option value="all" selected>All Items</option>
                         @foreach($products as $product)
@@ -50,43 +58,18 @@
                 type: "get",
                 data: function(d) {
                     d.product_id = $("#products").val();
+                    d.supplier_id = $("#suppliers").val();
                 },
             },
             columns: [{
-                    title: "Sup ID",
-                    render: function(data, type, full, meta) {
-                        if (full.supplier) {
-                            return full.supplier.id;
-                        } else {
-                            return '-';
-                        }
-                    }
+                    data: "DT_RowIndex",
+                    title: "S.No",
                 },
                 {
                     title: "Name",
                     render: function(data, type, full, meta) {
                         if (full.supplier) {
                             return full.supplier.name;
-                        } else {
-                            return '-';
-                        }
-                    }
-                },
-                {
-                    title: "Contact Person",
-                    render: function(data, type, full, meta) {
-                        if (full.supplier) {
-                            return full.supplier.person;
-                        } else {
-                            return '-';
-                        }
-                    }
-                },
-                {
-                    title: "Address",
-                    render: function(data, type, full, meta) {
-                        if (full.supplier) {
-                            return full.supplier.address;
                         } else {
                             return '-';
                         }
@@ -103,30 +86,60 @@
                     }
                 },
                 {
-                    title: "Phone",
+                    title: "Contact Person",
                     render: function(data, type, full, meta) {
                         if (full.supplier) {
-                            return full.supplier.phone;
+                            return full.supplier.person;
                         } else {
                             return '-';
                         }
                     }
                 },
                 {
-                    title: "Fax",
+                    title: "Item",
                     render: function(data, type, full, meta) {
-                        if (full.supplier) {
-                            return full.supplier.fax_number;
+                        if (full.product) {
+                            return full.product.name;
                         } else {
                             return '-';
                         }
                     }
                 },
                 {
-                    title: "Email",
+                    title: "Item Description",
                     render: function(data, type, full, meta) {
-                        if (full.supplier) {
-                            return full.supplier.email;
+                        if (full.product) {
+                            return full.product.description;
+                        } else {
+                            return '-';
+                        }
+                    }
+                },
+                {
+                    title: "HS Code",
+                    render: function(data, type, full, meta) {
+                        if (full.product) {
+                            return full.product.hs_code;
+                        } else {
+                            return '-';
+                        }
+                    }
+                },
+                {
+                    title: "Unit",
+                    render: function(data, type, full, meta) {
+                        if (full.product) {
+                            return full.product.unit;
+                        } else {
+                            return '-';
+                        }
+                    }
+                },
+                {
+                    title: "Type",
+                    render: function(data, type, full, meta) {
+                        if (full.product) {
+                            return full.product.type;
                         } else {
                             return '-';
                         }
@@ -156,7 +169,7 @@
             ]
         });
 
-        $("#products").change(function() {
+        $("#products, #suppliers").change(function() {
             datatable.ajax.reload();
         })
     });
