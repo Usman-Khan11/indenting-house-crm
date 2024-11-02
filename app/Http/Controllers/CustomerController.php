@@ -74,10 +74,15 @@ class CustomerController extends Controller
         return back()->withSuccess('Customer deleted successfully.');
     }
 
-    public function map()
+    public function map(Request $request)
     {
         $data['page_title'] = "Customer Map Material";
         $this->checkPermissions('map product');
+
+        if (isset($request->id) && !empty($request->id)) {
+            $d = CustomerProducts::where('customer_id', $request->id)->get();
+            return $d;
+        }
 
         $data['customers'] = Customer::orderBy("name")->get();
         $data['products'] = Product::orderBy("name")->get();

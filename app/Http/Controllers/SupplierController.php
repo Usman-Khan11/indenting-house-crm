@@ -79,6 +79,11 @@ class SupplierController extends Controller
         $data['page_title'] = "Supplier Map Material";
         $this->checkPermissions('map product');
 
+        if (isset($request->id) && !empty($request->id)) {
+            $d = SupplierProducts::where('supplier_id', $request->id)->get();
+            return $d;
+        }
+
         $data['suppliers'] = Supplier::orderBy("name")->get();
         $data['products'] = Product::orderBy("name")->get();
         return view('supplier.map', $data);
