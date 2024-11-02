@@ -232,153 +232,48 @@
                     </div>
 
                     <!-- Product Repeater -->
-                    <div class="col-12 mb-4 card-datatable table-responsive">
+                    <div class="col-12">
                         <h4>
                             Items: &nbsp;
                             <button onclick="addProductRow(this)" type="button" class="btn btn-info btn-sm"><i class="fa fa-plus"></i></button>
                         </h4>
-                        <table class="datatables-basic table table-bordered" id="product_table" style="width:110%;">
-                            <thead>
-                                <tr>
-                                    <th width="3%">...</th>
-                                    <th width="30%">Item</th>
-                                    <th width="8%">Qty</th>
-                                    <th width="8%">Unit</th>
-                                    <th width="10%">Rate</th>
-                                    <!-- <th>Total</th> -->
-                                    <th width="10%">Shipment Mode</th>
-                                    <th width="10%">Payment Term</th>
-                                    <!-- <th>PONO</th>
-                                    <th>PODT</th>
-                                    <th>Lot Detail</th>
-                                    <th>Other Desc</th> -->
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @php
-                                $p = (!empty(old('product'))) ? old('product') : [];
-                                @endphp
-                                @forelse($p as $k => $v)
-                                <tr>
-                                    <td width="3%">
-                                        <button onclick="delProductRow(this)" type="button" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
-                                    </td>
-                                    <td width="30%">
-                                        <select name="product[]" class="form-select select2 product" required onchange="productData(this)">
-                                            <option selected disabled value="">Select Item</option>
-                                            @foreach($products as $product)
-                                            <option title="{{ $product->description }}" @if($v==$product->id) selected @endif value="{{ $product->id }}">{{ $product->name }}</option>
-                                            @endforeach
-                                        </select>
-                                    </td>
-                                    <td width="8%">
-                                        <input type="number" onkeyup="calculation(this)" value="{{ old('product_qty')[$k] }}" name="product_qty[]" class="form-control product_qty" step="any" required>
-                                    </td>
-                                    <td width="8%">
-                                        <input type="text" value="{{ old('product_unit')[$k] }}" name="product_unit[]" class="form-control product_unit">
-                                    </td>
-                                    <td width="10%">
-                                        <input type="number" onkeyup="calculation(this)" value="{{ old('product_rate')[$k] }}" name="product_rate[]" class="form-control product_rate" step="any" required>
-                                    </td>
-                                    <td class="d-none">
-                                        <input type="number" value="{{ old('product_total')[$k] }}" name="product_total[]" class="form-control product_total" step="any" readonly>
-                                    </td>
-                                    <td width="10%">
-                                        <select name="product_shipment[]" class="form-select product_shipment">
-                                            <option selected value="">Select Shipment Mode</option>
-                                            @foreach(shippingMode() as $key => $value)
-                                            <option @if(old('product_shipment')[$k]==$key) selected @endif value="{{ $key }}">{{ $value }}</option>
-                                            @endforeach
-                                        </select>
-                                    </td>
-                                    <td width="10%">
-                                        <select name="product_payment_term[]" class="form-select product_payment_term">
-                                            <option selected value="">Select Payment Term</option>
-                                            @foreach(paymentTerms() as $key => $value)
-                                            <option @if(old('product_payment_term')[$k]==$key) selected @endif value="{{ $key }}">{{ $value }}</option>
-                                            @endforeach
-                                        </select>
-                                    </td>
-                                    <td class="d-none">
-                                        <select name="product_po_id[]" class="form-select product_po_id">
-                                            <option selected disabled value="">Select Purchase Order</option>
-                                            @foreach($purchase_orders as $purchase_order)
-                                            <option @if(old('product_po_id')[$k]==$purchase_order->id ) selected @endif value="{{ $purchase_order->id }}">{{ $purchase_order->po_no }}</option>
-                                            @endforeach
-                                        </select>
-                                    </td>
-                                    <td class="d-none">
-                                        <input type="text" value="{{ old('product_po_date')[$k] }}" name="product_po_date[]" class="form-control product_po_date">
-                                    </td>
-                                    <td class="d-none">
-                                        <input type="text" value="{{ old('product_lot_detail')[$k] }}" name="product_lot_detail[]" class="form-control product_lot_detail">
-                                    </td>
-                                    <td class="d-none">
-                                        <input type="text" value="{{ old('product_other_desc')[$k] }}" name="product_other_desc[]" class="form-control product_other_desc">
-                                    </td>
-                                </tr>
-                                @empty
-                                <tr>
-                                    <td width="3%">
-                                        <button onclick="delProductRow(this)" type="button" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
-                                    </td>
-                                    <td width="30%">
-                                        <select name="product[]" class="form-select select2 product" required onchange="productData(this)">
-                                            <option selected disabled value="">Select Item</option>
-                                            @foreach($products as $product)
-                                            <option title="{{ $product->description }}" value="{{ $product->id }}">{{ $product->name }}</option>
-                                            @endforeach
-                                        </select>
-                                    </td>
-                                    <td width="8%">
-                                        <input type="number" onkeyup="calculation(this)" name="product_qty[]" class="form-control product_qty" step="any" required>
-                                    </td>
-                                    <td width="8%">
-                                        <input type="text" name="product_unit[]" class="form-control product_unit">
-                                    </td>
-                                    <td width="10%">
-                                        <input type="number" onkeyup="calculation(this)" name="product_rate[]" class="form-control product_rate" step="any" required>
-                                    </td>
-                                    <td class="d-none">
-                                        <input type="number" name="product_total[]" class="form-control product_total" step="any" readonly>
-                                    </td>
-                                    <td width="10%">
-                                        <select name="product_shipment[]" class="form-select product_shipment">
-                                            <option selected value="">Select Shipment Mode</option>
-                                            @foreach(shippingMode() as $key => $value)
-                                            <option value="{{ $key }}">{{ $value }}</option>
-                                            @endforeach
-                                        </select>
-                                    </td>
-                                    <td width="10%">
-                                        <select name="product_payment_term[]" class="form-select product_payment_term">
-                                            <option selected value="">Select Payment Term</option>
-                                            @foreach(paymentTerms() as $key => $value)
-                                            <option value="{{ $key }}">{{ $value }}</option>
-                                            @endforeach
-                                        </select>
-                                    </td>
-                                    <td class="d-none">
-                                        <select name="product_po_id[]" class="form-select product_po_id">
-                                            <option selected disabled value="">Select Purchase Order</option>
-                                            @foreach($purchase_orders as $purchase_order)
-                                            <option value="{{ $purchase_order->id }}">{{ $purchase_order->po_no }}</option>
-                                            @endforeach
-                                        </select>
-                                    </td>
-                                    <td class="d-none">
-                                        <input type="text" name="product_po_date[]" class="form-control product_po_date">
-                                    </td>
-                                    <td class="d-none">
-                                        <input type="text" name="product_lot_detail[]" class="form-control product_lot_detail">
-                                    </td>
-                                    <td class="d-none">
-                                        <input type="text" name="product_other_desc[]" class="form-control product_other_desc">
-                                    </td>
-                                </tr>
-                                @endforelse
-                            </tbody>
-                        </table>
+                        <div id="product_table">
+                            @php
+                            $p = old('product', []);
+                            @endphp
+
+                            @forelse ($p as $k => $v)
+                            @include('indent.product_row', [
+                            'product_id' => $v,
+                            'product_qty' => old('product_qty')[$k] ?? '',
+                            'product_unit' => old('product_unit')[$k] ?? '',
+                            'product_rate' => old('product_rate')[$k] ?? '',
+                            'product_total' => old('product_total')[$k] ?? '',
+                            'product_shipment' => old('product_shipment')[$k] ?? '',
+                            'product_payment_term' => old('product_payment_term')[$k] ?? '',
+                            'product_po_id' => old('product_po_id')[$k] ?? '',
+                            'product_po_date' => old('product_po_date')[$k] ?? '',
+                            'product_lot_detail' => old('product_lot_detail')[$k] ?? '',
+                            'product_other_desc' => old('product_other_desc')[$k] ?? '',
+                            'products' => $products
+                            ])
+                            @empty
+                            @include('indent.product_row', [
+                            'product_id' => '',
+                            'product_qty' => '',
+                            'product_unit' => '',
+                            'product_rate' => '',
+                            'product_total' => '',
+                            'product_shipment' => '',
+                            'product_payment_term' => '',
+                            'product_po_id' => '',
+                            'product_po_date' => '',
+                            'product_lot_detail' => '',
+                            'product_other_desc' => '',
+                            'products' => $products
+                            ])
+                            @endforelse
+                        </div>
                     </div>
 
                     <div class="col-md-12 col-12 mt-3">

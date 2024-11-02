@@ -80,97 +80,38 @@
                     </div>
 
                     <!-- Product Repeater -->
-                    <div class="col-12 mb-4 card-datatable table-responsive">
+                    <div class="col-12">
                         <h4>
                             Items: &nbsp;
                             <button onclick="addProductRow(this)" type="button" class="btn btn-info btn-sm"><i class="fa fa-plus"></i></button>
                         </h4>
-                        <table class="datatables-basic table table-bordered" id="product_table" style="width:100%;">
-                            <thead>
-                                <tr>
-                                    <th width="3%">...</th>
-                                    <th width="30%">Item</th>
-                                    <th width="8%">Qty</th>
-                                    <th width="8%">Unit</th>
-                                    <th width="10%">Rate</th>
-                                    <th width="10%">Shipping Type</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @php
-                                $p = (!empty(old('product'))) ? old('product') : [];
-                                @endphp
-                                @forelse($p as $k => $v)
-                                <tr>
-                                    <td width="3%">
-                                        <button onclick="delProductRow(this)" type="button" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
-                                    </td>
-                                    <td width="30%">
-                                        <select name="product[]" class="form-select select2 product" required onchange="productData(this)">
-                                            <option selected disabled value="">Select Item</option>
-                                            @foreach($products as $product)
-                                            <option title="{{ $product->description }}" @if($v==$product->id) selected @endif value="{{ $product->id }}">{{ $product->name }}</option>
-                                            @endforeach
-                                        </select>
-                                    </td>
-                                    <td width="8%">
-                                        <input type="number" onkeyup="calculation(this)" value="{{ old('product_qty')[$k] }}" name="product_qty[]" class="form-control product_qty" step="any" required>
-                                    </td>
-                                    <td width="8%">
-                                        <input type="text" value="{{ old('product_unit')[$k] }}" name="product_unit[]" class="form-control product_unit">
-                                    </td>
-                                    <td width="10%">
-                                        <input type="number" onkeyup="calculation(this)" value="{{ old('product_rate')[$k] }}" name="product_rate[]" class="form-control product_rate" step="any" required>
-                                    </td>
-                                    <td class="d-none">
-                                        <input type="number" value="{{ old('product_total')[$k] }}" name="product_total[]" class="form-control product_total" step="any" readonly>
-                                    </td>
-                                    <td width="10%">
-                                        <select name="product_shipping_type[]" class="form-select product_shipping_type">
-                                            <option value="" selected>Select Shipping Type</option>
-                                            @foreach(shippingType() as $key => $value)
-                                            <option @if(old('product_shipping_type')==$key) selected @endif value="{{ $key }}">{{ $value }}</option>
-                                            @endforeach
-                                        </select>
-                                    </td>
-                                </tr>
-                                @empty
-                                <tr>
-                                    <td width="3%">
-                                        <button onclick="delProductRow(this)" type="button" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
-                                    </td>
-                                    <td width="30%">
-                                        <select name="product[]" class="form-select select2 product" required onchange="productData(this)">
-                                            <option selected disabled value="">Select Item</option>
-                                            @foreach($products as $product)
-                                            <option title="{{ $product->description }}" value="{{ $product->id }}">{{ $product->name }}</option>
-                                            @endforeach
-                                        </select>
-                                    </td>
-                                    <td width="8%">
-                                        <input type="number" onkeyup="calculation(this)" name="product_qty[]" class="form-control product_qty" step="any" required>
-                                    </td>
-                                    <td width="8%">
-                                        <input type="text" name="product_unit[]" class="form-control product_unit">
-                                    </td>
-                                    <td width="10%">
-                                        <input type="number" onkeyup="calculation(this)" name="product_rate[]" class="form-control product_rate" step="any" required>
-                                    </td>
-                                    <td class="d-none">
-                                        <input type="number" name="product_total[]" class="form-control product_total" step="any" readonly>
-                                    </td>
-                                    <td width="10%">
-                                        <select name="product_shipping_type[]" class="form-select product_shipping_type">
-                                            <option value="" selected>Select Shipping Type</option>
-                                            @foreach(shippingType() as $key => $value)
-                                            <option value="{{ $key }}">{{ $value }}</option>
-                                            @endforeach
-                                        </select>
-                                    </td>
-                                </tr>
-                                @endforelse
-                            </tbody>
-                        </table>
+                        <div id="product_table">
+                            @php
+                            $p = old('product', []);
+                            @endphp
+
+                            @forelse ($p as $k => $v)
+                            @include('po.product_row', [
+                            'product_id' => $v,
+                            'product_qty' => old('product_qty')[$k] ?? '',
+                            'product_unit' => old('product_unit')[$k] ?? '',
+                            'product_rate' => old('product_rate')[$k] ?? '',
+                            'product_total' => old('product_total')[$k] ?? '',
+                            'product_shipping_type' => old('product_shipping_type')[$k] ?? '',
+                            'products' => $products
+                            ])
+                            @empty
+                            @include('po.product_row', [
+                            'product_id' => '',
+                            'product_qty' => '',
+                            'product_unit' => '',
+                            'product_rate' => '',
+                            'product_total' => '',
+                            'product_shipping_type' => '',
+                            'products' => $products
+                            ])
+                            @endforelse
+                        </div>
                     </div>
 
                     <div class="col-md-12 col-12 mt-3">

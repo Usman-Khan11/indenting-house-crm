@@ -47,6 +47,18 @@
                     title: "S.No",
                 },
                 {
+                    title: "Options",
+                    class: "text-nowrap",
+                    render: function(data, type, full, meta) {
+                        let button = '';
+                        button += `<a href="/offer/view/${full.id}" target="_blank" class="btn btn-info btn-sm">View</a> `;
+                        button += `<a href="/offer/edit/${full.id}" class="btn btn-warning btn-sm">Edit</a> `;
+                        button += `<a onclick="return checkDelete()" href="/offer/delete/${full.id}" class="btn btn-danger btn-sm">Delete</a> `;
+
+                        return button;
+                    },
+                },
+                {
                     data: "offer_no",
                     title: "Offer #",
                 },
@@ -96,18 +108,6 @@
                             return '-';
                         }
                     }
-                },
-                {
-                    title: "Options",
-                    class: "text-nowrap",
-                    render: function(data, type, full, meta) {
-                        let button = '';
-                        button += `<a href="/offer/view/${full.id}" target="_blank" class="btn btn-info btn-sm">View</a> `;
-                        button += `<a href="/offer/edit/${full.id}" class="btn btn-warning btn-sm">Edit</a> `;
-                        button += `<a onclick="return checkDelete()" href="/offer/delete/${full.id}" class="btn btn-danger btn-sm">Delete</a> `;
-
-                        return button;
-                    },
                 }
             ],
             rowCallback: function(row, data) {},

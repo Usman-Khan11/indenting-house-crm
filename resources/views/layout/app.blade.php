@@ -55,11 +55,6 @@
             place-items: center;
             transform: scale(1.5);
         }
-
-        .card-datatable.table-responsive {
-            /* min-height: 500px; */
-            padding: 120px 0 270px 0;
-        }
     </style>
 </head>
 
@@ -171,14 +166,14 @@
                 }, function(res) {
                     if (res) {
                         $(e).parent().parent().parent().find(".product_unit").val(res.unit);
-                        $(e).parent().find("p").remove();
-                        $(e).parent().append(`<p class="m-0 p-0 mt-2">${res.description}</p>`);
+                        // $(e).parent().find("p").remove();
+                        // $(e).parent().append(`<p class="m-0 p-0 mt-2">${res.description}</p>`);
                     }
 
                     $(".loader").hide();
                 })
             } else {
-                $(e).parent().find("p").remove();
+                // $(e).parent().find("p").remove();
                 $(".loader").hide();
             }
         }
@@ -188,15 +183,21 @@
                 $('select.product, select.product_supplier').select2('destroy');
             }
 
-            $("#product_table tbody tr:last").clone().appendTo("#product_table tbody");
-            $("#product_table tbody tr:last").find("input").val(null).prop("disabled", false);
-            $("#product_table tbody tr:last").find("select").val(null).trigger('change').prop("disabled", false);
+            // Old Method
+            // $("#product_table tbody tr:last").clone().appendTo("#product_table tbody");
+            // $("#product_table tbody tr:last").find("input").val(null).prop("disabled", false);
+            // $("#product_table tbody tr:last").find("select").val(null).trigger('change').prop("disabled", false);
+
+            // New Method
+            $("#product_table .row:last").clone().appendTo("#product_table");
+            $("#product_table .row:last").find("input").val(null).prop("disabled", false);
+            $("#product_table .row:last").find("select").val(null).trigger('change').prop("disabled", false);
 
             $('select.product, select.product_supplier').select2();
         }
 
         function delProductRow(e) {
-            if ($("#product_table tbody tr").length > 1) {
+            if ($("#product_table .row").length > 1) {
                 $(e).parent().parent().remove();
             }
         }
@@ -229,14 +230,14 @@
 
                 if (res.items.length) {
                     let items = res.items;
-                    $("#product_table tbody tr:gt(0)").remove();
+                    $("#product_table .row:gt(0)").remove();
 
                     if ($('select.product, select.product_supplier').hasClass('select2-hidden-accessible')) {
                         $('select.product, select.product_supplier').select2('destroy');
                     }
 
                     $(items).each(function(key, value) {
-                        let $newRow = $("#product_table tbody tr:first").clone();
+                        let $newRow = $("#product_table .row:first").clone();
 
                         $newRow.find('.product').val(value.item_id).trigger('change');
                         $newRow.find('.product_qty').val(value.qty);
@@ -249,10 +250,10 @@
                         $newRow.find('.product_delivery').val(value.delivery);
                         $newRow.find('.product_supplier').val(value.supplier_id).trigger('change');
 
-                        $("#product_table tbody").append($newRow);
+                        $("#product_table").append($newRow);
                     });
 
-                    $("#product_table tbody tr:first").remove();
+                    $("#product_table .row:first").remove();
                     $('select.product, select.product_supplier').select2();
                 }
 
@@ -278,14 +279,14 @@
 
                 if (res.items.length) {
                     let items = res.items;
-                    $("#product_table tbody tr:gt(0)").remove();
+                    $("#product_table .row:gt(0)").remove();
 
                     if ($('select.product, select.product_supplier').hasClass('select2-hidden-accessible')) {
                         $('select.product, select.product_supplier').select2('destroy');
                     }
 
                     $(items).each(function(key, value) {
-                        let $newRow = $("#product_table tbody tr:first").clone();
+                        let $newRow = $("#product_table .row:first").clone();
 
                         $newRow.find('.product').val(value.item_id).trigger('change');
                         $newRow.find('.product_qty').val(value.qty);
@@ -294,10 +295,10 @@
                         $newRow.find('.product_total').val(value.total);
                         $newRow.find('.product_shipping_type').val(value.shipping_type).trigger('change');
 
-                        $("#product_table tbody").append($newRow);
+                        $("#product_table").append($newRow);
                     });
 
-                    $("#product_table tbody tr:first").remove();
+                    $("#product_table .row:first").remove();
                     $('select.product, select.product_supplier').select2();
                 }
 
@@ -325,14 +326,14 @@
 
                 if (res.items.length) {
                     let items = res.items;
-                    $("#product_table tbody tr:gt(0)").remove();
+                    $("#product_table .row:gt(0)").remove();
 
                     if ($('select.product, select.product_supplier').hasClass('select2-hidden-accessible')) {
                         $('select.product, select.product_supplier').select2('destroy');
                     }
 
                     $(items).each(function(key, value) {
-                        let $newRow = $("#product_table tbody tr:first").clone();
+                        let $newRow = $("#product_table .row:first").clone();
 
                         $newRow.find('.product').val(value.item_id).trigger('change').prop("disabled", true);
                         $newRow.find('.product_qty').val(value.qty).prop("disabled", true);
@@ -341,10 +342,10 @@
                         $newRow.find('.product_total').val(value.total).prop("disabled", true);
                         // $newRow.find('.product_po_id').val(value.po_id).trigger('change');
 
-                        $("#product_table tbody").append($newRow);
+                        $("#product_table").append($newRow);
                     });
 
-                    $("#product_table tbody tr:first").remove();
+                    $("#product_table .row:first").remove();
                     $('select.product, select.product_supplier').select2();
                 }
 

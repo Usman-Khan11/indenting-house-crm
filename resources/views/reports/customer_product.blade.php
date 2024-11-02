@@ -79,7 +79,7 @@
                     title: "Location",
                     render: function(data, type, full, meta) {
                         if (full.customer) {
-                            return full.customer.address_office;
+                            return full.customer.location;
                         } else {
                             return '-';
                         }
