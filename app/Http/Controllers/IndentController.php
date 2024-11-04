@@ -65,7 +65,7 @@ class IndentController extends Controller
         $data['customers'] = Customer::orderBy('name', 'asc')->get();
         $data['suppliers'] = Supplier::orderBy('name', 'asc')->get();
         $data['products'] = Product::orderBy('name', 'asc')->get();
-        $data['purchase_orders'] = PurchaseOrder::leftJoin('indents', 'purchase_orders.id', '=', 'indents.po_id')->whereNull('indents.po_id')->select('purchase_orders.*')->latest()->latest()->get();
+        $data['purchase_orders'] = PurchaseOrder::leftJoin('indents', 'purchase_orders.id', '=', 'indents.po_id')->whereNull('indents.po_id')->select('purchase_orders.*')->latest()->get();
 
         $data["indent_no"] = 1000;
         $q = Indent::latest()->first();

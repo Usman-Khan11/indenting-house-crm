@@ -17,6 +17,7 @@ use App\Http\Controllers\OfferController;
 use App\Http\Controllers\PurchaseOrderController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\ShipmentController;
 use App\Http\Controllers\WarrantyNoteController;
 
 /*
@@ -187,4 +188,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/report/offer', [ReportController::class, 'offer'])->name('report.offer');
     Route::get('/report/po', [ReportController::class, 'po'])->name('report.po');
     Route::get('/report/indent', [ReportController::class, 'indent'])->name('report.indent');
+
+    // Shipment
+    Route::get('shipments', [ShipmentController::class, 'index'])->name('shipment');
+    Route::get('shipment/create', [ShipmentController::class, 'create'])->name('shipment.create');
+    Route::get('shipment/edit/{id}', [ShipmentController::class, 'edit'])->name('shipment.edit');
+    Route::get('shipment/view/{id}', [ShipmentController::class, 'view'])->name('shipment.view');
+    Route::get('shipment/delete/{id}', [ShipmentController::class, 'delete'])->name('shipment.delete');
+    Route::post('shipment/store', [ShipmentController::class, 'store'])->name('shipment.store');
+    Route::post('shipment/update', [ShipmentController::class, 'update'])->name('shipment.update');
 });

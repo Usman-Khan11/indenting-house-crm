@@ -353,6 +353,51 @@
             });
         }
 
+        function getIndentData(e) {
+            let indentId = $(e).val();
+            $(".loader").show();
+
+            $.get("{{ route('shipment') }}", {
+                _token: '{{ csrf_token() }}',
+                indentId,
+                type: 'getIndentData'
+            }, function(res) {
+                $(".customer_id").val(res.customer_id).trigger("change");
+                $(".customer_id").prop("disabled", true);
+                $(".supplier_id").val(res.supplier_id).trigger("change");
+                $(".supplier_id").prop("disabled", true);
+                $(".currency").val(res.currency).trigger("change");
+                $(".currency").prop("disabled", true);
+
+                if (res.items.length) {
+                    let items = res.items;
+                    $("#product_table .row:gt(0)").remove();
+
+                    if ($('select.product, select.product_supplier').hasClass('select2-hidden-accessible')) {
+                        $('select.product, select.product_supplier').select2('destroy');
+                    }
+
+                    $(items).each(function(key, value) {
+                        let $newRow = $("#product_table .row:first").clone();
+
+                        $newRow.find('.product').val(value.item_id).trigger('change').prop("disabled", true);
+                        $newRow.find('.product_qty').val(value.qty);
+                        $newRow.find('.product_unit').val(value.unit).prop("disabled", true);
+                        $newRow.find('.product_rate').val(value.rate).prop("disabled", true);
+                        $newRow.find('.product_total').val(value.total).prop("disabled", true);
+                        // $newRow.find('.product_po_id').val(value.po_id).trigger('change');
+
+                        $("#product_table").append($newRow);
+                    });
+
+                    $("#product_table .row:first").remove();
+                    $('select.product, select.product_supplier').select2();
+                }
+
+                $(".loader").hide();
+            });
+        }
+
         $("form").on('submit', function() {
             $("select, input, textarea").prop("disabled", false);
             $(".loader").show();
