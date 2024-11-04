@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -22,6 +23,18 @@ return new class extends Migration
             $table->string('expired_at', 20)->nullable();
             $table->timestamps();
         });
+
+        DB::table('general_settings')->insert([
+            [
+                'sitename' => 'MRI',
+                'logo' => 'assets/img/logo.png',
+                'page_length' => 15,
+                'expired' => 0,
+                'expired_at' => '2050-12-31',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]
+        ]);
     }
 
     /**

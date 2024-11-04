@@ -19,8 +19,9 @@ return new class extends Migration
             $table->integer('item_id');
             $table->string('qty', 15);
             $table->string('unit', 15)->nullable();
-            $table->string('rate', 15);
-            $table->string('total', 15);
+            $table->string('rate', 40);
+            $table->string('total', 40);
+            $table->string('shipping_type', 25)->nullable();
             $table->timestamps();
         });
     }

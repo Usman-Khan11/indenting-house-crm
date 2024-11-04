@@ -32,6 +32,7 @@ return new class extends Migration
             $table->string('date_of_negotiation', 15)->nullable();
             $table->string('validity', 15)->nullable();
             $table->string('origin', 200)->nullable();
+            $table->string('currency', 20)->nullable();
             $table->text('bank_detail')->nullable();
             $table->text('remark')->nullable();
             $table->text('remark_2')->nullable();

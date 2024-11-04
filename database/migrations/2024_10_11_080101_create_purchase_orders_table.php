@@ -18,9 +18,9 @@ return new class extends Migration
             $table->string('po_no', 20);
             $table->integer('offer_id');
             $table->string('date', 15)->nullable();
+            $table->string('currency', 20)->nullable();
             $table->integer('customer_id');
             $table->integer('supplier_id');
-            $table->string('shipping_type', 25)->nullable();
             $table->text('remark')->nullable();
             $table->integer('added_by');
             $table->timestamps();

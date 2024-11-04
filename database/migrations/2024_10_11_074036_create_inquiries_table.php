@@ -17,7 +17,9 @@ return new class extends Migration
             $table->id();
             $table->string('inq_no', 20);
             $table->integer('customer_id');
+            $table->integer('supplier_id');
             $table->string('currency', 20)->nullable();
+            $table->string('date', 20)->nullable();
             $table->string('validity', 20)->nullable();
             $table->text('remark')->nullable();
             $table->text('remark_2')->nullable();
