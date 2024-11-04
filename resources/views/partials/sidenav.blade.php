@@ -124,7 +124,7 @@
         @if($value->nav_id == 9 && in_array('view', Get_Permission($value->nav_id, auth()->user()->role_id)))
         <li class="menu-item {{ menuActive('shipment*') }}">
             <a href="{{ route('shipment') }}" class="menu-link">
-                <i class="menu-icon tf-icons ti ti-check"></i>
+                <i class="menu-icon tf-icons ti ti-truck"></i>
                 <div data-i18n="Shipments">Shipments</div>
             </a>
         </li>
