@@ -1,7 +1,7 @@
 <div class="row align-items-center border border-primary py-2 mb-3">
-    <div class="col-md-1 mb-3 text-center">
+    {{-- <div class="col-md-1 mb-3 text-center">
         <button onclick="delProductRow(this)" type="button" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
-    </div>
+    </div> --}}
 
     <div class="col-md-5 mb-3">
         <label class="form-label">Item</label>

@@ -203,6 +203,29 @@ function units()
     return $data;
 }
 
+function paymentRemarks()
+{
+    $data = [
+        'Pending' => 'Pending',
+        'Done' => 'Done'
+    ];
+
+    return $data;
+}
+
+function shipmentLotDetails()
+{
+    $data = [
+        '1st Lot' => '1st Lot',
+        '2nd Lot' => '2nd Lot',
+        '3rd Lot' => '3rd Lot',
+        '4th Lot' => '4th Lot',
+        '5th Lot' => '5th Lot'
+    ];
+
+    return $data;
+}
+
 function renew()
 {
     $gnl = GeneralSetting::first();

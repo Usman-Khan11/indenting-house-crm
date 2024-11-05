@@ -72,7 +72,11 @@
                     <div class="col-md-4 col-12">
                         <div class="mb-3">
                             <label class="form-label">Shipment Lot No</label>
-                            <input type="text" name="lot_no" value="{{ old('lot_no') }}" class="form-control" placeholder="Shipment Lot no" />
+                            <select name="lot_no" class="form-select">
+                                @foreach (shipmentLotDetails() as $key => $value)
+                                    <option @if($key == old('lot_no')) selected @endif value="{{ $key }}">{{ $value }}</option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
 
@@ -131,7 +135,11 @@
                     <div class="col-md-4 col-12">
                         <div class="mb-3">
                             <label class="form-label">Payment Remarks</label>
-                            <textarea name="payment_remark" class="form-control remark" placeholder="Payment Remarks">{{ old('payment_remark') }}</textarea>
+                            <select name="payment_remark" class="form-select">
+                                @foreach (paymentRemarks() as $key => $value)
+                                    <option @if($key == old('payment_remark')) selected @endif value="{{ $key }}">{{ $value }}</option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
 
@@ -146,7 +154,7 @@
                     <div class="col-12">
                         <h4>
                             Items: &nbsp;
-                            <button onclick="addProductRow(this)" type="button" class="btn btn-info btn-sm"><i class="fa fa-plus"></i></button>
+                            {{-- <button onclick="addProductRow(this)" type="button" class="btn btn-info btn-sm"><i class="fa fa-plus"></i></button> --}}
                         </h4>
                         <div id="product_table">
                             @php
