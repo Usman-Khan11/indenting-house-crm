@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Shipment extends Model
 {
     use HasFactory;
+    protected $casts = ['lot_no' => 'array'];
 
     public function indent()
     {

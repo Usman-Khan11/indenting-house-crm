@@ -74,7 +74,7 @@ class SupplierController extends Controller
         return back()->withSuccess('Supplier deleted successfully.');
     }
 
-    public function map()
+    public function map(Request $request)
     {
         $data['page_title'] = "Supplier Map Material";
         $this->checkPermissions('map product');

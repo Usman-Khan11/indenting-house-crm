@@ -71,31 +71,6 @@
 
                     <div class="col-md-4 col-12">
                         <div class="mb-3">
-                            <label class="form-label">Shipment Lot No</label>
-                            <select name="lot_no" class="form-select">
-                                @foreach (shipmentLotDetails() as $key => $value)
-                                    <option @if($key == old('lot_no')) selected @endif value="{{ $key }}">{{ $value }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="col-md-2 col-12">
-                        <div class="mb-3">
-                            <label class="form-label">Invoice No</label>
-                            <input type="text" name="inv_no" value="{{ old('inv_no') }}" class="form-control" placeholder="Invoice No" />
-                        </div>
-                    </div>
-
-                    <div class="col-md-2 col-12">
-                        <div class="mb-3">
-                            <label class="form-label">Invoice Date</label>
-                            <input type="date" name="inv_date" value="{{ old('inv_date') }}" class="form-control" placeholder="Invoice Date" />
-                        </div>
-                    </div>
-
-                    <div class="col-md-4 col-12">
-                        <div class="mb-3">
                             <label class="form-label">Customers</label>
                             <select class="select2 form-select customer_id" name="customer_id" required>
                                 <option selected disabled value="">Select Customer</option>
@@ -118,18 +93,33 @@
                         </div>
                     </div>
 
-                    <div class="col-md-2 col-12">
-                        <div class="mb-3">
-                            <label class="form-label">BL No</label>
-                            <input type="text" name="bl_no" value="{{ old('bl_no') }}" class="form-control" placeholder="BL No" />
+                    <div class="col-12 shipment_lot_row">
+                        <div class="mb-2">
+                            <button onclick="addShipmentLotRow(this)" type="button" class="btn btn-info btn-sm p-1 px-2"><i class="fa fa-plus"></i></button> 
+                            <button onclick="delShipmentLotRow(this)" type="button" class="btn btn-danger btn-sm p-1 px-2"><i class="fa fa-trash-alt"></i></button> 
                         </div>
-                    </div>
 
-                    <div class="col-md-2 col-12">
-                        <div class="mb-3">
-                            <label class="form-label">BL Date</label>
-                            <input type="date" name="bl_date" value="{{ old('bl_date') }}" class="form-control" placeholder="BL Date" />
-                        </div>
+                        @php
+                        $p = old('lot_no', []);
+                        @endphp
+
+                        @forelse ($p as $k => $v)
+                        @include('shipment.shipment_lot_row', [
+                        'lot_no' => $v,
+                        'inv_no' => old('inv_no')[$k] ?? '',
+                        'inv_date' => old('inv_date')[$k] ?? '',
+                        'bl_no' => old('bl_no')[$k] ?? '',
+                        'bl_date' => old('bl_date')[$k] ?? ''
+                        ])
+                        @empty
+                        @include('shipment.shipment_lot_row', [
+                        'lot_no' => '',
+                        'inv_no' => '',
+                        'inv_date' => '',
+                        'bl_no' => '',
+                        'bl_date' => ''
+                        ])
+                        @endforelse
                     </div>
 
                     <div class="col-md-4 col-12">

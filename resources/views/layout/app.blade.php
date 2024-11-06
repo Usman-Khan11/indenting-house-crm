@@ -202,6 +202,18 @@
             }
         }
 
+        function addShipmentLotRow(e) {
+            $(".shipment_lot_row .row:last").clone().appendTo(".shipment_lot_row");
+            $(".shipment_lot_row .row:last").find("input").val(null).prop("disabled", false);
+            $(".shipment_lot_row .row:last").find("select").val(null).trigger('change').prop("disabled", false);
+        }
+
+        function delShipmentLotRow(e) {
+            if ($(".shipment_lot_row .row").length > 1) {
+                $(".shipment_lot_row .row:last").remove();
+            }
+        }
+
         function calculation(e) {
             let qty = parseFloat($(e).parent().parent().find('.product_qty').val());
             let rate = parseFloat($(e).parent().parent().find('.product_rate').val());

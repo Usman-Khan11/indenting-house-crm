@@ -116,11 +116,11 @@ class ShipmentController extends Controller
             'lc_bt_tt_no' => 'nullable|string|max:100',
             'lc_issue_date' => 'nullable|date',
             'lc_exp_date' => 'nullable|date',
-            'lot_no' => 'required|string|max:100',
-            'inv_no' => 'required|string|max:40',
-            'inv_date' => 'required|date',
-            'bl_no' => 'required|string|max:40',
-            'bl_date' => 'required|date',
+            // 'lot_no' => 'required|string|max:100',
+            // 'inv_no' => 'required|string|max:40',
+            // 'inv_date' => 'required|date',
+            // 'bl_no' => 'required|string|max:40',
+            // 'bl_date' => 'required|date',
             'payment_remark' => 'nullable|string',
             'final_remark' => 'nullable|string',
         ]);
@@ -135,16 +135,30 @@ class ShipmentController extends Controller
         $shipment->lc_bt_tt_no = $request->lc_bt_tt_no;
         $shipment->lc_issue_date = $request->lc_issue_date;
         $shipment->lc_exp_date = $request->lc_exp_date;
-        $shipment->lot_no = $request->lot_no;
-        $shipment->inv_no = $request->inv_no;
-        $shipment->inv_date = $request->inv_date;
-        $shipment->bl_no = $request->bl_no;
-        $shipment->bl_date = $request->bl_date;
+        // $shipment->lot_no = $request->lot_no;
+        // $shipment->inv_no = $request->inv_no;
+        // $shipment->inv_date = $request->inv_date;
+        // $shipment->bl_no = $request->bl_no;
+        // $shipment->bl_date = $request->bl_date;
         $shipment->payment_remark = $request->payment_remark;
         $shipment->final_remark = $request->final_remark;
         $shipment->added_by = auth()->user()->id;
 
         $product = (!empty($request->product)) ? $request->product : [];
+
+        $lot_no = (!empty($request->lot_no)) ? $request->lot_no : [];
+        $arr = [];
+        foreach ($lot_no as $key => $value) {
+            $arr[$value . '_' . $key] = [
+                "lot_no" => $value,
+                "inv_no" => $request->inv_no[$key],
+                "inv_date" => $request->inv_date[$key],
+                "bl_no" => $request->bl_no[$key],
+                "bl_date" => $request->bl_date[$key]
+            ];
+        }
+
+        $shipment->lot_no = $arr;
 
         if ($shipment->save()) {
             foreach ($product as $key => $value) {
@@ -181,11 +195,11 @@ class ShipmentController extends Controller
             'lc_bt_tt_no' => 'nullable|string|max:100',
             'lc_issue_date' => 'nullable|date',
             'lc_exp_date' => 'nullable|date',
-            'lot_no' => 'required|string|max:100',
-            'inv_no' => 'required|string|max:40',
-            'inv_date' => 'required|date',
-            'bl_no' => 'required|string|max:40',
-            'bl_date' => 'required|date',
+            // 'lot_no' => 'required|string|max:100',
+            // 'inv_no' => 'required|string|max:40',
+            // 'inv_date' => 'required|date',
+            // 'bl_no' => 'required|string|max:40',
+            // 'bl_date' => 'required|date',
             'payment_remark' => 'nullable|string',
             'final_remark' => 'nullable|string',
         ]);
@@ -200,15 +214,29 @@ class ShipmentController extends Controller
         $shipment->lc_bt_tt_no = $request->lc_bt_tt_no;
         $shipment->lc_issue_date = $request->lc_issue_date;
         $shipment->lc_exp_date = $request->lc_exp_date;
-        $shipment->lot_no = $request->lot_no;
-        $shipment->inv_no = $request->inv_no;
-        $shipment->inv_date = $request->inv_date;
-        $shipment->bl_no = $request->bl_no;
-        $shipment->bl_date = $request->bl_date;
+        // $shipment->lot_no = $request->lot_no;
+        // $shipment->inv_no = $request->inv_no;
+        // $shipment->inv_date = $request->inv_date;
+        // $shipment->bl_no = $request->bl_no;
+        // $shipment->bl_date = $request->bl_date;
         $shipment->payment_remark = $request->payment_remark;
         $shipment->final_remark = $request->final_remark;
 
         $product = (!empty($request->product)) ? $request->product : [];
+
+        $lot_no = (!empty($request->lot_no)) ? $request->lot_no : [];
+        $arr = [];
+        foreach ($lot_no as $key => $value) {
+            $arr[$value . '_' . $key] = [
+                "lot_no" => $value,
+                "inv_no" => $request->inv_no[$key],
+                "inv_date" => $request->inv_date[$key],
+                "bl_no" => $request->bl_no[$key],
+                "bl_date" => $request->bl_date[$key]
+            ];
+        }
+
+        $shipment->lot_no = $arr;
 
         if ($shipment->save()) {
             ShipmentItems::where('shipment_id', $shipment->id)->delete();

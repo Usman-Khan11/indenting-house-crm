@@ -237,38 +237,42 @@
                                     <p class="m-0">{{ ($shipment->lc_exp_date) ? date("d-M-Y", strtotime($shipment->lc_exp_date)) : '-' }}</p>
                                 </td>
                             </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="mb-2">
+            <div class="row">
+                <div class="col-12">
+                    <table class="table align-top">
+                        <tbody>
                             <tr>
-                                <td width="18.33%">
-                                    <h6 class="mb-0"><b>Shipment Lot No:</b></h6>
-                                </td>
-                                <td width="15%">
-                                    <p class="m-0">{{ $shipment->lot_no }}</p>
-                                </td>
-                                <td width="18.33%">
-                                    <h6 class="mb-0"><b>Invoice No:</b></h6>
-                                </td>
-                                <td width="15%">
-                                    <p class="m-0">{{ $shipment->inv_no }}</p>
-                                </td>
-                                <td width="18.33%">
-                                    <h6 class="mb-0"><b>Invoice Date:</b></h6>
-                                </td>
-                                <td width="15%">
-                                    <p class="m-0">{{ ($shipment->inv_date) ? date("d-M-Y", strtotime($shipment->inv_date)) : '-' }}</p>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td width="18.33%">
-                                    <h6 class="mb-0"><b>BL No:</b></h6>
-                                </td>
-                                <td width="15%">
-                                    <p class="m-0">{{ $shipment->bl_no }}</p>
-                                </td>
-                                <td width="18.33%">
-                                    <h6 class="mb-0"><b>BL Date:</b></h6>
-                                </td>
-                                <td width="15%">
-                                    <p class="m-0">{{ ($shipment->bl_date) ? date("d-M-Y", strtotime($shipment->bl_date)) : '-' }}</p>
+                                <td width="100%">
+                                    <h5 class="mb-1"><b>Shipment Lot Details:</b></h5>
+                                    <table class="table table-bordered table-sm border-dark align-top">
+                                        <thead>
+                                            <tr>
+                                                <th>Shipment Lot</th>
+                                                <th>Invoice #</th>
+                                                <th>Invoice Date</th>
+                                                <th>BL #</th>
+                                                <th>BL Date</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($shipment->lot_no as $k => $v)
+                                                <tr>
+                                                    <td>{{ $v['lot_no'] ?? '' }}</td>
+                                                    <td>{{ $v['inv_no'] ?? '' }}</td>
+                                                    <td>{{ ($v['inv_date']) ? date("d-M-Y", strtotime($v['inv_date'])) : '-' }}</td>
+                                                    <td>{{ $v['bl_no'] ?? '' }}</td>
+                                                    <td>{{ ($v['bl_date']) ? date("d-M-Y", strtotime($v['bl_date'])) : '-' }}</td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
                                 </td>
                             </tr>
                         </tbody>
@@ -276,6 +280,7 @@
                 </div>
             </div>
         </div>
+
 
         <div class="mb-2">
             <div class="row">

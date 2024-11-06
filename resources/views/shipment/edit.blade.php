@@ -73,31 +73,6 @@
 
                     <div class="col-md-4 col-12">
                         <div class="mb-3">
-                            <label class="form-label">Shipment Lot No</label>
-                            <select name="lot_no" class="form-select">
-                                @foreach (shipmentLotDetails() as $key => $value)
-                                    <option @if($key == old('lot_no', $shipment->lot_no)) selected @endif value="{{ $key }}">{{ $value }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="col-md-2 col-12">
-                        <div class="mb-3">
-                            <label class="form-label">Invoice No</label>
-                            <input type="text" name="inv_no" value="{{ old('inv_no',  $shipment->inv_no) }}" class="form-control" placeholder="Invoice No" />
-                        </div>
-                    </div>
-
-                    <div class="col-md-2 col-12">
-                        <div class="mb-3">
-                            <label class="form-label">Invoice Date</label>
-                            <input type="date" name="inv_date" value="{{ old('inv_date',  $shipment->inv_date) }}" class="form-control" placeholder="Invoice Date" />
-                        </div>
-                    </div>
-
-                    <div class="col-md-4 col-12">
-                        <div class="mb-3">
                             <label class="form-label">Customer</label>
                             <select class="select2 form-select customer_id" name="customer_id" required disabled>
                                 <option selected disabled value="">Select Customer</option>
@@ -120,18 +95,33 @@
                         </div>
                     </div>
 
-                    <div class="col-md-2 col-12">
-                        <div class="mb-3">
-                            <label class="form-label">BL No</label>
-                            <input type="text" name="bl_no" value="{{ old('bl_no', $shipment->bl_no) }}" class="form-control" placeholder="BL No" />
+                    <div class="col-12 shipment_lot_row">
+                        <div class="mb-2">
+                            <button onclick="addShipmentLotRow(this)" type="button" class="btn btn-info btn-sm p-1 px-2"><i class="fa fa-plus"></i></button> 
+                            <button onclick="delShipmentLotRow(this)" type="button" class="btn btn-danger btn-sm p-1 px-2"><i class="fa fa-trash-alt"></i></button> 
                         </div>
-                    </div>
 
-                    <div class="col-md-2 col-12">
-                        <div class="mb-3">
-                            <label class="form-label">BL Date</label>
-                            <input type="date" name="bl_date" value="{{ old('bl_date', $shipment->bl_date) }}" class="form-control" placeholder="BL Date" />
-                        </div>
+                        @php
+                        $p = old('lot_no', $shipment->lot_no);
+                        @endphp
+
+                        @forelse ($p as $k => $v)
+                        @include('shipment.shipment_lot_row', [
+                        'lot_no' => old('lot_no')[$k] ?? $v['lot_no'] ?? '',
+                        'inv_no' => old('inv_no')[$k] ?? $v['inv_no'] ?? '',
+                        'inv_date' => old('inv_no')[$k] ?? $v['inv_date'] ?? '',
+                        'bl_no' => old('inv_no')[$k] ?? $v['bl_no'] ?? '',
+                        'bl_date' => old('inv_no')[$k] ?? $v['bl_date'] ?? ''
+                        ])
+                        @empty
+                        @include('shipment.shipment_lot_row', [
+                        'lot_no' => '',
+                        'inv_no' => '',
+                        'inv_date' => '',
+                        'bl_no' => '',
+                        'bl_date' => ''
+                        ])
+                        @endforelse
                     </div>
                     
                     <div class="col-md-4 col-12">
@@ -156,7 +146,7 @@
                     <div class="col-12">
                         <h4>
                             Items: &nbsp;
-                            <button onclick="addProductRow(this)" type="button" class="btn btn-info btn-sm"><i class="fa fa-plus"></i></button>
+                            {{-- <button onclick="addProductRow(this)" type="button" class="btn btn-info btn-sm"><i class="fa fa-plus"></i></button> --}}
                         </h4>
                         <div id="product_table">
                             @php
