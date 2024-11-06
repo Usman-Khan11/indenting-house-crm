@@ -219,7 +219,7 @@
                         <tbody>
                             <tr>
                                 <td width="18.33%">
-                                    <h6 class="mb-0"><b>LC/BC/TT No:</b></h6>
+                                    <h6 class="mb-0"><b>{{ $shipment->indent->payment ?? 'LC/BC/TT No' }}</b></h6>
                                 </td>
                                 <td width="15%">
                                     <p class="m-0">{{ $shipment->lc_bt_tt_no }}</p>
@@ -259,6 +259,7 @@
                                                 <th>Invoice Date</th>
                                                 <th>BL #</th>
                                                 <th>BL Date</th>
+                                                <th>Payment Remarks</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -269,6 +270,7 @@
                                                     <td>{{ ($v['inv_date']) ? date("d-M-Y", strtotime($v['inv_date'])) : '-' }}</td>
                                                     <td>{{ $v['bl_no'] ?? '' }}</td>
                                                     <td>{{ ($v['bl_date']) ? date("d-M-Y", strtotime($v['bl_date'])) : '-' }}</td>
+                                                    <td>{{ $v['payment_remark'] ?? '' }}</td>
                                                 </tr>
                                             @endforeach
                                         </tbody>
@@ -288,13 +290,7 @@
                     <table class="table table-bordered table-sm border-dark align-top">
                         <tbody>
                             <tr>
-                                <td width="50%">
-                                    <h5 class="mb-1"><b>Payment Remark:</b></h5>
-                                    <p class="mb-0">
-                                        {{ $shipment->payment_remark }}
-                                    </p>
-                                </td>
-                                <td width="50%">
+                                <td width="100%">
                                     <h5 class="mb-1"><b>Final Remark:</b></h5>
                                     <p class="mb-0">
                                         {{ $shipment->final_remark }}

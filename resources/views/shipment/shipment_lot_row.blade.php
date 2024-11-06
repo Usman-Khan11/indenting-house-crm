@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col-md-4 col-12">
+    <div class="col-md-2 col-12">
         <div class="mb-3">
             <label class="form-label">Shipment Lot No</label>
             <select name="lot_no[]" class="form-select" required>
@@ -36,6 +36,17 @@
         <div class="mb-3">
             <label class="form-label">BL Date</label>
             <input type="date" name="bl_date[]" value="{{ $bl_date }}" class="form-control" placeholder="BL Date" />
+        </div>
+    </div>
+
+    <div class="col-md-2 col-12">
+        <div class="mb-3">
+            <label class="form-label">Payment Remarks</label>
+            <select name="payment_remark[]" class="form-select">
+                @foreach (paymentRemarks() as $key => $value)
+                    <option @if($key == $payment_remark) selected @endif value="{{ $key }}">{{ $value }}</option>
+                @endforeach
+            </select>
         </div>
     </div>
 </div>

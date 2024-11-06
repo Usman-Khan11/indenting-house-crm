@@ -121,7 +121,7 @@ class ShipmentController extends Controller
             // 'inv_date' => 'required|date',
             // 'bl_no' => 'required|string|max:40',
             // 'bl_date' => 'required|date',
-            'payment_remark' => 'nullable|string',
+            // 'payment_remark' => 'nullable|string',
             'final_remark' => 'nullable|string',
         ]);
 
@@ -140,7 +140,7 @@ class ShipmentController extends Controller
         // $shipment->inv_date = $request->inv_date;
         // $shipment->bl_no = $request->bl_no;
         // $shipment->bl_date = $request->bl_date;
-        $shipment->payment_remark = $request->payment_remark;
+        // $shipment->payment_remark = $request->payment_remark;
         $shipment->final_remark = $request->final_remark;
         $shipment->added_by = auth()->user()->id;
 
@@ -154,7 +154,8 @@ class ShipmentController extends Controller
                 "inv_no" => $request->inv_no[$key],
                 "inv_date" => $request->inv_date[$key],
                 "bl_no" => $request->bl_no[$key],
-                "bl_date" => $request->bl_date[$key]
+                "bl_date" => $request->bl_date[$key],
+                "payment_remark" => $request->payment_remark[$key]
             ];
         }
 
@@ -200,7 +201,7 @@ class ShipmentController extends Controller
             // 'inv_date' => 'required|date',
             // 'bl_no' => 'required|string|max:40',
             // 'bl_date' => 'required|date',
-            'payment_remark' => 'nullable|string',
+            // 'payment_remark' => 'nullable|string',
             'final_remark' => 'nullable|string',
         ]);
 
@@ -219,7 +220,7 @@ class ShipmentController extends Controller
         // $shipment->inv_date = $request->inv_date;
         // $shipment->bl_no = $request->bl_no;
         // $shipment->bl_date = $request->bl_date;
-        $shipment->payment_remark = $request->payment_remark;
+        // $shipment->payment_remark = $request->payment_remark;
         $shipment->final_remark = $request->final_remark;
 
         $product = (!empty($request->product)) ? $request->product : [];
@@ -232,7 +233,8 @@ class ShipmentController extends Controller
                 "inv_no" => $request->inv_no[$key],
                 "inv_date" => $request->inv_date[$key],
                 "bl_no" => $request->bl_no[$key],
-                "bl_date" => $request->bl_date[$key]
+                "bl_date" => $request->bl_date[$key],
+                "payment_remark" => $request->payment_remark[$key]
             ];
         }
 

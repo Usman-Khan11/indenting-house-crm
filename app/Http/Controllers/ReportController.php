@@ -10,6 +10,7 @@ use App\Models\InquiryItem;
 use App\Models\Offer;
 use App\Models\Product;
 use App\Models\PurchaseOrder;
+use App\Models\Shipment;
 use App\Models\Supplier;
 use App\Models\SupplierProducts;
 use Illuminate\Http\Request;
@@ -335,5 +336,64 @@ class ReportController extends Controller
         $data['products'] = Product::orderBy('name', 'asc')->get();
 
         return view('reports.indent', $data);
+    }
+
+    public function shipment(Request $request)
+    {
+        $data['page_title'] = "MRI Shipment Report";
+        $this->checkPermissions('shipment');
+
+        if ($request->ajax()) {
+            $query = Shipment::join('shipment_items', 'shipments.id', '=', 'shipment_items.shipment_id')
+                ->join('customers', 'shipments.customer_id', '=', 'customers.id')
+                ->join('suppliers', 'shipments.supplier_id', '=', 'suppliers.id')
+                ->join('indents', 'shipments.indent_id', '=', 'indents.id')
+                ->join('products', 'shipment_items.item_id', '=', 'products.id')
+                ->select(
+                    'shipments.shipment_no',
+                    'shipments.date as shipment_date',
+                    'shipments.lc_issue_date',
+                    'shipments.lc_exp_date',
+                    'shipments.lc_bt_tt_no',
+                    'shipments.lot_no',
+                    'shipments.customer_id',
+                    'shipments.supplier_id',
+                    'shipment_items.*',
+                    'customers.name as customer_name',
+                    'suppliers.name as supplier_name',
+                    'indents.indent_no',
+                    'indents.date as indent_date',
+                    'products.name as product_name',
+                    'products.description as product_description',
+                );
+
+            if (!empty($request->from) && !empty($request->to)) {
+                $query->whereBetween('shipments.date', [
+                    $request->from,
+                    $request->to
+                ]);
+            }
+
+            if (!empty($request->customer_id)) {
+                $query->where('shipments.customer_id', $request->customer_id);
+            }
+
+            if (!empty($request->supplier_id)) {
+                $query->where('shipments.supplier_id', $request->supplier_id);
+            }
+
+            if (!empty($request->product_id)) {
+                $query->where('shipment_items.item_id', $request->product_id);
+            }
+
+            $query = $query->orderBy('shipment_date', 'desc')->get();
+            return DataTables::of($query)->addIndexColumn()->make(true);
+        }
+
+        $data['customers'] = Customer::orderBy('name', 'asc')->get();
+        $data['suppliers'] = Supplier::orderBy('name', 'asc')->get();
+        $data['products'] = Product::orderBy('name', 'asc')->get();
+
+        return view('reports.shipment', $data);
     }
 }

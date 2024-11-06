@@ -140,6 +140,7 @@
         || in_array('offer', Get_Permission($value->nav_id, auth()->user()->role_id))
         || in_array('po', Get_Permission($value->nav_id, auth()->user()->role_id))
         || in_array('indent', Get_Permission($value->nav_id, auth()->user()->role_id))
+        || in_array('shipment', Get_Permission($value->nav_id, auth()->user()->role_id))
         ))
         <li class="menu-item {{ menuActive('report*', 2) }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
@@ -215,6 +216,14 @@
                 <li class="menu-item {{ menuActive('report.indent') }}">
                     <a href="{{ route('report.indent') }}" class="menu-link">
                         <div data-i18n="Indent">Indent</div>
+                    </a>
+                </li>
+                @endif
+
+                @if(in_array('shipment', Get_Permission($value->nav_id, auth()->user()->role_id)))
+                <li class="menu-item {{ menuActive('report.shipment') }}">
+                    <a href="{{ route('report.shipment') }}" class="menu-link">
+                        <div data-i18n="Shipment">Shipment</div>
                     </a>
                 </li>
                 @endif

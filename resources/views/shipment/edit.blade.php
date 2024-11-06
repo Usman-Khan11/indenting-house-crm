@@ -41,8 +41,8 @@
 
                     <div class="col-md-2 col-12">
                         <div class="mb-3">
-                            <label class="form-label">LC/BC/TT No</label>
-                            <input type="text" name="lc_bt_tt_no" value="{{ old('lc_bt_tt_no', $shipment->lc_bt_tt_no) }}" class="form-control" placeholder="LC/BC/TT No" />
+                            <label class="form-label">{{ $shipment->indent->payment ?? 'LC/BC/TT No' }}</label>
+                            <input type="text" name="lc_bt_tt_no" value="{{ old('lc_bt_tt_no', $shipment->lc_bt_tt_no) }}" class="form-control lc_bt_tt_no" placeholder="{{ $shipment->indent->payment ?? 'LC/BC/TT No' }}" />
                         </div>
                     </div>
 
@@ -109,9 +109,10 @@
                         @include('shipment.shipment_lot_row', [
                         'lot_no' => old('lot_no')[$k] ?? $v['lot_no'] ?? '',
                         'inv_no' => old('inv_no')[$k] ?? $v['inv_no'] ?? '',
-                        'inv_date' => old('inv_no')[$k] ?? $v['inv_date'] ?? '',
-                        'bl_no' => old('inv_no')[$k] ?? $v['bl_no'] ?? '',
-                        'bl_date' => old('inv_no')[$k] ?? $v['bl_date'] ?? ''
+                        'inv_date' => old('inv_date')[$k] ?? $v['inv_date'] ?? '',
+                        'bl_no' => old('bl_no')[$k] ?? $v['bl_no'] ?? '',
+                        'bl_date' => old('bl_date')[$k] ?? $v['bl_date'] ?? '',
+                        'payment_remark' => old('payment_remark')[$k] ?? $v['payment_remark'] ?? ''
                         ])
                         @empty
                         @include('shipment.shipment_lot_row', [
@@ -119,20 +120,10 @@
                         'inv_no' => '',
                         'inv_date' => '',
                         'bl_no' => '',
-                        'bl_date' => ''
+                        'bl_date' => '',
+                        'payment_remark' => ''
                         ])
                         @endforelse
-                    </div>
-                    
-                    <div class="col-md-4 col-12">
-                        <div class="mb-3">
-                            <label class="form-label">Payment Remarks</label>
-                            <select name="payment_remark" class="form-select">
-                                @foreach (paymentRemarks() as $key => $value)
-                                    <option @if($key == old('payment_remark', $shipment->payment_remark)) selected @endif value="{{ $key }}">{{ $value }}</option>
-                                @endforeach
-                            </select>
-                        </div>
                     </div>
 
                     <div class="col-md-4 col-12">

@@ -381,6 +381,9 @@
                 $(".currency").val(res.currency).trigger("change");
                 $(".currency").prop("disabled", true);
 
+                $(".lc_bt_tt_no").parent().find('label').text(res.payment);
+                $(".lc_bt_tt_no").attr('placeholder', res.payment);
+
                 if (res.items.length) {
                     let items = res.items;
                     $("#product_table .row:gt(0)").remove();

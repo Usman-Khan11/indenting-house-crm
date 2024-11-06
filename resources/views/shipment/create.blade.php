@@ -40,7 +40,7 @@
                     <div class="col-md-2 col-12">
                         <div class="mb-3">
                             <label class="form-label">LC/BC/TT No</label>
-                            <input type="text" name="lc_bt_tt_no" value="{{ old('lc_bt_tt_no') }}" class="form-control" placeholder="LC/BC/TT No" />
+                            <input type="text" name="lc_bt_tt_no" value="{{ old('lc_bt_tt_no') }}" class="form-control lc_bt_tt_no" placeholder="LC/BC/TT No" />
                         </div>
                     </div>
 
@@ -109,7 +109,8 @@
                         'inv_no' => old('inv_no')[$k] ?? '',
                         'inv_date' => old('inv_date')[$k] ?? '',
                         'bl_no' => old('bl_no')[$k] ?? '',
-                        'bl_date' => old('bl_date')[$k] ?? ''
+                        'bl_date' => old('bl_date')[$k] ?? '',
+                        'payment_remark' => old('payment_remark')[$k] ?? ''
                         ])
                         @empty
                         @include('shipment.shipment_lot_row', [
@@ -117,20 +118,10 @@
                         'inv_no' => '',
                         'inv_date' => '',
                         'bl_no' => '',
-                        'bl_date' => ''
+                        'bl_date' => '',
+                        'payment_remark' => ''
                         ])
                         @endforelse
-                    </div>
-
-                    <div class="col-md-4 col-12">
-                        <div class="mb-3">
-                            <label class="form-label">Payment Remarks</label>
-                            <select name="payment_remark" class="form-select">
-                                @foreach (paymentRemarks() as $key => $value)
-                                    <option @if($key == old('payment_remark')) selected @endif value="{{ $key }}">{{ $value }}</option>
-                                @endforeach
-                            </select>
-                        </div>
                     </div>
 
                     <div class="col-md-4 col-12">
