@@ -109,6 +109,10 @@
                     title: "Customer",
                 },
                 {
+                    data: "location",
+                    title: "Location",
+                },
+                {
                     data: "product_name",
                     title: "Item Description",
                     render: function(data, type, full, meta) {
@@ -136,6 +140,14 @@
                 {
                     data: "supplier_name",
                     title: "Supplier",
+                },
+                {
+                    data: "sales_person",
+                    title: "Sales Person",
+                },
+                {
+                    data: "sourcing_person",
+                    title: "Sourcing Person",
                 }
             ],
             rowCallback: function(row, data) {},
@@ -178,7 +190,7 @@
             let product_id = $("#product_id").val();
 
             datatable.ajax.reload();
-            title = `MRI Inquiry Report ${from} to ${to}`;
+            title = `MRI Offer Report ${from} to ${to}`;
         })
     });
 </script>

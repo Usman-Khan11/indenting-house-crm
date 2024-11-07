@@ -247,6 +247,13 @@
                 <div data-i18n="Users">Users</div>
             </a>
         </li>
+
+        <li class="menu-item {{ menuActive('email.setting') }}">
+            <a href="{{ route('email.setting') }}" class="menu-link">
+                <i class="menu-icon tf-icons ti ti-mail"></i>
+                <div data-i18n="Email Setting">Email Setting</div>
+            </a>
+        </li>
         @endif
     </ul>
 </aside>

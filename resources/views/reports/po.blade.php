@@ -143,6 +143,14 @@
                 {
                     data: "supplier_name",
                     title: "Supplier",
+                },
+                {
+                    data: "sales_person",
+                    title: "Sales Person",
+                },
+                {
+                    data: "sourcing_person",
+                    title: "Sourcing Person",
                 }
             ],
             rowCallback: function(row, data) {},

@@ -14,7 +14,7 @@
                     <div class="col-md-2 col-12">
                         <div class="mb-3">
                             <label class="form-label">Shipment #</label>
-                            <input type="text" name="shipment_no" value="SHIP-{{ $shipment_no }}" class="form-control" readonly />
+                            <input type="text" name="shipment_no" value="{{ $shipment_no }}" class="form-control" readonly />
                         </div>
                     </div>
 
@@ -110,7 +110,8 @@
                         'inv_date' => old('inv_date')[$k] ?? '',
                         'bl_no' => old('bl_no')[$k] ?? '',
                         'bl_date' => old('bl_date')[$k] ?? '',
-                        'payment_remark' => old('payment_remark')[$k] ?? ''
+                        'payment_remark' => old('payment_remark')[$k] ?? '',
+                        'payment_remark_2' => old('payment_remark_2')[$k] ?? ''
                         ])
                         @empty
                         @include('shipment.shipment_lot_row', [
@@ -119,7 +120,8 @@
                         'inv_date' => '',
                         'bl_no' => '',
                         'bl_date' => '',
-                        'payment_remark' => ''
+                        'payment_remark' => '',
+                        'payment_remark_2' => ''
                         ])
                         @endforelse
                     </div>

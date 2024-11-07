@@ -42,10 +42,7 @@
                 type: "get",
                 data: function(d) {},
             },
-            columns: [{
-                    data: "DT_RowIndex",
-                    title: "S.No",
-                },
+            columns: [
                 {
                     data: "id",
                     title: "ID",

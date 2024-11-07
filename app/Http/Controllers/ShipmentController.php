@@ -65,8 +65,7 @@ class ShipmentController extends Controller
         $q = Shipment::latest()->first();
         if ($q) {
             $str = $q->shipment_no;
-            $str = explode("-", $str);
-            $str = $str[1] + 1;
+            $str = $str + 1;
             $data["shipment_no"] = $str;
         }
 
@@ -155,7 +154,8 @@ class ShipmentController extends Controller
                 "inv_date" => $request->inv_date[$key],
                 "bl_no" => $request->bl_no[$key],
                 "bl_date" => $request->bl_date[$key],
-                "payment_remark" => $request->payment_remark[$key]
+                "payment_remark" => $request->payment_remark[$key],
+                "payment_remark_2" => $request->payment_remark_2[$key],
             ];
         }
 
@@ -234,7 +234,8 @@ class ShipmentController extends Controller
                 "inv_date" => $request->inv_date[$key],
                 "bl_no" => $request->bl_no[$key],
                 "bl_date" => $request->bl_date[$key],
-                "payment_remark" => $request->payment_remark[$key]
+                "payment_remark" => $request->payment_remark[$key],
+                "payment_remark_2" => $request->payment_remark_2[$key]
             ];
         }
 

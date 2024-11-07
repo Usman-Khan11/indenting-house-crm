@@ -70,8 +70,8 @@
 
                     <div class="col-md-4 col-12">
                         <div class="mb-3">
-                            <label class="form-label">Person</label>
-                            <input name="person_3" type="text" class="form-control" value="{{ old('person_3', $customer->person_3) }}" placeholder="Person" />
+                            <label class="form-label">Sales Person</label>
+                            <input name="person_3" type="text" class="form-control" value="{{ old('person_3', $customer->person_3) }}" placeholder="Sales Person" />
                         </div>
                     </div>
 

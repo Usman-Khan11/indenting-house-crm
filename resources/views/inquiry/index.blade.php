@@ -15,7 +15,7 @@
             <hr />
         </div>
         <div class="card-body">
-            <div class="responsive text-nowrap">
+            <div class="responsive">
                 <table class="table table-sm" id="my_table"></table>
             </div>
         </div>
@@ -42,18 +42,15 @@
                 type: "get",
                 data: function(d) {},
             },
-            columns: [{
-                    data: "DT_RowIndex",
-                    title: "S.No",
-                },
+            columns: [
                 {
                     title: "Options",
                     class: "text-nowrap",
                     render: function(data, type, full, meta) {
                         let button = '';
-                        button += `<a href="/inquiry/view/${full.id}" target="_blank" class="btn btn-info btn-sm">View</a> `;
-                        button += `<a href="/inquiry/edit/${full.id}" class="btn btn-warning btn-sm">Edit</a> `;
-                        button += `<a onclick="return checkDelete()" href="/inquiry/delete/${full.id}" class="btn btn-danger btn-sm">Delete</a> `;
+                        button += `<a href="/inquiry/view/${full.id}" target="_blank" class="btn btn-info btn-xs">View</a> `;
+                        button += `<a href="/inquiry/edit/${full.id}" class="btn btn-warning btn-xs">Edit</a> `;
+                        button += `<a onclick="return checkDelete()" href="/inquiry/delete/${full.id}" class="btn btn-danger btn-xs">Delete</a> `;
 
                         return button;
                     },
@@ -73,20 +70,16 @@
                     }
                 },
                 {
+                    title: 'Date',
+                    "render": function(data, type, full, meta) {
+                        return getDate(full.created_at);
+                    }
+                },
+                {
                     data: "validity",
                     title: "validity",
                     "render": function(data, type, full, meta) {
                         return getDate(full.validity);
-                    }
-                },
-                {
-                    data: "currency",
-                    title: "currency",
-                },
-                {
-                    title: 'Date',
-                    "render": function(data, type, full, meta) {
-                        return getDate(full.created_at);
                     }
                 },
                 {
@@ -98,6 +91,10 @@
                             return '-';
                         }
                     }
+                },
+                {
+                    data: "currency",
+                    title: "currency",
                 }
             ],
             rowCallback: function(row, data) {},

@@ -134,25 +134,29 @@
             }
 
             date = new Date(date);
-            let options = {
-                month: 'short',
-                day: '2-digit',
-                year: 'numeric',
-            };
 
+            // Format the date as DD-MM-YYYY
+            let day = String(date.getDate()).padStart(2, '0');
+            let month = String(date.getMonth() + 1).padStart(2, '0');
+            let year = date.getFullYear();
+            
+            let formattedDate = `${day}-${month}-${year}`;
+
+            // If full datetime is requested, add time formatting
             if (full) {
-                options = {
-                    ...options,
-                    hour: '2-digit',
-                    minute: '2-digit',
-                    second: '2-digit',
-                    hour12: true
-                };
+                let hours = date.getHours();
+                let minutes = String(date.getMinutes()).padStart(2, '0');
+                let seconds = String(date.getSeconds()).padStart(2, '0');
+                let ampm = hours >= 12 ? 'PM' : 'AM';
+
+                hours = hours % 12 || 12; // Convert to 12-hour format
+                hours = String(hours).padStart(2, '0');
+
+                let formattedTime = `${hours}:${minutes}:${seconds} ${ampm}`;
+                formattedDate += ` ${formattedTime}`;
             }
 
-            let formattedDateTime = date.toLocaleString('en-US', options);
-
-            return formattedDateTime;
+            return formattedDate;
         }
 
         function productData(e) {
@@ -203,6 +207,9 @@
         }
 
         function addShipmentLotRow(e) {
+            if ($(".shipment_lot_row .row").length >= 10) {
+                return;
+            }
             $(".shipment_lot_row .row:last").clone().appendTo(".shipment_lot_row");
             $(".shipment_lot_row .row:last").find("input").val(null).prop("disabled", false);
             $(".shipment_lot_row .row:last").find("select").val(null).trigger('change').prop("disabled", false);

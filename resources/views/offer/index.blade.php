@@ -42,18 +42,15 @@
                 type: "get",
                 data: function(d) {},
             },
-            columns: [{
-                    data: "DT_RowIndex",
-                    title: "S.No",
-                },
+            columns: [
                 {
                     title: "Options",
                     class: "text-nowrap",
                     render: function(data, type, full, meta) {
                         let button = '';
-                        button += `<a href="/offer/view/${full.id}" target="_blank" class="btn btn-info btn-sm">View</a> `;
-                        button += `<a href="/offer/edit/${full.id}" class="btn btn-warning btn-sm">Edit</a> `;
-                        button += `<a onclick="return checkDelete()" href="/offer/delete/${full.id}" class="btn btn-danger btn-sm">Delete</a> `;
+                        button += `<a href="/offer/view/${full.id}" target="_blank" class="btn btn-info btn-xs">View</a> `;
+                        button += `<a href="/offer/edit/${full.id}" class="btn btn-warning btn-xs">Edit</a> `;
+                        button += `<a onclick="return checkDelete()" href="/offer/delete/${full.id}" class="btn btn-danger btn-xs">Delete</a> `;
 
                         return button;
                     },
@@ -83,20 +80,16 @@
                     }
                 },
                 {
+                    title: 'Date',
+                    "render": function(data, type, full, meta) {
+                        return getDate(full.date);
+                    }
+                },
+                {
                     data: "validity",
                     title: "validity",
                     "render": function(data, type, full, meta) {
                         return getDate(full.validity);
-                    }
-                },
-                {
-                    data: "currency",
-                    title: "currency",
-                },
-                {
-                    title: 'Date',
-                    "render": function(data, type, full, meta) {
-                        return getDate(full.date);
                     }
                 },
                 {
@@ -108,6 +101,10 @@
                             return '-';
                         }
                     }
+                },
+                {
+                    data: "currency",
+                    title: "currency",
                 }
             ],
             rowCallback: function(row, data) {},

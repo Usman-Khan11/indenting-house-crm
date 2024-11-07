@@ -41,10 +41,21 @@
 
     <div class="col-md-2 col-12">
         <div class="mb-3">
-            <label class="form-label">Payment Remarks</label>
+            <label class="form-label">Payment to Supplier</label>
             <select name="payment_remark[]" class="form-select">
                 @foreach (paymentRemarks() as $key => $value)
                     <option @if($key == $payment_remark) selected @endif value="{{ $key }}">{{ $value }}</option>
+                @endforeach
+            </select>
+        </div>
+    </div>
+
+    <div class="col-md-2 col-12">
+        <div class="mb-3">
+            <label class="form-label">Payment to MRI</label>
+            <select name="payment_remark_2[]" class="form-select">
+                @foreach (paymentRemarks() as $key => $value)
+                    <option @if($key == $payment_remark_2) selected @endif value="{{ $key }}">{{ $value }}</option>
                 @endforeach
             </select>
         </div>

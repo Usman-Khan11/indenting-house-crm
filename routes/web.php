@@ -12,6 +12,7 @@ use App\Http\Controllers\QuotationController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\PaymentNoteController;
 use App\Http\Controllers\DeliveryNoteController;
+use App\Http\Controllers\EmailController;
 use App\Http\Controllers\IndentController;
 use App\Http\Controllers\OfferController;
 use App\Http\Controllers\PurchaseOrderController;
@@ -198,4 +199,8 @@ Route::middleware('auth')->group(function () {
     Route::get('shipment/delete/{id}', [ShipmentController::class, 'delete'])->name('shipment.delete');
     Route::post('shipment/store', [ShipmentController::class, 'store'])->name('shipment.store');
     Route::post('shipment/update', [ShipmentController::class, 'update'])->name('shipment.update');
+
+    // Email Setting
+    Route::get('email/setting', [EmailController::class, 'emailSetting'])->name('email.setting');
+    Route::post('email/setting', [EmailController::class, 'emailSettingUpdate'])->name('email.setting');
 });

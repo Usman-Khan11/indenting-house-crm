@@ -147,7 +147,9 @@ class ReportController extends Controller
                     'inquiries.supplier_id',
                     'inquiry_items.*',
                     'customers.name as customer_name',
+                    'customers.person_3 as sales_person',
                     'suppliers.name as supplier_name',
+                    'suppliers.person_3 as sourcing_person',
                     'products.name as product_name',
                     'products.description as product_description',
                 );
@@ -199,7 +201,10 @@ class ReportController extends Controller
                     'offers.supplier_id',
                     'offer_items.*',
                     'customers.name as customer_name',
+                    'customers.location as location',
+                    'customers.person_3 as sales_person',
                     'suppliers.name as supplier_name',
+                    'suppliers.person_3 as sourcing_person',
                     'products.name as product_name',
                     'products.description as product_description',
                 );
@@ -251,7 +256,9 @@ class ReportController extends Controller
                     'purchase_orders.supplier_id',
                     'purchase_order_items.*',
                     'customers.name as customer_name',
+                    'customers.person_3 as sales_person',
                     'suppliers.name as supplier_name',
+                    'suppliers.person_3 as sourcing_person',
                     'products.name as product_name',
                     'products.description as product_description',
                 );
@@ -303,7 +310,9 @@ class ReportController extends Controller
                     'indents.supplier_id',
                     'indent_items.*',
                     'customers.name as customer_name',
+                    'customers.person_3 as sales_person',
                     'suppliers.name as supplier_name',
+                    'suppliers.person_3 as sourcing_person',
                     'products.name as product_name',
                     'products.description as product_description',
                 );

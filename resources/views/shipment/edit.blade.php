@@ -112,7 +112,8 @@
                         'inv_date' => old('inv_date')[$k] ?? $v['inv_date'] ?? '',
                         'bl_no' => old('bl_no')[$k] ?? $v['bl_no'] ?? '',
                         'bl_date' => old('bl_date')[$k] ?? $v['bl_date'] ?? '',
-                        'payment_remark' => old('payment_remark')[$k] ?? $v['payment_remark'] ?? ''
+                        'payment_remark' => old('payment_remark')[$k] ?? $v['payment_remark'] ?? '',
+                        'payment_remark_2' => old('payment_remark_2')[$k] ?? $v['payment_remark_2'] ?? ''
                         ])
                         @empty
                         @include('shipment.shipment_lot_row', [
@@ -121,7 +122,8 @@
                         'inv_date' => '',
                         'bl_no' => '',
                         'bl_date' => '',
-                        'payment_remark' => ''
+                        'payment_remark' => '',
+                        'payment_remark_2' => ''
                         ])
                         @endforelse
                     </div>

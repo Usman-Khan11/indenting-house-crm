@@ -259,7 +259,8 @@
                                                 <th>Invoice Date</th>
                                                 <th>BL #</th>
                                                 <th>BL Date</th>
-                                                <th>Payment Remarks</th>
+                                                <th>Payment to Supplier</th>
+                                                <th>Payment to MRI</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -271,6 +272,7 @@
                                                     <td>{{ $v['bl_no'] ?? '' }}</td>
                                                     <td>{{ ($v['bl_date']) ? date("d-M-Y", strtotime($v['bl_date'])) : '-' }}</td>
                                                     <td>{{ $v['payment_remark'] ?? '' }}</td>
+                                                    <td>{{ $v['payment_remark_2'] ?? '' }}</td>
                                                 </tr>
                                             @endforeach
                                         </tbody>
@@ -282,7 +284,6 @@
                 </div>
             </div>
         </div>
-
 
         <div class="mb-2">
             <div class="row">

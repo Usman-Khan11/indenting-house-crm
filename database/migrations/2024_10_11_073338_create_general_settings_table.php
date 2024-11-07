@@ -18,6 +18,7 @@ return new class extends Migration
             $table->id();
             $table->string('sitename', 150)->nullable();
             $table->string('logo', 150)->nullable();
+            $table->text('mail_config')->nullable();
             $table->integer('page_length')->default(10);
             $table->tinyInteger('expired')->default(0);
             $table->string('expired_at', 20)->nullable();
@@ -28,6 +29,7 @@ return new class extends Migration
             [
                 'sitename' => 'MRI',
                 'logo' => 'assets/img/logo.png',
+                'mail_config' => '',
                 'page_length' => 15,
                 'expired' => 0,
                 'expired_at' => '2050-12-31',

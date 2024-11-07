@@ -109,6 +109,10 @@
                         </div>
                     </div>
 
+                    <div class="col-md-4 col-12">
+                        <a href="" class="btn btn-primary mt-3">Send Email to Customer</a>
+                    </div>
+
                     <!-- Product Repeater -->
                     <div class="col-12">
                         <h4>
