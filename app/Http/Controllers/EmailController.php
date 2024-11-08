@@ -42,6 +42,17 @@ class EmailController extends Controller
         } else if ($request->email_method == 'smtp') {
             $request->merge(['name' => 'smtp']);
             $data = $request->only('name', 'host', 'port', 'enc', 'username', 'password', 'driver');
+            updateEnv(
+                [
+                    "MAIL_MAILER" => "smtp",
+                    "MAIL_HOST" => $request->host,
+                    "MAIL_PORT" => $request->port,
+                    "MAIL_USERNAME" => $request->username,
+                    "MAIL_PASSWORD" => $request->password,
+                    "MAIL_ENCRYPTION" => $request->enc,
+                    "MAIL_FROM_ADDRESS" => $request->username,
+                ]
+            );
         } else if ($request->email_method == 'sendgrid') {
             $request->merge(['name' => 'sendgrid']);
             $data = $request->only('name', 'appkey');

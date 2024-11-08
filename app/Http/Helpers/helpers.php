@@ -4,6 +4,7 @@ use App\Models\GeneralSetting;
 use App\Models\Permission;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 
 function general()
 {
@@ -303,4 +304,31 @@ function Get_Permission($nav_id, $role_id)
         }
     }
     return $arr;
+}
+
+function updateEnv($data = [])
+{
+    $envPath = base_path('.env');
+
+    // Read the current .env content
+    $envContent = File::get($envPath);
+
+    // Process each key-value pair
+    foreach ($data as $key => $value) {
+        // Add quotes around values with special characters
+        $quotedValue = preg_match('/[\s"\'\=\:]/', $value) ? '"' . addslashes($value) . '"' : $value;
+
+        // Check if the key already exists in the .env content
+        $pattern = "/^{$key}=.*/m";
+        if (preg_match($pattern, $envContent)) {
+            // Replace the existing line with the new key-value pair
+            $envContent = preg_replace($pattern, "{$key}={$quotedValue}", $envContent);
+        } else {
+            // Append new key-value pair if the key doesn't exist
+            $envContent .= "\n{$key}={$quotedValue}";
+        }
+    }
+
+    // Write the updated content back to the .env file
+    File::put($envPath, $envContent);
 }
