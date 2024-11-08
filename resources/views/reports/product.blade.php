@@ -12,7 +12,7 @@
             <hr />
         </div>
         <div class="card-body">
-            <div class="responsive">
+            <div class="responsive text-nowrap">
                 <table class="table table-bordered table-sm" id="my_table"></table>
             </div>
         </div>
@@ -51,6 +51,7 @@
                 {
                     data: "description",
                     title: "description",
+                    class: "text-wrap",
                 },
                 {
                     data: "unit",

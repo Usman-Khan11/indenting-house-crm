@@ -67,13 +67,13 @@ class IndentController extends Controller
         $data['products'] = Product::orderBy('name', 'asc')->get();
         $data['purchase_orders'] = PurchaseOrder::leftJoin('indents', 'purchase_orders.id', '=', 'indents.po_id')->whereNull('indents.po_id')->select('purchase_orders.*')->latest()->get();
 
-        $data["indent_no"] = 1000;
+        $data["indent_no"] = 'MRI-001000';
         $q = Indent::latest()->first();
         if ($q) {
             $str = $q->indent_no;
-            $str = explode("-", $str);
-            $str = $str[1] + 1;
-            $data["indent_no"] = $str;
+            $str_parts = explode("-", $str);
+            $incremented_number = str_pad($str_parts[1] + 1, strlen($str_parts[1]), "0", STR_PAD_LEFT);
+            $data["indent_no"] = $str_parts[0] . "-" . $incremented_number;
         }
 
         return view('indent.create', $data);

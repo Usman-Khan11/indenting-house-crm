@@ -57,7 +57,7 @@
                     <button type="button" class="btn btn-primary w-100 d-block" id="filter_btn">Filter Data</button>
                 </div>
             </div>
-            <div class="responsive">
+            <div class="responsive text-nowrap">
                 <table class="table table-bordered table-sm" id="my_table"></table>
             </div>
         </div>
@@ -111,6 +111,7 @@
                 {
                     data: "product_name",
                     title: "Item Description",
+                    class: 'text-wrap',
                     render: function(data, type, full, meta) {
                         var p = `
                             <div><strong>${full.product_name}</strong></div>

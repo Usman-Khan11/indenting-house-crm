@@ -30,7 +30,7 @@
                     </select>
                 </div>
             </div>
-            <div class="responsive">
+            <div class="responsive text-nowrap">
                 <table class="table table-bordered table-sm" id="my_table"></table>
             </div>
         </div>

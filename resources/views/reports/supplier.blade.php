@@ -12,7 +12,7 @@
             <hr />
         </div>
         <div class="card-body">
-            <div class="responsive">
+            <div class="responsive text-nowrap">
                 <table class="table table-bordered table-sm" id="my_table"></table>
             </div>
         </div>
@@ -55,6 +55,7 @@
                 {
                     data: "address",
                     title: "Address",
+                    class: "text-wrap",
                 },
                 {
                     data: "origin",
@@ -71,6 +72,10 @@
                 {
                     data: "email",
                     title: "Email",
+                },
+                {
+                    data: "person_3",
+                    title: "Sourcing Person",
                 }
             ],
             rowCallback: function(row, data) {},

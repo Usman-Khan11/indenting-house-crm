@@ -14,7 +14,7 @@
                     <div class="col-md-2 col-12">
                         <div class="mb-3">
                             <label class="form-label">PO #</label>
-                            <input type="text" name="indent_no" value="MRI-{{ $indent_no }}" class="form-control" readonly />
+                            <input type="text" name="indent_no" value="{{ $indent_no }}" class="form-control" readonly />
                         </div>
                     </div>
 

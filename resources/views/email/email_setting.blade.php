@@ -27,7 +27,7 @@
                         <label class="font-weight-bold">@lang('Sending Method')</label>
                     </div>
                     <div class="col-md-10">
-                        <select name="email_method" class="form-control" >
+                        <select name="email_method" class="form-select" >
                             <option value="php" @if(@$general_setting->mail_config->name == 'php') selected @endif>@lang('PHP Mail')</option>
                             <option value="smtp" @if(@$general_setting->mail_config->name == 'smtp') selected @endif>@lang('SMTP')</option>
                             <option value="sendgrid" @if(@$general_setting->mail_config->name == 'sendgrid') selected @endif>@lang('SendGrid API')</option>

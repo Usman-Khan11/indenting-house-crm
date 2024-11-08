@@ -42,18 +42,15 @@
                 type: "get",
                 data: function(d) {},
             },
-            columns: [{
-                    data: "DT_RowIndex",
-                    title: "S.No",
-                },
+            columns: [
                 {
                     title: "Options",
                     class: "text-nowrap",
                     render: function(data, type, full, meta) {
                         let button = '';
-                        button += `<a href="/shipment/view/${full.id}" target="_blank" class="btn btn-info btn-sm">View</a> `;
-                        button += `<a href="/shipment/edit/${full.id}" class="btn btn-warning btn-sm">Edit</a> `;
-                        button += `<a onclick="return checkDelete()" href="/shipment/delete/${full.id}" class="btn btn-danger btn-sm">Delete</a> `;
+                        button += `<a href="/shipment/view/${full.id}" target="_blank" class="btn btn-info btn-xs">View</a> `;
+                        button += `<a href="/shipment/edit/${full.id}" class="btn btn-warning btn-xs">Edit</a> `;
+                        button += `<a onclick="return checkDelete()" href="/shipment/delete/${full.id}" class="btn btn-danger btn-xs">Delete</a> `;
 
                         return button;
                     },
