@@ -1,94 +1,102 @@
 @extends('layout.app')
 
 @section('content')
-<div class="container-xxl flex-grow-1 container-p-y">
-    <div class="card">
-        <div class="card-header">
-            <div class="row align-items-center">
-                <div class="col-6">
-                    <h4 class="card-title m-0">{{ $page_title }}</h4>
+    <div class="container-xxl flex-grow-1 container-p-y">
+        <div class="card">
+            <div class="card-header">
+                <div class="row align-items-center">
+                    <div class="col-6">
+                        <h4 class="card-title m-0">{{ $page_title }}</h4>
+                    </div>
+                    <div class="col-6 text-end">
+                        <a href="{{ route('supplier.create') }}" class="btn btn-primary">Add New Supplier</a>
+                    </div>
                 </div>
-                <div class="col-6 text-end">
-                    <a href="{{ route('supplier.create') }}" class="btn btn-primary">Add New Supplier</a>
-                </div>
+                <hr />
             </div>
-            <hr />
-        </div>
-        <div class="card-body">
-            <div class="responsive text-nowra">
-                <table class="table table-sm" id="my_table"></table>
+            <div class="card-body">
+                <div class="responsive text-nowrap">
+                    <table class="table table-sm" id="my_table"></table>
+                </div>
             </div>
         </div>
     </div>
-</div>
 @endsection
 
 @push('script')
-<script type="text/javascript">
-    $(document).ready(function() {
-        var datatable = $("#my_table").DataTable({
-            select: {
-                style: "api",
-            },
-            processing: true,
-            searching: true,
-            serverSide: true,
-            lengthChange: false,
-            ordering: false,
-            pageLength: '{{ general()->page_length }}',
-            scrollX: true,
-            ajax: {
-                url: "{{ route('supplier') }}",
-                type: "get",
-                data: function(d) {},
-            },
-            columns: [{
-                    data: "DT_RowIndex",
-                    title: "S.No",
+    <script type="text/javascript">
+        $(document).ready(function() {
+            var datatable = $("#my_table").DataTable({
+                select: {
+                    style: "api",
                 },
-                {
-                    data: "name",
-                    title: "Name",
+                processing: true,
+                searching: true,
+                serverSide: true,
+                lengthChange: false,
+                ordering: false,
+                pageLength: '{{ general()->page_length }}',
+                scrollX: true,
+                ajax: {
+                    url: "{{ route('supplier') }}",
+                    type: "get",
+                    data: function(d) {},
                 },
-                {
-                    data: "origin",
-                    title: "origin",
-                },
-                {
-                    data: "fax_number",
-                    title: "fax number",
-                },
-                {
-                    data: "email",
-                    title: "email",
-                },
-                {
-                    data: "address",
-                    title: "address",
-                },
-                {
-                    data: "phone",
-                    title: "phone",
-                },
-                {
-                    data: "swift_code",
-                    title: "swift code",
-                },
-                {
-                    title: "Options",
-                    class: "text-nowrap",
-                    render: function(data, type, full, meta) {
-                        let button = '';
-                        button += `<a href="/supplier/view/${full.id}" class="btn btn-info btn-sm">View</a> `;
-                        button += `<a href="/supplier/edit/${full.id}" class="btn btn-warning btn-sm">Edit</a> `;
-                        button += `<a onclick="return checkDelete()" href="/supplier/delete/${full.id}" class="btn btn-danger btn-sm">Delete</a> `;
-
-                        return button;
+                columns: [{
+                        data: "id",
+                        title: "ID",
                     },
-                }
-            ],
-            rowCallback: function(row, data) {},
+                    {
+                        data: "name",
+                        title: "Name",
+                    },
+                    {
+                        data: "origin",
+                        title: "origin",
+                    },
+                    {
+                        data: "fax_number",
+                        title: "fax number",
+                    },
+                    {
+                        data: "email",
+                        title: "email",
+                    },
+                    {
+                        data: "address",
+                        title: "address",
+                        class: 'text-wrap'
+                    },
+                    {
+                        data: "phone",
+                        title: "phone",
+                    },
+                    {
+                        data: "swift_code",
+                        title: "swift code",
+                    },
+                    {
+                        data: "person_3",
+                        title: "Sourcing Person",
+                    },
+                    {
+                        title: "Options",
+                        class: "text-nowrap",
+                        render: function(data, type, full, meta) {
+                            let button = '';
+                            button +=
+                                `<a href="/supplier/view/${full.id}" class="btn btn-info btn-sm">View</a> `;
+                            button +=
+                                `<a href="/supplier/edit/${full.id}" class="btn btn-warning btn-sm">Edit</a> `;
+                            button +=
+                                `<a onclick="return checkDelete()" href="/supplier/delete/${full.id}" class="btn btn-danger btn-sm">Delete</a> `;
+
+                            return button;
+                        },
+                    }
+                ],
+                rowCallback: function(row, data) {},
+            });
         });
-    });
-</script>
+    </script>
 @endpush

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" class="light-style layout-navbar-fixed layout-menu-fixed" dir="ltr" data-theme="theme-default" data-assets-path="{{ asset('assets') }}/" data-template="vertical-menu-template-starter">
+<html lang="en" class="light-style layout-navbar-fixed layout-menu-fixed" dir="ltr" data-theme="theme-default"
+    data-assets-path="{{ asset('assets') }}/" data-template="vertical-menu-template-starter">
 
 <head>
     <meta charset="UTF-8">
@@ -10,7 +11,9 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
+        rel="stylesheet" />
     <link rel="stylesheet" href="{{ asset('assets/vendor/fonts/fontawesome.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/vendor/fonts/tabler-icons.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/vendor/fonts/flag-icons.css') }}" />
@@ -23,8 +26,10 @@
     <link rel="stylesheet" href="{{ asset('assets/vendor/libs/apex-charts/apex-charts.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/vendor/libs/swiper/swiper.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/vendor/libs/datatables-bs5/datatables.bootstrap5.css') }}" />
-    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.css') }}" />
-    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/datatables-checkboxes-jquery/datatables.checkboxes.css') }}" />
+    <link rel="stylesheet"
+        href="{{ asset('assets/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.css') }}" />
+    <link rel="stylesheet"
+        href="{{ asset('assets/vendor/libs/datatables-checkboxes-jquery/datatables.checkboxes.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/vendor/libs/datatables-buttons-bs5/buttons.bootstrap5.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/vendor/css/pages/cards-advance.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/vendor/libs/select2/select2.css') }}" />
@@ -32,8 +37,7 @@
     <link rel="stylesheet" href="{{ asset('assets/vendor/libs/spinkit/spinkit.css') }}" />
     <!-- <link rel="stylesheet" href="{{ asset('assets/vendor/css/pages/app-invoice-print.css') }}" /> -->
 
-    <script src="{{ asset('assets/vendor/js/helpers.js') }}">
-    </script>
+    <script src="{{ asset('assets/vendor/js/helpers.js') }}"></script>
     <script src="{{ asset('assets/js/config.js') }}"></script>
     @stack('style')
     <style>
@@ -109,7 +113,9 @@
     <script src="{{ asset('assets/js/main.js') }}"></script>
     <script src="{{ asset('assets/js/forms-selects.js') }}"></script>
     <script src="{{ asset('assets/js/dashboards-analytics.js') }}"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/ckeditor/4.9.2/ckeditor.js" integrity="sha512-OF6VwfoBrM/wE3gt0I/lTh1ElROdq3etwAquhEm2YI45Um4ird+0ZFX1IwuBDBRufdXBuYoBb0mqXrmUA2VnOA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ckeditor/4.9.2/ckeditor.js"
+        integrity="sha512-OF6VwfoBrM/wE3gt0I/lTh1ElROdq3etwAquhEm2YI45Um4ird+0ZFX1IwuBDBRufdXBuYoBb0mqXrmUA2VnOA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     @stack('script')
     @include('partials.notify')
 
@@ -139,7 +145,7 @@
             let day = String(date.getDate()).padStart(2, '0');
             let month = String(date.getMonth() + 1).padStart(2, '0');
             let year = date.getFullYear();
-            
+
             let formattedDate = `${day}-${month}-${year}`;
 
             // If full datetime is requested, add time formatting
@@ -354,7 +360,8 @@
                     $(items).each(function(key, value) {
                         let $newRow = $("#product_table .row:first").clone();
 
-                        $newRow.find('.product').val(value.item_id).trigger('change').prop("disabled", true);
+                        $newRow.find('.product').val(value.item_id).trigger('change').prop("disabled",
+                        true);
                         $newRow.find('.product_qty').val(value.qty).prop("disabled", true);
                         $newRow.find('.product_unit').val(value.unit).prop("disabled", true);
                         $newRow.find('.product_rate').val(value.rate).prop("disabled", true);
@@ -402,7 +409,8 @@
                     $(items).each(function(key, value) {
                         let $newRow = $("#product_table .row:first").clone();
 
-                        $newRow.find('.product').val(value.item_id).trigger('change').prop("disabled", true);
+                        $newRow.find('.product').val(value.item_id).trigger('change').prop("disabled",
+                        true);
                         $newRow.find('.product_qty').val(value.qty);
                         $newRow.find('.product_unit').val(value.unit).prop("disabled", true);
                         $newRow.find('.product_rate').val(value.rate).prop("disabled", true);
@@ -501,7 +509,9 @@
                     if (res) {
                         $("select.product").append(`<option title="" value=""></option>`);
                         $(res).each(function(i, v) {
-                            $("select.product").append(`<option title="${v.product.description}" value="${v.product.id}">${v.product.name}</option>`);
+                            $("select.product").append(
+                                `<option title="${v.product.description}" value="${v.product.id}">${v.product.name}</option>`
+                                );
                         });
                         $(".loader").hide();
                     }
@@ -525,7 +535,9 @@
                     if (res) {
                         $("select.product").append(`<option title="" value=""></option>`);
                         $(res).each(function(i, v) {
-                            $("select.product").append(`<option title="${v.product.description}" value="${v.product.id}">${v.product.name}</option>`);
+                            $("select.product").append(
+                                `<option title="${v.product.description}" value="${v.product.id}">${v.product.name}</option>`
+                                );
                         });
                         $(".loader").hide();
                     }
