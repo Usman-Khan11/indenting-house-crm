@@ -43,6 +43,21 @@
                     data: function(d) {},
                 },
                 columns: [{
+                        title: "Options",
+                        class: "text-nowrap",
+                        render: function(data, type, full, meta) {
+                            let button = '';
+                            button +=
+                                `<a href="/supplier/view/${full.id}" class="btn btn-info btn-xs">View</a> `;
+                            button +=
+                                `<a href="/supplier/edit/${full.id}" class="btn btn-warning btn-xs">Edit</a> `;
+                            button +=
+                                `<a onclick="return checkDelete()" href="/supplier/delete/${full.id}" class="btn btn-danger btn-xs">Delete</a> `;
+
+                            return button;
+                        },
+                    },
+                    {
                         data: "id",
                         title: "ID",
                     },
@@ -55,44 +70,16 @@
                         title: "origin",
                     },
                     {
-                        data: "fax_number",
-                        title: "fax number",
-                    },
-                    {
                         data: "email",
                         title: "email",
-                    },
-                    {
-                        data: "address",
-                        title: "address",
-                        class: 'text-wrap'
                     },
                     {
                         data: "phone",
                         title: "phone",
                     },
                     {
-                        data: "swift_code",
-                        title: "swift code",
-                    },
-                    {
                         data: "person_3",
                         title: "Sourcing Person",
-                    },
-                    {
-                        title: "Options",
-                        class: "text-nowrap",
-                        render: function(data, type, full, meta) {
-                            let button = '';
-                            button +=
-                                `<a href="/supplier/view/${full.id}" class="btn btn-info btn-sm">View</a> `;
-                            button +=
-                                `<a href="/supplier/edit/${full.id}" class="btn btn-warning btn-sm">Edit</a> `;
-                            button +=
-                                `<a onclick="return checkDelete()" href="/supplier/delete/${full.id}" class="btn btn-danger btn-sm">Delete</a> `;
-
-                            return button;
-                        },
                     }
                 ],
                 rowCallback: function(row, data) {},

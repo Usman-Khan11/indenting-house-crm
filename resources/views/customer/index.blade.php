@@ -43,6 +43,21 @@
                     data: function(d) {},
                 },
                 columns: [{
+                        title: "Options",
+                        class: "text-nowrap",
+                        render: function(data, type, full, meta) {
+                            let button = '';
+                            button +=
+                                `<a href="/customer/view/${full.id}" class="btn btn-info btn-xs">View</a> `;
+                            button +=
+                                `<a href="/customer/edit/${full.id}" class="btn btn-warning btn-xs">Edit</a> `;
+                            button +=
+                                `<a onclick="return checkDelete()" href="/customer/delete/${full.id}" class="btn btn-danger btn-xs">Delete</a> `;
+
+                            return button;
+                        },
+                    },
+                    {
                         data: "id",
                         title: "ID",
                     },
@@ -58,11 +73,11 @@
                         data: "email",
                         title: "email",
                     },
-                    {
-                        data: "address_office",
-                        title: "office address",
-                        class: 'text-wrap'
-                    },
+                    // {
+                    //     data: "address_office",
+                    //     title: "office address",
+                    //     class: 'text-wrap'
+                    // },
                     {
                         data: "cell_1",
                         title: "Cell",
@@ -74,21 +89,6 @@
                     {
                         data: "person_3",
                         title: "Sales Person",
-                    },
-                    {
-                        title: "Options",
-                        class: "text-nowrap",
-                        render: function(data, type, full, meta) {
-                            let button = '';
-                            button +=
-                                `<a href="/customer/view/${full.id}" class="btn btn-info btn-sm">View</a> `;
-                            button +=
-                                `<a href="/customer/edit/${full.id}" class="btn btn-warning btn-sm">Edit</a> `;
-                            button +=
-                                `<a onclick="return checkDelete()" href="/customer/delete/${full.id}" class="btn btn-danger btn-sm">Delete</a> `;
-
-                            return button;
-                        },
                     }
                 ],
                 rowCallback: function(row, data) {},

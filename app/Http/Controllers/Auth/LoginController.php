@@ -33,7 +33,7 @@ class LoginController extends Controller
                 if (renew() == 1) {
                     return back()->withError('Subscription expired please renew now!');
                 }
-                Auth::login($user);
+                Auth::login($user, request()->has('remember'));
                 return redirect()->route('dashboard')->withSuccess('Login successfully.');
             }
         }
