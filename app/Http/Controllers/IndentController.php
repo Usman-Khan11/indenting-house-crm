@@ -68,7 +68,7 @@ class IndentController extends Controller
         $data['purchase_orders'] = PurchaseOrder::leftJoin('indents', 'purchase_orders.id', '=', 'indents.po_id')->whereNull('indents.po_id')->select('purchase_orders.*')->latest()->get();
 
         $data["indent_no"] = 'MRI-001000';
-        $q = Indent::latest()->first();
+        $q = Indent::orderBy('indent_no', 'desc')->first();
         if ($q) {
             $str = $q->indent_no;
             $str_parts = explode("-", $str);
