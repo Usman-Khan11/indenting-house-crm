@@ -18,6 +18,7 @@ use App\Http\Controllers\OfferController;
 use App\Http\Controllers\PurchaseOrderController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\ShadeCardController;
 use App\Http\Controllers\ShipmentController;
 use App\Http\Controllers\SizeController;
 use App\Http\Controllers\WarrantyNoteController;
@@ -213,4 +214,13 @@ Route::middleware('auth')->group(function () {
     Route::get('size/delete/{id}', [SizeController::class, 'delete'])->name('size.delete');
     Route::post('size/store', [SizeController::class, 'store'])->name('size.store');
     Route::post('size/update', [SizeController::class, 'update'])->name('size.update');
+
+    // Shade Card & Artwork
+    Route::get('shade-cards', [ShadeCardController::class, 'index'])->name('shade_card');
+    Route::get('shade-card/create', [ShadeCardController::class, 'create'])->name('shade_card.create');
+    Route::get('shade-card/edit/{id}', [ShadeCardController::class, 'edit'])->name('shade_card.edit');
+    Route::get('shade-card/view/{id}', [ShadeCardController::class, 'view'])->name('shade_card.view');
+    Route::get('shade-card/delete/{id}', [ShadeCardController::class, 'delete'])->name('shade_card.delete');
+    Route::post('shade-card/store', [ShadeCardController::class, 'store'])->name('shade_card.store');
+    Route::post('shade-card/update', [ShadeCardController::class, 'update'])->name('shade_card.update');
 });

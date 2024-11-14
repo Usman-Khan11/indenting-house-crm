@@ -332,3 +332,23 @@ function updateEnv($data = [])
     // Write the updated content back to the .env file
     File::put($envPath, $envContent);
 }
+
+function uploadImage($file, $directory, $old_file = '')
+{
+    if (!$file || !$directory) {
+        return '';
+    }
+
+    deleteImage($old_file);
+
+    $filename = uniqid() . '.' . $file->getClientOriginalExtension();
+    $path = $file->move($directory, $filename);
+    return $directory . $filename;
+}
+
+function deleteImage($file)
+{
+    if (!empty($file) && file_exists(public_path($file))) {
+        unlink(public_path($file));
+    }
+}

@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('front_print_color', 50)->nullable();
             $table->string('back_print', 50)->nullable();
             $table->string('back_print_color', 50)->nullable();
+            $table->string('image', 255)->nullable();
             $table->text('remarks')->nullable();
             $table->tinyInteger('status')->comment('1-Approved, 2-Pending at Supplier, 3-Pending at Customer');
             $table->tinyInteger('print_style')->comment('1-Axial Not Rectified, 2-Radial Not Rectified, 3-Not Known, 4-Axial Rectified, 5-Radial Rectified');

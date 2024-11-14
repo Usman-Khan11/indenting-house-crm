@@ -9,6 +9,11 @@ class Card extends Model
 {
     use HasFactory;
 
+    public function artwork()
+    {
+        return $this->belongsTo(Artwork::class, 'id', 'card_id');
+    }
+
     public function customer()
     {
         return $this->belongsTo(Customer::class);

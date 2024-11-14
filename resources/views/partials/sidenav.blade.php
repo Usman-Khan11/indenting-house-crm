@@ -244,6 +244,15 @@
                     </a>
                 </li>
             @endif
+
+            @if ($value->nav_id == 11 && in_array('view', Get_Permission($value->nav_id, auth()->user()->role_id)))
+                <li class="menu-item {{ menuActive('shade_card*') }}">
+                    <a href="{{ route('shade_card') }}" class="menu-link">
+                        <i class="menu-icon tf-icons ti ti-palette"></i>
+                        <div data-i18n="Shade Card & Artwork">Shade Card & Artwork</div>
+                    </a>
+                </li>
+            @endif
         @endforeach
 
         @if (auth()->user()->id == 1)
