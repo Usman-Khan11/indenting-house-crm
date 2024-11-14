@@ -294,7 +294,57 @@ return new class extends Migration
                 'key' => 'delete',
                 'created_at' => now(),
                 'updated_at' => now(),
-            ]
+            ],
+            // Sizes
+            [
+                'nav_id' => 10,
+                'key' => 'create',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'nav_id' => 10,
+                'key' => 'view',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'nav_id' => 10,
+                'key' => 'update',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'nav_id' => 10,
+                'key' => 'delete',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            // Shade Card & Artwork
+            [
+                'nav_id' => 11,
+                'key' => 'create',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'nav_id' => 11,
+                'key' => 'view',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'nav_id' => 11,
+                'key' => 'update',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'nav_id' => 11,
+                'key' => 'delete',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
         ]);
     }
 

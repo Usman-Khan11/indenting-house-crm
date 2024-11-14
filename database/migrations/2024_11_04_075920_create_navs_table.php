@@ -76,6 +76,18 @@ return new class extends Migration
                 'slug' => 'shipment',
                 'created_at' => now(),
                 'updated_at' => now(),
+            ],
+            [
+                'name' => 'Sizes',
+                'slug' => 'sizes',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'name' => 'Shade Card & Artwork',
+                'slug' => 'shade-card-and-artwork',
+                'created_at' => now(),
+                'updated_at' => now(),
             ]
         ]);
     }
