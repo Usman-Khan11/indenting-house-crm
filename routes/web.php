@@ -19,6 +19,7 @@ use App\Http\Controllers\PurchaseOrderController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\ShipmentController;
+use App\Http\Controllers\SizeController;
 use App\Http\Controllers\WarrantyNoteController;
 
 /*
@@ -203,4 +204,13 @@ Route::middleware('auth')->group(function () {
     // Email Setting
     Route::get('email/setting', [EmailController::class, 'emailSetting'])->name('email.setting');
     Route::post('email/setting', [EmailController::class, 'emailSettingUpdate'])->name('email.setting');
+
+    // Sizes
+    Route::get('sizes', [SizeController::class, 'index'])->name('size');
+    Route::get('size/create', [SizeController::class, 'create'])->name('size.create');
+    Route::get('size/edit/{id}', [SizeController::class, 'edit'])->name('size.edit');
+    Route::get('size/view/{id}', [SizeController::class, 'view'])->name('size.view');
+    Route::get('size/delete/{id}', [SizeController::class, 'delete'])->name('size.delete');
+    Route::post('size/store', [SizeController::class, 'store'])->name('size.store');
+    Route::post('size/update', [SizeController::class, 'update'])->name('size.update');
 });
