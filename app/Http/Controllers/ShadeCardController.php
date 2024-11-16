@@ -72,6 +72,17 @@ class ShadeCardController extends Controller
         return view('shade_card.edit', $data);
     }
 
+    public function view($id)
+    {
+        $data['page_title'] = "View Shade Card & Artwork";
+        $this->checkPermissions('view');
+
+        $data['card'] = Card::where("id", $id)->first();
+        $data['artwork'] = Artwork::where("card_id", $id)->first();
+
+        return view('shade_card.view', $data);
+    }
+
     public function delete($id)
     {
         $this->checkPermissions('delete');

@@ -47,8 +47,8 @@
                         class: "text-nowrap",
                         render: function(data, type, full, meta) {
                             let button = '';
-                            // button +=
-                            //     `<a href="/shade-card/view/${full.id}" class="btn btn-info btn-xs">View</a> `;
+                            button +=
+                                `<a href="/shade-card/view/${full.id}" class="btn btn-info btn-xs">View</a> `;
                             button +=
                                 `<a href="/shade-card/edit/${full.id}" class="btn btn-warning btn-xs">Edit</a> `;
                             button +=

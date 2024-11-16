@@ -88,6 +88,12 @@ return new class extends Migration
                 'slug' => 'shade-card-and-artwork',
                 'created_at' => now(),
                 'updated_at' => now(),
+            ],
+            [
+                'name' => 'Proforma Invoices',
+                'slug' => 'proforma_invoice',
+                'created_at' => now(),
+                'updated_at' => now(),
             ]
         ]);
     }

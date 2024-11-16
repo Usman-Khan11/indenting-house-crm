@@ -345,6 +345,31 @@ return new class extends Migration
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
+            // Proforma Invoices
+            [
+                'nav_id' => 12,
+                'key' => 'create',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'nav_id' => 12,
+                'key' => 'view',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'nav_id' => 12,
+                'key' => 'update',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'nav_id' => 12,
+                'key' => 'delete',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
         ]);
     }
 

@@ -195,7 +195,7 @@ class IndentController extends Controller
             'indent_no' => [
                 'required',
                 'string',
-                'max:200',
+                'max:20',
                 Rule::unique('indents')->ignore($request->id),
             ],
             'po_id' => 'required|integer|exists:purchase_orders,id',

@@ -15,6 +15,7 @@ use App\Http\Controllers\DeliveryNoteController;
 use App\Http\Controllers\EmailController;
 use App\Http\Controllers\IndentController;
 use App\Http\Controllers\OfferController;
+use App\Http\Controllers\ProformaInvoiceController;
 use App\Http\Controllers\PurchaseOrderController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\RoleController;
@@ -223,4 +224,13 @@ Route::middleware('auth')->group(function () {
     Route::get('shade-card/delete/{id}', [ShadeCardController::class, 'delete'])->name('shade_card.delete');
     Route::post('shade-card/store', [ShadeCardController::class, 'store'])->name('shade_card.store');
     Route::post('shade-card/update', [ShadeCardController::class, 'update'])->name('shade_card.update');
+
+    // Proforma Invoice
+    Route::get('proforma-invoices', [ProformaInvoiceController::class, 'index'])->name('proforma_invoice');
+    Route::get('proforma-invoice/create', [ProformaInvoiceController::class, 'create'])->name('proforma_invoice.create');
+    Route::get('proforma-invoice/edit/{id}', [ProformaInvoiceController::class, 'edit'])->name('proforma_invoice.edit');
+    Route::get('proforma-invoice/view/{id}', [ProformaInvoiceController::class, 'view'])->name('proforma_invoice.view');
+    Route::get('proforma-invoice/delete/{id}', [ProformaInvoiceController::class, 'delete'])->name('proforma_invoice.delete');
+    Route::post('proforma-invoice/store', [ProformaInvoiceController::class, 'store'])->name('proforma_invoice.store');
+    Route::post('proforma-invoice/update', [ProformaInvoiceController::class, 'update'])->name('proforma_invoice.update');
 });
