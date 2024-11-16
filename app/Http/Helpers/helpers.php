@@ -276,6 +276,23 @@ function Get_Sidebar_User($user_id)
     return $Permisions;
 }
 
+function checkSidebar($role_id, $nav_id, $key)
+{
+    $permission = DB::table('permissions')
+        ->join('nav_keys', 'nav_keys.id', '=', 'permissions.nav_key_id')
+        ->where('permissions.nav_id', $nav_id)
+        ->where('permissions.user_id', $role_id)
+        ->where('nav_keys.key', $key)
+        ->select('permissions.*', 'nav_keys.key')
+        ->count();
+
+    if ($permission) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 function get_navkey_by_nav_id($nav_id)
 {
     $Permisions = DB::table('nav_keys')->where('nav_id', $nav_id)->get();
