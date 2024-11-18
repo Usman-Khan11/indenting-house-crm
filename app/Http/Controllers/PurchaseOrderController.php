@@ -135,6 +135,7 @@ class PurchaseOrderController extends Controller
                 $po_product = new PurchaseOrderItem();
                 $po_product->po_id = $po->id;
                 $po_product->item_id = $request->product[$key];
+                $po_product->item_desc = $request->product_description[$key];
                 $po_product->qty = $request->product_qty[$key] ?? 0;
                 $po_product->unit = $request->product_unit[$key];
                 $po_product->rate = $request->product_rate[$key] ?? 0;
@@ -183,6 +184,7 @@ class PurchaseOrderController extends Controller
                 $po_product = new PurchaseOrderItem();
                 $po_product->po_id = $po->id;
                 $po_product->item_id = $request->product[$key];
+                $po_product->item_desc = $request->product_description[$key];
                 $po_product->qty = $request->product_qty[$key] ?? 0;
                 $po_product->unit = $request->product_unit[$key];
                 $po_product->rate = $request->product_rate[$key] ?? 0;

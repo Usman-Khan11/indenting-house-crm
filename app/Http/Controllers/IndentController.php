@@ -170,6 +170,7 @@ class IndentController extends Controller
                 $indent_product = new IndentItems();
                 $indent_product->indent_id = $indent->id;
                 $indent_product->item_id = $request->product[$key];
+                $indent_product->item_desc = $request->product_description[$key];
                 $indent_product->qty = $request->product_qty[$key] ?? 0;
                 $indent_product->unit = $request->product_unit[$key];
                 $indent_product->rate = $request->product_rate[$key] ?? 0;
@@ -254,6 +255,7 @@ class IndentController extends Controller
                 $indent_product = new IndentItems();
                 $indent_product->indent_id = $indent->id;
                 $indent_product->item_id = $request->product[$key];
+                $indent_product->item_desc = $request->product_description[$key];
                 $indent_product->qty = $request->product_qty[$key] ?? 0;
                 $indent_product->unit = $request->product_unit[$key];
                 $indent_product->rate = $request->product_rate[$key] ?? 0;

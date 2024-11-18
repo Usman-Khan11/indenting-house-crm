@@ -132,6 +132,7 @@
                                 @forelse ($p as $k => $v)
                                     @include('offer.product_row', [
                                         'product_id' => $v,
+                                        'product_description' => old('product_description')[$k] ?? '',
                                         'product_qty' => old('product_qty')[$k] ?? '',
                                         'product_unit' => old('product_unit')[$k] ?? '',
                                         'product_rate' => old('product_rate')[$k] ?? '',
@@ -147,6 +148,7 @@
                                 @empty
                                     @include('offer.product_row', [
                                         'product_id' => '',
+                                        'product_description' => '',
                                         'product_qty' => '',
                                         'product_unit' => '',
                                         'product_rate' => '',

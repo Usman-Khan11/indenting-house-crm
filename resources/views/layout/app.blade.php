@@ -176,14 +176,15 @@
                 }, function(res) {
                     if (res) {
                         $(e).parent().parent().parent().find(".product_unit").val(res.unit);
-                        // $(e).parent().find("p").remove();
-                        // $(e).parent().append(`<p class="m-0 p-0 mt-2">${res.description}</p>`);
+                        $(e).parent().parent().parent().find(".product_description").val(res.description);
+                    } else {
+                        $(e).parent().parent().parent().find(".product_unit").val(null);
+                        $(e).parent().parent().parent().find(".product_description").val(null);
                     }
 
                     $(".loader").hide();
                 })
             } else {
-                // $(e).parent().find("p").remove();
                 $(".loader").hide();
             }
         }
@@ -193,22 +194,17 @@
                 $('select.product, select.product_supplier').select2('destroy');
             }
 
-            // Old Method
-            // $("#product_table tbody tr:last").clone().appendTo("#product_table tbody");
-            // $("#product_table tbody tr:last").find("input").val(null).prop("disabled", false);
-            // $("#product_table tbody tr:last").find("select").val(null).trigger('change').prop("disabled", false);
-
-            // New Method
-            $("#product_table .row:last").clone().appendTo("#product_table");
-            $("#product_table .row:last").find("input").val(null).prop("disabled", false);
-            $("#product_table .row:last").find("select").val(null).trigger('change').prop("disabled", false);
+            $("#product_table .product_row:last").clone().appendTo("#product_table");
+            $("#product_table .product_row:last").find("input").val(null).prop("disabled", false);
+            $("#product_table .product_row:last").find("textarea").val(null).prop("disabled", false);
+            $("#product_table .product_row:last").find("select").val(null).trigger('change').prop("disabled", false);
 
             $('select.product, select.product_supplier').select2();
         }
 
         function delProductRow(e) {
-            if ($("#product_table .row").length > 1) {
-                $(e).parent().parent().remove();
+            if ($("#product_table .product_row").length > 1) {
+                $(e).parent().parent().parent().parent().remove();
             }
         }
 
@@ -255,14 +251,14 @@
 
                 if (res.items.length) {
                     let items = res.items;
-                    $("#product_table .row:gt(0)").remove();
+                    $("#product_table .product_row:gt(0)").remove();
 
                     if ($('select.product, select.product_supplier').hasClass('select2-hidden-accessible')) {
                         $('select.product, select.product_supplier').select2('destroy');
                     }
 
                     $(items).each(function(key, value) {
-                        let $newRow = $("#product_table .row:first").clone();
+                        let $newRow = $("#product_table .product_row:first").clone();
 
                         $newRow.find('.product').val(value.item_id).trigger('change');
                         $newRow.find('.product_qty').val(value.qty);
@@ -274,11 +270,12 @@
                         $newRow.find('.product_payment_term').val(value.payment_term).trigger("change");
                         $newRow.find('.product_delivery').val(value.delivery);
                         $newRow.find('.product_supplier').val(value.supplier_id).trigger('change');
+                        $newRow.find('.product_description').val(value.item_desc);
 
                         $("#product_table").append($newRow);
                     });
 
-                    $("#product_table .row:first").remove();
+                    $("#product_table .product_row:first").remove();
                     $('select.product, select.product_supplier').select2();
                 }
 
@@ -304,14 +301,14 @@
 
                 if (res.items.length) {
                     let items = res.items;
-                    $("#product_table .row:gt(0)").remove();
+                    $("#product_table .product_row:gt(0)").remove();
 
                     if ($('select.product, select.product_supplier').hasClass('select2-hidden-accessible')) {
                         $('select.product, select.product_supplier').select2('destroy');
                     }
 
                     $(items).each(function(key, value) {
-                        let $newRow = $("#product_table .row:first").clone();
+                        let $newRow = $("#product_table .product_row:first").clone();
 
                         $newRow.find('.product').val(value.item_id).trigger('change');
                         $newRow.find('.product_qty').val(value.qty);
@@ -319,11 +316,12 @@
                         $newRow.find('.product_rate').val(value.rate);
                         $newRow.find('.product_total').val(value.total);
                         $newRow.find('.product_shipping_type').val(value.shipping_type).trigger('change');
+                        $newRow.find('.product_description').val(value.item_desc);
 
                         $("#product_table").append($newRow);
                     });
 
-                    $("#product_table .row:first").remove();
+                    $("#product_table .product_row:first").remove();
                     $('select.product, select.product_supplier').select2();
                 }
 
@@ -351,27 +349,27 @@
 
                 if (res.items.length) {
                     let items = res.items;
-                    $("#product_table .row:gt(0)").remove();
+                    $("#product_table .product_row:gt(0)").remove();
 
                     if ($('select.product, select.product_supplier').hasClass('select2-hidden-accessible')) {
                         $('select.product, select.product_supplier').select2('destroy');
                     }
 
                     $(items).each(function(key, value) {
-                        let $newRow = $("#product_table .row:first").clone();
+                        let $newRow = $("#product_table .product_row:first").clone();
 
                         $newRow.find('.product').val(value.item_id).trigger('change').prop("disabled",
-                        true);
+                            true);
                         $newRow.find('.product_qty').val(value.qty).prop("disabled", true);
                         $newRow.find('.product_unit').val(value.unit).prop("disabled", true);
                         $newRow.find('.product_rate').val(value.rate).prop("disabled", true);
                         $newRow.find('.product_total').val(value.total).prop("disabled", true);
-                        // $newRow.find('.product_po_id').val(value.po_id).trigger('change');
+                        $newRow.find('.product_description').val(value.item_desc).prop("disabled", false);
 
                         $("#product_table").append($newRow);
                     });
 
-                    $("#product_table .row:first").remove();
+                    $("#product_table .product_row:first").remove();
                     $('select.product, select.product_supplier').select2();
                 }
 
@@ -410,7 +408,7 @@
                         let $newRow = $("#product_table .row:first").clone();
 
                         $newRow.find('.product').val(value.item_id).trigger('change').prop("disabled",
-                        true);
+                            true);
                         $newRow.find('.product_qty').val(value.qty);
                         $newRow.find('.product_unit').val(value.unit).prop("disabled", true);
                         $newRow.find('.product_rate').val(value.rate).prop("disabled", true);
@@ -511,7 +509,7 @@
                         $(res).each(function(i, v) {
                             $("select.product").append(
                                 `<option title="${v.product.description}" value="${v.product.id}">${v.product.name}</option>`
-                                );
+                            );
                         });
                         $(".loader").hide();
                     }
@@ -537,7 +535,7 @@
                         $(res).each(function(i, v) {
                             $("select.product").append(
                                 `<option title="${v.product.description}" value="${v.product.id}">${v.product.name}</option>`
-                                );
+                            );
                         });
                         $(".loader").hide();
                     }

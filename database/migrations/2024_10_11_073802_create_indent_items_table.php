@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->integer('indent_id');
             $table->integer('item_id');
+            $table->text('item_desc')->nullable();
             $table->string('qty', 15);
             $table->string('unit', 15)->nullable();
             $table->string('rate', 40);

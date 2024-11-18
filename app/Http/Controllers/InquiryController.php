@@ -129,6 +129,7 @@ class InquiryController extends Controller
                 $inquiry_product = new InquiryItem();
                 $inquiry_product->inquiry_id = $inquiry->id;
                 $inquiry_product->item_id = $request->product[$key];
+                $inquiry_product->item_desc = $request->product_description[$key];
                 $inquiry_product->qty = $request->product_qty[$key] ?? 0;
                 $inquiry_product->unit = $request->product_unit[$key];
                 $inquiry_product->rate = $request->product_rate[$key] ?? 0;
@@ -190,6 +191,7 @@ class InquiryController extends Controller
                 $inquiry_product = new InquiryItem();
                 $inquiry_product->inquiry_id = $inquiry->id;
                 $inquiry_product->item_id = $request->product[$key];
+                $inquiry_product->item_desc = $request->product_description[$key];
                 $inquiry_product->qty = $request->product_qty[$key] ?? 0;
                 $inquiry_product->unit = $request->product_unit[$key];
                 $inquiry_product->rate = $request->product_rate[$key] ?? 0;

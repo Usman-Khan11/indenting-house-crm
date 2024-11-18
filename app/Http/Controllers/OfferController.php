@@ -143,6 +143,7 @@ class OfferController extends Controller
                 $offer_product = new OfferItem();
                 $offer_product->offer_id = $offer->id;
                 $offer_product->item_id = $request->product[$key];
+                $offer_product->item_desc = $request->product_description[$key];
                 $offer_product->qty = $request->product_qty[$key] ?? 0;
                 $offer_product->unit = $request->product_unit[$key];
                 $offer_product->rate = $request->product_rate[$key] ?? 0;
@@ -204,6 +205,7 @@ class OfferController extends Controller
                 $offer_product = new OfferItem();
                 $offer_product->offer_id = $offer->id;
                 $offer_product->item_id = $request->product[$key];
+                $offer_product->item_desc = $request->product_description[$key];
                 $offer_product->qty = $request->product_qty[$key] ?? 0;
                 $offer_product->unit = $request->product_unit[$key];
                 $offer_product->rate = $request->product_rate[$key] ?? 0;
