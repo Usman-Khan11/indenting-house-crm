@@ -544,6 +544,34 @@
                 $(".loader").hide();
             }
         }
+
+        function getMappedProducts() {
+            const customer_id = $("select.customer_id").val();
+            const supplier_id = $("select.supplier_id").val();
+            const item = $('select.item_id');
+
+            $.get("{{ route('shade_card') }}", {
+                _token: '{{ csrf_token() }}',
+                customer_id,
+                supplier_id,
+                type: "getMappedProducts"
+            }, function(res) {
+                let text = '';
+                ['customer_products', 'supplier_products'].forEach(group => {
+                    if (res[group]) {
+                        text +=
+                            `<optgroup label="${group.replace('_', ' ').replace(/\b\w/g, c => c.toUpperCase())}">`;
+                        res[group].forEach(({
+                            product
+                        }) => {
+                            text += `<option value="${product.id}">${product.name}</option>`;
+                        });
+                        text += `</optgroup>`;
+                    }
+                });
+                item.html(text);
+            });
+        }
     </script>
 </body>
 

@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\Artwork;
 use App\Models\Card;
 use App\Models\Customer;
+use App\Models\CustomerProducts;
 use App\Models\Product;
 use App\Models\Size;
 use App\Models\Supplier;
+use App\Models\SupplierProducts;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Yajra\DataTables\Facades\DataTables;
@@ -36,6 +38,24 @@ class ShadeCardController extends Controller
         $this->checkPermissions('view');
 
         if ($request->ajax()) {
+            if (isset($request->type) && $request->type == "getMappedProducts") {
+                $data = ["customer_products" => [], "supplier_products" => []];
+
+                if (!empty($request->customer_id)) {
+                    $data["customer_products"] = CustomerProducts::where('customer_id', $request->customer_id)
+                        ->with('product')
+                        ->get();
+                }
+
+                if (!empty($request->supplier_id)) {
+                    $data["supplier_products"] = SupplierProducts::where('supplier_id', $request->supplier_id)
+                        ->with('product')
+                        ->get();
+                }
+
+                return $data;
+            }
+
             $query = Card::Query();
             $query = $query->with('artwork', 'customer', 'supplier', 'item', 'size')->orderBy('card_no', 'desc')->get();
             return DataTables::of($query)->addIndexColumn()->make(true);
@@ -48,6 +68,14 @@ class ShadeCardController extends Controller
     {
         $data['page_title'] = "Add New Shade Card & Artwork";
         $this->checkPermissions('create');
+
+        $data["card_no"] = 1000;
+        $q = Card::latest()->first();
+        if ($q) {
+            $str = $q->card_no;
+            $str = $str + 1;
+            $data["card_no"] = $str;
+        }
 
         $data['customers'] = Customer::orderBy('name', 'asc')->get();
         $data['suppliers'] = Supplier::orderBy('name', 'asc')->get();

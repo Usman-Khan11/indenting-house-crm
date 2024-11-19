@@ -207,7 +207,7 @@
                         <div class="col-md-2 col-12">
                             <div class="mb-3">
                                 <label class="form-label">Currency</label>
-                                <select class="select2 form-select currency" name="currency" disabled>
+                                <select class="select2 form-select currency" name="currency">
                                     @foreach (currency() as $key => $value)
                                         <option @if (old('currency', $proforma_invoice->currency) == $key) selected @endif
                                             value="{{ $key }}">{{ $value }}</option>

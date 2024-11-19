@@ -19,7 +19,8 @@
                         <div class="col-md-4 col-12">
                             <div class="mb-3">
                                 <label class="form-label">Customers</label>
-                                <select class="select2 form-select customer_id" name="customer_id" required>
+                                <select class="select2 form-select customer_id" name="customer_id"
+                                    onchange="getMappedProducts()" required>
                                     <option selected disabled value="">Select Customer</option>
                                     @foreach ($customers as $customer)
                                         <option @if (old('customer_id') == $customer->id) selected @endif
@@ -32,7 +33,8 @@
                         <div class="col-md-4 col-12">
                             <div class="mb-3">
                                 <label class="form-label">Suppliers</label>
-                                <select class="select2 form-select supplier_id" name="supplier_id" required>
+                                <select class="select2 form-select supplier_id" name="supplier_id"
+                                    onchange="getMappedProducts()" required>
                                     <option selected disabled value="">Select Supplier</option>
                                     @foreach ($suppliers as $supplier)
                                         <option @if (old('supplier_id') == $supplier->id) selected @endif
@@ -47,10 +49,10 @@
                                 <label class="form-label">Products</label>
                                 <select class="select2 form-select item_id" name="item_id" required>
                                     <option selected disabled value="">Select Product</option>
-                                    @foreach ($products as $product)
+                                    {{-- @foreach ($products as $product)
                                         <option @if (old('item_id') == $product->id) selected @endif
                                             value="{{ $product->id }}">{{ $product->name }}</option>
-                                    @endforeach
+                                    @endforeach --}}
                                 </select>
                             </div>
                         </div>
@@ -71,7 +73,8 @@
                         <div class="col-md-3 col-12">
                             <div class="mb-3">
                                 <label class="form-label">Card No</label>
-                                <input name="card_no" type="text" class="form-control" placeholder="Card No" />
+                                <input name="card_no" type="text" value="{{ $card_no }}" readonly
+                                    class="form-control" placeholder="Card No" />
                             </div>
                         </div>
 
