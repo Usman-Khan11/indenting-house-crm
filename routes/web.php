@@ -218,6 +218,7 @@ Route::middleware('auth')->group(function () {
 
     // Shade Card & Artwork
     Route::get('shade-cards', [ShadeCardController::class, 'index'])->name('shade_card');
+    Route::get('shade-card/search', [ShadeCardController::class, 'search'])->name('shade_card.search');
     Route::get('shade-card/create', [ShadeCardController::class, 'create'])->name('shade_card.create');
     Route::get('shade-card/edit/{id}', [ShadeCardController::class, 'edit'])->name('shade_card.edit');
     Route::get('shade-card/view/{id}', [ShadeCardController::class, 'view'])->name('shade_card.view');

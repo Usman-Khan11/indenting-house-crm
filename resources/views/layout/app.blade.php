@@ -546,6 +546,7 @@
         }
 
         function getMappedProducts() {
+            $(".loader").show();
             const customer_id = $("select.customer_id").val();
             const supplier_id = $("select.supplier_id").val();
             const item = $('select.item_id');
@@ -570,6 +571,7 @@
                     }
                 });
                 item.html(text);
+                $(".loader").hide();
             });
         }
     </script>

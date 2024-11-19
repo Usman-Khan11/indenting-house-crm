@@ -11,6 +11,7 @@ use App\Models\Size;
 use App\Models\Supplier;
 use App\Models\SupplierProducts;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -62,6 +63,36 @@ class ShadeCardController extends Controller
         }
 
         return view('shade_card.index', $data);
+    }
+
+    public function search(Request $request)
+    {
+        $cardNo = $request->card_no;
+        $product = $request->product;
+        $orderBy = $request->order_by;
+
+        $results = DB::table('cards')
+            ->join('products', 'cards.item_id', '=', 'products.id')
+            ->join('sizes', 'cards.size_id', '=', 'sizes.id')
+            ->join('customers', 'cards.customer_id', '=', 'customers.id')
+            ->select(
+                'cards.card_no',
+                'products.name as product',
+                'sizes.name as size_name',
+                'cards.customer_id',
+                'cards.size_id',
+                'customers.location'
+            )
+            ->when($cardNo, function ($query, $cardNo) {
+                return $query->where('cards.card_no', $cardNo);
+            })
+            ->when($product, function ($query, $product) {
+                return $query->where('products.name', 'LIKE', "%$product%");
+            })
+            ->orderBy($orderBy === 'code' ? 'cards.card_no' : 'products.name')
+            ->get();
+
+        return view('shade_card.search', compact('results'));
     }
 
     public function create(Request $request)

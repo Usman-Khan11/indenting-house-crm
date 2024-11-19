@@ -151,7 +151,7 @@ class ReportController extends Controller
                     'suppliers.name as supplier_name',
                     'suppliers.person_3 as sourcing_person',
                     'products.name as product_name',
-                    'products.description as product_description',
+                    'inquiry_items.item_desc as product_description',
                 );
 
             if (!empty($request->from) && !empty($request->to)) {
@@ -206,7 +206,7 @@ class ReportController extends Controller
                     'suppliers.name as supplier_name',
                     'suppliers.person_3 as sourcing_person',
                     'products.name as product_name',
-                    'products.description as product_description',
+                    'offer_items.item_desc as product_description',
                 );
 
             if (!empty($request->from) && !empty($request->to)) {
@@ -260,7 +260,7 @@ class ReportController extends Controller
                     'suppliers.name as supplier_name',
                     'suppliers.person_3 as sourcing_person',
                     'products.name as product_name',
-                    'products.description as product_description',
+                    'purchase_order_items.item_desc as product_description',
                 );
 
             if (!empty($request->from) && !empty($request->to)) {
@@ -314,7 +314,7 @@ class ReportController extends Controller
                     'suppliers.name as supplier_name',
                     'suppliers.person_3 as sourcing_person',
                     'products.name as product_name',
-                    'products.description as product_description',
+                    'indent_items.item_desc as product_description',
                 );
 
             if (!empty($request->from) && !empty($request->to)) {

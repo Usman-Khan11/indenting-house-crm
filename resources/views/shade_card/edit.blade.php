@@ -9,7 +9,15 @@
 
             <div class="card">
                 <div class="card-header">
-                    <h4 class="fw-bold">{{ $page_title }}</h4>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4 class="fw-bold mb-0">{{ $page_title }}</h4>
+                        </div>
+                        <div class="col-md-6 text-end">
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                data-bs-target="#search_modal">Search</button>
+                        </div>
+                    </div>
                     <hr />
                 </div>
                 <div class="card-body">
@@ -257,4 +265,7 @@
             </div>
         </form>
     </div>
+
+    <!-- Search Modal -->
+    @include('shade_card.partials.search_modal')
 @endsection
