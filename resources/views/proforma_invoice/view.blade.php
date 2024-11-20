@@ -62,15 +62,15 @@
 @section('content')
     <div class="w-100">
         <div class="invoice-print p-4">
-            <div class="d-flex justify-content-between flex-row">
-                {{-- <div class="mb-4">
+            {{-- <div class="d-flex justify-content-between flex-row">
+                <div class="mb-4">
                     <div class="d-flex svg-illustration mb-3 gap-2">
                         <img src="{{ asset(general()->logo) }}" width="150px" alt="Logo">
                     </div>
                     <p class="mb-1">Office 149, 450 South Brand Brooklyn</p>
                     <p class="mb-1">San Diego County, CA 91905, USA</p>
                     <p class="mb-0">+1 (123) 456 7891, +44 (876) 543 2198</p>
-                </div> --}}
+                </div>
                 <div class="col-6 col-lg-4">
                     <!-- <h4 class="fw-bold">INVOICE #86423</h4> -->
                     <div class="mb-2">
@@ -90,46 +90,31 @@
                         <span class="">mri@mri.com.pk</span>
                     </div>
                 </div>
-            </div>
+            </div> --}}
 
-            <div class="mb-2 mt-3">
+            <div class="mb-3 mt-0">
                 <h3 class="text-center fw-bolder">PROFORMA INVOICE</h3>
                 <div class="row">
-                    <div class="col-6">
+                    <div class="col-12">
                         <table class="table table-bordered table-sm border-dark">
                             <tbody>
                                 <tr>
-                                    <td width="60%">
-                                        <h5 class="mb-1">
-                                            <b>PI No.</b> &nbsp; {{ @$proforma_invoice->pi_no }}
+                                    <td width="35%">
+                                        <h5 class="mb-0">
+                                            <b>PI No.</b> {{ @$proforma_invoice->pi_no }}
                                             @if ($proforma_invoice->revised)
                                                 <small>(Revised)</small>
                                             @endif
                                         </h5>
                                     </td>
-                                </tr>
-                                <tr>
-                                    <td width="60%">
-                                        <h5 class="mb-1"><b>PI Date:</b> &nbsp;
+                                    <td width="30%">
+                                        <h5 class="mb-0"><b>PI Date:</b>
                                             {{ date('d-M-Y', strtotime($proforma_invoice->date)) }}</h5>
                                     </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="col-6">
-                        <table class="table table-bordered table-sm border-dark">
-                            <tbody>
-                                <tr>
-                                    <td width="60%">
-                                        <h5 class="mb-1"><b>PI Validity:</b> &nbsp;
+                                    <td width="35%">
+                                        <h5 class="mb-0"><b>PI Validity:</b>
                                             {{ $proforma_invoice->validity ? date('d-M-Y', strtotime($proforma_invoice->validity)) : '-' }}
                                         </h5>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td width="60%">
-                                        <h5 class="mb-1"><b>NTN No.</b> &nbsp; 2734223-9</h5>
                                     </td>
                                 </tr>
                             </tbody>
@@ -151,11 +136,11 @@
                         </tr>
                         <tr>
                             <td width="50%">
-                                <h6 class="mb-1">{{ @$proforma_invoice->supplier->name }}</h6>
+                                <h5 class="mb-1 fw-bold">{{ @$proforma_invoice->supplier->name }}</h5>
                                 <small>{{ @$proforma_invoice->supplier->address }}</small>
                             </td>
                             <td width="50%">
-                                <h6 class="mb-1">{{ @$proforma_invoice->customer->name }}</h6>
+                                <h5 class="mb-1 fw-bold">{{ @$proforma_invoice->customer->name }}</h5>
                                 <small>{{ @$proforma_invoice->customer->address_office }}</small>
                             </td>
                         </tr>
@@ -366,9 +351,6 @@
                                             Manually signed Non-Negotiable copies of Invoice, Form 3, Form 7. Analysis
                                             Certificate & Export Packing List Must Accompany Shipping Documents and complete
                                             sets thereof should be sent by courier to buyer and indenters prior to shipment.
-                                            <br /><br />
-                                            Manufacturer & Expiry dates should be mentioned on each Export packing. Shelf
-                                            life of material should be 80% minimum at the time of arrival.
                                         </p>
                                     </td>
                                 </tr>
@@ -378,7 +360,7 @@
                 </div>
             </div>
 
-            <div class="mb-2 mt-1">
+            <div class="mb-3 mt-2">
                 <div class="row">
                     <div class="col-12">
                         <table class="table table-bordered table-sm border-dark align-top">
@@ -397,9 +379,29 @@
                 </div>
             </div>
 
+            <div class="mb-3 mt-2">
+                <div class="row">
+                    <div class="col-12">
+                        <table class="table table-bordered table-sm border-dark align-top">
+                            <tbody>
+                                <tr>
+                                    <td width="100%">
+                                        <p class="mb-0 fw-bold">
+                                            Manufacturer & Expiry dates should be mentioned on each Export packing. Shelf
+                                            life of material should be 80% minimum at the time of arrival.
+                                        </p>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
             <div class="row mt-3">
                 <div class="col-6 border border-dark pb-5 pt-2">
-                    <h5 class="mb-1">Sign & Stamp: <small>(For <b>MRI Indenting House</b>)</small></h5>
+                    <h5 class="mb-1">Sign & Stamp: <small>(For <b>{{ @$proforma_invoice->supplier->name }}</b>)</small>
+                    </h5>
                     <br /><br /><br />
                 </div>
                 <div class="col-6 border border-dark pb-5 pt-2">
