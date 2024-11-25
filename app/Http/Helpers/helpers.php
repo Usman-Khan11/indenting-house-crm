@@ -167,6 +167,7 @@ function portOfShipment()
         'Shenzen Sea Port' => 'Shenzen Sea Port',
         'Ningbo Sea Port' => 'Ningbo Sea Port',
         'Qingdao Sea Port' => 'Qingdao Sea Port',
+        'Qingdao Airport' => 'Qingdao Airport',
         'Tianjin Sea Port' => 'Tianjin Sea Port',
         'Dehli Air Port' => 'Dehli Air Port',
         'Beijing Airport' => 'Beijing Airport',
@@ -174,6 +175,7 @@ function portOfShipment()
         'Hyderabad Airport' => 'Hyderabad Airport',
         'Xiamen Airport' => 'Xiamen Airport',
         'Xiamen Sea Port' => 'Xiamen Sea Port',
+        'Taipei Airport' => 'Taipei Airport',
     ];
 
     return $data;
