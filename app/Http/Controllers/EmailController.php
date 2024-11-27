@@ -93,15 +93,19 @@ class EmailController extends Controller
         return back()->withSuccess('You should receive a test mail at ' . $request->email . ' shortly.');
     }
 
-    public function emailInquiry($id, Request $request)
+    public function emailInquiry($id)
     {
         $data['inquiry'] = Inquiry::where('id', $id)->with('items', 'supplier')->first();
 
-        try {
-            $email = @$data['inquiry']->supplier->email;
-            $data['subject'] = "Inquiry " . $data['inquiry']->inq_no . " Details";
+        $recipients = array_filter([
+            $data['inquiry']->supplier->email ?? null,
+            $data['inquiry']->supplier->email_2 ?? null,
+            $data['inquiry']->supplier->email_3 ?? null,
+        ]);
 
-            Mail::to($email)->queue(new InquiryEmail($data));
+        try {
+            $data['subject'] = "Inquiry " . $data['inquiry']->inq_no . " Details";
+            Mail::to($recipients)->queue(new InquiryEmail($data));
         } catch (\Exception $exp) {
             return back()->withError('Email not sent.');
         }
