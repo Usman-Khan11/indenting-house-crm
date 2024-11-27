@@ -18,8 +18,14 @@ class InquiryEmail extends Mailable
 
     public function build()
     {
-        return $this->subject($this->data['subject'])
+        $email =  $this->subject($this->data['subject'])
             ->view('email.templates.inquiry')
             ->with('data', $this->data);
+
+        if (!empty($this->data['bcc'])) {
+            $email->bcc($this->data['bcc']);
+        }
+
+        return $email;
     }
 }

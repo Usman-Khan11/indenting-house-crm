@@ -97,11 +97,17 @@ class EmailController extends Controller
     {
         $data['inquiry'] = Inquiry::where('id', $id)->with('items', 'supplier')->first();
 
+        if ($data['inquiry']->supplier->products->count() == 0) {
+            return back()->withError('Email not sent. This supplier does not mapped any product!');
+        }
+
         $recipients = array_filter([
             $data['inquiry']->supplier->email ?? null,
             $data['inquiry']->supplier->email_2 ?? null,
             $data['inquiry']->supplier->email_3 ?? null,
         ]);
+
+        $data['bcc'] = auth()->user()->email;
 
         try {
             $data['subject'] = "Inquiry " . $data['inquiry']->inq_no . " Details";
