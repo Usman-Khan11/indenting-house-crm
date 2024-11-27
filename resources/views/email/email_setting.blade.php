@@ -2,66 +2,103 @@
 
 @push('style')
     <style>
-        .form-group.row{
+        .form-group.row {
             margin-bottom: 15px !important;
         }
     </style>
 @endpush
 
 @section('content')
-<div class="container-xxl flex-grow-1 container-p-y">
-    <div class="card">
-        <div class="card-header">
-            <div class="row align-items-center">
-                <div class="col-6">
-                    <h4 class="card-title m-0">{{ $page_title }}</h4>
+    <div class="container-xxl flex-grow-1 container-p-y">
+        <div class="card">
+            <div class="card-header">
+                <div class="row align-items-center">
+                    <div class="col-6">
+                        <h4 class="card-title m-0">{{ $page_title }}</h4>
+                    </div>
+                    <div class="col-6 text-end">
+                        <button type="button" data-bs-target="#testMailModal" data-bs-toggle="modal" class="btn btn-primary">
+                            Send Test Mail
+                        </button>
+                    </div>
                 </div>
+                <hr />
             </div>
-            <hr />
-        </div>
-        <div class="card-body">
-            <form action="{{ route('email.setting') }}" method="POST">
-                @csrf
-                <div class="form-group row">
-                    <div class="col-md-2">
-                        <label class="font-weight-bold">@lang('Sending Method')</label>
+            <div class="card-body">
+                <form action="{{ route('email.setting') }}" method="POST">
+                    @csrf
+                    <div class="form-group row">
+                        <div class="col-md-2">
+                            <label class="font-weight-bold">@lang('Sending Method')</label>
+                        </div>
+                        <div class="col-md-10">
+                            <select name="email_method" class="form-select">
+                                <option value="php" @if (@$general_setting->mail_config->name == 'php') selected @endif>@lang('PHP Mail')
+                                </option>
+                                <option value="smtp" @if (@$general_setting->mail_config->name == 'smtp') selected @endif>@lang('SMTP')
+                                </option>
+                                <option value="sendgrid" @if (@$general_setting->mail_config->name == 'sendgrid') selected @endif>@lang('SendGrid API')
+                                </option>
+                                <option value="mailjet" @if (@$general_setting->mail_config->name == 'mailjet') selected @endif>@lang('Mailjet API')
+                                </option>
+                            </select>
+                        </div>
                     </div>
-                    <div class="col-md-10">
-                        <select name="email_method" class="form-select" >
-                            <option value="php" @if(@$general_setting->mail_config->name == 'php') selected @endif>@lang('PHP Mail')</option>
-                            <option value="smtp" @if(@$general_setting->mail_config->name == 'smtp') selected @endif>@lang('SMTP')</option>
-                            <option value="sendgrid" @if(@$general_setting->mail_config->name == 'sendgrid') selected @endif>@lang('SendGrid API')</option>
-                            <option value="mailjet" @if(@$general_setting->mail_config->name == 'mailjet') selected @endif>@lang('Mailjet API')</option>
-                        </select>
-                    </div>
-                </div>
 
-                <div class="mt-4 d-none configForm" id="smtp"></div>
-                <div class="mt-4 d-none configForm" id="sendgrid"> </div>
-                <div class="mt-4 d-none configForm" id="mailjet"></div>
+                    <div class="mt-4 d-none configForm" id="smtp"></div>
+                    <div class="mt-4 d-none configForm" id="sendgrid"> </div>
+                    <div class="mt-4 d-none configForm" id="mailjet"></div>
 
-                <button type="submit" class="btn btn-primary mt-3">Update</button>
-            </form>
+                    <button type="submit" class="btn btn-primary mt-3">Update</button>
+                </form>
+            </div>
         </div>
     </div>
-</div>
+
+    <div id="testMailModal" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Sending Test Mail</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="{{ route('email.sendTestMail') }}" method="POST">
+                    <div class="modal-body">
+                        @csrf
+                        <input type="hidden" name="id">
+                        <div class="form-group row">
+                            <div class="col-md-2">
+                                <label class="fw-bold">To</label>
+                            </div>
+                            <div class="col-md-10">
+                                <input type="text" name="email" class="form-control" placeholder="Email Address">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success">Send</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @push('script')
     <script>
         "use strict";
-        (function ($) {
+        (function($) {
             var method = $('select[name=email_method]').val();
             config(method);
             $('select[name=email_method]').on('change', function() {
                 config($(this).val());
             });
 
-            function config(method){
+            function config(method) {
                 $('.configForm').hide('300');
                 $('.configForm').html('');
 
-                if(method=='smtp'){
+                if (method == 'smtp') {
                     $(`#sendgrid`).html('');
                     $(`#mailjet`).html('');
                     $(`#${method}`).html(`<h4 class="border-bottom pb-2 mb-4">@lang('Configuration')</h4>
@@ -91,9 +128,18 @@
                                 <div class="col-md-10">
                                     <select class="form-select" name="enc" id="enc">
                                         <option null selected>@lang('Select one')</option>
-                                        <option value="ssl" {{ @$general_setting->mail_config->enc == 'ssl'?'selected':'' }}>@lang('SSL')</option>
-                                        <option value="tls" {{ @$general_setting->mail_config->enc == 'tls'?'selected':'' }}>@lang('TLS')</option>
+                                        <option value="ssl" {{ @$general_setting->mail_config->enc == 'ssl' ? 'selected' : '' }}>@lang('SSL')</option>
+                                        <option value="tls" {{ @$general_setting->mail_config->enc == 'tls' ? 'selected' : '' }}>@lang('TLS')</option>
                                     </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <div class="col-md-2">
+                                    <label class="font-weight-bold">@lang('Mail From Name')</label>
+                                </div>
+                                <div class="col-md-10">
+                                    <input type="text" class="form-control" placeholder="@lang('Mail From Name')" name="mail_name" value="{{ $general_setting->mail_config->mail_name ?? '' }}" required/>
                                 </div>
                             </div>
 
@@ -117,7 +163,7 @@
 
                 }
 
-                if(method=='sendgrid'){
+                if (method == 'sendgrid') {
                     $(`#smtp`).html('');
                     $(`#mailjet`).html('');
                     $(`#${method}`).removeClass('d-none');
@@ -133,7 +179,7 @@
                                         `);
                     $(`#${method}`).removeClass('d-none').hide().show(300);
                 }
-                if(method=='mailjet'){
+                if (method == 'mailjet') {
                     $(`#smtp`).html('');
                     $(`#sendgrid`).html('');
 
@@ -154,8 +200,7 @@
                                                     <div class="col-md-10">
                                                         <input type="text" class="form-control" placeholder="@lang('Mailjet API SECRET KEY')" name="secret_key" value="{{ $general_setting->mail_config->secret_key ?? '' }}" required/>
                                                     </div>
-                                                </div>`
-                                            );
+                                                </div>`);
 
                     $(`#${method}`).removeClass('d-none').hide().show(300);
                 }

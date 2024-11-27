@@ -99,7 +99,8 @@
                         </div>
 
                         <div class="col-md-4 col-12">
-                            <a href="" class="btn btn-primary mt-3">Send Email to Supplier</a>
+                            <a href="/email/inquiry/{{ $inquiry->id }}" class="btn btn-primary mt-3">Send Email to
+                                Supplier</a>
                         </div>
 
                         <!-- Product Repeater -->
