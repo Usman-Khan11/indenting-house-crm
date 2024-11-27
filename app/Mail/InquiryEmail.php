@@ -22,7 +22,7 @@ class InquiryEmail extends Mailable
             ->view('email.templates.inquiry')
             ->with('data', $this->data);
 
-        if (!empty($this->data['bcc'])) {
+        if (isset($this->data['bcc']) && !empty($this->data['bcc'])) {
             $email->bcc($this->data['bcc']);
         }
 
