@@ -32,7 +32,7 @@ class UserController extends Controller
 
         if ($request->ajax()) {
             $query = User::Query();
-            $query = $query->where('id', '!=', 1);
+            // $query = $query->where('id', '!=', 1);
             $query = $query->with('role');
             $query = $query->latest()->get();
             return DataTables::of($query)->addIndexColumn()->make(true);
@@ -66,7 +66,7 @@ class UserController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
+            'email' => 'required|string|email|max:255',
             'phone' => 'nullable|string|max:255',
             'address' => 'nullable|string|max:255',
             'designation' => 'nullable|string|max:255',
@@ -96,7 +96,7 @@ class UserController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users,email,' . $request->id,
+            'email' => 'required|string|email|max:255',
             'phone' => 'nullable|string|max:255',
             'address' => 'nullable|string|max:255',
             'designation' => 'nullable|string|max:255',
