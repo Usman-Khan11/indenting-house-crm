@@ -24,6 +24,12 @@
                     <i class="menu-icon tf-icons ti ti-users"></i>
                     Users
                 </a>
+                &nbsp;
+                <a href="{{ route('email.history') }}"
+                    class="btn btn-label-info waves-effect {{ menuActive('email.history') }}">
+                    <i class="menu-icon tf-icons ti ti-mail"></i>
+                    Email History
+                </a>
             </div>
         @endif
 
