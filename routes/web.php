@@ -206,6 +206,8 @@ Route::middleware('auth')->group(function () {
     // Email Setting
     Route::get('email/setting', [EmailController::class, 'emailSetting'])->name('email.setting');
     Route::post('email/setting', [EmailController::class, 'emailSettingUpdate'])->name('email.setting');
+    Route::get('email/history', [EmailController::class, 'emailHistory'])->name('email.history');
+    Route::get('email/history/{id}', [EmailController::class, 'emailHistoryView'])->name('email.history.view');
     Route::post('email/send-test-mail', [EmailController::class, 'sendTestMail'])->name('email.sendTestMail');
     Route::get('email/inquiry/{id}', [EmailController::class, 'emailInquiry'])->name('email.inquiry');
 

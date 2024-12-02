@@ -6,8 +6,10 @@ use App\Models\GeneralSetting;
 use Illuminate\Http\Request;
 use App\Mail\InquiryEmail;
 use App\Mail\TestMail;
+use App\Models\EmailHistory;
 use App\Models\Inquiry;
 use Illuminate\Support\Facades\Mail;
+use Yajra\DataTables\Facades\DataTables;
 
 class EmailController extends Controller
 {
@@ -75,6 +77,28 @@ class EmailController extends Controller
         return redirect()->route('email.setting')->withSuccess('Email configuration has been updated.');
     }
 
+    public function emailHistory(Request $request)
+    {
+        $data['page_title'] = 'Email History';
+
+        if ($request->ajax()) {
+            $query = EmailHistory::Query();
+            $query = $query->with('user');
+            $query = $query->latest()->get();
+            return DataTables::of($query)->addIndexColumn()->make(true);
+        }
+
+        return view('email.email_history', $data);
+    }
+
+    public function emailHistoryView($id)
+    {
+        $data['page_title'] = 'Email History View';
+        $data['email_history'] = EmailHistory::where('id', $id)->first();
+
+        return view('email.email_history_view', $data);
+    }
+
     public function sendTestMail(Request $request)
     {
         $request->validate([
@@ -107,11 +131,16 @@ class EmailController extends Controller
             $data['inquiry']->supplier->email_3 ?? null,
         ]);
 
-        $data['bcc'] = auth()->user()->email;
+        // $data['bcc'] = auth()->user()->email;
 
         try {
             $data['subject'] = "Inquiry " . $data['inquiry']->inq_no . " Details";
             Mail::to($recipients)->queue(new InquiryEmail($data));
+
+            $email_history = new EmailHistory();
+            $email_history->user_id = auth()->user()->id;
+            $email_history->content = view('email.templates.inquiry', ['data' => $data]);
+            $email_history->save();
         } catch (\Exception $exp) {
             return back()->withError('Email not sent.');
         }
