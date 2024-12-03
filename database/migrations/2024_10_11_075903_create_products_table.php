@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('name', 255);
             $table->text('description')->nullable();
+            $table->string('code', 255)->nullable();
             $table->string('hs_code', 100)->nullable();
             $table->string('unit', 100)->nullable();
             $table->string('type', 30)->nullable();
