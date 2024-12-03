@@ -59,4 +59,10 @@
             @endforeach
         </select>
     </div>
+
+    <div class="col-md-4 mb-3">
+        <label class="form-label">Item Code</label>
+        <input type="text" name="product_code[]" value="{{ $product_code }}" class="form-control product_code"
+            readonly>
+    </div>
 </div>

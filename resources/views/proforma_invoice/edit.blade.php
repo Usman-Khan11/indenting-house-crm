@@ -266,6 +266,7 @@
                                         'product_size_id' => old('product_size_id')[$k] ?? ($v->size_id ?? ''),
                                         'product_artwork_id' =>
                                             old('product_artwork_id')[$k] ?? ($v->artwork_id ?? ''),
+                                        'product_code' => old('product_code')[$k] ?? (@$v->item->code ?? ''),
                                         'products' => $products,
                                         'sizes' => $sizes,
                                         'artworks' => $artworks,
@@ -279,6 +280,7 @@
                                         'product_total' => '',
                                         'product_size_id' => '',
                                         'product_artwork_id' => '',
+                                        'product_code' => '',
                                         'products' => $products,
                                         'sizes' => $sizes,
                                         'artworks' => $artworks,

@@ -48,6 +48,9 @@
                         render: function(data, type, full, meta) {
                             let button = '';
                             button +=
+                                `<a href="/proforma-invoice/view/${full.id}?letter_head=true" target="_blank" class="btn btn-primary btn-xs">Letter Head</a> `;
+
+                            button +=
                                 `<a href="/proforma-invoice/view/${full.id}" target="_blank" class="btn btn-info btn-xs">View</a> `;
                             button +=
                                 `<a href="/proforma-invoice/edit/${full.id}" class="btn btn-warning btn-xs">Edit</a> `;

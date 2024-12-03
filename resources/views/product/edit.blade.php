@@ -64,6 +64,14 @@
                             </div>
                         </div>
 
+                        <div class="col-md-4 col-12">
+                            <div class="mb-3">
+                                <label class="form-label">Item Code</label>
+                                <input name="code" type="text" class="form-control"
+                                    value="{{ old('code', $product->code) }}" placeholder="Item Code" />
+                            </div>
+                        </div>
+
                         <div class="col-md-12 col-12 mt-3">
                             <button type="submit" class="btn btn-primary">Save</button>
                         </div>

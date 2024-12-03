@@ -56,11 +56,33 @@
         .border-dark {
             border-color: black !important;
         }
+
+        .newpage {
+            page-break-before: always;
+        }
+
+        .newpage:last-child {
+            page-break-after: auto;
+        }
+
+        @media print {
+
+            .content-block,
+            p {
+                page-break-inside: avoid;
+            }
+        }
     </style>
 @endpush
 
 @section('content')
     <div class="w-100">
+        @if (isset($_GET['letter_head']))
+            <div>
+                <img src="{{ asset('assets/img/proforma-logo.jpg') }}" width="100%" alt="Logo">
+            </div>
+        @endif
+
         <div class="invoice-print p-4">
             {{-- <div class="d-flex justify-content-between flex-row">
                 <div class="mb-4">
@@ -176,6 +198,8 @@
                                     <td>
                                         <h6 class="mb-1">{{ @$v->item->name }}</h6>
                                         <small class="d-block">{{ @$v->item->description }}</small>
+                                        <small><b>Item Code:</b> {{ @$v->item->code }}</small> <br />
+                                        <small><b>Size:</b> {{ @$v->size->name }}</small> <br />
                                         <small><b>HS Code:</b> {{ @$v->item->hs_code }}</small>
                                     </td>
                                     <td class="text-center">

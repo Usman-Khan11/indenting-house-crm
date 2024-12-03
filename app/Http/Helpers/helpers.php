@@ -148,7 +148,7 @@ function currency()
     $data = [
         "$" => "USD",
         "¥" => "CNY",
-        "₨" => "PKR",
+        "RS" => "PKR",
         "C$" => "CAD",
         "A$" => "AUD",
         "₹" => "IND"

@@ -176,9 +176,11 @@
                 }, function(res) {
                     if (res) {
                         $(e).parent().parent().parent().find(".product_unit").val(res.unit);
+                        $(e).parent().parent().parent().find(".product_code").val(res.code);
                         $(e).parent().parent().parent().find(".product_description").val(res.description);
                     } else {
                         $(e).parent().parent().parent().find(".product_unit").val(null);
+                        $(e).parent().parent().parent().find(".product_code").val(null);
                         $(e).parent().parent().parent().find(".product_description").val(null);
                     }
 
