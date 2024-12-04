@@ -109,7 +109,18 @@ class ProductController extends Controller
             'code' => 'nullable|string|max:255',
         ]);
 
+        $new_id = $request->new_id;
         $product = Product::find($request->id);
+
+        if ($new_id != $request->id) {
+            $chk = Product::where('id', $new_id)->count();
+            if ($chk > 0) {
+                return back()->withError('The ID is already in use. Please choose a different ID.');
+            }
+
+            $product->id = $new_id;
+        }
+
         $product->name = $request->name;
         $product->description = $request->description;
         $product->hs_code = $request->hs_code;

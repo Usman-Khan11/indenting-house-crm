@@ -12,7 +12,7 @@
                 </div>
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-md-6 col-12">
+                        <div class="col-md-12 col-12">
                             <div class="mb-3">
                                 <label class="form-label">Name*</label>
                                 <input name="name" type="text" class="form-control" value="{{ old('name') }}"
@@ -20,7 +20,7 @@
                             </div>
                         </div>
 
-                        <div class="col-md-6 col-12">
+                        <div class="col-md-8 col-12">
                             <div class="mb-3">
                                 <label class="form-label">Description</label>
                                 <textarea name="description" class="form-control" placeholder="Description">{{ old('description') }}</textarea>

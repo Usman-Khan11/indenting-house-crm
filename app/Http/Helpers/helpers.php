@@ -163,6 +163,7 @@ function portOfShipment()
         'Chinese Sea Port' => 'Chinese Sea Port',
         'Chinese Airport' => 'Chinese Airport',
         'Shanghai Sea Port' => 'Shanghai Sea Port',
+        'Shanghai Air Port' => 'Shanghai Air Port',
         'Nhava Sheva Sea Port' => 'Nhava Sheva Sea Port',
         'Shenzen Sea Port' => 'Shenzen Sea Port',
         'Ningbo Sea Port' => 'Ningbo Sea Port',

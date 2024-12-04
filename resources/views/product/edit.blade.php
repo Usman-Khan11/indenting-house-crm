@@ -13,11 +13,20 @@
                 </div>
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-12">
+                        {{-- <div class="col-3">
                             <h5><b>Material ID: </b> {{ $product->id }}</h5>
+                        </div> --}}
+
+                        <div class="col-md-3 col-12">
+                            <div class="mb-3">
+                                <label class="form-label">Material ID*</label>
+                                <input name="new_id" type="number" class="form-control"
+                                    value="{{ old('new_id', $product->id) }}" placeholder="ID*"
+                                    @if (auth()->user()->role_id != 1) readonly @endif />
+                            </div>
                         </div>
 
-                        <div class="col-md-6 col-12">
+                        <div class="col-md-12 col-12">
                             <div class="mb-3">
                                 <label class="form-label">Name*</label>
                                 <input name="name" type="text" class="form-control"
@@ -25,7 +34,7 @@
                             </div>
                         </div>
 
-                        <div class="col-md-6 col-12">
+                        <div class="col-md-8 col-12">
                             <div class="mb-3">
                                 <label class="form-label">Description</label>
                                 <textarea name="description" class="form-control" placeholder="Description">{{ old('description', $product->description) }}</textarea>

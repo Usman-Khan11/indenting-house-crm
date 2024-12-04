@@ -125,7 +125,7 @@
                                         <h5 class="mb-0">
                                             <b>PI No.</b> {{ @$proforma_invoice->pi_no }}
                                             @if ($proforma_invoice->revised)
-                                                <small>(Revised)</small>
+                                                <small>(REVISED)</small>
                                             @endif
                                         </h5>
                                     </td>
@@ -196,11 +196,11 @@
                                 <tr>
                                     <td class="text-center">{{ $k + 1 }}</td>
                                     <td>
-                                        <h6 class="mb-1">{{ @$v->item->name }}</h6>
+                                        <h6 class="mb-1 d-inline-block">{{ @$v->item->name }}</h6>
+                                        <small><b>Item Code:</b> {{ @$v->item->code }}</small>
                                         <small class="d-block">{{ @$v->item->description }}</small>
-                                        <small><b>Item Code:</b> {{ @$v->item->code }}</small> <br />
-                                        <small><b>Size:</b> {{ @$v->size->name }}</small> <br />
-                                        <small><b>HS Code:</b> {{ @$v->item->hs_code }}</small>
+                                        <small><b>HS Code:</b> {{ @$v->item->hs_code }}</small> <br />
+                                        <small><b>Width:</b> {{ @$v->size->name }}</small>
                                     </td>
                                     <td class="text-center">
                                         {{ number_format($v->qty) }}
