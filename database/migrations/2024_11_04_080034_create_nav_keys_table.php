@@ -47,6 +47,12 @@ return new class extends Migration
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
+            [
+                'nav_id' => 1,
+                'key' => 'map',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
             // Customers
             [
                 'nav_id' => 2,
