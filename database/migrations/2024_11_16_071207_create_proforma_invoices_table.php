@@ -26,8 +26,10 @@ return new class extends Migration
             $table->string('trans_shipment', 100)->nullable();
             $table->string('packing', 100)->nullable();
             $table->string('shipment', 100)->nullable();
+            $table->string('shipment_text', 255)->nullable();
             $table->string('shipping_type', 100)->nullable();
             $table->string('payment', 100)->nullable();
+            $table->string('payment_text', 255)->nullable();
             $table->string('last_date_of_shipment', 15)->nullable();
             $table->string('date_of_negotiation', 15)->nullable();
             $table->string('origin', 100)->nullable();
