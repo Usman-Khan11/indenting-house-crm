@@ -296,7 +296,10 @@
                                         <h6 class="mb-0"><b>Payment:</b></h6>
                                     </td>
                                     <td width="15%">
-                                        <p class="m-0">{{ $proforma_invoice->payment }}</p>
+                                        <p class="m-0">
+                                            {{ $proforma_invoice->payment }}
+                                            {{ $proforma_invoice->payment_text }}
+                                        </p>
                                     </td>
                                 </tr>
                                 <tr>
@@ -310,7 +313,10 @@
                                         <h6 class="mb-0"><b>Shipment:</b></h6>
                                     </td>
                                     <td width="15%">
-                                        <p class="m-0">{{ $proforma_invoice->shipment }}</p>
+                                        <p class="m-0">
+                                            {{ $proforma_invoice->shipment }}
+                                            {{ $proforma_invoice->shipment_text }}
+                                        </p>
                                     </td>
                                     <td width="18.33%">
                                         <h6 class="mb-0"><b>Origin:</b></h6>
