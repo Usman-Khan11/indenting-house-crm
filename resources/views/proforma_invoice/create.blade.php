@@ -23,7 +23,7 @@
                             <div class="mb-3">
                                 <label class="form-label">Date</label>
                                 <input type="date" required name="date" value="{{ old('date', date('Y-m-d')) }}"
-                                    class="form-control date" placeholder="Date" onchange="indentDates(this)" />
+                                    class="form-control date" placeholder="Date" onchange="PIDates(this)" />
                             </div>
                         </div>
 
@@ -92,7 +92,7 @@
                             </div>
                         </div>
 
-                        <div class="col-md-4 col-12">
+                        <div class="col-md-2 col-12">
                             <div class="mb-3">
                                 <label class="form-label">Trans Shipment</label>
                                 <select name="trans_shipment" class="form-select trans_shipment">
@@ -104,7 +104,7 @@
                             </div>
                         </div>
 
-                        <div class="col-md-4 col-12">
+                        <div class="col-md-3 col-12">
                             <div class="mb-3">
                                 <label class="form-label">Packing</label>
                                 <select name="packing" class="form-select packing">
@@ -116,7 +116,7 @@
                             </div>
                         </div>
 
-                        <div class="col-md-4 col-12">
+                        <div class="col-md-2 col-12">
                             <div class="mb-3">
                                 <label class="form-label">Shipment</label>
                                 <select name="shipment" class="form-select shipment">
@@ -126,6 +126,12 @@
                                     @endforeach
                                 </select>
                             </div>
+                        </div>
+
+                        <div class="col-md-4 col-12">
+                            <label class="form-label">Shipment Text</label>
+                            <input type="text" name="shipment_text" value="{{ old('shipment_text') }}"
+                                class="form-control shipment_text" placeholder="Shipment Text" />
                         </div>
 
                         <div class="col-md-2 col-12">
@@ -154,7 +160,7 @@
                         </div>
 
                         <div class="col-md-2 col-12">
-                            <div class="form-check mb-3">
+                            <div class="form-check mb-3 mt-3">
                                 <input class="form-check-input" type="checkbox" value="1" id="revised"
                                     name="revised">
                                 <label class="form-check-label" for="revised">
@@ -197,6 +203,12 @@
                                     @endforeach
                                 </select>
                             </div>
+                        </div>
+
+                        <div class="col-md-4 col-12">
+                            <label class="form-label">Payment Text</label>
+                            <input type="text" name="payment_text" value="{{ old('payment_text') }}"
+                                class="form-control payment_text" placeholder="Payment Text" />
                         </div>
 
                         <div class="col-md-2 col-12">
@@ -297,6 +309,35 @@
     <script>
         $(document).ready(function() {
             $('.date').change();
+            //     $('.date').change(function() {
+            //         let date = $(this).val();
+
+            //         const validityDate = new Date(date);
+            //         validityDate.setMonth(validityDate.getMonth() + 1);
+
+            //         const formatDate = (date) => date.toISOString().split('T')[0];
+
+            //         $(".validity").val(formatDate(validityDate));
+            //     });
         })
+
+        function PIDates(e) {
+            let date = new Date($(e).val());
+
+            const validityDate = new Date(date);
+            validityDate.setMonth(validityDate.getMonth() + 1);
+
+            const lastShipmentDate = new Date(validityDate);
+            lastShipmentDate.setMonth(lastShipmentDate.getMonth() + 1);
+
+            const negotiationDate = new Date(lastShipmentDate);
+            negotiationDate.setDate(negotiationDate.getDate() + 15);
+
+            const formatDate = (date) => date.toISOString().split('T')[0];
+
+            $(".validity").val(formatDate(validityDate));
+            $(".last_date_of_shipment").val(formatDate(lastShipmentDate));
+            $(".date_of_negotiation").val(formatDate(negotiationDate));
+        }
     </script>
 @endpush

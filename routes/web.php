@@ -97,6 +97,8 @@ Route::middleware('auth')->group(function () {
     Route::get('product/delete/{id}', [ProductController::class, 'delete'])->name('product.delete');
     Route::post('product/store', [ProductController::class, 'store'])->name('product.store');
     Route::post('product/update', [ProductController::class, 'update'])->name('product.update');
+    Route::get('product/map', [ProductController::class, 'map'])->name('product.map');
+    Route::post('product/map', [ProductController::class, 'map_product'])->name('product.map_product');
 
     // Services
     Route::get('services', [ServiceController::class, 'index'])->name('service');

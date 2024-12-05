@@ -28,12 +28,36 @@
             </a>
         </li>
 
-        @if (checkSidebar($role_id, 1, 'view'))
-            <li class="menu-item {{ menuActive('product*') }}">
+        @if (checkSidebar($role_id, 1, 'view') || checkSidebar($role_id, 1, 'map'))
+            {{-- <li class="menu-item {{ menuActive('product*') }}">
                 <a href="{{ route('product') }}" class="menu-link">
                     <i class="menu-icon tf-icons ti ti-stack"></i>
                     <div data-i18n="Materials">Materials</div>
                 </a>
+            </li> --}}
+
+            <li class="menu-item {{ menuActive('product*', 2) }}">
+                <a href="javascript:void(0);" class="menu-link menu-toggle">
+                    <i class="menu-icon tf-icons ti ti-stack"></i>
+                    <div data-i18n="Materials">Materials</div>
+                </a>
+                <ul class="menu-sub">
+                    @if (checkSidebar($role_id, 1, 'view'))
+                        <li class="menu-item {{ menuActive('product*') }}">
+                            <a href="{{ route('product') }}" class="menu-link">
+                                <div data-i18n="Lists">Lists</div>
+                            </a>
+                        </li>
+                    @endif
+
+                    @if (checkSidebar($role_id, 1, 'map'))
+                        <li class="menu-item">
+                            <a href="{{ route('product.map') }}" class="menu-link">
+                                <div data-i18n="Map">Map</div>
+                            </a>
+                        </li>
+                    @endif
+                </ul>
             </li>
         @endif
 

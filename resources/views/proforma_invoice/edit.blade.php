@@ -17,7 +17,7 @@
                             <div class="mb-3">
                                 <label class="form-label">PI #</label>
                                 <input type="text" name="pi_no" value="{{ $proforma_invoice->pi_no }}"
-                                    class="form-control" @if (auth()->user()->id != 1) readonly @endif />
+                                    class="form-control" @if (auth()->user()->role_id != 1) readonly @endif />
                             </div>
                         </div>
 
@@ -95,7 +95,7 @@
                             </div>
                         </div>
 
-                        <div class="col-md-4 col-12">
+                        <div class="col-md-2 col-12">
                             <div class="mb-3">
                                 <label class="form-label">Trans Shipment</label>
                                 <select name="trans_shipment" class="form-select trans_shipment">
@@ -107,7 +107,7 @@
                             </div>
                         </div>
 
-                        <div class="col-md-4 col-12">
+                        <div class="col-md-3 col-12">
                             <div class="mb-3">
                                 <label class="form-label">Packing</label>
                                 <select name="packing" class="form-select packing">
@@ -119,7 +119,7 @@
                             </div>
                         </div>
 
-                        <div class="col-md-4 col-12">
+                        <div class="col-md-2 col-12">
                             <div class="mb-3">
                                 <label class="form-label">Shipment</label>
                                 <select name="shipment" class="form-select shipment">
@@ -129,6 +129,13 @@
                                     @endforeach
                                 </select>
                             </div>
+                        </div>
+
+                        <div class="col-md-4 col-12">
+                            <label class="form-label">Shipment Text</label>
+                            <input type="text" name="shipment_text"
+                                value="{{ old('shipment_text', $proforma_invoice->shipment_text) }}"
+                                class="form-control shipment_text" placeholder="Shipment Text" />
                         </div>
 
                         <div class="col-md-2 col-12">
@@ -202,6 +209,13 @@
                                     @endforeach
                                 </select>
                             </div>
+                        </div>
+
+                        <div class="col-md-4 col-12">
+                            <label class="form-label">Payment Text</label>
+                            <input type="text" name="payment_text"
+                                value="{{ old('payment_text', $proforma_invoice->payment_text) }}"
+                                class="form-control payment_text" placeholder="Payment Text" />
                         </div>
 
                         <div class="col-md-2 col-12">

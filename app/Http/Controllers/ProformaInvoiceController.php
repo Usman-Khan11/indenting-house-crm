@@ -120,8 +120,10 @@ class ProformaInvoiceController extends Controller
             'trans_shipment' => 'nullable|string|max:100',
             'packing' => 'nullable|string|max:100',
             'shipment' => 'nullable|string|max:100',
+            'shipment_text' => 'nullable|string|max:255',
             'shipping_type' => 'nullable|string|max:100',
             'payment' => 'nullable|string|max:100',
+            'payment_text' => 'nullable|string|max:255',
             'last_date_of_shipment' => 'nullable|string|max:15',
             'date_of_negotiation' => 'nullable|string|max:15',
             'origin' => 'nullable|string|max:100',
@@ -144,8 +146,10 @@ class ProformaInvoiceController extends Controller
         $pi->trans_shipment = $request->trans_shipment;
         $pi->packing = $request->packing;
         $pi->shipment = $request->shipment;
+        $pi->shipment_text = $request->shipment_text;
         $pi->shipping_type = $request->shipping_type;
         $pi->payment = $request->payment;
+        $pi->payment_text = $request->payment_text;
         $pi->last_date_of_shipment = $request->last_date_of_shipment;
         $pi->date_of_negotiation = $request->date_of_negotiation;
         $pi->origin = $request->origin;
@@ -198,8 +202,10 @@ class ProformaInvoiceController extends Controller
             'trans_shipment' => 'nullable|string|max:100',
             'packing' => 'nullable|string|max:100',
             'shipment' => 'nullable|string|max:100',
+            'shipment_text' => 'nullable|string|max:255',
             'shipping_type' => 'nullable|string|max:100',
             'payment' => 'nullable|string|max:100',
+            'payment_text' => 'nullable|string|max:255',
             'last_date_of_shipment' => 'nullable|string|max:15',
             'date_of_negotiation' => 'nullable|string|max:15',
             'origin' => 'nullable|string|max:100',
@@ -222,8 +228,10 @@ class ProformaInvoiceController extends Controller
         $pi->trans_shipment = $request->trans_shipment;
         $pi->packing = $request->packing;
         $pi->shipment = $request->shipment;
+        $pi->shipment_text = $request->shipment_text;
         $pi->shipping_type = $request->shipping_type;
         $pi->payment = $request->payment;
+        $pi->payment_text = $request->payment_text;
         $pi->last_date_of_shipment = $request->last_date_of_shipment;
         $pi->date_of_negotiation = $request->date_of_negotiation;
         $pi->origin = $request->origin;

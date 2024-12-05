@@ -137,6 +137,7 @@ function paymentTerms()
         'DA 60 Days' => 'DA 60 Days',
         'DA 90 Days' => 'DA 90 Days',
         'DA 120 Days' => 'DA 120 Days',
+        'LC 45 Days' => 'LC 45 Days',
         'LC 120 Days' => 'LC 120 Days'
     ];
 

@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Customer;
+use App\Models\CustomerProducts;
 use App\Models\Product;
+use App\Models\Supplier;
+use App\Models\SupplierProducts;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -72,6 +76,23 @@ class ProductController extends Controller
         return back()->withSuccess('Material deleted successfully.');
     }
 
+    public function map(Request $request)
+    {
+        $data['page_title'] = "Map Material";
+        $this->checkPermissions('map');
+
+        if (isset($request->id) && !empty($request->id)) {
+            $arr["supplier_products"] = SupplierProducts::where('product_id', $request->id)->get();
+            $arr["customer_products"] = CustomerProducts::where('product_id', $request->id)->get();
+            return $arr;
+        }
+
+        $data['suppliers'] = Supplier::orderBy("name")->get();
+        $data['customers'] = Customer::orderBy("name")->get();
+        $data['products'] = Product::orderBy("name")->get();
+        return view('product.map', $data);
+    }
+
     public function store(Request $request)
     {
         $request->validate([
@@ -133,5 +154,46 @@ class ProductController extends Controller
         }
 
         return back()->withError('Something went wrong.');
+    }
+
+    public function map_product(Request $request)
+    {
+        $request->validate([
+            // 'supplier_id' => 'required|exists:suppliers,id',
+            'supplier_id'   => 'nullable|array',
+            'supplier_id.*' => 'exists:suppliers,id',
+            'customer_id'   => 'nullable|array',
+            'customer_id.*' => 'exists:customers,id',
+            'products' => 'required|exists:products,id',
+            // 'products'      => 'required|array',
+            // 'products.*'    => 'exists:products,id',
+        ]);
+
+        $product_id = $request->products;
+        $supplier_id = $request->supplier_id;
+        $customer_id = $request->customer_id;
+
+        SupplierProducts::where('product_id', $product_id)->delete();
+        CustomerProducts::where('product_id', $product_id)->delete();
+
+        if ($supplier_id) {
+            foreach ($supplier_id as $key => $value) {
+                $supplier_product = new SupplierProducts();
+                $supplier_product->supplier_id = $value;
+                $supplier_product->product_id = $product_id;
+                $supplier_product->save();
+            }
+        }
+
+        if ($customer_id) {
+            foreach ($customer_id as $key => $value) {
+                $customer_product = new CustomerProducts();
+                $customer_product->customer_id = $value;
+                $customer_product->product_id = $product_id;
+                $customer_product->save();
+            }
+        }
+
+        return back()->withSuccess('Products mapped successfully.');
     }
 }
