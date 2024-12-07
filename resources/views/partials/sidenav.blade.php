@@ -61,8 +61,15 @@
             </li>
         @endif
 
-        @if (checkSidebar($role_id, 2, 'view') || checkSidebar($role_id, 2, 'map product'))
-            <li class="menu-item {{ menuActive('customer*', 2) }}">
+        @if (checkSidebar($role_id, 2, 'view') || checkSidebar($role_id, 2, 'map produc'))
+            <li class="menu-item {{ menuActive('customer*') }}">
+                <a href="{{ route('customer') }}" class="menu-link">
+                    <i class="menu-icon tf-icons ti ti-users"></i>
+                    <div data-i18n="Customers">Customers</div>
+                </a>
+            </li>
+
+            {{-- <li class="menu-item {{ menuActive('customer*', 2) }}">
                 <a href="javascript:void(0);" class="menu-link menu-toggle">
                     <i class="menu-icon tf-icons ti ti-users"></i>
                     <div data-i18n="Customers">Customers</div>
@@ -84,11 +91,18 @@
                         </li>
                     @endif
                 </ul>
-            </li>
+            </li> --}}
         @endif
 
-        @if (checkSidebar($role_id, 3, 'view') || checkSidebar($role_id, 3, 'map product'))
-            <li class="menu-item {{ menuActive('supplier*', 2) }}">
+        @if (checkSidebar($role_id, 3, 'view') || checkSidebar($role_id, 3, 'map produc'))
+            <li class="menu-item {{ menuActive('supplier*') }}">
+                <a href="{{ route('supplier') }}" class="menu-link">
+                    <i class="menu-icon tf-icons ti ti-users"></i>
+                    <div data-i18n="Suppliers">Suppliers</div>
+                </a>
+            </li>
+
+            {{-- <li class="menu-item {{ menuActive('supplier*', 2) }}">
                 <a href="javascript:void(0);" class="menu-link menu-toggle">
                     <i class="menu-icon tf-icons ti ti-users"></i>
                     <div data-i18n="Suppliers">Suppliers</div>
@@ -110,7 +124,7 @@
                         </li>
                     @endif
                 </ul>
-            </li>
+            </li> --}}
         @endif
 
         @if (checkSidebar($role_id, 4, 'view'))
