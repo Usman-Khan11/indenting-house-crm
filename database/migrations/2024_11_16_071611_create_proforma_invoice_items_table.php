@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('total', 40);
             $table->integer('size_id')->nullable()->default(0);
             $table->integer('artwork_id')->nullable()->default(0);
+            $table->text('remark')->nullable();
             $table->timestamps();
         });
     }

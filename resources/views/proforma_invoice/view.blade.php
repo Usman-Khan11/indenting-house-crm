@@ -175,13 +175,14 @@
                     <table class="table table-sm text-wrap w-100 table-bordered border-dark">
                         <thead>
                             <tr>
-                                <th colspan="5">
+                                <th colspan="6">
                                     <h5 class="mb-0 fw-bolder">Product Appendix</h5>
                                 </th>
                             </tr>
                             <tr>
                                 <th>S.#</th>
                                 <th>Description</th>
+                                <th>Remarks</th>
                                 <th>Qty</th>
                                 <th>Rate</th>
                                 <th>Total</th>
@@ -197,10 +198,15 @@
                                     <td class="text-center">{{ $k + 1 }}</td>
                                     <td>
                                         <h6 class="mb-1 d-inline-block">{{ @$v->item->name }}</h6>
-                                        <small><b>Item Code:</b> {{ @$v->item->code }}</small>
+                                        @if (!empty($v->item->code))
+                                            <small><b>Item Code:</b> {{ $v->item->code }}</small>
+                                        @endif
                                         <small class="d-block">{{ @$v->item->description }}</small>
-                                        <small><b>HS Code:</b> {{ @$v->item->hs_code }}</small> <br />
+                                        <small><b>HS Code:</b> {{ @$v->item->hs_code }}</small> &nbsp;
                                         <small><b>Width:</b> {{ @$v->size->name }}</small>
+                                    </td>
+                                    <td>
+                                        {{ @$v->remark }}
                                     </td>
                                     <td class="text-center">
                                         {{ number_format($v->qty) }}
@@ -222,7 +228,7 @@
                                 @endphp
                             @endforeach
                             <tr>
-                                <td colspan="2" class="text-end">
+                                <td colspan="3" class="text-end">
                                     <h5 class="mb-0">
                                         Total:
                                     </h5>

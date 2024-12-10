@@ -68,32 +68,26 @@
                     _token: '{{ csrf_token() }}',
                     id,
                 }, function(res) {
-                    $(".products").find("option:selected").attr("selected", false).trigger('change');
+                    $(".supplier_id, .customer_id").find("option").prop("selected", false);
+
                     if (res.supplier_products.length) {
-                        $(res.supplier_products).each(function(i, v) {
-                            $(".supplier_id").find(`option[value=${v.supplier_id}]`).attr(
-                                "selected",
-                                true).trigger('change');
-                        })
-                    } else {
-                        $(".supplier_id").find(`option`).attr("selected", false).trigger('change');
+                        res.supplier_products.forEach(v => {
+                            $(`.supplier_id option[value=${v.supplier_id}]`).prop("selected", true);
+                        });
                     }
 
                     if (res.customer_products.length) {
-                        $(res.customer_products).each(function(i, v) {
-                            $(".customer_id").find(`option[value=${v.customer_id}]`).attr(
-                                "selected",
-                                true).trigger('change');
-                        })
-                    } else {
-                        $(".customer_id").find(`option`).attr("selected", false).trigger('change');
+                        res.customer_products.forEach(v => {
+                            $(`.customer_id option[value=${v.customer_id}]`).prop("selected", true);
+                        });
                     }
 
+                    $(".supplier_id, .customer_id").trigger('change');
                     $(".loader").hide();
-                })
+                });
             } else {
                 $(".loader").hide();
             }
-        })
+        });
     </script>
 @endpush

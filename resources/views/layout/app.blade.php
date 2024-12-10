@@ -509,8 +509,12 @@
                     if (res) {
                         $("select.product").append(`<option title="" value=""></option>`);
                         $(res).each(function(i, v) {
+                            var id = (v.product) ? v.product.id : '';
+                            var name = (v.product) ? v.product.name : '';
+                            var description = (v.product) ? v.product.description : '';
+
                             $("select.product").append(
-                                `<option title="${v.product.description}" value="${v.product.id}">${v.product.name}</option>`
+                                `<option title="${description}" value="${id}">${name}</option>`
                             );
                         });
                         $(".loader").hide();
@@ -535,8 +539,12 @@
                     if (res) {
                         $("select.product").append(`<option title="" value=""></option>`);
                         $(res).each(function(i, v) {
+                            var id = (v.product) ? v.product.id : '';
+                            var name = (v.product) ? v.product.name : '';
+                            var description = (v.product) ? v.product.description : '';
+
                             $("select.product").append(
-                                `<option title="${v.product.description}" value="${v.product.id}">${v.product.name}</option>`
+                                `<option title="${description}" value="${id}">${name}</option>`
                             );
                         });
                         $(".loader").hide();

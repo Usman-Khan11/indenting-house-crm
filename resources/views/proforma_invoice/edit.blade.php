@@ -281,6 +281,9 @@
                                         'product_artwork_id' =>
                                             old('product_artwork_id')[$k] ?? ($v->artwork_id ?? ''),
                                         'product_code' => old('product_code')[$k] ?? (@$v->item->code ?? ''),
+                                        'product_description' =>
+                                            old('product_description')[$k] ?? (@$v->item->description ?? ''),
+                                        'product_remark' => old('product_remark')[$k] ?? (@$v->remark ?? ''),
                                         'products' => $products,
                                         'sizes' => $sizes,
                                         'artworks' => $artworks,
@@ -295,6 +298,8 @@
                                         'product_size_id' => '',
                                         'product_artwork_id' => '',
                                         'product_code' => '',
+                                        'product_description' => '',
+                                        'product_remark' => '',
                                         'products' => $products,
                                         'sizes' => $sizes,
                                         'artworks' => $artworks,

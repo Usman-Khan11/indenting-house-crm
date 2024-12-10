@@ -10,7 +10,7 @@
             <option selected disabled value="">Select Item</option>
             @foreach ($products as $product)
                 <option @if ($product_id == $product->id) selected @endif title="{{ $product->description }}"
-                    value="{{ $product->id }}">{{ $product->name }}</option>
+                    value="{{ $product->id }}">{{ $product->id }} -- {{ $product->name }}</option>
             @endforeach
         </select>
 
@@ -61,10 +61,15 @@
                 </select>
             </div>
 
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <label class="form-label">Item Code</label>
                 <input type="text" name="product_code[]" value="{{ $product_code }}"
                     class="form-control product_code" readonly>
+            </div>
+
+            <div class="col-md-4">
+                <label class="form-label">Remarks</label>
+                <textarea name="product_remark[]" class="form-control product_remark" rows="2">{{ $product_remark }}</textarea>
             </div>
 
             <div class="col mb-3 text-end">
@@ -76,6 +81,6 @@
 
     <div class="col-md-4">
         <label class="form-label">Item Desc.</label>
-        <textarea name="product_description[]" class="form-control product_description" rows="8" readonly></textarea>
+        <textarea name="product_description[]" class="form-control product_description" rows="8" readonly>{{ $product_description }}</textarea>
     </div>
 </div>

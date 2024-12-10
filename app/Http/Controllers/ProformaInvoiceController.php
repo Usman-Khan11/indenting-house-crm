@@ -174,6 +174,7 @@ class ProformaInvoiceController extends Controller
                 $pi_product->total = $request->product_total[$key] ?? 0;
                 $pi_product->size_id = $request->product_size_id[$key] ?? 0;
                 $pi_product->artwork_id = $request->product_artwork_id[$key] ?? 0;
+                $pi_product->remark = $request->product_remark[$key];
                 $pi_product->save();
             }
 
@@ -256,6 +257,7 @@ class ProformaInvoiceController extends Controller
                 $pi_product->total = $request->product_total[$key] ?? 0;
                 $pi_product->size_id = $request->product_size_id[$key] ?? 0;
                 $pi_product->artwork_id = $request->product_artwork_id[$key] ?? 0;
+                $pi_product->remark = $request->product_remark[$key];
                 $pi_product->save();
             }
 
