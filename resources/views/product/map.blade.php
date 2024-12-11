@@ -17,7 +17,12 @@
                                 <select name="products" class="form-select select2 products">
                                     <option value=""></option>
                                     @foreach ($products as $product)
-                                        <option value="{{ $product->id }}">{{ $product->name }}</option>
+                                        <option value="{{ $product->id }}">
+                                            {{ $product->id }} - {{ $product->name }}
+                                            @if (!empty($product->code))
+                                                ({{ $product->code }})
+                                            @endif
+                                        </option>
                                     @endforeach
                                 </select>
                             </div>
