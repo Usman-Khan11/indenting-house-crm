@@ -316,4 +316,6 @@
             </div>
         </form>
     </div>
+
+    @include('proforma_invoice.partials.search_modal')
 @endsection

@@ -234,6 +234,7 @@ Route::middleware('auth')->group(function () {
 
     // Proforma Invoice
     Route::get('proforma-invoices', [ProformaInvoiceController::class, 'index'])->name('proforma_invoice');
+    Route::get('proforma-invoice/search', [ProformaInvoiceController::class, 'search'])->name('proforma_invoice.search');
     Route::get('proforma-invoice/create', [ProformaInvoiceController::class, 'create'])->name('proforma_invoice.create');
     Route::get('proforma-invoice/edit/{id}', [ProformaInvoiceController::class, 'edit'])->name('proforma_invoice.edit');
     Route::get('proforma-invoice/view/{id}', [ProformaInvoiceController::class, 'view'])->name('proforma_invoice.view');
