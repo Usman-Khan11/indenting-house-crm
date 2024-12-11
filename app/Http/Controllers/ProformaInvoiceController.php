@@ -92,7 +92,7 @@ class ProformaInvoiceController extends Controller
         $this->checkPermissions('create');
 
         $data['customers'] = Customer::orderBy('name', 'asc')->get();
-        $data['suppliers'] = Supplier::orderBy('name', 'asc')->get();
+        $data['suppliers'] = Supplier::whereIn('id', [789])->orderBy('name', 'asc')->get();
         $data['products'] = Product::orderBy('name', 'asc')->get();
         $data['sizes'] = Size::orderBy('name', 'asc')->get();
         $data['artworks'] = Artwork::orderBy('artwork_no', 'desc')->get();
@@ -115,7 +115,7 @@ class ProformaInvoiceController extends Controller
         $this->checkPermissions('update');
 
         $data['customers'] = Customer::orderBy('name', 'asc')->get();
-        $data['suppliers'] = Supplier::orderBy('name', 'asc')->get();
+        $data['suppliers'] = Supplier::whereIn('id', [789])->orderBy('name', 'asc')->get();
         $data['products'] = Product::orderBy('name', 'asc')->get();
         $data['sizes'] = Size::orderBy('name', 'asc')->get();
         $data['artworks'] = Artwork::orderBy('artwork_no', 'desc')->get();
