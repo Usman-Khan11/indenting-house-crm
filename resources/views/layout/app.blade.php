@@ -575,7 +575,9 @@
                         res[group].forEach(({
                             product
                         }) => {
-                            text += `<option value="${product.id}">${product.name}</option>`;
+                            var id = (product) ? product.id : '';
+                            var name = (product) ? product.name : '';
+                            text += `<option value="${id}">${name}</option>`;
                         });
                         text += `</optgroup>`;
                     }
