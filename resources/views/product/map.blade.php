@@ -34,7 +34,8 @@
                                 <select name="supplier_id[]" class="form-select select2 supplier_id" multiple>
                                     {{-- <option value="" selected disabled>Select Supplier</option> --}}
                                     @foreach ($suppliers as $supplier)
-                                        <option value="{{ $supplier->id }}">{{ $supplier->name }}</option>
+                                        <option value="{{ $supplier->id }}">{{ $supplier->id }} - {{ $supplier->name }}
+                                        </option>
                                     @endforeach
                                 </select>
                             </div>
@@ -46,7 +47,8 @@
                                 <select name="customer_id[]" class="form-select select2 customer_id" multiple>
                                     {{-- <option value="" selected disabled>Select Customer</option> --}}
                                     @foreach ($customers as $customer)
-                                        <option value="{{ $customer->id }}">{{ $customer->name }}</option>
+                                        <option value="{{ $customer->id }}">{{ $customer->id }} - {{ $customer->name }}
+                                        </option>
                                     @endforeach
                                 </select>
                             </div>

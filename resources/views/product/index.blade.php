@@ -60,6 +60,10 @@
                     title: "hs code",
                 },
                 {
+                    data: "code",
+                    title: "item code",
+                },
+                {
                     data: "unit",
                     title: "unit",
                 },

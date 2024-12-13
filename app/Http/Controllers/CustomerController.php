@@ -33,7 +33,7 @@ class CustomerController extends Controller
 
         if ($request->ajax()) {
             $query = Customer::Query();
-            $query = $query->latest()->get();
+            $query = $query->orderBy('id', 'desc')->get();
             return Datatables::of($query)->addIndexColumn()->make(true);
         }
 

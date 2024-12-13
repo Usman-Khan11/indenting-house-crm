@@ -83,7 +83,8 @@
                             <div class="mb-3">
                                 <label class="form-label">Card No</label>
                                 <input name="card_no" type="text" value="{{ old('card_no', $card->card_no) }}"
-                                    class="form-control" placeholder="Card No" readonly />
+                                    class="form-control" placeholder="Card No"
+                                    @if (auth()->user()->role_id != 1) readonly @endif />
                             </div>
                         </div>
 
@@ -173,7 +174,7 @@
                                 <label class="form-label">Artwork No</label>
                                 <input name="artwork_no" type="text"
                                     value="{{ old('artwork_no', $artwork->artwork_no) }}" class="form-control"
-                                    placeholder="Artwork No" readonly />
+                                    placeholder="Artwork No" @if (auth()->user()->role_id != 1) readonly @endif />
                             </div>
                         </div>
 
