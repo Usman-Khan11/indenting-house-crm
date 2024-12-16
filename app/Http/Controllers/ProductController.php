@@ -34,8 +34,22 @@ class ProductController extends Controller
         $this->checkPermissions('view');
 
         if ($request->ajax()) {
-            $query = Product::Query();
-            $query = $query->orderBy('id', 'desc')->get();
+            $query = Product::query();
+
+            if (!empty($request->input('search')['value'])) {
+                $search = $request->input('search')['value'];
+                $query->where(function ($q) use ($search) {
+                    $q->where('id', 'like', "%{$search}%")
+                        ->orWhere('name', 'like', "%{$search}%")
+                        ->orWhere('description', 'like', "%{$search}%")
+                        ->orWhere('code', 'like', "%{$search}%")
+                        ->orWhere('hs_code', 'like', "%{$search}%")
+                        ->orWhere('unit', 'like', "%{$search}%")
+                        ->orWhere('type', 'like', "%{$search}%");
+                });
+            }
+
+            $query = $query->orderBy('id', 'desc');
             return DataTables::of($query)->addIndexColumn()->make(true);
         }
 
