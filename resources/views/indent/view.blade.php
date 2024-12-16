@@ -68,8 +68,8 @@
                         <img src="{{ asset(general()->logo) }}" width="150px" alt="Logo">
                     </div>
                     <!-- <p class="mb-1">Office 149, 450 South Brand Brooklyn</p>
-                            <p class="mb-1">San Diego County, CA 91905, USA</p>
-                            <p class="mb-0">+1 (123) 456 7891, +44 (876) 543 2198</p> -->
+                                <p class="mb-1">San Diego County, CA 91905, USA</p>
+                                <p class="mb-0">+1 (123) 456 7891, +44 (876) 543 2198</p> -->
                 </div>
                 <div class="col-6 col-lg-4">
                     <!-- <h4 class="fw-bold">INVOICE #86423</h4> -->
@@ -189,7 +189,7 @@
                                         <small><b>HS Code:</b> {{ @$v->item->hs_code }}</small>
                                     </td>
                                     <td class="text-center">
-                                        {{ number_format($v->qty) }}
+                                        {{ number_format($v->qty, 1) }}
                                         {{ @$v->unit }}
                                     </td>
                                     <td class="text-center">
@@ -215,7 +215,7 @@
                                 </td>
                                 <td class="text-center">
                                     <h6 class="fw-bold mb-0">
-                                        {{ number_format($qty) }}
+                                        {{ number_format($qty, 1) }}
                                     </h6>
                                 </td>
                                 <td></td>

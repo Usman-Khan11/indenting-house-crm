@@ -367,6 +367,7 @@ class ReportController extends Controller
                     'shipments.lot_no',
                     'shipments.customer_id',
                     'shipments.supplier_id',
+                    'shipments.final_remark',
                     'shipment_items.*',
                     'customers.name as customer_name',
                     'suppliers.name as supplier_name',

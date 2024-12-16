@@ -1,329 +1,333 @@
 @extends('layout.app')
 
 @section('content')
-<div class="container-xxl flex-grow-1 container-p-y">
-    <div class="card">
-        <div class="card-header">
-            <div class="row align-items-center">
-                <div class="col-6">
-                    <h4 class="card-title m-0">{{ $page_title }}</h4>
+    <div class="container-xxl flex-grow-1 container-p-y">
+        <div class="card">
+            <div class="card-header">
+                <div class="row align-items-center">
+                    <div class="col-6">
+                        <h4 class="card-title m-0">{{ $page_title }}</h4>
+                    </div>
                 </div>
+                <hr />
             </div>
-            <hr />
-        </div>
-        <div class="card-body">
-            <div class="row mb-1">
-                <div class="col-md-2 mb-2">
-                    <label class="form-label">From</label>
-                    <input type="date" id="from" class="form-control" value="{{ date('Y-m-d') }}">
-                </div>
+            <div class="card-body">
+                <div class="row mb-1">
+                    <div class="col-md-2 mb-2">
+                        <label class="form-label">From</label>
+                        <input type="date" id="from" class="form-control" value="{{ date('Y-m-d') }}">
+                    </div>
 
-                <div class="col-md-2 mb-2">
-                    <label class="form-label">To</label>
-                    <input type="date" id="to" class="form-control" value="{{ date('Y-m-d') }}">
-                </div>
+                    <div class="col-md-2 mb-2">
+                        <label class="form-label">To</label>
+                        <input type="date" id="to" class="form-control" value="{{ date('Y-m-d') }}">
+                    </div>
 
-                <div class="col-md-4 mb-2">
-                    <label class="form-label">Customers</label>
-                    <select id="customer_id" class="select2 form-select">
-                        <option value="">All</option>
-                        @foreach($customers as $customer)
-                        <option value="{{ $customer->id }}">{{ $customer->name }}</option>
-                        @endforeach
-                    </select>
-                </div>
+                    <div class="col-md-4 mb-2">
+                        <label class="form-label">Customers</label>
+                        <select id="customer_id" class="select2 form-select">
+                            <option value="">All</option>
+                            @foreach ($customers as $customer)
+                                <option value="{{ $customer->id }}">{{ $customer->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
 
-                <div class="col-md-4 mb-2">
-                    <label class="form-label">Suppliers</label>
-                    <select id="supplier_id" class="select2 form-select">
-                        <option value="">All</option>
-                        @foreach($suppliers as $supplier)
-                        <option value="{{ $supplier->id }}">{{ $supplier->name }}</option>
-                        @endforeach
-                    </select>
-                </div>
+                    <div class="col-md-4 mb-2">
+                        <label class="form-label">Suppliers</label>
+                        <select id="supplier_id" class="select2 form-select">
+                            <option value="">All</option>
+                            @foreach ($suppliers as $supplier)
+                                <option value="{{ $supplier->id }}">{{ $supplier->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
 
-                <div class="col-md-4 mb-2">
-                    <label class="form-label">Materials</label>
-                    <select id="product_id" class="select2 form-select">
-                        <option value="">All</option>
-                        @foreach($products as $product)
-                        <option value="{{ $product->id }}">{{ $product->name }}</option>
-                        @endforeach
-                    </select>
-                </div>
+                    <div class="col-md-4 mb-2">
+                        <label class="form-label">Materials</label>
+                        <select id="product_id" class="select2 form-select">
+                            <option value="">All</option>
+                            @foreach ($products as $product)
+                                <option value="{{ $product->id }}">{{ $product->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
 
-                <div class="col-md-4 mb-2 mt-4">
-                    <button type="button" class="btn btn-primary w-100 d-block" id="filter_btn">Filter Data</button>
+                    <div class="col-md-4 mb-2 mt-4">
+                        <button type="button" class="btn btn-primary w-100 d-block" id="filter_btn">Filter Data</button>
+                    </div>
                 </div>
-            </div>
-            <div class="responsive text-nowrap">
-                <table class="table table-bordered table-sm" id="my_table"></table>
+                <div class="responsive text-nowrap">
+                    <table class="table table-bordered table-sm" id="my_table"></table>
+                </div>
             </div>
         </div>
     </div>
-</div>
 @endsection
 
 @push('script')
-<script type="text/javascript">
-    $(document).ready(function() {
-        let title = 'MRI Shipment Report';
-        let filename = 'shipment-report';
+    <script type="text/javascript">
+        $(document).ready(function() {
+            let title = 'MRI Shipment Report';
+            let filename = 'shipment-report';
 
-        var datatable = $("#my_table").DataTable({
-            select: {
-                style: "api",
-            },
-            processing: true,
-            searching: false,
-            serverSide: true,
-            lengthChange: true,
-            ordering: false,
-            paging: false,
-            pageLength: '{{ general()->page_length }}',
-            scrollX: true,
-            ajax: {
-                url: "{{ route('report.shipment') }}",
-                type: "get",
-                data: function(d) {
-                    d.from = $("#from").val();
-                    d.to = $("#to").val();
-                    d.customer_id = $("#customer_id").val();
-                    d.supplier_id = $("#supplier_id").val();
-                    d.product_id = $("#product_id").val();
+            var datatable = $("#my_table").DataTable({
+                select: {
+                    style: "api",
                 },
-            },
-            columns: [{
-                    data: "shipment_no",
-                    title: "Ship #",
+                processing: true,
+                searching: false,
+                serverSide: true,
+                lengthChange: true,
+                ordering: false,
+                paging: false,
+                pageLength: '{{ general()->page_length }}',
+                scrollX: true,
+                ajax: {
+                    url: "{{ route('report.shipment') }}",
+                    type: "get",
+                    data: function(d) {
+                        d.from = $("#from").val();
+                        d.to = $("#to").val();
+                        d.customer_id = $("#customer_id").val();
+                        d.supplier_id = $("#supplier_id").val();
+                        d.product_id = $("#product_id").val();
+                    },
                 },
-                {
-                    title: 'Ship Date',
-                    "render": function(data, type, full, meta) {
-                        return getDate(full.shipment_date);
-                    }
-                },
-                {
-                    data: "indent_no",
-                    title: "Indent #",
-                },
-                {
-                    title: 'IND Date',
-                    "render": function(data, type, full, meta) {
-                        return getDate(full.indent_date);
-                    }
-                },
-                {
-                    data: "customer_name",
-                    title: "Customer",
-                },
-                {
-                    data: "supplier_name",
-                    title: "Supplier",
-                },
-                {
-                    data: "product_name",
-                    title: "Item Description",
-                    class: 'text-wrap',
-                    render: function(data, type, full, meta) {
-                        var p = `
+                columns: [{
+                        data: "shipment_no",
+                        title: "Ship #",
+                    },
+                    {
+                        title: 'Ship Date',
+                        "render": function(data, type, full, meta) {
+                            return getDate(full.shipment_date);
+                        }
+                    },
+                    {
+                        data: "indent_no",
+                        title: "Indent #",
+                    },
+                    {
+                        title: 'IND Date',
+                        "render": function(data, type, full, meta) {
+                            return getDate(full.indent_date);
+                        }
+                    },
+                    {
+                        data: "customer_name",
+                        title: "Customer",
+                    },
+                    {
+                        data: "supplier_name",
+                        title: "Supplier",
+                    },
+                    {
+                        data: "product_name",
+                        title: "Item Description",
+                        class: 'text-wrap',
+                        render: function(data, type, full, meta) {
+                            var p = `
                             <div><strong>${full.product_name}</strong></div>
                             <div><small>${full.product_description}</small></div>`;
 
-                        return p;
-                    }
-                },
-                {
-                    data: "qty",
-                    title: "Qty",
-                    render: function(data, type, full, meta) {
-                        return `${full.qty} ${full.unit}`;
-                    }
-                },
-                {
-                    data: "rate",
-                    title: "Rate",
-                    render: function(data, type, full, meta) {
-                        return parseFloat(data).toFixed(3);
-                    }
-                },
-                {
-                    data: "total",
-                    title: "Total",
-                    render: function(data, type, full, meta) {
-                        return parseFloat(data).toFixed(3);
-                    }
-                },
-                {
-                    data: "lc_bt_tt_no",
-                    title: "LC No",
-                    render: function(data, type, full, meta) {
-                        return full.lc_bt_tt_no;
-                    }
-                },
-                {
-                    data: "lc_issue_date",
-                    title: "LC Issue Date",
-                    render: function(data, type, full, meta) {
-                        return getDate(full.lc_issue_date);
-                    }
-                },
-                {
-                    data: "lc_exp_date",
-                    title: "LC Exp Date",
-                    render: function(data, type, full, meta) {
-                        return getDate(full.lc_exp_date);
-                    }
-                },
-                {
-                    data: "lot_no",
-                    title: "Lot No",
-                    render: function(data, type, full, meta) {
-                        let d = [];
-                        for (const key in data) {
-                            if (data.hasOwnProperty(key)) {
-                                const lot = data[key];
-                                d.push(lot.lot_no);
-                            }
+                            return p;
                         }
-
-                        return d.join(", ");
-                    }
-                },
-                {
-                    data: "lot_no",
-                    title: "Invoice #",
-                    render: function(data, type, full, meta) {
-                        let d = [];
-                        for (const key in data) {
-                            if (data.hasOwnProperty(key)) {
-                                const lot = data[key];
-                                d.push(lot.inv_no);
-                            }
-                        }
-
-                        return d.join(", ");
-                    }
-                },
-                {
-                    data: "lot_no",
-                    title: "Invoice Date",
-                    render: function(data, type, full, meta) {
-                        let d = [];
-                        for (const key in data) {
-                            if (data.hasOwnProperty(key)) {
-                                const lot = data[key];
-                                d.push(getDate(lot.inv_date));
-                            }
-                        }
-
-                        return d.join(", ");
-                    }
-                },
-                {
-                    data: "lot_no",
-                    title: "BL #",
-                    render: function(data, type, full, meta) {
-                        let d = [];
-                        for (const key in data) {
-                            if (data.hasOwnProperty(key)) {
-                                const lot = data[key];
-                                d.push(lot.bl_no);
-                            }
-                        }
-
-                        return d.join(", ");
-                    }
-                },
-                {
-                    data: "lot_no",
-                    title: "BL Date",
-                    render: function(data, type, full, meta) {
-                        let d = [];
-                        for (const key in data) {
-                            if (data.hasOwnProperty(key)) {
-                                const lot = data[key];
-                                d.push(getDate(lot.bl_date));
-                            }
-                        }
-
-                        return d.join(", ");
-                    }
-                },
-                {
-                    data: "lot_no",
-                    title: "Payment to Supplier",
-                    render: function(data, type, full, meta) {
-                        let d = [];
-                        for (const key in data) {
-                            if (data.hasOwnProperty(key)) {
-                                const lot = data[key];
-                                d.push(lot.payment_remark);
-                            }
-                        }
-
-                        return d.join(", ");
-                    }
-                },
-                {
-                    data: "lot_no",
-                    title: "Payment to MRI",
-                    render: function(data, type, full, meta) {
-                        let d = [];
-                        for (const key in data) {
-                            if (data.hasOwnProperty(key)) {
-                                const lot = data[key];
-                                d.push(lot.payment_remark_2);
-                            }
-                        }
-
-                        return d.join(", ");
-                    }
-                }
-            ],
-            rowCallback: function(row, data) {},
-            dom: 'Bfrtip',
-            buttons: [{
-                    extend: 'excelHtml5',
-                    text: 'Export Excel',
-                    title: function() {
-                        return title;
                     },
-                    className: "btn btn-success m-1",
-                    filename: filename
-                },
-                {
-                    extend: 'pdfHtml5',
-                    text: 'Export PDF',
-                    title: function() {
-                        return title;
+                    {
+                        data: "qty",
+                        title: "Qty",
+                        render: function(data, type, full, meta) {
+                            return `${full.qty} ${full.unit}`;
+                        }
                     },
-                    className: "btn btn-success m-1",
-                    filename: filename
-                },
-                {
-                    extend: 'print',
-                    text: 'Print Table',
-                    title: function() {
-                        return title;
+                    {
+                        data: "rate",
+                        title: "Rate",
+                        render: function(data, type, full, meta) {
+                            return parseFloat(data).toFixed(3);
+                        }
                     },
-                    className: "btn btn-success m-1",
-                    filename: filename
-                }
-            ]
+                    {
+                        data: "total",
+                        title: "Total",
+                        render: function(data, type, full, meta) {
+                            return parseFloat(data).toFixed(3);
+                        }
+                    },
+                    {
+                        data: "lc_bt_tt_no",
+                        title: "LC No",
+                        render: function(data, type, full, meta) {
+                            return full.lc_bt_tt_no;
+                        }
+                    },
+                    {
+                        data: "lc_issue_date",
+                        title: "LC Issue Date",
+                        render: function(data, type, full, meta) {
+                            return getDate(full.lc_issue_date);
+                        }
+                    },
+                    {
+                        data: "lc_exp_date",
+                        title: "LC Exp Date",
+                        render: function(data, type, full, meta) {
+                            return getDate(full.lc_exp_date);
+                        }
+                    },
+                    {
+                        data: "lot_no",
+                        title: "Lot No",
+                        render: function(data, type, full, meta) {
+                            let d = [];
+                            for (const key in data) {
+                                if (data.hasOwnProperty(key)) {
+                                    const lot = data[key];
+                                    d.push(lot.lot_no);
+                                }
+                            }
+
+                            return d.join(", ");
+                        }
+                    },
+                    {
+                        data: "lot_no",
+                        title: "Invoice #",
+                        render: function(data, type, full, meta) {
+                            let d = [];
+                            for (const key in data) {
+                                if (data.hasOwnProperty(key)) {
+                                    const lot = data[key];
+                                    d.push(lot.inv_no);
+                                }
+                            }
+
+                            return d.join(", ");
+                        }
+                    },
+                    {
+                        data: "lot_no",
+                        title: "Invoice Date",
+                        render: function(data, type, full, meta) {
+                            let d = [];
+                            for (const key in data) {
+                                if (data.hasOwnProperty(key)) {
+                                    const lot = data[key];
+                                    d.push(getDate(lot.inv_date));
+                                }
+                            }
+
+                            return d.join(", ");
+                        }
+                    },
+                    {
+                        data: "lot_no",
+                        title: "BL #",
+                        render: function(data, type, full, meta) {
+                            let d = [];
+                            for (const key in data) {
+                                if (data.hasOwnProperty(key)) {
+                                    const lot = data[key];
+                                    d.push(lot.bl_no);
+                                }
+                            }
+
+                            return d.join(", ");
+                        }
+                    },
+                    {
+                        data: "lot_no",
+                        title: "BL Date",
+                        render: function(data, type, full, meta) {
+                            let d = [];
+                            for (const key in data) {
+                                if (data.hasOwnProperty(key)) {
+                                    const lot = data[key];
+                                    d.push(getDate(lot.bl_date));
+                                }
+                            }
+
+                            return d.join(", ");
+                        }
+                    },
+                    {
+                        data: "lot_no",
+                        title: "Payment to Supplier",
+                        render: function(data, type, full, meta) {
+                            let d = [];
+                            for (const key in data) {
+                                if (data.hasOwnProperty(key)) {
+                                    const lot = data[key];
+                                    d.push(lot.payment_remark);
+                                }
+                            }
+
+                            return d.join(", ");
+                        }
+                    },
+                    {
+                        data: "lot_no",
+                        title: "Payment to MRI",
+                        render: function(data, type, full, meta) {
+                            let d = [];
+                            for (const key in data) {
+                                if (data.hasOwnProperty(key)) {
+                                    const lot = data[key];
+                                    d.push(lot.payment_remark_2);
+                                }
+                            }
+
+                            return d.join(", ");
+                        }
+                    },
+                    {
+                        data: "final_remark",
+                        title: "final remark"
+                    }
+                ],
+                rowCallback: function(row, data) {},
+                dom: 'Bfrtip',
+                buttons: [{
+                        extend: 'excelHtml5',
+                        text: 'Export Excel',
+                        title: function() {
+                            return title;
+                        },
+                        className: "btn btn-success m-1",
+                        filename: filename
+                    },
+                    {
+                        extend: 'pdfHtml5',
+                        text: 'Export PDF',
+                        title: function() {
+                            return title;
+                        },
+                        className: "btn btn-success m-1",
+                        filename: filename
+                    },
+                    {
+                        extend: 'print',
+                        text: 'Print Table',
+                        title: function() {
+                            return title;
+                        },
+                        className: "btn btn-success m-1",
+                        filename: filename
+                    }
+                ]
+            });
+
+            $("#filter_btn").click(function() {
+                let from = $("#from").val();
+                let to = $("#to").val();
+                let customer_id = $("#customer_id").val();
+                let supplier_id = $("#supplier_id").val();
+                let product_id = $("#product_id").val();
+
+                datatable.ajax.reload();
+                title = `MRI Shipment Report ${from} to ${to}`;
+            })
         });
-
-        $("#filter_btn").click(function() {
-            let from = $("#from").val();
-            let to = $("#to").val();
-            let customer_id = $("#customer_id").val();
-            let supplier_id = $("#supplier_id").val();
-            let product_id = $("#product_id").val();
-
-            datatable.ajax.reload();
-            title = `MRI Shipment Report ${from} to ${to}`;
-        })
-    });
-</script>
+    </script>
 @endpush
