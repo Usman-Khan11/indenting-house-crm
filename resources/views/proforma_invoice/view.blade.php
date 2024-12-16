@@ -203,7 +203,10 @@
                                         @endif
                                         <small class="d-block">{{ @$v->item->description }}</small>
                                         <small><b>HS Code:</b> {{ @$v->item->hs_code }}</small> &nbsp;
-                                        <small><b>Width:</b> {{ @$v->size->name }}</small>
+                                        <small><b>Width:</b> {{ @$v->size->name }}</small> &nbsp;
+                                        @if (!empty($v->artwork->artwork_no))
+                                            <small><b>AW Code:</b> {{ @$v->artwork->artwork_no }}</small>
+                                        @endif
                                     </td>
                                     <td>
                                         {{ @$v->remark }}

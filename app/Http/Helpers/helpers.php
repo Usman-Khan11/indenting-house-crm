@@ -108,7 +108,8 @@ function origin()
 {
     $data = [
         "China" => "China",
-        "India" => "India"
+        "India" => "India",
+        "Taiwan" => "Taiwan"
     ];
 
     return $data;
