@@ -118,7 +118,14 @@ class ProductController extends Controller
             'code' => 'nullable|string|max:255',
         ]);
 
+        $id = 1;
+        $p = Product::orderBy('id', 'desc')->first();
+        if ($p) {
+            $id = $p->id + 1;
+        }
+
         $product = new Product();
+        $product->id = $id;
         $product->name = $request->name;
         $product->description = $request->description;
         $product->hs_code = $request->hs_code;
