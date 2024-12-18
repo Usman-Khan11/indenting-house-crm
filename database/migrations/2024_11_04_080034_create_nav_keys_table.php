@@ -276,6 +276,12 @@ return new class extends Migration
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
+            [
+                'nav_id' => 8,
+                'key' => 'proforma_invoice',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
             // Shipments
             [
                 'nav_id' => 9,

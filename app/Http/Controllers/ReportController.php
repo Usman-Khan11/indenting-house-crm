@@ -9,6 +9,7 @@ use App\Models\Inquiry;
 use App\Models\InquiryItem;
 use App\Models\Offer;
 use App\Models\Product;
+use App\Models\ProformaInvoice;
 use App\Models\PurchaseOrder;
 use App\Models\Shipment;
 use App\Models\Supplier;
@@ -405,5 +406,57 @@ class ReportController extends Controller
         $data['products'] = Product::orderBy('name', 'asc')->get();
 
         return view('reports.shipment', $data);
+    }
+
+    public function proforma_invoice(Request $request)
+    {
+        $data['page_title'] = "Proforma Invoice Report";
+        $this->checkPermissions('proforma_invoice');
+
+        if ($request->ajax()) {
+            $query = ProformaInvoice::join('proforma_invoice_items', 'proforma_invoices.id', '=', 'proforma_invoice_items.proforma_invoice_id')
+                ->join('customers', 'proforma_invoices.customer_id', '=', 'customers.id')
+                ->join('suppliers', 'proforma_invoices.supplier_id', '=', 'suppliers.id')
+                ->join('products', 'proforma_invoice_items.item_id', '=', 'products.id')
+                ->select(
+                    'proforma_invoices.pi_no',
+                    'proforma_invoices.date as pi_date',
+                    'proforma_invoices.customer_id',
+                    'proforma_invoices.supplier_id',
+                    'proforma_invoice_items.*',
+                    'customers.name as customer_name',
+                    'suppliers.name as supplier_name',
+                    'products.name as product_name',
+                    'products.description as product_description',
+                );
+
+            if (!empty($request->from) && !empty($request->to)) {
+                $query->whereBetween('proforma_invoices.date', [
+                    $request->from,
+                    $request->to
+                ]);
+            }
+
+            if (!empty($request->customer_id)) {
+                $query->where('proforma_invoices.customer_id', $request->customer_id);
+            }
+
+            if (!empty($request->supplier_id)) {
+                $query->where('proforma_invoices.supplier_id', $request->supplier_id);
+            }
+
+            if (!empty($request->product_id)) {
+                $query->where('proforma_invoice_items.item_id', $request->product_id);
+            }
+
+            $query = $query->orderBy('pi_date', 'desc')->get();
+            return DataTables::of($query)->addIndexColumn()->make(true);
+        }
+
+        $data['customers'] = Customer::orderBy('name', 'asc')->get();
+        $data['suppliers'] = Supplier::orderBy('name', 'asc')->get();
+        $data['products'] = Product::orderBy('name', 'asc')->get();
+
+        return view('reports.proforma_invoice', $data);
     }
 }
