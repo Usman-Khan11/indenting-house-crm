@@ -96,7 +96,7 @@
                 },
                 columns: [{
                         data: "pi_no",
-                        title: "pi #",
+                        title: "PI #",
                     },
                     {
                         title: 'Date',
@@ -135,8 +135,26 @@
                         }
                     },
                     {
+                        data: "total",
+                        title: "Amount",
+                        render: function(data, type, full, meta) {
+                            return parseFloat(data).toFixed(3);
+                        }
+                    },
+                    {
+                        data: "size_name",
+                        title: "Size",
+                    },
+                    {
                         data: "supplier_name",
                         title: "Supplier",
+                    },
+                    {
+                        data: "payment",
+                        title: "Payment",
+                        render: function(data, type, full, meta) {
+                            return data + ' ' + full.payment_text;
+                        }
                     },
                 ],
                 rowCallback: function(row, data) {},

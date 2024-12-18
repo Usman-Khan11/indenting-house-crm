@@ -418,16 +418,20 @@ class ReportController extends Controller
                 ->join('customers', 'proforma_invoices.customer_id', '=', 'customers.id')
                 ->join('suppliers', 'proforma_invoices.supplier_id', '=', 'suppliers.id')
                 ->join('products', 'proforma_invoice_items.item_id', '=', 'products.id')
+                ->join('sizes', 'proforma_invoice_items.size_id', '=', 'sizes.id')
                 ->select(
                     'proforma_invoices.pi_no',
                     'proforma_invoices.date as pi_date',
                     'proforma_invoices.customer_id',
                     'proforma_invoices.supplier_id',
+                    'proforma_invoices.payment',
+                    'proforma_invoices.payment_text',
                     'proforma_invoice_items.*',
                     'customers.name as customer_name',
                     'suppliers.name as supplier_name',
                     'products.name as product_name',
                     'products.description as product_description',
+                    'sizes.name as size_name',
                 );
 
             if (!empty($request->from) && !empty($request->to)) {

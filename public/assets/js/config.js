@@ -10,7 +10,7 @@
 // JS global variables
 let config = {
   colors: {
-    primary: '#7367f0',
+    primary: '#1f6078',
     secondary: '#a8aaae',
     success: '#28c76f',
     info: '#00cfe8',
@@ -27,7 +27,7 @@ let config = {
     borderColor: '#dbdade'
   },
   colors_label: {
-    primary: '#7367f029',
+    primary: '#1f607829',
     secondary: '#a8aaae29',
     success: '#28c76f29',
     info: '#00cfe829',
@@ -90,7 +90,7 @@ if (typeof TemplateCustomizer !== 'undefined') {
   window.templateCustomizer = new TemplateCustomizer({
     cssPath: assetsPath + 'vendor/css' + (rtlSupport ? '/rtl' : '') + '/',
     themesPath: assetsPath + 'vendor/css' + (rtlSupport ? '/rtl' : '') + '/',
-    displayCustomizer: true,
+    displayCustomizer: false,
     // lang: 'fr',
     // defaultTheme: 2,
     // defaultStyle: 'light',

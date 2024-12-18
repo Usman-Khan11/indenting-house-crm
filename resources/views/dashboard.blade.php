@@ -124,6 +124,51 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-xl-3 mb-4 col-lg-3 col-6">
+                    <div class="card h-100 cursor-pointer">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center" onclick="window.location.assign('/sizes')">
+                                <div class="badge rounded-pill bg-label-success me-3 p-2">
+                                    <i class="ti ti-ruler ti-lg"></i>
+                                </div>
+                                <div class="card-info">
+                                    <h5 class="mb-0">{{ \App\Models\Size::count() }}</h5>
+                                    <small>Sizes</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 mb-4 col-lg-3 col-6">
+                    <div class="card h-100 cursor-pointer">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center" onclick="window.location.assign('/shade-cards')">
+                                <div class="badge rounded-pill bg-label-success me-3 p-2">
+                                    <i class="ti ti-palette ti-lg"></i>
+                                </div>
+                                <div class="card-info">
+                                    <h5 class="mb-0">{{ \App\Models\Card::count() }}</h5>
+                                    <small>Shade Card & Artwork</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 mb-4 col-lg-3 col-6">
+                    <div class="card h-100 cursor-pointer">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center" onclick="window.location.assign('/proforma-invoices')">
+                                <div class="badge rounded-pill bg-label-success me-3 p-2">
+                                    <i class="ti ti-file-invoice ti-lg"></i>
+                                </div>
+                                <div class="card-info">
+                                    <h5 class="mb-0">{{ \App\Models\ProformaInvoice::count() }}</h5>
+                                    <small>Proforma Invoices</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

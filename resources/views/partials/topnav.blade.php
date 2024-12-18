@@ -7,12 +7,6 @@
     </div>
 
     <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
-        <div class="navbar-nav align-items-center">
-            <a class="nav-link style-switcher-toggle hide-arrow" href="javascript:void(0);">
-                <i class="ti ti-sm"></i>
-            </a>
-        </div>
-
         @if (auth()->user()->id == 1)
             <div>
                 <a href="{{ route('role') }}" class="btn btn-label-danger waves-effect {{ menuActive('role') }}">
@@ -34,6 +28,11 @@
         @endif
 
         <ul class="navbar-nav flex-row align-items-center ms-auto">
+            <li class="nav-item me-2 me-xl-0">
+                <a class="nav-link style-switcher-toggle hide-arrow" href="javascript:void(0);">
+                    <i class="ti ti-md"></i>
+                </a>
+            </li>
             <li class="nav-item navbar-dropdown dropdown-user dropdown">
                 <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
                     <div class="avatar avatar-online">
@@ -42,7 +41,7 @@
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end">
                     <li>
-                        <a class="dropdown-item" href="#">
+                        <a class="dropdown-item" href="{{ route('user.edit', auth()->user()->id) }}">
                             <div class="d-flex">
                                 <div class="flex-shrink-0 me-3">
                                     <div class="avatar avatar-online">
