@@ -139,7 +139,8 @@ function paymentTerms()
         'DA 90 Days' => 'DA 90 Days',
         'DA 120 Days' => 'DA 120 Days',
         'LC 45 Days' => 'LC 45 Days',
-        'LC 120 Days' => 'LC 120 Days'
+        'LC 120 Days' => 'LC 120 Days',
+        'LC 60 Days' => 'LC 60 Days'
     ];
 
     return $data;
@@ -179,6 +180,7 @@ function portOfShipment()
         'Xiamen Airport' => 'Xiamen Airport',
         'Xiamen Sea Port' => 'Xiamen Sea Port',
         'Taipei Airport' => 'Taipei Airport',
+        'Wuhan Airport' => 'Wuhan Airport',
     ];
 
     return $data;

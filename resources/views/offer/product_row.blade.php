@@ -5,7 +5,7 @@
             <option selected disabled value="">Select Item</option>
             @foreach ($products as $product)
                 <option @if ($product_id == $product->id) selected @endif title="{{ $product->description }}"
-                    value="{{ $product->id }}">{{ $product->name }}</option>
+                    value="{{ $product->id }}">{{ $product->id }} -- {{ $product->name }}</option>
             @endforeach
         </select>
 
