@@ -36,7 +36,7 @@
     <link rel="stylesheet" href="{{ asset('assets/vendor/libs/select2/select2.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/vendor/libs/bootstrap-select/bootstrap-select.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/vendor/libs/spinkit/spinkit.css') }}" />
-    <!-- <link rel="stylesheet" href="{{ asset('assets/vendor/css/pages/app-invoice-print.css') }}" /> -->
+    {{-- <link rel="stylesheet" href="{{ asset('assets/vendor/css/pages/app-invoice-print.css') }}" /> --}}
 
     <script src="{{ asset('assets/vendor/js/helpers.js') }}"></script>
     <script src="{{ asset('assets/vendor/js/template-customizer.js') }}"></script>
@@ -54,6 +54,10 @@
             display: none;
         }
 
+        html.dark-style .loader {
+            background-color: rgba(0, 0, 0, 0.7) !important;
+        }
+
         .loader .inner {
             width: 100%;
             height: 100%;
@@ -65,7 +69,6 @@
 </head>
 
 <body>
-
     <div class="layout-wrapper layout-content-navbar">
         <div class="layout-container">
             @include('partials.sidenav')
@@ -126,8 +129,6 @@
             if ($(".editor").length) {
                 CKEDITOR.replaceAll('editor');
             }
-
-            //$(".loader").hide();
         })
 
         function decodeHtmlEntities(str) {
