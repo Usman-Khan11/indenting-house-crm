@@ -54,7 +54,8 @@
                                     <option selected disabled value="">Select Customer</option>
                                     @foreach ($customers as $customer)
                                         <option @if (old('customer_id') == $customer->id) selected @endif
-                                            value="{{ $customer->id }}">{{ $customer->name }}</option>
+                                            value="{{ $customer->id }}">{{ $customer->id }} -- {{ $customer->name }}
+                                        </option>
                                     @endforeach
                                 </select>
                             </div>
@@ -68,7 +69,8 @@
                                     <option selected disabled value="">Select Supplier</option>
                                     @foreach ($suppliers as $supplier)
                                         <option @if (old('supplier_id') == $supplier->id) selected @endif
-                                            value="{{ $supplier->id }}">{{ $supplier->name }}</option>
+                                            value="{{ $supplier->id }}">{{ $supplier->id }} -- {{ $supplier->name }}
+                                        </option>
                                     @endforeach
                                 </select>
                             </div>
@@ -110,6 +112,7 @@
 
                                 @forelse ($p as $k => $v)
                                     @include('inquiry.product_row', [
+                                        'sno' => $k + 1,
                                         'product_id' => $v,
                                         'product_description' => old('product_description')[$k] ?? '',
                                         'product_qty' => old('product_qty')[$k] ?? '',
@@ -126,6 +129,7 @@
                                     ])
                                 @empty
                                     @include('inquiry.product_row', [
+                                        'sno' => 1,
                                         'product_id' => '',
                                         'product_description' => '',
                                         'product_qty' => '',

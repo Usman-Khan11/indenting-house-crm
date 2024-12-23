@@ -199,10 +199,12 @@
                 $('select.product, select.product_supplier').select2('destroy');
             }
 
+            let sno = parseInt($("#product_table .product_row:last .sno span").text()) + 1;
             $("#product_table .product_row:last").clone().appendTo("#product_table");
             $("#product_table .product_row:last").find("input").val(null).prop("disabled", false);
             $("#product_table .product_row:last").find("textarea").val(null).prop("disabled", false);
             $("#product_table .product_row:last").find("select").val(null).trigger('change').prop("disabled", false);
+            $("#product_table .product_row:last .sno span").text(sno)
 
             $('select.product, select.product_supplier').select2();
         }
@@ -210,6 +212,9 @@
         function delProductRow(e) {
             if ($("#product_table .product_row").length > 1) {
                 $(e).parent().parent().parent().parent().remove();
+                $("#product_table .product_row .sno span").each(function(index) {
+                    $(this).text(index + 1)
+                })
             }
         }
 
