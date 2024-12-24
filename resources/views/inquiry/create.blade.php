@@ -23,15 +23,15 @@
                             <div class="mb-3">
                                 <label class="form-label">Date</label>
                                 <input type="date" name="date" value="{{ old('date', date('Y-m-d')) }}"
-                                    class="form-control" placeholder="Date" />
+                                    class="form-control date" placeholder="Date" onchange="inquiryDates()" />
                             </div>
                         </div>
 
                         <div class="col-md-3 col-12">
                             <div class="mb-3">
                                 <label class="form-label">Validity</label>
-                                <input type="date" name="validity" value="{{ old('validity') }}" class="form-control"
-                                    placeholder="Validity" />
+                                <input type="date" name="validity" value="{{ old('validity') }}"
+                                    class="form-control validity" placeholder="Validity" />
                             </div>
                         </div>
 
@@ -157,3 +157,11 @@
         </form>
     </div>
 @endsection
+
+@push('script')
+    <script>
+        $(document).ready(function() {
+            inquiryDates();
+        })
+    </script>
+@endpush

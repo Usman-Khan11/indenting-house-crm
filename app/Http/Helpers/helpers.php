@@ -181,6 +181,7 @@ function portOfShipment()
         'Xiamen Sea Port' => 'Xiamen Sea Port',
         'Taipei Airport' => 'Taipei Airport',
         'Wuhan Airport' => 'Wuhan Airport',
+        'Shaanxi Sea Port' => 'Shaanxi Sea Port',
     ];
 
     return $data;

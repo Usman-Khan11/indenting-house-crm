@@ -25,7 +25,7 @@
                             <div class="mb-3">
                                 <label class="form-label">Date</label>
                                 <input type="date" name="date" value="{{ old('date', $inquiry->date) }}"
-                                    class="form-control" placeholder="Date" />
+                                    class="form-control date" placeholder="Date" onchange="inquiryDates()" />
                             </div>
                         </div>
 
@@ -33,7 +33,7 @@
                             <div class="mb-3">
                                 <label class="form-label">Validity</label>
                                 <input type="date" name="validity" value="{{ old('validity', $inquiry->validity) }}"
-                                    class="form-control" placeholder="Validity" />
+                                    class="form-control validity" placeholder="Validity" />
                             </div>
                         </div>
 

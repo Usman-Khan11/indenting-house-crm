@@ -50,6 +50,10 @@
                 </select>
             </div>
 
+            <div class="col-md-2 mb-0 text-center">
+                <h5 class="mb-0 sno text-warning">S.No: &nbsp; <span>{{ $sno }}</span></h5>
+            </div>
+
             <div class="col-md-1 mb-3 text-center">
                 <button onclick="delProductRow(this)" type="button" class="btn btn-danger btn-sm"><i
                         class="fa fa-trash"></i></button>

@@ -71,6 +71,10 @@
                 <input type="hidden" name="product_other_desc[]" class="form-control product_other_desc">
             </div>
 
+            <div class="col-md-6 mb-0 text-end">
+                <h5 class="mb-0 sno text-warning">S.No: &nbsp; <span>{{ $sno }}</span></h5>
+            </div>
+
             <div class="col mb-3 text-end">
                 <button onclick="delProductRow(this)" type="button" class="btn btn-danger btn-sm"><i
                         class="fa fa-trash"></i></button>

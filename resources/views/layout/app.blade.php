@@ -522,7 +522,7 @@
                             var description = (v.product) ? v.product.description : '';
 
                             $("select.product").append(
-                                `<option title="${description}" value="${id}">${name}</option>`
+                                `<option title="${description}" value="${id}">${id} -- ${name}</option>`
                             );
                         });
                         $(".loader").hide();
@@ -552,7 +552,7 @@
                             var description = (v.product) ? v.product.description : '';
 
                             $("select.product").append(
-                                `<option title="${description}" value="${id}">${name}</option>`
+                                `<option title="${description}" value="${id}">${id} -- ${name}</option>`
                             );
                         });
                         $(".loader").hide();
@@ -593,6 +593,17 @@
                 item.html(text);
                 $(".loader").hide();
             });
+        }
+
+        function inquiryDates() {
+            let date = new Date($('.date').val());
+
+            const validityDate = new Date(date);
+            validityDate.setDate(validityDate.getDate() + 3);
+
+            const formatDate = (date) => date.toISOString().split('T')[0];
+
+            $(".validity").val(formatDate(validityDate));
         }
     </script>
 </body>

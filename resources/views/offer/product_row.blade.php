@@ -45,7 +45,7 @@
                     <option selected disabled value="">Select value</option>
                     @foreach ($suppliers as $supplier)
                         <option @if ($product_supplier == $supplier->id) selected @endif value="{{ $supplier->id }}">
-                            {{ $supplier->name }}</option>
+                            {{ $supplier->id }} -- {{ $supplier->name }}</option>
                     @endforeach
                 </select>
             </div>
@@ -87,6 +87,10 @@
                 <label class="form-label">Delivery</label>
                 <input type="text" name="product_delivery[]" value="{{ $product_delivery }}"
                     class="form-control product_delivery">
+            </div>
+
+            <div class="col-md-2 mb-0 text-center">
+                <h5 class="mb-0 sno text-warning">S.No: &nbsp; <span>{{ $sno }}</span></h5>
             </div>
 
             <div class="col-md-1 mb-3 text-center">

@@ -36,4 +36,8 @@
         <input type="number" name="product_total[]" value="{{ $product_total }}" class="form-control product_total"
             step="any" readonly>
     </div>
+
+    <div class="col-md-1 mb-0 text-center">
+        <h5 class="mb-0 sno text-warning">S.No: &nbsp; <span>{{ $sno }}</span></h5>
+    </div>
 </div>

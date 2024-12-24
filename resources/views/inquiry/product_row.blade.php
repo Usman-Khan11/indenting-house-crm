@@ -45,7 +45,7 @@
                     <option selected disabled value="">Select value</option>
                     @foreach ($suppliers as $supplier)
                         <option @if ($product_supplier == $supplier->id) selected @endif value="{{ $supplier->id }}">
-                            {{ $supplier->name }}</option>
+                            {{ $supplier->id }} -- {{ $supplier->name }}</option>
                     @endforeach
                 </select>
             </div>
