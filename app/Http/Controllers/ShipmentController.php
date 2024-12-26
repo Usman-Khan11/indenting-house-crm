@@ -43,6 +43,7 @@ class ShipmentController extends Controller
             }
 
             $query = Shipment::Query();
+            $query = $query->where('pi_id', 0);
             $query = $query->with('indent', 'customer', 'supplier', 'added_by');
             $query = $query->orderBy('date', 'desc')->get();
             return DataTables::of($query)->addIndexColumn()->make(true);

@@ -199,6 +199,15 @@
             </li>
         @endif
 
+        @if (checkSidebar($role_id, 13, 'view'))
+            <li class="menu-item {{ menuActive('nantong_shipment*') }}">
+                <a href="{{ route('nantong_shipment') }}" class="menu-link">
+                    <i class="menu-icon tf-icons ti ti-file-invoice"></i>
+                    <div data-i18n="Nantong Shipments">Nantong Shipments</div>
+                </a>
+            </li>
+        @endif
+
         @if (checkSidebar($role_id, 8, 'supplier list') ||
                 checkSidebar($role_id, 8, 'customer list') ||
                 checkSidebar($role_id, 8, 'material list') ||

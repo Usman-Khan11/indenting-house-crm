@@ -14,6 +14,7 @@ use App\Http\Controllers\PaymentNoteController;
 use App\Http\Controllers\DeliveryNoteController;
 use App\Http\Controllers\EmailController;
 use App\Http\Controllers\IndentController;
+use App\Http\Controllers\NantongShipmentController;
 use App\Http\Controllers\OfferController;
 use App\Http\Controllers\ProformaInvoiceController;
 use App\Http\Controllers\PurchaseOrderController;
@@ -231,4 +232,13 @@ Route::middleware('auth')->group(function () {
     Route::get('proforma-invoice/delete/{id}', [ProformaInvoiceController::class, 'delete'])->name('proforma_invoice.delete');
     Route::post('proforma-invoice/store', [ProformaInvoiceController::class, 'store'])->name('proforma_invoice.store');
     Route::post('proforma-invoice/update', [ProformaInvoiceController::class, 'update'])->name('proforma_invoice.update');
+
+    // Nantong Shipment
+    Route::get('nantong-shipments', [NantongShipmentController::class, 'index'])->name('nantong_shipment');
+    Route::get('nantong-shipment/create', [NantongShipmentController::class, 'create'])->name('nantong_shipment.create');
+    Route::get('nantong-shipment/edit/{id}', [NantongShipmentController::class, 'edit'])->name('nantong_shipment.edit');
+    Route::get('nantong-shipment/view/{id}', [NantongShipmentController::class, 'view'])->name('nantong_shipment.view');
+    Route::get('nantong-shipment/delete/{id}', [NantongShipmentController::class, 'delete'])->name('nantong_shipment.delete');
+    Route::post('nantong-shipment/store', [NantongShipmentController::class, 'store'])->name('nantong_shipment.store');
+    Route::post('nantong-shipment/update', [NantongShipmentController::class, 'update'])->name('nantong_shipment.update');
 });

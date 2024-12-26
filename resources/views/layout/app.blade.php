@@ -605,6 +605,57 @@
 
             $(".validity").val(formatDate(validityDate));
         }
+
+        function getProformaInvoiceData(e) {
+            let piId = $(e).val();
+            $(".loader").show();
+
+            $.get("{{ route('nantong_shipment') }}", {
+                _token: '{{ csrf_token() }}',
+                piId,
+                type: 'getProformaInvoiceData'
+            }, function(res) {
+                $(".customer_id").val(res.customer_id).trigger("change");
+                $(".customer_id").prop("disabled", true);
+                $(".supplier_id").val(res.supplier_id).trigger("change");
+                $(".supplier_id").prop("disabled", true);
+                $(".currency").val(res.currency).trigger("change");
+                $(".currency").prop("disabled", true);
+
+                $(".lc_bt_tt_no").parent().find('label').text(res.payment);
+                $(".lc_bt_tt_no").attr('placeholder', res.payment);
+
+                if (res.items.length) {
+                    let items = res.items;
+                    $("#product_table .product_row:gt(0)").remove();
+
+                    if ($('select.product, select.product_size_id').hasClass('select2-hidden-accessible')) {
+                        $('select.product, select.product_size_id').select2('destroy');
+                    }
+
+                    $(items).each(function(key, value) {
+                        let $newRow = $("#product_table .product_row:first").clone();
+
+                        $newRow.find('.product').val(value.item_id).trigger('change').prop("disabled",
+                            true);
+                        $newRow.find('.product_qty').val(value.qty);
+                        $newRow.find('.product_unit').val(value.unit).prop("disabled", true);
+                        $newRow.find('.product_rate').val(value.rate).prop("disabled", true);
+                        $newRow.find('.product_total').val(value.total).prop("disabled", true);
+                        $newRow.find('.product_size_id').val(value.size_id).trigger('change').prop(
+                            "disabled",
+                            true);
+
+                        $("#product_table").append($newRow);
+                    });
+
+                    $("#product_table .product_row:first").remove();
+                    $('select.product, select.product_size_id').select2();
+                }
+
+                $(".loader").hide();
+            });
+        }
     </script>
 </body>
 

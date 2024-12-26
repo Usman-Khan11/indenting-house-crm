@@ -15,6 +15,11 @@ class Shipment extends Model
         return $this->belongsTo(Indent::class, 'indent_id');
     }
 
+    public function pi()
+    {
+        return $this->belongsTo(ProformaInvoice::class, 'pi_id');
+    }
+
     public function customer()
     {
         return $this->belongsTo(Customer::class);

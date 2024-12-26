@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('unit', 15)->nullable();
             $table->string('rate', 40);
             $table->string('total', 40);
+            $table->integer('size_id')->default(0);
             $table->timestamps();
         });
     }

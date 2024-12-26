@@ -18,7 +18,8 @@ return new class extends Migration
             $table->string('shipment_no', 20);
             $table->string('date', 20);
             $table->string('currency', 30)->nullable();
-            $table->integer('indent_id');
+            $table->integer('indent_id')->default(0);
+            $table->integer('pi_id')->default(0);
             $table->integer('supplier_id');
             $table->integer('customer_id');
             $table->string('lc_bt_tt_no', 100)->nullable();

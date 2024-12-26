@@ -382,6 +382,31 @@ return new class extends Migration
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
+            // Nantong Shipment
+            [
+                'nav_id' => 13,
+                'key' => 'create',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'nav_id' => 13,
+                'key' => 'view',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'nav_id' => 13,
+                'key' => 'update',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'nav_id' => 13,
+                'key' => 'delete',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
         ]);
     }
 

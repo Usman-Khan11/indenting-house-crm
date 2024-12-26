@@ -94,6 +94,12 @@ return new class extends Migration
                 'slug' => 'proforma_invoice',
                 'created_at' => now(),
                 'updated_at' => now(),
+            ],
+            [
+                'name' => 'Nantong Shipment',
+                'slug' => 'nantong_shipment',
+                'created_at' => now(),
+                'updated_at' => now(),
             ]
         ]);
     }

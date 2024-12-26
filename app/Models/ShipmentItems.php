@@ -15,6 +15,11 @@ class ShipmentItems extends Model
         return $this->belongsTo(Indent::class, 'shipment_id', 'id');
     }
 
+    public function size()
+    {
+        return $this->belongsTo(Size::class, 'size_id', 'id');
+    }
+
     public function item()
     {
         return $this->belongsTo(Product::class, 'item_id', 'id');
