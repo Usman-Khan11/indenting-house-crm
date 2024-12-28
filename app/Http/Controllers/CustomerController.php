@@ -110,7 +110,14 @@ class CustomerController extends Controller
             'phone_2' => 'nullable|string|max:80',
         ]);
 
+        $id = 1;
+        $p = Customer::orderBy('id', 'desc')->first();
+        if ($p) {
+            $id = $p->id + 1;
+        }
+
         $customer = new Customer();
+        $customer->id = $id;
         $customer->name = $request->name;
         $customer->location = $request->location;
         $customer->fax_number = $request->fax_number;
@@ -157,6 +164,16 @@ class CustomerController extends Controller
         ]);
 
         $customer = Customer::find($request->id);
+        $new_id = $request->new_id;
+        if ($new_id != $request->id) {
+            $chk = Customer::where('id', $new_id)->count();
+            if ($chk > 0) {
+                return back()->withError('The ID is already in use. Please choose a different ID.')->withInput();
+            }
+
+            $customer->id = $new_id;
+        }
+
         $customer->name = $request->name;
         $customer->location = $request->location;
         $customer->fax_number = $request->fax_number;

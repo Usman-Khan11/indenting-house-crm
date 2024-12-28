@@ -107,7 +107,14 @@ class SupplierController extends Controller
             'swift_code' => 'nullable|string|max:50',
         ]);
 
+        $id = 1;
+        $p = Supplier::orderBy('id', 'desc')->first();
+        if ($p) {
+            $id = $p->id + 1;
+        }
+
         $supplier = new Supplier();
+        $supplier->id = $id;
         $supplier->name = $request->name;
         $supplier->fax_number = $request->fax_number;
         $supplier->phone = $request->phone;
@@ -148,6 +155,16 @@ class SupplierController extends Controller
         ]);
 
         $supplier = Supplier::find($request->id);
+        $new_id = $request->new_id;
+        if ($new_id != $request->id) {
+            $chk = Supplier::where('id', $new_id)->count();
+            if ($chk > 0) {
+                return back()->withError('The ID is already in use. Please choose a different ID.')->withInput();
+            }
+
+            $supplier->id = $new_id;
+        }
+
         $supplier->name = $request->name;
         $supplier->fax_number = $request->fax_number;
         $supplier->phone = $request->phone;

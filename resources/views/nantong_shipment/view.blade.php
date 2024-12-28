@@ -68,8 +68,8 @@
                         <img src="{{ asset(general()->logo) }}" width="150px" alt="Logo">
                     </div>
                     <!-- <p class="mb-1">Office 149, 450 South Brand Brooklyn</p>
-                                                    <p class="mb-1">San Diego County, CA 91905, USA</p>
-                                                    <p class="mb-0">+1 (123) 456 7891, +44 (876) 543 2198</p> -->
+                                                            <p class="mb-1">San Diego County, CA 91905, USA</p>
+                                                            <p class="mb-0">+1 (123) 456 7891, +44 (876) 543 2198</p> -->
                 </div>
                 <div class="col-6 col-lg-4">
                     <!-- <h4 class="fw-bold">INVOICE #86423</h4> -->
@@ -111,7 +111,7 @@
                             <tbody>
                                 <tr>
                                     <td width="100%">
-                                        <h5 class="mb-1"><b>Indent No.</b> &nbsp; {{ @$shipment->indent->indent_no }}</h5>
+                                        <h5 class="mb-1"><b>PI No.</b> &nbsp; {{ @$shipment->pi->pi_no }}</h5>
                                     </td>
                                 </tr>
                             </tbody>
@@ -180,7 +180,8 @@
                                     <td>
                                         <h6 class="mb-1">{{ @$v->item->name }}</h6>
                                         <small class="d-block">{{ @$v->item->description }}</small>
-                                        <small><b>HS Code:</b> {{ @$v->item->hs_code }}</small>
+                                        <small class="d-block"><b>HS Code:</b> {{ @$v->item->hs_code }}</small>
+                                        <small><b>Size:</b> {{ @$v->size->name }}</small>
                                     </td>
                                     <td class="text-center">
                                         {{ number_format($v->qty) }}
@@ -342,19 +343,19 @@
             </div>
 
             <!-- <div class="row mt-2">
-                                                <div class="col-12 mb-2">
-                                                    <span>We hope our offer will prove competitive & we look forward to your order confirmation.</span>
-                                                </div>
-                                                <div class="col-12">
-                                                    <span>Thank you</span>
-                                                </div>
-                                                <div class="col-12">
-                                                    <span>Best Regards,</span>
-                                                </div>
-                                                <div class="col-12">
-                                                    <span>For <b>MRI Indenting House</b></span>
-                                                </div>
-                                            </div> -->
+                                                        <div class="col-12 mb-2">
+                                                            <span>We hope our offer will prove competitive & we look forward to your order confirmation.</span>
+                                                        </div>
+                                                        <div class="col-12">
+                                                            <span>Thank you</span>
+                                                        </div>
+                                                        <div class="col-12">
+                                                            <span>Best Regards,</span>
+                                                        </div>
+                                                        <div class="col-12">
+                                                            <span>For <b>MRI Indenting House</b></span>
+                                                        </div>
+                                                    </div> -->
         </div>
     </div>
 

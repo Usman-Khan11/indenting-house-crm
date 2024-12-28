@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container-xxl flex-grow-1 container-p-y">
-        <form method="post" action="{{ route('shipment.update') }}" enctype="multipart/form-data">
+        <form method="post" action="{{ route('nantong_shipment.update') }}" enctype="multipart/form-data">
             @csrf
             <input type="hidden" name="id" value="{{ $shipment->id }}">
 
@@ -31,13 +31,13 @@
 
                         <div class="col-md-4 col-12">
                             <div class="mb-3">
-                                <label class="form-label">Indents</label>
-                                <select class="select2 form-select" name="indent_id" required
-                                    onchange="getIndentData(this)">
-                                    <option selected disabled value="">Select Indent</option>
-                                    @foreach ($indents as $indent)
-                                        <option @if (old('indent_id', $shipment->indent_id) == $indent->id) selected @endif
-                                            value="{{ $indent->id }}">{{ $indent->indent_no }}</option>
+                                <label class="form-label">Proforma Invoices</label>
+                                <select class="select2 form-select" name="pi_id" required
+                                    onchange="getProformaInvoiceData(this)">
+                                    <option selected disabled value="">Select Proforma Invoice</option>
+                                    @foreach ($proforma_invoices as $proforma_invoice)
+                                        <option @if (old('pi_id', $shipment->pi_id) == $proforma_invoice->id) selected @endif
+                                            value="{{ $proforma_invoice->id }}">{{ $proforma_invoice->pi_no }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -45,11 +45,11 @@
 
                         <div class="col-md-2 col-12">
                             <div class="mb-3">
-                                <label class="form-label">{{ $shipment->indent->payment ?? 'LC/BC/TT No' }}</label>
+                                <label class="form-label">{{ $shipment->pi->payment ?? 'LC/BC/TT No' }}</label>
                                 <input type="text" name="lc_bt_tt_no"
                                     value="{{ old('lc_bt_tt_no', $shipment->lc_bt_tt_no) }}"
                                     class="form-control lc_bt_tt_no"
-                                    placeholder="{{ $shipment->indent->payment ?? 'LC/BC/TT No' }}" />
+                                    placeholder="{{ $shipment->pi->payment ?? 'LC/BC/TT No' }}" />
                             </div>
                         </div>
 
@@ -166,24 +166,31 @@
                                 @endphp
 
                                 @forelse ($p as $k => $v)
-                                    @include('shipment.product_row', [
+                                    @include('nantong_shipment.product_row', [
                                         'sno' => $k + 1,
                                         'product_id' => old('product_id')[$k] ?? ($v->item_id ?? ''),
+                                        'product_description' =>
+                                            old('product_description')[$k] ?? ($v->item->description ?? ''),
                                         'product_qty' => old('product_qty')[$k] ?? ($v->qty ?? ''),
                                         'product_unit' => old('product_unit')[$k] ?? ($v->unit ?? ''),
                                         'product_rate' => old('product_rate')[$k] ?? ($v->rate ?? ''),
                                         'product_total' => old('product_total')[$k] ?? ($v->total ?? ''),
+                                        'product_size_id' => old('product_size_id')[$k] ?? ($v->size_id ?? ''),
                                         'products' => $products,
+                                        'sizes' => $sizes,
                                     ])
                                 @empty
-                                    @include('shipment.product_row', [
+                                    @include('nantong_shipment.product_row', [
                                         'sno' => 1,
                                         'product_id' => '',
+                                        'product_description' => '',
                                         'product_qty' => '',
                                         'product_unit' => '',
                                         'product_rate' => '',
                                         'product_total' => '',
+                                        'product_size_id' => '',
                                         'products' => $products,
+                                        'sizes' => $sizes,
                                     ])
                                 @endforelse
                             </div>
