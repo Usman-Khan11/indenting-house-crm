@@ -33,7 +33,8 @@
                                     <option selected disabled value="">Select Customer</option>
                                     @foreach ($customers as $customer)
                                         <option @if (old('customer_id', $card->customer_id) == $customer->id) selected @endif
-                                            value="{{ $customer->id }}">{{ $customer->name }}</option>
+                                            value="{{ $customer->id }}">{{ $customer->id }} -- {{ $customer->name }}
+                                        </option>
                                     @endforeach
                                 </select>
                             </div>
@@ -46,7 +47,8 @@
                                     <option selected disabled value="">Select Supplier</option>
                                     @foreach ($suppliers as $supplier)
                                         <option @if (old('supplier_id', $card->supplier_id) == $supplier->id) selected @endif
-                                            value="{{ $supplier->id }}">{{ $supplier->name }}</option>
+                                            value="{{ $supplier->id }}">{{ $supplier->id }} -- {{ $supplier->name }}
+                                        </option>
                                     @endforeach
                                 </select>
                             </div>
@@ -59,7 +61,8 @@
                                     <option selected disabled value="">Select Product</option>
                                     @foreach ($products as $product)
                                         @if (old('item_id', $card->item_id))
-                                            <option selected value="{{ $product->id }}">{{ $product->name }}</option>
+                                            <option selected value="{{ $product->id }}">{{ $product->id }} --
+                                                {{ $product->name }}</option>
                                         @endif
                                     @endforeach
                                 </select>

@@ -585,7 +585,7 @@
                         }) => {
                             var id = (product) ? product.id : '';
                             var name = (product) ? product.name : '';
-                            text += `<option value="${id}">${name}</option>`;
+                            text += `<option value="${id}">${id} -- ${name}</option>`;
                         });
                         text += `</optgroup>`;
                     }
