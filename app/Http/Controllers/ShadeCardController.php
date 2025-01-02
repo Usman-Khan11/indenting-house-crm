@@ -69,6 +69,7 @@ class ShadeCardController extends Controller
     {
         $cardNo = $request->card_no;
         $product = $request->product;
+        $width = $request->width;
         $orderBy = $request->order_by;
 
         $results = DB::table('cards')
@@ -88,6 +89,9 @@ class ShadeCardController extends Controller
             })
             ->when($product, function ($query, $product) {
                 return $query->where('products.name', 'LIKE', "%$product%");
+            })
+            ->when($width, function ($query, $width) {
+                return $query->where('sizes.name', 'LIKE', "%$width%");
             })
             ->orderBy($orderBy === 'code' ? 'cards.card_no' : 'products.name')
             ->get();
