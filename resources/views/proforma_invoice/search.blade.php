@@ -7,6 +7,7 @@
             <th>Card No</th>
             <th>CUS ID</th>
             <th>Size ID</th>
+            <th>...</th>
         </tr>
     </thead>
     <tbody>
@@ -18,6 +19,10 @@
                 <td>{{ $value->card_no }}</td>
                 <td>{{ $value->customer_id }}</td>
                 <td>{{ $value->size_id }}</td>
+                <td>
+                    <button type="button" class="btn btn-info btn-xs"
+                        onclick="search_selection(this, '{{ $value->card_id }}')">Select</button>
+                </td>
             </tr>
         @endforeach
     </tbody>

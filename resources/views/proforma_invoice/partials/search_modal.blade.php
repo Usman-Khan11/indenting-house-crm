@@ -81,5 +81,48 @@
                 $(".loader").hide();
             })
         })
+
+        function search_selection(e, card_id) {
+            $(".loader").show();
+
+            $.get("{{ route('proforma_invoice') }}", {
+                _token: '{{ csrf_token() }}',
+                search_card_id: card_id,
+                type: 'search_card_id'
+            }, function(res) {
+                if (res.length) {
+                    let items = res;
+
+                    if ($('select.product, select.product_size_id, select.product_artwork_id').hasClass(
+                            'select2-hidden-accessible')) {
+                        $('select.product, select.product_size_id, select.product_artwork_id').select2('destroy');
+                    }
+
+                    $(items).each(function(key, value) {
+                        let $newRow = $("#product_table .row:first").clone();
+
+                        $newRow.find('.product').val(value.item_id).trigger('change');
+                        $newRow.find('.product_size_id').val(value.size_id).trigger('change');
+                        $newRow.find('.product_artwork_id').val(value.artwork.id).trigger('change');
+
+                        $("#product_table").append($newRow);
+                    });
+
+                    $("#product_table select.product").each(function(key, value) {
+                        let v = $(value).val();
+                        if (!v) {
+                            $(value).closest(".product_row").remove();
+                        }
+                    })
+
+                    $('select.product, select.product_size_id, select.product_artwork_id').select2();
+                    notify('success', 'Product added successfully.');
+                } else {
+                    notify('success', 'Product not found.');
+                }
+
+                $(".loader").hide();
+            })
+        }
     </script>
 @endpush

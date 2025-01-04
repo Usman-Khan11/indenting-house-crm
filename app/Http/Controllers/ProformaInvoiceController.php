@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Artwork;
+use App\Models\Card;
 use App\Models\Customer;
 use App\Models\Product;
 use App\Models\ProformaInvoice;
@@ -43,6 +44,14 @@ class ProformaInvoiceController extends Controller
                 return $data->band_detail;
             }
 
+            if (isset($request->type) && $request->type == "search_card_id") {
+                $search_card_id = $request->search_card_id;
+                $data = Card::where('id', $search_card_id)
+                    ->with('artwork', 'item')
+                    ->get();
+                return $data;
+            }
+
             $query = ProformaInvoice::Query();
             $query = $query->with('customer', 'supplier', 'added_by');
             $query = $query->orderBy('pi_no', 'desc')->get();
@@ -64,6 +73,7 @@ class ProformaInvoiceController extends Controller
             ->join('sizes', 'cards.size_id', '=', 'sizes.id')
             ->join('customers', 'cards.customer_id', '=', 'customers.id')
             ->select(
+                'cards.id as card_id',
                 'cards.card_no',
                 'products.name as product',
                 'sizes.name as size_name',
