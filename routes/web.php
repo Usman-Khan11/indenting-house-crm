@@ -185,6 +185,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/report/po', [ReportController::class, 'po'])->name('report.po');
     Route::get('/report/indent', [ReportController::class, 'indent'])->name('report.indent');
     Route::get('/report/shipment', [ReportController::class, 'shipment'])->name('report.shipment');
+    Route::get('/report/shade-cards', [ReportController::class, 'shade_card'])->name('report.shade_card');
     Route::get('/report/proforma-invoice', [ReportController::class, 'proforma_invoice'])->name('report.proforma_invoice');
 
     // Shipment

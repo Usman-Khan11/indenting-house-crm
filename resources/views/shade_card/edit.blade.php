@@ -23,6 +23,99 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-12 border-bottom mb-3">
+                            <h5 class="mb-1 fw-bold">Artwork Status:</h5>
+                        </div>
+
+                        <div class="col-md-4 col-12">
+                            <div class="mb-3">
+                                <label class="form-label">Artwork No</label>
+                                <input name="artwork_no" type="text"
+                                    value="{{ old('artwork_no', $artwork->artwork_no) }}" class="form-control"
+                                    placeholder="Artwork No" @if (auth()->user()->role_id != 1) readonly @endif />
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 col-12">
+                            <div class="mb-3">
+                                <label class="form-label">Status</label>
+                                <select name="artwork_status" class="form-select">
+                                    <option @if (old('artwork_status', $artwork->status) == '1') selected @endif value="1">Approved
+                                    </option>
+                                    <option @if (old('artwork_status', $artwork->status) == '2') selected @endif value="2">Pending at
+                                        Supplier</option>
+                                    <option @if (old('artwork_status', $artwork->status) == '3') selected @endif value="3">Pending at
+                                        Customer</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 col-12">
+                            <div class="mb-3">
+                                <label class="form-label">Print Style</label>
+                                <select name="print_style" class="form-select">
+                                    <option @if (old('print_style', $artwork->print_style) == '1') selected @endif value="1">Axial Not
+                                        Rectified</option>
+                                    <option @if (old('print_style', $artwork->print_style) == '2') selected @endif value="2">Radial Not
+                                        Rectified</option>
+                                    <option @if (old('print_style', $artwork->print_style) == '3') selected @endif value="3">Not Known
+                                    </option>
+                                    <option @if (old('print_style', $artwork->print_style) == '4') selected @endif value="4">Axial
+                                        Rectified</option>
+                                    <option @if (old('print_style', $artwork->print_style) == '5') selected @endif value="5">Radial
+                                        Rectified</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3 col-12">
+                            <div class="mb-3">
+                                <label class="form-label">Front Print</label>
+                                <input name="front_print" type="text" class="form-control"
+                                    value="{{ old('front_print', $artwork->front_print) }}" placeholder="Front Print" />
+                            </div>
+                        </div>
+
+                        <div class="col-md-3 col-12">
+                            <div class="mb-3">
+                                <label class="form-label">Front Print Color</label>
+                                <input name="front_print_color" type="text" class="form-control"
+                                    value="{{ old('front_print_color', $artwork->front_print_color) }}"
+                                    placeholder="Front Print Color" />
+                            </div>
+                        </div>
+
+                        <div class="col-md-3 col-12">
+                            <div class="mb-3">
+                                <label class="form-label">Back Print</label>
+                                <input name="back_print" type="text" class="form-control"
+                                    value="{{ old('back_print', $artwork->back_print) }}" placeholder="Back Print" />
+                            </div>
+                        </div>
+
+                        <div class="col-md-3 col-12">
+                            <div class="mb-3">
+                                <label class="form-label">Back Print Color</label>
+                                <input name="back_print_color" type="text" class="form-control"
+                                    value="{{ old('back_print_color', $artwork->back_print_color) }}"
+                                    placeholder="Back Print Color" />
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-12">
+                            <div class="mb-3">
+                                <label class="form-label">Remarks</label>
+                                <textarea name="remarks" rows="5" class="form-control" placeholder="Remarks">{{ old('remarks', $artwork->remarks) }}</textarea>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3 col-12">
+                            <div class="mb-3">
+                                <label class="form-label">Image</label>
+                                <input name="artwork_image" type="file" class="form-control" placeholder="Image" />
+                            </div>
+                        </div>
+
+                        <div class="col-12 border-bottom my-3">
                             <h5 class="mb-1 fw-bold">Card Status:</h5>
                         </div>
 
@@ -165,99 +258,6 @@
                             <div class="mb-3">
                                 <label class="form-label">Image</label>
                                 <input name="card_image" type="file" class="form-control" placeholder="Image" />
-                            </div>
-                        </div>
-
-                        <div class="col-12 border-bottom my-3">
-                            <h5 class="mb-1 fw-bold">Artwork Status:</h5>
-                        </div>
-
-                        <div class="col-md-4 col-12">
-                            <div class="mb-3">
-                                <label class="form-label">Artwork No</label>
-                                <input name="artwork_no" type="text"
-                                    value="{{ old('artwork_no', $artwork->artwork_no) }}" class="form-control"
-                                    placeholder="Artwork No" @if (auth()->user()->role_id != 1) readonly @endif />
-                            </div>
-                        </div>
-
-                        <div class="col-md-4 col-12">
-                            <div class="mb-3">
-                                <label class="form-label">Status</label>
-                                <select name="artwork_status" class="form-select">
-                                    <option @if (old('artwork_status', $artwork->status) == '1') selected @endif value="1">Approved
-                                    </option>
-                                    <option @if (old('artwork_status', $artwork->status) == '2') selected @endif value="2">Pending at
-                                        Supplier</option>
-                                    <option @if (old('artwork_status', $artwork->status) == '3') selected @endif value="3">Pending at
-                                        Customer</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="col-md-4 col-12">
-                            <div class="mb-3">
-                                <label class="form-label">Print Style</label>
-                                <select name="print_style" class="form-select">
-                                    <option @if (old('print_style', $artwork->print_style) == '1') selected @endif value="1">Axial Not
-                                        Rectified</option>
-                                    <option @if (old('print_style', $artwork->print_style) == '2') selected @endif value="2">Radial Not
-                                        Rectified</option>
-                                    <option @if (old('print_style', $artwork->print_style) == '3') selected @endif value="3">Not Known
-                                    </option>
-                                    <option @if (old('print_style', $artwork->print_style) == '4') selected @endif value="4">Axial
-                                        Rectified</option>
-                                    <option @if (old('print_style', $artwork->print_style) == '5') selected @endif value="5">Radial
-                                        Rectified</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="col-md-3 col-12">
-                            <div class="mb-3">
-                                <label class="form-label">Front Print</label>
-                                <input name="front_print" type="text" class="form-control"
-                                    value="{{ old('front_print', $artwork->front_print) }}" placeholder="Front Print" />
-                            </div>
-                        </div>
-
-                        <div class="col-md-3 col-12">
-                            <div class="mb-3">
-                                <label class="form-label">Front Print Color</label>
-                                <input name="front_print_color" type="text" class="form-control"
-                                    value="{{ old('front_print_color', $artwork->front_print_color) }}"
-                                    placeholder="Front Print Color" />
-                            </div>
-                        </div>
-
-                        <div class="col-md-3 col-12">
-                            <div class="mb-3">
-                                <label class="form-label">Back Print</label>
-                                <input name="back_print" type="text" class="form-control"
-                                    value="{{ old('back_print', $artwork->back_print) }}" placeholder="Back Print" />
-                            </div>
-                        </div>
-
-                        <div class="col-md-3 col-12">
-                            <div class="mb-3">
-                                <label class="form-label">Back Print Color</label>
-                                <input name="back_print_color" type="text" class="form-control"
-                                    value="{{ old('back_print_color', $artwork->back_print_color) }}"
-                                    placeholder="Back Print Color" />
-                            </div>
-                        </div>
-
-                        <div class="col-md-6 col-12">
-                            <div class="mb-3">
-                                <label class="form-label">Remarks</label>
-                                <textarea name="remarks" rows="5" class="form-control" placeholder="Remarks">{{ old('remarks', $artwork->remarks) }}</textarea>
-                            </div>
-                        </div>
-
-                        <div class="col-md-3 col-12">
-                            <div class="mb-3">
-                                <label class="form-label">Image</label>
-                                <input name="artwork_image" type="file" class="form-control" placeholder="Image" />
                             </div>
                         </div>
 

@@ -13,6 +13,10 @@
                             <input type="text" class="form-control card_no" name="card_no">
                         </div>
                         <div class="input-group mb-3">
+                            <span class="input-group-text">Item Code</span>
+                            <input type="text" class="form-control item_code" name="item_code">
+                        </div>
+                        <div class="input-group mb-3">
                             <span class="input-group-text">Product</span>
                             <input type="text" class="form-control product" name="product">
                         </div>
@@ -66,6 +70,7 @@
         $("#search_now").click(function() {
             $(".loader").show();
             let card_no = $(".card_no").val();
+            let item_code = $(".item_code").val();
             let product = $(".product").val();
             let width = $(".width").val();
             let order_by = $('input[name="order_by"]:checked').val();
@@ -73,6 +78,7 @@
             $.get("{{ route('proforma_invoice.search') }}", {
                 _token: '{{ csrf_token() }}',
                 card_no,
+                item_code,
                 product,
                 order_by,
                 width,

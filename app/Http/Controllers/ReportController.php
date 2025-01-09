@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Card;
 use App\Models\Customer;
 use App\Models\CustomerProducts;
 use App\Models\Indent;
@@ -462,5 +463,59 @@ class ReportController extends Controller
         $data['products'] = Product::orderBy('name', 'asc')->get();
 
         return view('reports.proforma_invoice', $data);
+    }
+
+    public function shade_card(Request $request)
+    {
+        $data['page_title'] = "Shade Card & Artwork Report";
+        $this->checkPermissions('shade_card');
+
+        if ($request->ajax()) {
+            $query = Card::join('artworks', 'cards.id', '=', 'artworks.card_id')
+                ->join('customers', 'cards.customer_id', '=', 'customers.id')
+                ->join('suppliers', 'cards.supplier_id', '=', 'suppliers.id')
+                ->join('products', 'cards.item_id', '=', 'products.id')
+                ->join('sizes', 'cards.size_id', '=', 'sizes.id')
+                ->select(
+                    'cards.card_no',
+                    'artworks.artwork_no',
+                    'cards.date as card_date',
+                    'cards.customer_id',
+                    'cards.supplier_id',
+                    'customers.name as customer_name',
+                    'suppliers.name as supplier_name',
+                    'products.name as product_name',
+                    'products.description as product_description',
+                    'sizes.name as size_name',
+                );
+
+            if (!empty($request->from) && !empty($request->to)) {
+                $query->whereBetween('cards.date', [
+                    $request->from,
+                    $request->to
+                ]);
+            }
+
+            if (!empty($request->customer_id)) {
+                $query->where('cards.customer_id', $request->customer_id);
+            }
+
+            if (!empty($request->supplier_id)) {
+                $query->where('cards.supplier_id', $request->supplier_id);
+            }
+
+            if (!empty($request->product_id)) {
+                $query->where('cards.item_id', $request->product_id);
+            }
+
+            $query = $query->orderBy('card_date', 'desc')->get();
+            return DataTables::of($query)->addIndexColumn()->make(true);
+        }
+
+        $data['customers'] = Customer::orderBy('name', 'asc')->get();
+        $data['suppliers'] = Supplier::orderBy('name', 'asc')->get();
+        $data['products'] = Product::orderBy('name', 'asc')->get();
+
+        return view('reports.shade_card', $data);
     }
 }

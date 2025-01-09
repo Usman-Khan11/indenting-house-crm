@@ -182,7 +182,7 @@ class ShadeCardController extends Controller
             'ingredient' => 'nullable|string|max:100',
             'ref_code' => 'nullable|string|max:150',
             'card_status' => 'required',
-            'card_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:1048',
+            'card_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:10000',
 
             'artwork_no' => 'required|string|max:20|unique:artworks',
             'front_print' => 'nullable|string|max:50',
@@ -192,7 +192,7 @@ class ShadeCardController extends Controller
             'remarks' => 'nullable|string',
             'artwork_status' => 'required',
             'print_style' => 'required',
-            'artwork_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:1048',
+            'artwork_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:10000',
         ]);
 
         $card = new Card();
@@ -261,7 +261,7 @@ class ShadeCardController extends Controller
             'ingredient' => 'nullable|string|max:100',
             'ref_code' => 'nullable|string|max:150',
             'card_status' => 'required',
-            'card_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:1048',
+            'card_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:10000',
 
             'artwork_no' => [
                 'required',
@@ -276,7 +276,7 @@ class ShadeCardController extends Controller
             'remarks' => 'nullable|string',
             'artwork_status' => 'required',
             'print_style' => 'required',
-            'artwork_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:1048',
+            'artwork_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:10000',
         ]);
 
         $card = Card::find($request->card_id);

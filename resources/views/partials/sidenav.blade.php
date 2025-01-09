@@ -218,7 +218,8 @@
                 checkSidebar($role_id, 8, 'po') ||
                 checkSidebar($role_id, 8, 'indent') ||
                 checkSidebar($role_id, 8, 'shipment') ||
-                checkSidebar($role_id, 8, 'proforma_invoice'))
+                checkSidebar($role_id, 8, 'proforma_invoice') ||
+                checkSidebar($role_id, 8, 'shade_card'))
             <li class="menu-item {{ menuActive('report*', 2) }}">
                 <a href="javascript:void(0);" class="menu-link menu-toggle">
                     <i class="menu-icon tf-icons ti ti-chart-bar"></i>
@@ -301,6 +302,14 @@
                         <li class="menu-item {{ menuActive('report.shipment') }}">
                             <a href="{{ route('report.shipment') }}" class="menu-link">
                                 <div data-i18n="Shipment">Shipment</div>
+                            </a>
+                        </li>
+                    @endif
+
+                    @if (checkSidebar($role_id, 8, 'shade_card'))
+                        <li class="menu-item {{ menuActive('report.shade_card') }}">
+                            <a href="{{ route('report.shade_card') }}" class="menu-link">
+                                <div data-i18n="Shade Card & Artwork">Shade Card & Artwork</div>
                             </a>
                         </li>
                     @endif

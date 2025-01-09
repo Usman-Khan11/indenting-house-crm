@@ -282,6 +282,12 @@ return new class extends Migration
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
+            [
+                'nav_id' => 8,
+                'key' => 'shade_card',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
             // Shipments
             [
                 'nav_id' => 9,
