@@ -11,7 +11,9 @@
                 <table class="table table-bordered table-hover">
                     <thead class="table-light">
                         <tr>
-                            <th width="5%">...</th>
+                            <th width="5%">
+                                <input type="checkbox" class="form-check-input">
+                            </th>
                             <th width="95%">Supplier</th>
                         </tr>
                     </thead>
@@ -25,3 +27,15 @@
         </div>
     </form>
 </div>
+
+@push('script')
+    <script>
+        $("#supplier_mail_modal thead input").click(function() {
+            if ($(this).is(":checked")) {
+                $("#supplier_mail_modal tbody input").prop("checked", true);
+            } else {
+                $("#supplier_mail_modal tbody input").prop("checked", false);
+            }
+        });
+    </script>
+@endpush
