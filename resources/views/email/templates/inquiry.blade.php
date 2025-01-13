@@ -86,6 +86,7 @@
 @php
     $inquiry = $data['inquiry'];
     $items = $data['inquiry_items'];
+    $supplier = $data['supplier'];
 @endphp
 
 <body>
@@ -95,10 +96,10 @@
         </div>
         <div class="email-body">
             <p><strong>Dear Sir/Madam,</strong></p>
-            <p>{{ @$inquiry->supplier->name }}</p>
+            <p>{{ $supplier->name }}</p>
             <p>Hope you are absolutely fine.</p>
             <div class="highlight-box">
-                Kindly quote your best possible C&F by Sea Karachi L/C at Sight prices for the following item:
+                {{ $inquiry->remark }}
                 @foreach ($items as $item)
                     <div>
                         <strong>{{ $item->qty }} {{ $item->unit }} - {{ @$item->item->name }}</strong>

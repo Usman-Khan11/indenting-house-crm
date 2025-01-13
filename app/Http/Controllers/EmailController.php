@@ -140,6 +140,7 @@ class EmailController extends Controller
                     ->toArray();
 
                 $data['inquiry_items'] = $data["inquiry"]->items->whereIn('item_id', $a);
+                $data['supplier'] = $supplier;
 
                 $recipients = array_filter([
                     $supplier->email ?? null,
