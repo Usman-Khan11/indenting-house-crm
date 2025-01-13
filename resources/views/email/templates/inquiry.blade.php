@@ -85,6 +85,7 @@
 
 @php
     $inquiry = $data['inquiry'];
+    $items = $data['inquiry_items'];
 @endphp
 
 <body>
@@ -98,7 +99,7 @@
             <p>Hope you are absolutely fine.</p>
             <div class="highlight-box">
                 Kindly quote your best possible C&F by Sea Karachi L/C at Sight prices for the following item:
-                @foreach ($inquiry->items as $item)
+                @foreach ($items as $item)
                     <div>
                         <strong>{{ $item->qty }} {{ $item->unit }} - {{ @$item->item->name }}</strong>
                     </div>

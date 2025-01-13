@@ -8,6 +8,8 @@ use App\Mail\InquiryEmail;
 use App\Mail\TestMail;
 use App\Models\EmailHistory;
 use App\Models\Inquiry;
+use App\Models\Supplier;
+use App\Models\SupplierProducts;
 use Illuminate\Support\Facades\Mail;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -117,25 +119,36 @@ class EmailController extends Controller
         return back()->withSuccess('You should receive a test mail at ' . $request->email . ' shortly.');
     }
 
-    public function emailInquiry($id)
+    public function emailInquiry(Request $request)
     {
-        $data['inquiry'] = Inquiry::where('id', $id)->with('items', 'supplier')->first();
+        $id = $request->inquiry_id;
+        $data['inquiry'] = Inquiry::where('id', $id)->with('items', 'supplier', 'items.suppliers')->first();
+        $item_ids = $data['inquiry']->items->pluck('item_id')->toArray();
+        $supplier_ids = $request->supplier ?? [];
+        $suppliers = Supplier::whereIn('id', $supplier_ids)->get();
 
-        if ($data['inquiry']->supplier->products->count() == 0) {
-            return back()->withError('Email not sent. This supplier does not mapped any product!');
+        if (count($suppliers) == 0) {
+            return back()->withError('No supplier found.');
         }
-
-        $recipients = array_filter([
-            $data['inquiry']->supplier->email ?? null,
-            $data['inquiry']->supplier->email_2 ?? null,
-            $data['inquiry']->supplier->email_3 ?? null,
-        ]);
-
-        // $data['bcc'] = auth()->user()->email;
 
         try {
             $data['subject'] = "Inquiry " . $data['inquiry']->inq_no . " Details";
-            Mail::to($recipients)->queue(new InquiryEmail($data));
+            foreach ($suppliers as $supplier) {
+                $a = SupplierProducts::whereIn('product_id', $item_ids)
+                    ->where('supplier_id', $supplier->id)
+                    ->pluck('product_id')
+                    ->toArray();
+
+                $data['inquiry_items'] = $data["inquiry"]->items->whereIn('item_id', $a);
+
+                $recipients = array_filter([
+                    $supplier->email ?? null,
+                    $supplier->email_2 ?? null,
+                    $supplier->email_3 ?? null,
+                ]);
+
+                Mail::to($recipients)->queue(new InquiryEmail($data));
+            }
 
             $email_history = new EmailHistory();
             $email_history->user_id = auth()->user()->id;

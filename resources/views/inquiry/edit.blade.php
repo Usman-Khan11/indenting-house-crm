@@ -101,8 +101,11 @@
                         </div>
 
                         <div class="col-md-4 col-12">
-                            <a href="/email/inquiry/{{ $inquiry->id }}" class="btn btn-primary mt-3">Send Email to
-                                Supplier</a>
+                            {{-- <a href="/email/inquiry/{{ $inquiry->id }}" class="btn btn-primary mt-3">Send Email to
+                                Supplier</a> --}}
+                            <button type="button" class="btn btn-primary mt-3 supplier_email_btn">
+                                Send Email to Suppliers
+                            </button>
                         </div>
 
                         <!-- Product Repeater -->
@@ -182,4 +185,44 @@
             </div>
         </form>
     </div>
+
+    @include('inquiry.partials.suppliers_modal')
 @endsection
+
+@push('script')
+    <script>
+        $(".supplier_email_btn").click(function() {
+            $(".loader").show();
+            $("#supplier_mail_modal .modal-body table tbody").html(null);
+
+            let product_ids = $("select.product").map(function() {
+                return $(this).val();
+            }).get();
+
+            if (product_ids.length) {
+                $.get("{{ route('inquiry') }}", {
+                    type: 'get_suppliers',
+                    product_ids
+                }, function(res) {
+                    $(res).each(function(i, v) {
+                        $("#supplier_mail_modal .modal-body table tbody").append(`
+                            <tr>
+                                <td>
+                                    <input type="checkbox" class="form-check-input" name="supplier[]" id="sup_${i}" value="${v.supplier_id}">
+                                </td>
+                                <td>
+                                    <label class="cursor-pointer" for="sup_${i}">${v.supplier_id} -- ${v.supplier.name}</label>
+                                </td>
+                            </tr>
+                        `);
+                        $("input[name=inquiry_id]").val("{{ $inquiry->id }}");
+                        $("#supplier_mail_modal").modal("show");
+                    });
+                    $(".loader").hide();
+                });
+            } else {
+                $(".loader").hide();
+            }
+        });
+    </script>
+@endpush

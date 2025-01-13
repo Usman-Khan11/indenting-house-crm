@@ -23,4 +23,9 @@ class InquiryItem extends Model
     {
         return $this->belongsTo(Supplier::class);
     }
+
+    public function suppliers()
+    {
+        return $this->hasMany(SupplierProducts::class, 'product_id', 'item_id');
+    }
 }

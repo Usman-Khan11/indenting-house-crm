@@ -7,6 +7,7 @@ use App\Models\Inquiry;
 use App\Models\Product;
 use App\Models\Supplier;
 use App\Models\InquiryItem;
+use App\Models\SupplierProducts;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
@@ -36,6 +37,11 @@ class InquiryController extends Controller
         $this->checkPermissions('view');
 
         if ($request->ajax()) {
+            if (isset($request->type) && $request->type == 'get_suppliers') {
+                return SupplierProducts::whereIn('product_id', $request->product_ids)
+                    ->with('supplier', 'product')
+                    ->get();
+            }
             $query = Inquiry::Query();
             $query = $query->with('customer', 'added_by');
             $query = $query->orderBy('inq_no', 'desc')->get();
