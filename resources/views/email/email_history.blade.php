@@ -46,6 +46,8 @@
                             let button = '';
                             button +=
                                 `<a href="/email/history/${full.id}" target="_blank" class="btn btn-info btn-xs">View</a> `;
+                            button +=
+                                `<a href="/email/history/delete/${full.id}" onclick="return checkDelete()" class="btn btn-danger btn-xs">Delete</a> `;
 
                             return button;
                         },

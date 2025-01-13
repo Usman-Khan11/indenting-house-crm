@@ -101,6 +101,12 @@ class EmailController extends Controller
         return view('email.email_history_view', $data);
     }
 
+    public function emailHistoryDelete($id)
+    {
+        EmailHistory::where('id', $id)->delete();
+        return back()->withSuccess('Email history deleted successfully!');
+    }
+
     public function sendTestMail(Request $request)
     {
         $request->validate([
@@ -122,7 +128,9 @@ class EmailController extends Controller
     public function emailInquiry(Request $request)
     {
         $id = $request->inquiry_id;
-        $data['inquiry'] = Inquiry::where('id', $id)->with('items', 'supplier', 'items.suppliers')->first();
+        $data['inquiry'] = Inquiry::where('id', $id)
+            ->with('items', 'supplier', 'items.suppliers')
+            ->first();
         $item_ids = $data['inquiry']->items->pluck('item_id')->toArray();
         $supplier_ids = $request->supplier ?? [];
         $suppliers = Supplier::whereIn('id', $supplier_ids)->get();
@@ -142,6 +150,10 @@ class EmailController extends Controller
                 $data['inquiry_items'] = $data["inquiry"]->items->whereIn('item_id', $a);
                 $data['supplier'] = $supplier;
 
+                if ($data['inquiry_items']->count() == 0) {
+                    continue;
+                }
+
                 $recipients = array_filter([
                     $supplier->email ?? null,
                     $supplier->email_2 ?? null,
@@ -149,12 +161,12 @@ class EmailController extends Controller
                 ]);
 
                 Mail::to($recipients)->queue(new InquiryEmail($data));
-            }
 
-            $email_history = new EmailHistory();
-            $email_history->user_id = auth()->user()->id;
-            $email_history->content = view('email.templates.inquiry', ['data' => $data]);
-            $email_history->save();
+                $email_history = new EmailHistory();
+                $email_history->user_id = auth()->user()->id;
+                $email_history->content = view('email.templates.inquiry', ['data' => $data]);
+                $email_history->save();
+            }
         } catch (\Exception $exp) {
             return back()->withError('Email not sent.');
         }
