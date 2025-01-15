@@ -142,6 +142,10 @@
                         }
                     },
                     {
+                        data: "currency",
+                        title: "currency",
+                    },
+                    {
                         data: "size_name",
                         title: "Size",
                     },
@@ -197,7 +201,7 @@
                 let product_id = $("#product_id").val();
 
                 datatable.ajax.reload();
-                title = `Proforma Invoice Report ${from} to ${to}`;
+                title = `Proforma Invoice Report ${getDate(from)} to ${getDate(to)}`;
             })
         });
     </script>

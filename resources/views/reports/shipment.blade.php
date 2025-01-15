@@ -156,6 +156,10 @@
                         }
                     },
                     {
+                        data: "currency",
+                        title: "currency",
+                    },
+                    {
                         data: "lc_bt_tt_no",
                         title: "LC No",
                         render: function(data, type, full, meta) {
@@ -326,7 +330,7 @@
                 let product_id = $("#product_id").val();
 
                 datatable.ajax.reload();
-                title = `MRI Shipment Report ${from} to ${to}`;
+                title = `MRI Shipment Report ${getDate(from)} to ${getDate(to)}`;
             })
         });
     </script>
