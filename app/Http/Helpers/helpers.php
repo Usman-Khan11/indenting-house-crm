@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\File;
 function general()
 {
     return GeneralSetting::first();
+    // test
 }
 
 function menuActive($routeName, $type = null)
