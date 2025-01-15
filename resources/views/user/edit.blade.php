@@ -82,6 +82,34 @@
                             </div>
                         </div>
 
+                        <div class="col-12 border-bottom my-3">
+                            <h5 class="mb-1 fw-bold">IMAP Setting:</h5>
+                        </div>
+
+                        <div class="col-md-4 col-12">
+                            <div class="mb-3">
+                                <label class="form-label">IMAP Host</label>
+                                <input name="imap_host" type="text" class="form-control" placeholder="IMAP Host"
+                                    value="{{ old('imap_host', @$user->imap_setting['host']) }}" />
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 col-12">
+                            <div class="mb-3">
+                                <label class="form-label">IMAP Username</label>
+                                <input name="imap_username" type="text" class="form-control" placeholder="IMAP Username"
+                                    value="{{ old('imap_username', @$user->imap_setting['username']) }}" />
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 col-12">
+                            <div class="mb-3">
+                                <label class="form-label">IMAP Password</label>
+                                <input name="imap_password" type="text" class="form-control" placeholder="IMAP Password"
+                                    value="{{ old('imap_password', @$user->imap_setting['password']) }}" />
+                            </div>
+                        </div>
+
                         <div class="col-md-12 col-12 mt-3">
                             <button type="submit" class="btn btn-primary">Save</button>
                         </div>

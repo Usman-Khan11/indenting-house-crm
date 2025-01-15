@@ -84,6 +84,11 @@ class UserController extends Controller
         $user->address = $request->address;
         $user->username = $request->username;
         $user->password = Hash::make($request->password);
+        $user->imap_setting = [
+            'host'     => $request->imap_host,
+            'username' => $request->imap_username,
+            'password' => $request->imap_password,
+        ];
 
         if ($user->save()) {
             return redirect()->route('user')->withSuccess('User added successfully.');
@@ -113,6 +118,11 @@ class UserController extends Controller
         $user->designation = $request->designation;
         $user->address = $request->address;
         $user->username = $request->username;
+        $user->imap_setting = [
+            'host'     => $request->imap_host,
+            'username' => $request->imap_username,
+            'password' => $request->imap_password,
+        ];
 
         if (!empty($request->password)) {
             $user->password = Hash::make($request->password);

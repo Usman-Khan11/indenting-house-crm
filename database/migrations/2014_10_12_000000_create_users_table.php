@@ -27,6 +27,7 @@ return new class extends Migration
             $table->string('password', 255);
             $table->integer('role_id')->default(0);
             $table->string('remember_token', 100)->nullable();
+            $table->text('imap_setting')->nullable();
             $table->timestamps();
         });
 

@@ -377,3 +377,39 @@ function deleteImage($file)
         unlink(public_path($file));
     }
 }
+
+function saveMailToSentFolder($to, $subject, $htmlContent, $imapHost, $imapUsername, $imapPassword)
+{
+    if (!$to || !$subject || !$htmlContent) {
+        return "Invalid parameters!";
+    }
+
+    if (!$imapHost || !$imapUsername || !$imapPassword) {
+        return "Invalid parameters!";
+    }
+
+    $imapHost = "{" . $imapHost . ":993/imap/ssl}";
+
+    $imapStream = @imap_open($imapHost, $imapUsername, $imapPassword);
+
+    if (!$imapStream) {
+        return "IMAP Connection Error: " . imap_last_error();
+    } else {
+        $sentFolder = "INBOX.Sent";
+        $headers = "From: $imapUsername\r\n";
+        $headers .= "To: $to\r\n";
+        $headers .= "Subject: $subject\r\n";
+        $headers .= "MIME-Version: 1.0\r\n";
+        $headers .= "Content-Type: text/html; charset=UTF-8\r\n";
+        $emailMessage = $headers . "\r\n" . $htmlContent;
+
+        $result = imap_append($imapStream, $imapHost . $sentFolder, $emailMessage, "\\Seen");
+        if (!$result) {
+            return "Failed to save mail to Sent folder: " . imap_last_error();
+        } else {
+            return "Mail saved to Sent folder successfully!";
+        }
+
+        imap_close($imapStream);
+    }
+}

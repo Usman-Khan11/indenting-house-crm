@@ -16,6 +16,8 @@ return new class extends Migration
         Schema::create('email_history', function (Blueprint $table) {
             $table->id();
             $table->integer('user_id');
+            $table->text('to')->nullable();
+            $table->string('subject', 255)->nullable();
             $table->text('content')->nullable();
             $table->timestamps();
         });

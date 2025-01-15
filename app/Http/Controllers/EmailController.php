@@ -164,6 +164,8 @@ class EmailController extends Controller
 
                 $email_history = new EmailHistory();
                 $email_history->user_id = auth()->user()->id;
+                $email_history->to = $recipients;
+                $email_history->subject = $data['subject'];
                 $email_history->content = view('email.templates.inquiry', ['data' => $data]);
                 $email_history->save();
             }
