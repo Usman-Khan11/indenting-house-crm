@@ -28,7 +28,7 @@ return new class extends Migration
             $table->text('lot_no')->nullable();
             $table->string('inv_no', 40)->nullable();
             $table->string('inv_date', 20)->nullable();
-            $table->string('bl_id', 40)->nullable();
+            $table->string('bl_no', 40)->nullable();
             $table->string('bl_date', 20)->nullable();
             $table->text('payment_remark')->nullable();
             $table->text('final_remark')->nullable();
