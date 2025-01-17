@@ -44,7 +44,7 @@ class OfferController extends Controller
             }
 
             $query = Offer::Query();
-            $query = $query->with('inquiry', 'customer', 'added_by');
+            $query = $query->with('inquiry', 'customer', 'added_by', 'po.indent');
             $query = $query->orderBy('offer_no', 'desc')->get();
             return DataTables::of($query)->addIndexColumn()->make(true);
         }

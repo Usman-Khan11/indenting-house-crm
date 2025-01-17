@@ -28,4 +28,9 @@ class Offer extends Model
     {
         return $this->hasMany(OfferItem::class);
     }
+
+    public function po()
+    {
+        return $this->belongsTo(PurchaseOrder::class, 'id', 'offer_id');
+    }
 }

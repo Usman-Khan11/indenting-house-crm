@@ -33,4 +33,9 @@ class PurchaseOrder extends Model
     {
         return $this->hasMany(PurchaseOrderItem::class, 'po_id');
     }
+
+    public function indent()
+    {
+        return $this->belongsTo(Indent::class, 'id', 'po_id');
+    }
 }

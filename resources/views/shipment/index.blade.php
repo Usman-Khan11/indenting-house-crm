@@ -63,38 +63,20 @@
                     },
                     {
                         title: "Indent #",
-                        render: function(data, type, full, meta) {
-                            if (full.indent) {
-                                return full.indent.indent_no;
-                            } else {
-                                return '-';
-                            }
-                        }
+                        data: "indent_no",
                     },
                     {
                         title: "Customer",
-                        render: function(data, type, full, meta) {
-                            if (full.customer) {
-                                return full.customer.name;
-                            } else {
-                                return '-';
-                            }
-                        }
+                        data: "customer_name",
                     },
                     {
                         title: "Supplier",
-                        render: function(data, type, full, meta) {
-                            if (full.supplier) {
-                                return full.supplier.name;
-                            } else {
-                                return '-';
-                            }
-                        }
+                        data: "supplier_name",
                     },
                     {
                         title: 'Date',
                         "render": function(data, type, full, meta) {
-                            return getDate(full.date);
+                            return getDate(full.shipment_date);
                         }
                     },
                     {
@@ -103,13 +85,7 @@
                     },
                     {
                         title: "Added By",
-                        render: function(data, type, full, meta) {
-                            if (full.added_by) {
-                                return full.added_by.name;
-                            } else {
-                                return '-';
-                            }
-                        }
+                        data: "user_name",
                     }
                 ],
                 rowCallback: function(row, data) {},

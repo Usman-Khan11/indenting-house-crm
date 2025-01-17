@@ -28,4 +28,9 @@ class Inquiry extends Model
     {
         return $this->hasMany(InquiryItem::class);
     }
+
+    public function offer()
+    {
+        return $this->belongsTo(Offer::class, 'id', 'inquiry_id');
+    }
 }

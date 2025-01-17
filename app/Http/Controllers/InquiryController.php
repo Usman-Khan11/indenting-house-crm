@@ -43,7 +43,7 @@ class InquiryController extends Controller
                     ->get();
             }
             $query = Inquiry::Query();
-            $query = $query->with('customer', 'added_by');
+            $query = $query->with('customer', 'added_by', 'offer.po.indent');
             $query = $query->orderBy('inq_no', 'desc')->get();
             return DataTables::of($query)->addIndexColumn()->make(true);
         }
@@ -81,6 +81,7 @@ class InquiryController extends Controller
         $data['suppliers'] = Supplier::orderBy('name', 'asc')->get();
         $data['products'] = Product::orderBy('name', 'asc')->get();
         $data['inquiry'] = Inquiry::where("id", $id)->with('items')->first();
+        return $data['inquiry']->checkInquiry();
         return view('inquiry.edit', $data);
     }
 
