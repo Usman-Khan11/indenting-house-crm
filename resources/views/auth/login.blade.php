@@ -12,14 +12,19 @@
                 <!-- Login -->
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="mb-1 pt-2">LOGIN</h4>
+                        <div class="app-brand justify-content-center mb-4 mt-2">
+                            <a href="#" class="app-brand-link gap-2 text-center d-block w-100">
+                                <img src="{{ asset(general()->logo) }}" width="40%" />
+                            </a>
+                        </div>
+                        <h4 class="mb-2 pt-0 text-center">Welcome to {{ general()->sitename }} 👋</h4>
 
                         <form class="mb-3" action="{{ route('login') }}" method="POST">
                             @csrf
                             <div class="mb-3">
                                 <label for="email" class="form-label">Username</label>
                                 <input type="text" class="form-control" name="username" value="" required
-                                    autocomplete="username" autofocus tabindex="1">
+                                    autofocus>
                             </div>
                             <div class="mb-3 form-password-toggle">
                                 <div class="d-flex justify-content-between">
