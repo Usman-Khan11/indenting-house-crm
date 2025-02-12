@@ -81,6 +81,32 @@
                             </div>
                         </div>
 
+                        <div class="col-md-2 col-12">
+                            <div class="mb-3">
+                                <label class="form-label">Scodes</label>
+                                <select name="scode" class="form-select">
+                                    <option value="" selected></option>
+                                    @foreach (scodes() as $key => $value)
+                                        <option @if (old('scode', $product->scode) == $key) selected @endif
+                                            value="{{ $key }}">{{ $value }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2 col-12">
+                            <div class="mb-3">
+                                <label class="form-label">Pup</label>
+                                <select name="pup" class="form-select">
+                                    <option value="" selected></option>
+                                    @foreach (pup() as $key => $value)
+                                        <option @if (old('pup', $product->pup) == $key) selected @endif
+                                            value="{{ $key }}">{{ $value }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+
                         <div class="col-md-12 col-12 mt-3">
                             <button type="submit" class="btn btn-primary">Save</button>
                         </div>

@@ -71,6 +71,14 @@
                         title: "type",
                     },
                     {
+                        data: "scode",
+                        title: "scode",
+                    },
+                    {
+                        data: "pup",
+                        title: "pup",
+                    },
+                    {
                         title: "Options",
                         class: "text-nowrap",
                         render: function(data, type, full, meta) {

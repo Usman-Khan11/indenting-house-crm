@@ -116,6 +116,8 @@ class ProductController extends Controller
             'unit' => 'nullable|string|max:100',
             'type' => 'nullable|string|max:30',
             'code' => 'nullable|string|max:255',
+            'scode' => 'nullable|string|max:30',
+            'pup' => 'nullable|string|max:30',
         ]);
 
         $id = 1;
@@ -132,6 +134,8 @@ class ProductController extends Controller
         $product->unit = $request->unit;
         $product->type = $request->type;
         $product->code = $request->code;
+        $product->scode = $request->scode;
+        $product->pup = $request->pup;
 
         if ($product->save()) {
             return redirect()->route('product')->withSuccess('Material added successfully.');
@@ -149,6 +153,8 @@ class ProductController extends Controller
             'unit' => 'nullable|string|max:100',
             'type' => 'nullable|string|max:30',
             'code' => 'nullable|string|max:255',
+            'scode' => 'nullable|string|max:30',
+            'pup' => 'nullable|string|max:30',
         ]);
 
         $new_id = $request->new_id;
@@ -169,6 +175,8 @@ class ProductController extends Controller
         $product->unit = $request->unit;
         $product->type = $request->type;
         $product->code = $request->code;
+        $product->scode = $request->scode;
+        $product->pup = $request->pup;
 
         if ($product->save()) {
             return redirect()->route('product')->withSuccess('Material updated successfully.');

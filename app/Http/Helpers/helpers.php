@@ -235,6 +235,31 @@ function shipmentLotDetails()
     return $data;
 }
 
+function scodes()
+{
+    $data = [
+        'CFF' => 'CFF',
+        'PTP' => 'PTP',
+        'Tropical' => 'Tropical',
+        'ALU Sachet' => 'ALU Sachet',
+        'Paper Sachet' => 'Paper Sachet',
+        'Others' => 'Others'
+    ];
+
+    return $data;
+}
+
+function pup()
+{
+    $data = [
+        'Printed' => 'Printed',
+        'DSP' => 'DSP',
+        'Un Printed' => 'Un Printed'
+    ];
+
+    return $data;
+}
+
 function renew()
 {
     $gnl = GeneralSetting::first();
