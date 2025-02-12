@@ -230,7 +230,7 @@
                         <div class="col-md-4 col-12">
                             <div class="mb-3">
                                 <label class="form-label">Bank Detail</label>
-                                <textarea name="bank_detail" class="form-control bank_detail" placeholder="Bank Detail">{{ old('bank_detail') }}</textarea>
+                                <textarea name="bank_detail" readonly class="form-control bank_detail" placeholder="Bank Detail">{{ old('bank_detail') }}</textarea>
                             </div>
                         </div>
 
