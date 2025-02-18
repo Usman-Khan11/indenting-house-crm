@@ -153,10 +153,9 @@
                                 <select class="select2 form-select item_id" name="item_id" required>
                                     <option selected disabled value="">Select Product</option>
                                     @foreach ($products as $product)
-                                        @if (old('item_id', $card->item_id))
-                                            <option selected value="{{ $product->id }}">{{ $product->id }} --
-                                                {{ $product->name }}</option>
-                                        @endif
+                                        <option @if (old('item_id', $card->item_id) == $product->id) selected @endif
+                                            value="{{ $product->id }}">{{ $product->id }} --
+                                            {{ $product->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
