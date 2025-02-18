@@ -199,6 +199,10 @@
                 $('select.product, select.product_supplier').select2('destroy');
             }
 
+            if ($('select.product_size_id, select.product_artwork_id').hasClass('select2-hidden-accessible')) {
+                $('select.product_size_id, select.product_artwork_id').select2('destroy');
+            }
+
             let sno = parseInt($("#product_table .product_row:last .sno span").text()) + 1;
             $("#product_table .product_row:last").clone().appendTo("#product_table");
             $("#product_table .product_row:last").find("input").val(null).prop("disabled", false);
@@ -206,7 +210,7 @@
             $("#product_table .product_row:last").find("select").val(null).trigger('change').prop("disabled", false);
             $("#product_table .product_row:last .sno span").text(sno)
 
-            $('select.product, select.product_supplier').select2();
+            $('select.product, select.product_supplier, select.product_size_id, select.product_artwork_id').select2();
         }
 
         function delProductRow(e) {

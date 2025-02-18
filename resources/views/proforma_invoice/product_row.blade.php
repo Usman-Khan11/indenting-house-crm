@@ -39,7 +39,12 @@
                     class="form-control product_total" step="any" readonly>
             </div>
 
-            <div class="col-md-3 mb-3">
+            <div class="col-md-4 mb-3">
+                <label class="form-label">Remarks</label>
+                <textarea name="product_remark[]" class="form-control product_remark" rows="2">{{ $product_remark }}</textarea>
+            </div>
+
+            <div class="col-md-3">
                 <label class="form-label">Sizes</label>
                 <select name="product_size_id[]" class="form-select select2 product_size_id">
                     <option selected value="">Select value</option>
@@ -67,12 +72,11 @@
                     class="form-control product_code" readonly>
             </div>
 
-            <div class="col-md-4">
-                <label class="form-label">Remarks</label>
-                <textarea name="product_remark[]" class="form-control product_remark" rows="2">{{ $product_remark }}</textarea>
+            <div class="col-2 mb-0 text-end">
+                <h5 class="mb-0 sno text-warning">S.No: &nbsp; <span>{{ $sno }}</span></h5>
             </div>
 
-            <div class="col mb-3 text-end">
+            <div class="col-1 mb-3 text-end">
                 <button onclick="delProductRow(this)" type="button" class="btn btn-danger btn-sm"><i
                         class="fa fa-trash"></i></button>
             </div>

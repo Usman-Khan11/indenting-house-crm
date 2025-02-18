@@ -121,6 +121,14 @@
                         }
                     },
                     {
+                        data: "scode",
+                        title: "S code",
+                    },
+                    {
+                        data: "pup",
+                        title: "pup",
+                    },
+                    {
                         data: "qty",
                         title: "Qty",
                         render: function(data, type, full, meta) {

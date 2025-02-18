@@ -438,6 +438,8 @@ class ReportController extends Controller
                     'suppliers.name as supplier_name',
                     'products.name as product_name',
                     'products.description as product_description',
+                    'products.scode',
+                    'products.pup',
                     'sizes.name as size_name',
                 );
 

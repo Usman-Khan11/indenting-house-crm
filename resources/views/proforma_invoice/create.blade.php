@@ -265,6 +265,7 @@
 
                                 @forelse ($p as $k => $v)
                                     @include('proforma_invoice.product_row', [
+                                        'sno' => $k + 1,
                                         'product_id' => $v,
                                         'product_qty' => old('product_qty')[$k] ?? '',
                                         'product_unit' => old('product_unit')[$k] ?? '',
@@ -281,6 +282,7 @@
                                     ])
                                 @empty
                                     @include('proforma_invoice.product_row', [
+                                        'sno' => 1,
                                         'product_id' => '',
                                         'product_qty' => '',
                                         'product_unit' => '',
