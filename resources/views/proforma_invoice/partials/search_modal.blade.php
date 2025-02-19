@@ -69,11 +69,11 @@
 
         $("#search_now").click(function() {
             $(".loader").show();
-            let card_no = $(".card_no").val();
-            let item_code = $(".item_code").val();
-            let product = $(".product").val();
-            let width = $(".width").val();
-            let order_by = $('input[name="order_by"]:checked').val();
+            let card_no = $("#search_modal").find(".card_no").val();
+            let item_code = $("#search_modal").find(".item_code").val();
+            let product = $("#search_modal").find(".product").val();
+            let width = $("#search_modal").find(".width").val();
+            let order_by = $("#search_modal").find('input[name="order_by"]:checked').val();
 
             $.get("{{ route('proforma_invoice.search') }}", {
                 _token: '{{ csrf_token() }}',
