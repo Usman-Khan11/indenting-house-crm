@@ -108,6 +108,7 @@ class CustomerController extends Controller
             'cell_3' => 'nullable|string|max:80',
             'phone_1' => 'nullable|string|max:80',
             'phone_2' => 'nullable|string|max:80',
+            'status' => 'nullable|string|max:50',
         ]);
 
         $id = 1;
@@ -134,6 +135,7 @@ class CustomerController extends Controller
         $customer->cell_3 = $request->cell_3;
         $customer->phone_1 = $request->phone_1;
         $customer->phone_2 = $request->phone_2;
+        $customer->status = $request->status;
 
         if ($customer->save()) {
             return redirect()->route('customer')->withSuccess('Customer added successfully.');
@@ -161,6 +163,7 @@ class CustomerController extends Controller
             'cell_3' => 'nullable|string|max:80',
             'phone_1' => 'nullable|string|max:80',
             'phone_2' => 'nullable|string|max:80',
+            'status' => 'nullable|string|max:50',
         ]);
 
         $customer = Customer::find($request->id);
@@ -190,6 +193,7 @@ class CustomerController extends Controller
         $customer->cell_3 = $request->cell_3;
         $customer->phone_1 = $request->phone_1;
         $customer->phone_2 = $request->phone_2;
+        $customer->status = $request->status;
 
         if ($customer->save()) {
             return redirect()->route('customer')->withSuccess('Customer updated successfully.');

@@ -163,7 +163,7 @@
                         title: function() {
                             return title;
                         },
-                        className: "btn btn-success m-1",
+                        className: "btn-success",
                         filename: filename
                     },
                     {
@@ -172,7 +172,7 @@
                         title: function() {
                             return title;
                         },
-                        className: "btn btn-success m-1",
+                        className: "btn-success",
                         filename: filename
                     },
                     {
@@ -181,7 +181,7 @@
                         title: function() {
                             return title;
                         },
-                        className: "btn btn-success m-1",
+                        className: "btn-success",
                         filename: filename
                     }
                 ]

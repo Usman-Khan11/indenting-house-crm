@@ -35,6 +35,7 @@
                 paging: false,
                 pageLength: '{{ general()->page_length }}',
                 scrollX: true,
+                scrollCollapse: true,
                 ajax: {
                     url: "{{ route('report.product') }}",
                     type: "get",
@@ -54,12 +55,20 @@
                         class: "text-wrap",
                     },
                     {
-                        data: "unit",
-                        title: "Unit",
+                        data: "code",
+                        title: "Code",
                     },
                     {
                         data: "hs_code",
                         title: "HS Code",
+                    },
+                    {
+                        data: "unit",
+                        title: "Unit",
+                    },
+                    {
+                        data: "type",
+                        title: "Type",
                     },
                     {
                         data: "scode",
@@ -76,19 +85,24 @@
                         extend: 'excelHtml5',
                         text: 'Export Excel',
                         title: 'Materials List',
-                        className: "btn btn-success",
+                        className: "btn-warning",
                     },
                     {
                         extend: 'pdfHtml5',
                         text: 'Export PDF',
                         title: 'Materials List',
-                        className: "btn btn-success",
+                        className: "btn-warning",
                     },
                     {
                         extend: 'print',
                         text: 'Print Table',
                         title: 'Materials List',
-                        className: "btn btn-success",
+                        className: "btn-warning",
+                    },
+                    {
+                        extend: 'colvis',
+                        text: 'Column Visibility',
+                        className: "btn-warning",
                     }
                 ]
             });
