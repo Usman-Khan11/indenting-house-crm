@@ -125,6 +125,7 @@
                         text: 'Print Table',
                         title: 'Supplier List',
                         className: "btn-warning",
+                        orientation: 'landscape',
                         exportOptions: {
                             columns: ':visible'
                         }

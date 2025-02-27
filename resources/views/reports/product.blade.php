@@ -106,6 +106,7 @@
                         text: 'Print Table',
                         title: 'Materials List',
                         className: "btn-warning",
+                        orientation: 'landscape',
                         exportOptions: {
                             columns: ':visible'
                         }

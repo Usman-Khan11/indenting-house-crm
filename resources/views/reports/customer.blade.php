@@ -142,6 +142,7 @@
                         text: 'Print Table',
                         title: 'Customer List',
                         className: "btn-warning",
+                        orientation: 'landscape',
                         exportOptions: {
                             columns: ':visible'
                         }
