@@ -86,18 +86,29 @@
                         text: 'Export Excel',
                         title: 'Materials List',
                         className: "btn-warning",
+                        exportOptions: {
+                            columns: ':visible'
+                        }
                     },
                     {
                         extend: 'pdfHtml5',
                         text: 'Export PDF',
                         title: 'Materials List',
                         className: "btn-warning",
+                        orientation: 'landscape',
+                        pageSize: 'A4',
+                        exportOptions: {
+                            columns: ':visible'
+                        }
                     },
                     {
                         extend: 'print',
                         text: 'Print Table',
                         title: 'Materials List',
                         className: "btn-warning",
+                        exportOptions: {
+                            columns: ':visible'
+                        }
                     },
                     {
                         extend: 'colvis',

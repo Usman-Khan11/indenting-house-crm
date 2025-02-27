@@ -149,7 +149,21 @@
                     {
                         data: "sourcing_person",
                         title: "Sourcing Person",
-                    }
+                    },
+                    {
+                        title: "Inquiry Close",
+                        render: function(data, type, full, meta) {
+                            if (full.is_close == 1) {
+                                return `<span class="badge bg-success">Yes</span>`;
+                            } else {
+                                return `<span class="badge bg-danger">No</span>`;
+                            }
+                        }
+                    },
+                    {
+                        data: "reason_of_close",
+                        title: "Reason of Close",
+                    },
                 ],
                 rowCallback: function(row, data) {},
                 dom: 'Bfrtip',

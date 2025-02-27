@@ -148,6 +148,8 @@ class ReportController extends Controller
                     'inquiries.customer_id',
                     'inquiries.supplier_id',
                     'inquiries.currency',
+                    'inquiries.reason_of_close',
+                    'inquiries.is_close',
                     'inquiry_items.*',
                     'customers.name as customer_name',
                     'customers.person_3 as sales_person',
@@ -194,6 +196,7 @@ class ReportController extends Controller
 
         if ($request->ajax()) {
             $query = Offer::join('offer_items', 'offers.id', '=', 'offer_items.offer_id')
+                ->join('inquiries', 'offers.inquiry_id', '=', 'inquiries.id')
                 ->join('customers', 'offers.customer_id', '=', 'customers.id')
                 ->join('suppliers', 'offers.supplier_id', '=', 'suppliers.id')
                 ->join('products', 'offer_items.item_id', '=', 'products.id')
@@ -204,6 +207,8 @@ class ReportController extends Controller
                     'offers.supplier_id',
                     'offers.currency',
                     'offer_items.*',
+                    'inquiries.reason_of_close',
+                    'inquiries.is_close',
                     'customers.name as customer_name',
                     'customers.location as location',
                     'customers.person_3 as sales_person',

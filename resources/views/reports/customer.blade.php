@@ -122,18 +122,29 @@
                         text: 'Export Excel',
                         title: 'Customer List',
                         className: "btn-warning",
+                        exportOptions: {
+                            columns: ':visible'
+                        }
                     },
                     {
                         extend: 'pdfHtml5',
                         text: 'Export PDF',
                         title: 'Customer List',
                         className: "btn-warning",
+                        orientation: 'landscape',
+                        pageSize: 'A4',
+                        exportOptions: {
+                            columns: ':visible'
+                        }
                     },
                     {
                         extend: 'print',
                         text: 'Print Table',
                         title: 'Customer List',
                         className: "btn-warning",
+                        exportOptions: {
+                            columns: ':visible'
+                        }
                     },
                     {
                         extend: 'colvis',
