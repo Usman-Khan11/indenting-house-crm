@@ -54,7 +54,7 @@ class ProformaInvoiceController extends Controller
 
             $query = ProformaInvoice::Query();
             $query = $query->with('customer', 'supplier', 'added_by');
-            $query = $query->orderBy('pi_no', 'desc')->get();
+            $query = $query->get();
             return DataTables::of($query)->addIndexColumn()->make(true);
         }
 

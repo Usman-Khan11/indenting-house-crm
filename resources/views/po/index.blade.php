@@ -34,7 +34,10 @@
                 searching: true,
                 serverSide: true,
                 lengthChange: false,
-                ordering: false,
+                ordering: true,
+                order: [
+                    [1, 'desc']
+                ],
                 pageLength: '{{ general()->page_length }}',
                 scrollX: true,
                 ajax: {
@@ -69,6 +72,7 @@
                         }
                     },
                     {
+                        data: "offer.offer_no",
                         title: "Offer #",
                         render: function(data, type, full, meta) {
                             if (full.offer) {
@@ -79,6 +83,7 @@
                         }
                     },
                     {
+                        data: "customer.name",
                         title: "Customer",
                         render: function(data, type, full, meta) {
                             if (full.customer) {
@@ -89,6 +94,7 @@
                         }
                     },
                     {
+                        data: "supplier.name",
                         title: "Supplier",
                         render: function(data, type, full, meta) {
                             if (full.supplier) {
@@ -99,12 +105,14 @@
                         }
                     },
                     {
+                        data: "date",
                         title: 'Date',
                         "render": function(data, type, full, meta) {
                             return getDate(full.date);
                         }
                     },
                     {
+                        data: "added_by.name",
                         title: "Added By",
                         render: function(data, type, full, meta) {
                             if (full.added_by) {

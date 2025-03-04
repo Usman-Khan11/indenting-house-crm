@@ -34,7 +34,10 @@
                 searching: true,
                 serverSide: true,
                 lengthChange: false,
-                ordering: false,
+                ordering: true,
+                order: [
+                    [1, 'desc']
+                ],
                 pageLength: '{{ general()->page_length }}',
                 scrollX: true,
                 ajax: {
@@ -69,6 +72,7 @@
                         }
                     },
                     {
+                        data: "customer.name",
                         title: "Customer",
                         render: function(data, type, full, meta) {
                             if (full.customer) {
@@ -79,6 +83,7 @@
                         }
                     },
                     {
+                        data: "created_at",
                         title: 'Date',
                         "render": function(data, type, full, meta) {
                             return getDate(full.created_at);
@@ -92,6 +97,7 @@
                         }
                     },
                     {
+                        data: "added_by.name",
                         title: "Added By",
                         render: function(data, type, full, meta) {
                             if (full.added_by) {

@@ -121,14 +121,6 @@
                         }
                     },
                     {
-                        data: "scode",
-                        title: "S code",
-                    },
-                    {
-                        data: "pup",
-                        title: "pup",
-                    },
-                    {
                         data: "qty",
                         title: "Qty",
                         render: function(data, type, full, meta) {
@@ -160,6 +152,14 @@
                     {
                         data: "supplier_name",
                         title: "Supplier",
+                    },
+                    {
+                        data: "scode",
+                        title: "S code",
+                    },
+                    {
+                        data: "pup",
+                        title: "pup",
                     },
                     {
                         data: "payment",

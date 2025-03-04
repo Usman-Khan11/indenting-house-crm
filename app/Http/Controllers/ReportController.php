@@ -16,6 +16,7 @@ use App\Models\Shipment;
 use App\Models\Supplier;
 use App\Models\SupplierProducts;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Facades\DataTables;
 
 class ReportController extends Controller
@@ -202,6 +203,14 @@ class ReportController extends Controller
                 ->join('products', 'offer_items.item_id', '=', 'products.id')
                 ->select(
                     'offers.offer_no',
+                    DB::raw('(CASE 
+                                WHEN EXISTS (
+                                    SELECT 1 FROM purchase_orders 
+                                    INNER JOIN indents ON indents.po_id = purchase_orders.id 
+                                    WHERE purchase_orders.offer_id = offers.id
+                                ) 
+                                THEN 1 ELSE 0 
+                            END) as is_booked'),
                     'offers.date as offer_date',
                     'offers.customer_id',
                     'offers.supplier_id',
@@ -325,6 +334,8 @@ class ReportController extends Controller
                     'suppliers.name as supplier_name',
                     'suppliers.person_3 as sourcing_person',
                     'products.name as product_name',
+                    'products.scode as product_scode',
+                    'products.pup as product_pup',
                     'indent_items.item_desc as product_description',
                 );
 

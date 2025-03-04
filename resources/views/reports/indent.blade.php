@@ -150,6 +150,14 @@
                         title: "Supplier",
                     },
                     {
+                        data: "product_scode",
+                        title: "Scode",
+                    },
+                    {
+                        data: "product_pup",
+                        title: "Pup",
+                    },
+                    {
                         data: "sales_person",
                         title: "Sales Person",
                     },

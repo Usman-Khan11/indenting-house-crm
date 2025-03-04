@@ -42,41 +42,41 @@ class ShipmentController extends Controller
                 return $data;
             }
 
-            $query = Shipment::join('customers', 'shipments.customer_id', '=', 'customers.id')
-                ->join('suppliers', 'shipments.supplier_id', '=', 'suppliers.id')
-                ->join('indents', 'shipments.indent_id', '=', 'indents.id')
-                ->join('users', 'shipments.added_by', '=', 'users.id')
-                ->select(
-                    'shipments.id',
-                    'shipments.shipment_no',
-                    'shipments.date as shipment_date',
-                    'shipments.customer_id',
-                    'shipments.supplier_id',
-                    'shipments.currency',
-                    'customers.name as customer_name',
-                    'suppliers.name as supplier_name',
-                    'indents.indent_no',
-                    'indents.date as indent_date',
-                    'users.name as user_name',
-                );
+            // $query = Shipment::join('customers', 'shipments.customer_id', '=', 'customers.id')
+            //     ->join('suppliers', 'shipments.supplier_id', '=', 'suppliers.id')
+            //     ->join('indents', 'shipments.indent_id', '=', 'indents.id')
+            //     ->join('users', 'shipments.added_by', '=', 'users.id')
+            //     ->select(
+            //         'shipments.id',
+            //         'shipments.shipment_no',
+            //         'shipments.date as shipment_date',
+            //         'shipments.customer_id',
+            //         'shipments.supplier_id',
+            //         'shipments.currency',
+            //         'customers.name as customer_name',
+            //         'suppliers.name as supplier_name',
+            //         'indents.indent_no',
+            //         'indents.date as indent_date',
+            //         'users.name as user_name',
+            //     );
 
-            if (!empty($request->input('search')['value'])) {
-                $search = $request->input('search')['value'];
-                $query->where(function ($q) use ($search) {
-                    $q->where('shipments.id', "{$search}")
-                        ->orWhere('shipments.shipment_no', "{$search}")
-                        ->orWhere('shipments.currency', "{$search}")
-                        ->orWhere('indents.indent_no', 'like', "%{$search}%")
-                        ->orWhere('customers.name', 'like', "%{$search}%")
-                        ->orWhere('suppliers.name', 'like', "%{$search}%")
-                        ->orWhere('users.name', 'like', "%{$search}%");
-                });
-            }
+            // if (!empty($request->input('search')['value'])) {
+            //     $search = $request->input('search')['value'];
+            //     $query->where(function ($q) use ($search) {
+            //         $q->where('shipments.id', "{$search}")
+            //             ->orWhere('shipments.shipment_no', "{$search}")
+            //             ->orWhere('shipments.currency', "{$search}")
+            //             ->orWhere('indents.indent_no', 'like', "%{$search}%")
+            //             ->orWhere('customers.name', 'like', "%{$search}%")
+            //             ->orWhere('suppliers.name', 'like', "%{$search}%")
+            //             ->orWhere('users.name', 'like', "%{$search}%");
+            //     });
+            // }
 
-            // $query = Shipment::Query();
+            $query = Shipment::Query();
             $query = $query->where('shipments.pi_id', 0);
-            // $query = $query->with('indent', 'customer', 'supplier', 'added_by');
-            $query = $query->orderBy('shipments.date', 'desc')->get();
+            $query = $query->with('indent', 'customer', 'supplier', 'added_by');
+            $query = $query->get();
             return DataTables::of($query)->addIndexColumn()->make(true);
         }
 

@@ -168,6 +168,17 @@
                         data: "reason_of_close",
                         title: "Reason of Close",
                     },
+                    {
+                        data: "is_booked",
+                        title: "Remark",
+                        render: function(data, type, full, meta) {
+                            if (data == 1) {
+                                return 'Indent Booked';
+                            } else {
+                                return '-';
+                            }
+                        }
+                    },
                 ],
                 rowCallback: function(row, data) {},
                 dom: 'Bfrtip',

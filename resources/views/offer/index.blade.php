@@ -34,7 +34,10 @@
                 searching: true,
                 serverSide: true,
                 lengthChange: false,
-                ordering: false,
+                ordering: true,
+                order: [
+                    [1, 'desc']
+                ],
                 pageLength: '{{ general()->page_length }}',
                 scrollX: true,
                 ajax: {
@@ -61,14 +64,14 @@
                         data: "offer_no",
                         title: "Offer #",
                         render: function(data, type, full, meta) {
-                            if (full.po && full.po.indent) {
+                            if (full.is_booked) {
                                 return `<span class="text-success fw-bold">${data}</span>`;
                             }
-
                             return data;
                         }
                     },
                     {
+                        data: "inquiry.inq_no",
                         title: "Inquiry #",
                         render: function(data, type, full, meta) {
                             if (full.inquiry) {
@@ -79,6 +82,7 @@
                         }
                     },
                     {
+                        data: "customer.name",
                         title: "Customer",
                         render: function(data, type, full, meta) {
                             if (full.customer) {
@@ -89,6 +93,7 @@
                         }
                     },
                     {
+                        data: "date",
                         title: 'Date',
                         "render": function(data, type, full, meta) {
                             return getDate(full.date);
@@ -102,6 +107,7 @@
                         }
                     },
                     {
+                        data: "added_by.name",
                         title: "Added By",
                         render: function(data, type, full, meta) {
                             if (full.added_by) {

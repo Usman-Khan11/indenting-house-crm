@@ -46,7 +46,7 @@ class NantongShipmentController extends Controller
             $query = Shipment::Query();
             $query = $query->where('indent_id', 0);
             $query = $query->with('pi', 'customer', 'supplier', 'added_by');
-            $query = $query->orderBy('date', 'desc')->get();
+            $query = $query->get();
             return DataTables::of($query)->addIndexColumn()->make(true);
         }
 

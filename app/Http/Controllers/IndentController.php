@@ -50,7 +50,7 @@ class IndentController extends Controller
 
             $query = Indent::Query();
             $query = $query->with('po', 'customer', 'supplier', 'added_by');
-            $query = $query->orderBy('indent_no', 'desc')->get();
+            $query = $query->get();
             return DataTables::of($query)->addIndexColumn()->make(true);
         }
 

@@ -8,6 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Offer extends Model
 {
     use HasFactory;
+    protected $appends = ['is_booked'];
+
+    public function getIsBookedAttribute()
+    {
+        return ($this->po && $this->po->indent) ? 1 : 0;
+    }
 
     public function inquiry()
     {

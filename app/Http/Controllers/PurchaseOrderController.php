@@ -46,7 +46,7 @@ class PurchaseOrderController extends Controller
 
             $query = PurchaseOrder::Query();
             $query = $query->with('offer', 'customer', 'supplier', 'added_by', 'indent');
-            $query = $query->orderBy('po_no', 'desc')->get();
+            $query = $query->get();
             return DataTables::of($query)->addIndexColumn()->make(true);
         }
 

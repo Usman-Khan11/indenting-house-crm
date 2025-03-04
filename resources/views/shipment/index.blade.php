@@ -34,7 +34,10 @@
                 searching: true,
                 serverSide: true,
                 lengthChange: false,
-                ordering: false,
+                ordering: true,
+                order: [
+                    [5, 'desc']
+                ],
                 pageLength: '{{ general()->page_length }}',
                 scrollX: true,
                 ajax: {
@@ -63,20 +66,42 @@
                     },
                     {
                         title: "Indent #",
-                        data: "indent_no",
+                        data: "indent.indent_no",
+                        render: function(data, type, full, meta) {
+                            if (full.indent) {
+                                return full.indent.indent_no;
+                            } else {
+                                return '-';
+                            }
+                        }
                     },
                     {
                         title: "Customer",
-                        data: "customer_name",
+                        data: "customer.name",
+                        render: function(data, type, full, meta) {
+                            if (full.customer) {
+                                return full.customer.name;
+                            } else {
+                                return '-';
+                            }
+                        }
                     },
                     {
                         title: "Supplier",
-                        data: "supplier_name",
+                        data: "supplier.name",
+                        render: function(data, type, full, meta) {
+                            if (full.supplier) {
+                                return full.supplier.name;
+                            } else {
+                                return '-';
+                            }
+                        }
                     },
                     {
+                        data: "date",
                         title: 'Date',
                         "render": function(data, type, full, meta) {
-                            return getDate(full.shipment_date);
+                            return getDate(full.date);
                         }
                     },
                     {
@@ -84,8 +109,15 @@
                         title: "currency",
                     },
                     {
+                        data: "added_by.name",
                         title: "Added By",
-                        data: "user_name",
+                        render: function(data, type, full, meta) {
+                            if (full.added_by) {
+                                return full.added_by.name;
+                            } else {
+                                return '-';
+                            }
+                        }
                     }
                 ],
                 rowCallback: function(row, data) {},
