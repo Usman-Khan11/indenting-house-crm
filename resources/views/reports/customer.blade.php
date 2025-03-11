@@ -74,11 +74,19 @@
                     },
                     {
                         data: "email_3",
-                        title: "Sale Person Email",
+                        title: "Email 3",
                     },
                     {
-                        data: "person_3",
-                        title: "Sale Person",
+                        data: "sales_person",
+                        title: "Sales Person",
+                        render: function(data, type, full, meta) {
+                            if (data) {
+                                let s = data.split('|').map(item => item.trim()).join(',');
+                                return s;
+                            } else {
+                                return '-';
+                            }
+                        }
                     },
                     {
                         data: "address_office",

@@ -263,6 +263,8 @@
                 $(".currency").val(res.currency).trigger("change");
                 $(".signature").val(res.signature);
                 $(".remark").val(res.remark);
+                $(".sales_person").val(res.sales_person).trigger("change").prop("disabled", true);
+                $(".sourcing_person").val(res.sourcing_person).trigger("change").prop("disabled", true);
 
                 if (res.items.length) {
                     let items = res.items;
@@ -313,6 +315,8 @@
                 $(".supplier_id").prop("disabled", true);
                 $(".currency").val(res.currency).trigger("change");
                 $(".remark").val(res.remark);
+                $(".sales_person").val(res.sales_person).trigger("change").prop("disabled", true);
+                $(".sourcing_person").val(res.sourcing_person).trigger("change").prop("disabled", true);
 
                 if (res.items.length) {
                     let items = res.items;
@@ -361,6 +365,8 @@
                 $(".currency").prop("disabled", true);
                 $(".shipping_type").val(res.shipping_type).trigger("change");
                 $(".remark").val(res.remark);
+                $(".sales_person").val(res.sales_person).trigger("change").prop("disabled", true);
+                $(".sourcing_person").val(res.sourcing_person).trigger("change").prop("disabled", true);
 
                 if (res.items.length) {
                     let items = res.items;
@@ -513,6 +519,9 @@
             let supID = $(e).val();
             $("select.product").html(null);
 
+            let data = $(e).find("option:selected").data('sourcing_person');
+            showSourcingPerson(data);
+
             if (supID) {
                 $.get("{{ route('supplier.supplier_product') }}", {
                     _token: '{{ csrf_token() }}',
@@ -542,6 +551,9 @@
             $(".loader").show();
             let cusID = $(e).val();
             $("select.product").html(null);
+
+            let data = $(e).find("option:selected").data('sales_person');
+            showSalesPerson(data);
 
             if (cusID) {
                 $.get("{{ route('customer.customer_product') }}", {
@@ -661,6 +673,45 @@
                 $(".loader").hide();
             });
         }
+
+        function showSalesPerson(data) {
+            $("select.sales_person").html(null);
+            $("select.sales_person").append(`<option selected value="">Select Sales Person</option>`);
+
+            if (!data) {
+                return;
+            }
+
+            data = data.split('|').map(item => item.trim());
+            $(data).each(function(i, v) {
+                $("select.sales_person").append(`<option value="${v}">${v}</option>`);
+            })
+        }
+
+        function showSourcingPerson(data) {
+            $("select.sourcing_person").html(null);
+            $("select.sourcing_person").append(`<option selected value="">Select Sourcing Person</option>`);
+
+            if (!data) {
+                return;
+            }
+
+            data = data.split('|').map(item => item.trim());
+            console.log(data)
+            $(data).each(function(i, v) {
+                $("select.sourcing_person").append(`<option value="${v}">${v}</option>`);
+            })
+        }
+
+        $("select.customer_id").change(function() {
+            let data = $(this).find("option:selected").data('sales_person');
+            showSalesPerson(data);
+        })
+
+        $("select.supplier_id").change(function() {
+            let data = $(this).find("option:selected").data('sourcing_person');
+            showSourcingPerson(data);
+        })
     </script>
 </body>
 

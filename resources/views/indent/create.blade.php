@@ -48,7 +48,8 @@
                                     <option selected disabled value="">Select Customer</option>
                                     @foreach ($customers as $customer)
                                         <option @if (old('customer_id') == $customer->id) selected @endif
-                                            value="{{ $customer->id }}">{{ $customer->id }} -- {{ $customer->name }}
+                                            data-sales_person="{{ $customer->sales_person }}" value="{{ $customer->id }}">
+                                            {{ $customer->id }} -- {{ $customer->name }}
                                         </option>
                                     @endforeach
                                 </select>
@@ -63,9 +64,28 @@
                                     <option selected disabled value="">Select Supplier</option>
                                     @foreach ($suppliers as $supplier)
                                         <option @if (old('supplier_id') == $supplier->id) selected @endif
+                                            data-sourcing_person="{{ $supplier->sourcing_person }}"
                                             value="{{ $supplier->id }}">{{ $supplier->id }} -- {{ $supplier->name }}
                                         </option>
                                     @endforeach
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 col-12">
+                            <div class="mb-3">
+                                <label class="form-label">Sales Person</label>
+                                <select class="select2 form-select sales_person" name="sales_person">
+                                    <option selected value="">Select Sales Person</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 col-12">
+                            <div class="mb-3">
+                                <label class="form-label">Sourcing Person</label>
+                                <select class="select2 form-select sourcing_person" name="sourcing_person">
+                                    <option selected value="">Select Sourcing Person</option>
                                 </select>
                             </div>
                         </div>
@@ -148,16 +168,17 @@
                             <div class="mb-3">
                                 <label class="form-label">Last Date of Shipment</label>
                                 <input type="date" name="latest_date_of_shipment"
-                                    value="{{ old('latest_date_of_shipment') }}" class="form-control last_date_of_shipment"
-                                    placeholder="Date" />
+                                    value="{{ old('latest_date_of_shipment') }}"
+                                    class="form-control last_date_of_shipment" placeholder="Date" />
                             </div>
                         </div>
 
                         <div class="col-md-2 col-12">
                             <div class="mb-3">
                                 <label class="form-label">Date of Negotiation</label>
-                                <input type="date" name="date_of_negotiation" value="{{ old('date_of_negotiation') }}"
-                                    class="form-control date_of_negotiation" placeholder="Date of Negotiation" />
+                                <input type="date" name="date_of_negotiation"
+                                    value="{{ old('date_of_negotiation') }}" class="form-control date_of_negotiation"
+                                    placeholder="Date of Negotiation" />
                             </div>
                         </div>
 

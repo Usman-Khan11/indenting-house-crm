@@ -78,8 +78,16 @@
                         title: "phone",
                     },
                     {
-                        data: "person_3",
+                        data: "sourcing_person",
                         title: "Sourcing Person",
+                        render: function(data, type, full, meta) {
+                            if (data) {
+                                let s = data.split('|').map(item => item.trim()).join(',');
+                                return s;
+                            } else {
+                                return '-';
+                            }
+                        }
                     }
                 ],
                 rowCallback: function(row, data) {},

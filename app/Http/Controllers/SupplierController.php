@@ -101,6 +101,7 @@ class SupplierController extends Controller
             'person' => 'nullable|string|max:150',
             'person_2' => 'nullable|string|max:150',
             'person_3' => 'nullable|string|max:150',
+            'sourcing_person' => 'nullable|string',
             'band_detail' => 'nullable|string',
             'address' => 'nullable|string',
             'origin' => 'nullable|string|max:150',
@@ -124,6 +125,7 @@ class SupplierController extends Controller
         $supplier->person = $request->person;
         $supplier->person_2 = $request->person_2;
         $supplier->person_3 = $request->person_3;
+        $supplier->sourcing_person = $request->sourcing_person;
         $supplier->band_detail = $request->band_detail;
         $supplier->address = $request->address;
         $supplier->origin = $request->origin;
@@ -148,6 +150,7 @@ class SupplierController extends Controller
             'person' => 'nullable|string|max:150',
             'person_2' => 'nullable|string|max:150',
             'person_3' => 'nullable|string|max:150',
+            'sourcing_person' => 'nullable|string',
             'band_detail' => 'nullable|string',
             'address' => 'nullable|string',
             'origin' => 'nullable|string|max:150',
@@ -174,6 +177,7 @@ class SupplierController extends Controller
         $supplier->person = $request->person;
         $supplier->person_2 = $request->person_2;
         $supplier->person_3 = $request->person_3;
+        $supplier->sourcing_person = $request->sourcing_person;
         $supplier->band_detail = $request->band_detail;
         $supplier->address = $request->address;
         $supplier->origin = $request->origin;

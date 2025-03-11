@@ -102,9 +102,17 @@
 
                         <div class="col-md-4 col-12">
                             <div class="mb-3">
-                                <label class="form-label">Sourcing Person</label>
+                                <label class="form-label">Person</label>
                                 <input name="person_3" type="text" class="form-control"
-                                    value="{{ old('person_3', $supplier->person_3) }}" placeholder="Sourcing Person" />
+                                    value="{{ old('person_3', $supplier->person_3) }}" placeholder="Person" />
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 col-12">
+                            <div class="mb-3">
+                                <label class="form-label">Sourcing Person</label>
+                                <textarea name="sourcing_person" class="form-control" placeholder="Sourcing Person">{{ old('sourcing_person', $supplier->sourcing_person) }}</textarea>
+                                <small>Values must be | seperated</small>
                             </div>
                         </div>
 

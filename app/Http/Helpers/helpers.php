@@ -239,7 +239,11 @@ function scodes()
 {
     $data = [
         'CFF' => 'CFF',
+        'PVC' => 'PVC',
+        'PVDC' => 'PVDC',
         'PTP' => 'PTP',
+        'Moulded Glass' => 'Moulded Glass',
+        'Tabular Glass' => 'Tabular Glass',
         'Tropical' => 'Tropical',
         'ALU Sachet' => 'ALU Sachet',
         'Paper Sachet' => 'Paper Sachet',

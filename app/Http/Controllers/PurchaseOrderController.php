@@ -115,7 +115,9 @@ class PurchaseOrderController extends Controller
             'supplier_id' => 'required|integer|exists:suppliers,id',
             'date' => 'required|string|max:15',
             'currency' => 'nullable|string|max:20',
-            'remark' => 'nullable|string'
+            'remark' => 'nullable|string',
+            'sales_person' => 'nullable|string|max:80',
+            'sourcing_person' => 'nullable|string|max:80'
         ]);
 
         $po = new PurchaseOrder();
@@ -127,6 +129,8 @@ class PurchaseOrderController extends Controller
         $po->currency = $request->currency;
         $po->remark = $request->remark;
         $po->added_by = auth()->user()->id;
+        $po->sales_person = $request->sales_person;
+        $po->sourcing_person = $request->sourcing_person;
 
         $product = (!empty($request->product)) ? $request->product : [];
 
@@ -164,7 +168,9 @@ class PurchaseOrderController extends Controller
             'supplier_id' => 'required|integer|exists:suppliers,id',
             'date' => 'required|string|max:15',
             'currency' => 'nullable|string|max:20',
-            'remark' => 'nullable|string'
+            'remark' => 'nullable|string',
+            'sales_person' => 'nullable|string|max:80',
+            'sourcing_person' => 'nullable|string|max:80'
         ]);
 
         $po = PurchaseOrder::find($request->id);
@@ -175,6 +181,8 @@ class PurchaseOrderController extends Controller
         $po->date = $request->date;
         $po->currency = $request->currency;
         $po->remark = $request->remark;
+        $po->sales_person = $request->sales_person;
+        $po->sourcing_person = $request->sourcing_person;
 
         $product = (!empty($request->product)) ? $request->product : [];
 

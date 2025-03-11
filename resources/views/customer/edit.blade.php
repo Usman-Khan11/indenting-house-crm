@@ -87,9 +87,17 @@
 
                         <div class="col-md-4 col-12">
                             <div class="mb-3">
-                                <label class="form-label">Sales Person</label>
+                                <label class="form-label">Person</label>
                                 <input name="person_3" type="text" class="form-control"
-                                    value="{{ old('person_3', $customer->person_3) }}" placeholder="Sales Person" />
+                                    value="{{ old('person_3', $customer->person_3) }}" placeholder="Person" />
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 col-12">
+                            <div class="mb-3">
+                                <label class="form-label">Sales Person</label>
+                                <textarea name="sales_person" class="form-control" placeholder="Sales Person">{{ old('sales_person', $customer->sales_person) }}</textarea>
+                                <small>Values must be | seperated</small>
                             </div>
                         </div>
 

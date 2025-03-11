@@ -52,11 +52,12 @@
                         <div class="col-md-4 col-12">
                             <div class="mb-3">
                                 <label class="form-label">Customer</label>
-                                <select class="select2 form-select" name="customer_id" required>
+                                <select class="select2 form-select customer_id" name="customer_id" required>
                                     <option selected disabled value="">Select Customer</option>
                                     @foreach ($customers as $customer)
                                         <option @if (old('customer_id', $inquiry->customer_id) == $customer->id) selected @endif
-                                            value="{{ $customer->id }}">{{ $customer->id }} -- {{ $customer->name }}
+                                            data-sales_person="{{ $customer->sales_person }}" value="{{ $customer->id }}">
+                                            {{ $customer->id }} -- {{ $customer->name }}
                                         </option>
                                     @endforeach
                                 </select>
@@ -66,11 +67,12 @@
                         <div class="col-md-4 col-12">
                             <div class="mb-3">
                                 <label class="form-label">Supplier</label>
-                                <select class="select2 form-select" name="supplier_id" required
+                                <select class="select2 form-select supplier_id" name="supplier_id" required
                                     onchange="getSupplierProducts(this)">
                                     <option selected disabled value="">Select Supplier</option>
                                     @foreach ($suppliers as $supplier)
                                         <option @if (old('supplier_id', $inquiry->supplier_id) == $supplier->id) selected @endif
+                                            data-sourcing_person="{{ $supplier->sourcing_person }}"
                                             value="{{ $supplier->id }}">{{ $supplier->id }} -- {{ $supplier->name }}
                                         </option>
                                     @endforeach
@@ -82,6 +84,37 @@
                             <div class="mb-3">
                                 <label class="form-label">Remarks</label>
                                 <textarea name="remark" class="form-control" placeholder="Remarks">{{ old('remark', $inquiry->remark) }}</textarea>
+                            </div>
+                        </div>
+
+                        @php
+                            $sales_person = array_map('trim', explode('|', $inquiry->customer->sales_person));
+                            $sourcing_person = array_map('trim', explode('|', $inquiry->supplier->sourcing_person));
+                        @endphp
+
+                        <div class="col-md-4 col-12">
+                            <div class="mb-3">
+                                <label class="form-label">Sales Person</label>
+                                <select class="select2 form-select sales_person" name="sales_person">
+                                    <option selected value="">Select Sales Person</option>
+                                    @foreach ($sales_person as $v)
+                                        <option @if (old('sales_person', $inquiry->sales_person) == $v) selected @endif
+                                            value="{{ $v }}">{{ $v }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 col-12">
+                            <div class="mb-3">
+                                <label class="form-label">Sourcing Person</label>
+                                <select class="select2 form-select sourcing_person" name="sourcing_person">
+                                    <option selected value="">Select Sourcing Person</option>
+                                    @foreach ($sourcing_person as $v)
+                                        <option @if (old('sourcing_person', $inquiry->sourcing_person) == $v) selected @endif
+                                            value="{{ $v }}">{{ $v }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
 

@@ -134,7 +134,9 @@ class IndentController extends Controller
             'bank_detail' => 'nullable|string',
             'remark' => 'nullable|string',
             'remark_2' => 'nullable|string',
-            'shipping_marks' => 'nullable|string'
+            'shipping_marks' => 'nullable|string',
+            'sales_person' => 'nullable|string|max:80',
+            'sourcing_person' => 'nullable|string|max:80'
         ]);
 
         $indent = new Indent();
@@ -162,6 +164,8 @@ class IndentController extends Controller
         $indent->shipping_marks = $request->shipping_marks;
         $indent->revised = (!empty($request->revised)) ? 1 : 0;
         $indent->added_by = auth()->user()->id;
+        $indent->sales_person = $request->sales_person;
+        $indent->sourcing_person = $request->sourcing_person;
 
         $product = (!empty($request->product)) ? $request->product : [];
 
@@ -219,7 +223,9 @@ class IndentController extends Controller
             'bank_detail' => 'nullable|string',
             'remark' => 'nullable|string',
             'remark_2' => 'nullable|string',
-            'shipping_marks' => 'nullable|string'
+            'shipping_marks' => 'nullable|string',
+            'sales_person' => 'nullable|string|max:80',
+            'sourcing_person' => 'nullable|string|max:80'
         ]);
 
         $indent = Indent::find($request->id);
@@ -246,6 +252,8 @@ class IndentController extends Controller
         $indent->remark_2 = $request->remark_2;
         $indent->shipping_marks = $request->shipping_marks;
         $indent->revised = (!empty($request->revised)) ? 1 : 0;
+        $indent->sales_person = $request->sales_person;
+        $indent->sourcing_person = $request->sourcing_person;
 
         $product = (!empty($request->product)) ? $request->product : [];
 

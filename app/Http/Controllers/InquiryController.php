@@ -113,7 +113,9 @@ class InquiryController extends Controller
             'currency' => 'nullable|string|max:20',
             'remark' => 'nullable|string',
             'remark_2' => 'nullable|string',
-            'signature' => 'nullable|string|max:100'
+            'signature' => 'nullable|string|max:100',
+            'sales_person' => 'nullable|string|max:80',
+            'sourcing_person' => 'nullable|string|max:80'
         ]);
 
         $inquiry = new Inquiry();
@@ -127,6 +129,8 @@ class InquiryController extends Controller
         $inquiry->remark_2 = $request->remark_2;
         $inquiry->signature = $request->signature;
         $inquiry->added_by = auth()->user()->id;
+        $inquiry->sales_person = $request->sales_person;
+        $inquiry->sourcing_person = $request->sourcing_person;
 
         $product = (!empty($request->product)) ? $request->product : [];
 
@@ -170,7 +174,9 @@ class InquiryController extends Controller
             'currency' => 'nullable|string|max:20',
             'remark' => 'nullable|string',
             'remark_2' => 'nullable|string',
-            'signature' => 'nullable|string|max:100'
+            'signature' => 'nullable|string|max:100',
+            'sales_person' => 'nullable|string|max:80',
+            'sourcing_person' => 'nullable|string|max:80'
         ]);
 
         $inquiry = Inquiry::find($request->id);
@@ -183,6 +189,8 @@ class InquiryController extends Controller
         $inquiry->remark = $request->remark;
         $inquiry->remark_2 = $request->remark_2;
         $inquiry->signature = $request->signature;
+        $inquiry->sales_person = $request->sales_person;
+        $inquiry->sourcing_person = $request->sourcing_person;
         $inquiry->reason_of_close = $request->reason_of_close;
         if ($inquiry->is_close == 0 && $request->is_close == 1) {
             $inquiry->closed_at = date("Y-m-d h:i:s");

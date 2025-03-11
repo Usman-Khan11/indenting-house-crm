@@ -50,7 +50,8 @@
                                     <option selected disabled value="">Select Customer</option>
                                     @foreach ($customers as $customer)
                                         <option @if (old('customer_id', $indent->customer_id) == $customer->id) selected @endif
-                                            value="{{ $customer->id }}">{{ $customer->id }} -- {{ $customer->name }}
+                                            data-sales_person="{{ $customer->sales_person }}" value="{{ $customer->id }}">
+                                            {{ $customer->id }} -- {{ $customer->name }}
                                         </option>
                                     @endforeach
                                 </select>
@@ -65,9 +66,30 @@
                                     <option selected disabled value="">Select Supplier</option>
                                     @foreach ($suppliers as $supplier)
                                         <option @if (old('supplier_id', $indent->supplier_id) == $supplier->id) selected @endif
+                                            data-sourcing_person="{{ $supplier->sourcing_person }}"
                                             value="{{ $supplier->id }}">{{ $supplier->id }} -- {{ $supplier->name }}
                                         </option>
                                     @endforeach
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 col-12">
+                            <div class="mb-3">
+                                <label class="form-label">Sales Person</label>
+                                <select class="select2 form-select sales_person" name="sales_person" disabled>
+                                    <option selected value="{{ $indent->sales_person }}">{{ $indent->sales_person }}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 col-12">
+                            <div class="mb-3">
+                                <label class="form-label">Sourcing Person</label>
+                                <select class="select2 form-select sourcing_person" name="sourcing_person" disabled>
+                                    <option selected value="{{ $indent->sourcing_person }}">{{ $indent->sourcing_person }}
+                                    </option>
                                 </select>
                             </div>
                         </div>

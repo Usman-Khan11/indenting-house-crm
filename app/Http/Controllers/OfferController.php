@@ -118,7 +118,9 @@ class OfferController extends Controller
             'remark' => 'nullable|string',
             'remark_2' => 'nullable|string',
             'status_remark' => 'nullable|string',
-            'signature' => 'nullable|string|max:150'
+            'signature' => 'nullable|string|max:150',
+            'sales_person' => 'nullable|string|max:80',
+            'sourcing_person' => 'nullable|string|max:80'
         ]);
 
         $offer = new Offer();
@@ -135,6 +137,8 @@ class OfferController extends Controller
         $offer->status_remark = $request->status_remark;
         $offer->signature = $request->signature;
         $offer->added_by = auth()->user()->id;
+        $offer->sales_person = $request->sales_person;
+        $offer->sourcing_person = $request->sourcing_person;
 
         $product = (!empty($request->product)) ? $request->product : [];
 
@@ -180,7 +184,9 @@ class OfferController extends Controller
             'remark' => 'nullable|string',
             'remark_2' => 'nullable|string',
             'status_remark' => 'nullable|string',
-            'signature' => 'nullable|string|max:150'
+            'signature' => 'nullable|string|max:150',
+            'sales_person' => 'nullable|string|max:80',
+            'sourcing_person' => 'nullable|string|max:80'
         ]);
 
         $offer = Offer::find($request->id);
@@ -196,6 +202,8 @@ class OfferController extends Controller
         $offer->remark_2 = $request->remark_2;
         $offer->status_remark = $request->status_remark;
         $offer->signature = $request->signature;
+        $offer->sales_person = $request->sales_person;
+        $offer->sourcing_person = $request->sourcing_person;
 
         $product = (!empty($request->product)) ? $request->product : [];
 

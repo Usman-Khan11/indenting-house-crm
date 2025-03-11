@@ -101,6 +101,7 @@ class CustomerController extends Controller
             'person' => 'nullable|string|max:150',
             'person_2' => 'nullable|string|max:150',
             'person_3' => 'nullable|string|max:150',
+            'sales_person' => 'nullable|string',
             'address_office' => 'nullable|string',
             'address_factory' => 'nullable|string',
             'cell_1' => 'nullable|string|max:80',
@@ -128,6 +129,7 @@ class CustomerController extends Controller
         $customer->person = $request->person;
         $customer->person_2 = $request->person_2;
         $customer->person_3 = $request->person_3;
+        $customer->sales_person = $request->sales_person;
         $customer->address_office = $request->address_office;
         $customer->address_factory = $request->address_factory;
         $customer->cell_1 = $request->cell_1;
@@ -156,6 +158,7 @@ class CustomerController extends Controller
             'person' => 'nullable|string|max:150',
             'person_2' => 'nullable|string|max:150',
             'person_3' => 'nullable|string|max:150',
+            'sales_person' => 'nullable|string',
             'address_office' => 'nullable|string',
             'address_factory' => 'nullable|string',
             'cell_1' => 'nullable|string|max:80',
@@ -186,6 +189,7 @@ class CustomerController extends Controller
         $customer->person = $request->person;
         $customer->person_2 = $request->person_2;
         $customer->person_3 = $request->person_3;
+        $customer->sales_person = $request->sales_person;
         $customer->address_office = $request->address_office;
         $customer->address_factory = $request->address_factory;
         $customer->cell_1 = $request->cell_1;
