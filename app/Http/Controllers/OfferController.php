@@ -83,7 +83,7 @@ class OfferController extends Controller
         $data['suppliers'] = Supplier::orderBy('name', 'asc')->get();
         $data['products'] = Product::orderBy('name', 'asc')->get();
         $data['inquiries'] = Inquiry::latest()->get();
-        $data['offer'] = Offer::where("id", $id)->with('items')->first();
+        $data['offer'] = Offer::where("id", $id)->with('items', 'customer', 'supplier')->first();
         return view('offer.edit', $data);
     }
 

@@ -94,12 +94,25 @@
                             </div>
                         </div>
 
+                        @php
+                            $sales_persons = $offer->customer ? explode('|', $offer->customer->sales_person ?? []) : [];
+                            $sourcing_persons = $offer->supplier
+                                ? explode('|', $offer->supplier->sourcing_person ?? [])
+                                : [];
+                        @endphp
                         <div class="col-md-4 col-12">
                             <div class="mb-3">
                                 <label class="form-label">Sales Person</label>
-                                <select class="select2 form-select sales_person" name="sales_person" disabled>
-                                    <option selected value="{{ $offer->sales_person }}">{{ $offer->sales_person }}
-                                    </option>
+                                <select class="select2 form-select sales_person" name="sales_person">
+                                    @foreach ($sales_persons as $sales_person)
+                                        @php
+                                            $sales_person = trim($sales_person);
+                                        @endphp
+                                        <option @if ($sales_person == $offer->sales_person) selected @endif
+                                            value="{{ $sales_person }}">
+                                            {{ $sales_person }}
+                                        </option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
@@ -107,9 +120,16 @@
                         <div class="col-md-4 col-12">
                             <div class="mb-3">
                                 <label class="form-label">Sourcing Person</label>
-                                <select class="select2 form-select sourcing_person" name="sourcing_person" disabled>
-                                    <option selected value="{{ $offer->sourcing_person }}">{{ $offer->sourcing_person }}
-                                    </option>
+                                <select class="select2 form-select sourcing_person" name="sourcing_person">
+                                    @foreach ($sourcing_persons as $sourcing_person)
+                                        @php
+                                            $sourcing_person = trim($sourcing_person);
+                                        @endphp
+                                        <option @if ($sourcing_person == $offer->sourcing_person) selected @endif
+                                            value="{{ $sourcing_person }}">
+                                            {{ $sourcing_person }}
+                                        </option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>

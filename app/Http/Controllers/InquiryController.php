@@ -80,7 +80,7 @@ class InquiryController extends Controller
         $data['customers'] = Customer::orderBy('name', 'asc')->get();
         $data['suppliers'] = Supplier::orderBy('name', 'asc')->get();
         $data['products'] = Product::orderBy('name', 'asc')->get();
-        $data['inquiry'] = Inquiry::where("id", $id)->with('items')->first();
+        $data['inquiry'] = Inquiry::where("id", $id)->with('items', 'customer', 'supplier')->first();
         return view('inquiry.edit', $data);
     }
 

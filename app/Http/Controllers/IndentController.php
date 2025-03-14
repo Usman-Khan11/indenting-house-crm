@@ -88,7 +88,7 @@ class IndentController extends Controller
         $data['suppliers'] = Supplier::orderBy('name', 'asc')->get();
         $data['products'] = Product::orderBy('name', 'asc')->get();
         $data['purchase_orders'] = PurchaseOrder::latest()->get();
-        $data['indent'] = Indent::where("id", $id)->with('items')->first();
+        $data['indent'] = Indent::where("id", $id)->with('items', 'customer', 'supplier')->first();
         return view('indent.edit', $data);
     }
 

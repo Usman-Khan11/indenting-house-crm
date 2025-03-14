@@ -21,6 +21,10 @@
                             <input type="text" class="form-control product" name="product">
                         </div>
                         <div class="input-group mb-3">
+                            <span class="input-group-text">Customer</span>
+                            <input type="text" class="form-control customer" name="customer">
+                        </div>
+                        <div class="input-group mb-3">
                             <span class="input-group-text">Width</span>
                             <input type="text" class="form-control width" name="width">
                         </div>

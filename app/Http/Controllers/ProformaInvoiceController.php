@@ -66,6 +66,7 @@ class ProformaInvoiceController extends Controller
         $cardNo = $request->card_no;
         $product = $request->product;
         $itemCode = $request->item_code;
+        $customer = $request->customer;
         $width = $request->width;
         $orderBy = $request->order_by;
 
@@ -80,6 +81,7 @@ class ProformaInvoiceController extends Controller
                 'sizes.name as size_name',
                 'cards.customer_id',
                 'cards.size_id',
+                'customers.name as customer_name',
                 'customers.location'
             )
             ->when($cardNo, function ($query, $cardNo) {
@@ -90,6 +92,9 @@ class ProformaInvoiceController extends Controller
             })
             ->when($product, function ($query, $product) {
                 return $query->where('products.name', 'LIKE', "%$product%");
+            })
+            ->when($customer, function ($query, $customer) {
+                return $query->where('customers.name', 'LIKE', "%$customer%");
             })
             ->when($width, function ($query, $width) {
                 return $query->where('sizes.name', 'LIKE', "%$width%");

@@ -84,7 +84,7 @@ class PurchaseOrderController extends Controller
         $data['suppliers'] = Supplier::orderBy('name', 'asc')->get();
         $data['products'] = Product::orderBy('name', 'asc')->get();
         $data['offers'] = Offer::latest()->get();
-        $data['po'] = PurchaseOrder::where("id", $id)->with('items')->first();
+        $data['po'] = PurchaseOrder::where("id", $id)->with('items', 'customer', 'supplier')->first();
         return view('po.edit', $data);
     }
 
