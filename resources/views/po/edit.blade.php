@@ -92,8 +92,8 @@
                         </div>
 
                         @php
-                            $sales_persons = $po->customer ? explode('|', $po->customer->sales_person ?? []) : [];
-                            $sourcing_persons = $po->supplier ? explode('|', $po->supplier->sourcing_person ?? []) : [];
+                            $sales_persons = $po->customer ? explode('|', $po->customer->sales_person ?? '') : [];
+                            $sourcing_persons = $po->supplier ? explode('|', $po->supplier->sourcing_person ?? '') : [];
                         @endphp
                         <div class="col-md-4 col-12">
                             <div class="mb-3">

@@ -95,9 +95,9 @@
                         </div>
 
                         @php
-                            $sales_persons = $offer->customer ? explode('|', $offer->customer->sales_person ?? []) : [];
+                            $sales_persons = $offer->customer ? explode('|', $offer->customer->sales_person ?? '') : [];
                             $sourcing_persons = $offer->supplier
-                                ? explode('|', $offer->supplier->sourcing_person ?? [])
+                                ? explode('|', $offer->supplier->sourcing_person ?? '')
                                 : [];
                         @endphp
                         <div class="col-md-4 col-12">

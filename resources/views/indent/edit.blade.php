@@ -76,10 +76,10 @@
 
                         @php
                             $sales_persons = $indent->customer
-                                ? explode('|', $indent->customer->sales_person ?? [])
+                                ? explode('|', $indent->customer->sales_person ?? '')
                                 : [];
                             $sourcing_persons = $indent->supplier
-                                ? explode('|', $indent->supplier->sourcing_person ?? [])
+                                ? explode('|', $indent->supplier->sourcing_person ?? '')
                                 : [];
                         @endphp
                         <div class="col-md-4 col-12">
